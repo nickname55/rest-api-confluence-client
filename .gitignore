@@ -1,0 +1,16 @@
+### Java template
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+### Maven template
+target/
+
+# IntelliJ
+out/
+.idea/
+
+*.iml
