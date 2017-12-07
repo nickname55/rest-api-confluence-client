@@ -7,6 +7,7 @@
 	<groupId>com.pampushko.confluence</groupId>
 	<artifactId>rest-api-confluence-client</artifactId>
 	<version>0.0</version>
+	<description>Java client for Atlassian Confluence REST API</description>
 
 	<scm>
 		<connection>scm:svn:http://127.0.0.1/dummy</connection>
@@ -79,6 +80,29 @@
 				<version>3.0.2</version>
 				<configuration>
 					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.6.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<executable>maven</executable>
+					<!-- optional -->
+					<workingDirectory>/tmp</workingDirectory>
+					<arguments>
+						<argument>-X</argument>
+						<argument>myproject:dist</argument>
+					</arguments>
+					<mainClass>com.pampushko.confluence.Main</mainClass>
 				</configuration>
 			</plugin>
 
