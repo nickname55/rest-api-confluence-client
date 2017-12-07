@@ -33,6 +33,7 @@
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.showWarnings>true</maven.compiler.showWarnings>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<retrofit.version>2.3.0</retrofit.version>
 	</properties>
