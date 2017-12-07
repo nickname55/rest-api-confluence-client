@@ -34,6 +34,12 @@
 			<version>1.0.13</version>
 		</dependency>
 		<!-- логирование sl4j конец -->
+
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>23.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>
