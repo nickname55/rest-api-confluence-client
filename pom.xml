@@ -16,6 +16,13 @@
 		</developer>
 	</developers>
 
+	<!-- управление задачами проекта начало -->
+	<issueManagement>
+		<system>Bitbucket</system>
+		<url>https://bitbucket.org/AlexanderPampushko/rest-api-confluence-client/issues</url>
+	</issueManagement>
+	<!-- управление задачами проекта конец -->
+
 	<scm>
 		<connection>scm:svn:http://127.0.0.1/dummy</connection>
 		<developerConnection>scm:svn:https://127.0.0.1/dummy</developerConnection>
