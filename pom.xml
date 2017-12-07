@@ -9,6 +9,13 @@
 	<version>0.0</version>
 	<description>Java client for Atlassian Confluence REST API</description>
 
+	<developers>
+		<developer>
+			<name>Alexander Pampushko</name>
+			<email>pampushko@gmail.com</email>
+		</developer>
+	</developers>
+
 	<scm>
 		<connection>scm:svn:http://127.0.0.1/dummy</connection>
 		<developerConnection>scm:svn:https://127.0.0.1/dummy</developerConnection>
