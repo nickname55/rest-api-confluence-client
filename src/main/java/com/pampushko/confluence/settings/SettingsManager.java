@@ -1,4 +1,4 @@
-package com.pampushko.confluence.properties;
+package com.pampushko.confluence.settings;
 
 import com.google.common.io.Resources;
 import org.slf4j.Logger;
@@ -15,7 +15,7 @@ import java.util.Properties;
  * Класс для чтения настроек приложения
  * <br />
  */
-public class Settings
+public class SettingsManager
 {
 	private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 	
