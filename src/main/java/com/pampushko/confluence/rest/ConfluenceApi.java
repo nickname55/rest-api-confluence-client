@@ -17,7 +17,12 @@ import retrofit2.http.POST;
 public interface ConfluenceApi
 {
 	/**
-	 * Список областей
+	 * Возвращает список областей Confluence - {@code Space}
+	 * <br />
+	 * с кодом {@code key} и
+	 * именем {@code name}.
+	 * <br />
+	 * @return возвращаёмое значение {@code SpaceResultList} - массив из областей {@code Space}
 	 * <br />
 	 */
 	@GET("/wiki/rest/api/space")

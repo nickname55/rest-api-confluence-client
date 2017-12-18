@@ -92,14 +92,19 @@ class ConfluenceClient
 	}
 	
 	/**
-	 * возвратить список доступных областей
+	 * Возвращает список областей Confluence - {@code Space}
+	 * <br />
+	 * с кодом {@code key} и
+	 * именем {@code name}.
+	 * <br />
+	 * @return возвращаёмое значение {@code SpaceResultList} - массив из областей {@code Space}
 	 * <br />
 	 */
 	public SpaceResultList getSpaces() throws IOException
 	{
-		Call<SpaceResultList> spaces = confluenceApi.getSpaces();
-		retrofit2.Response<SpaceResultList> execute = spaces.execute();
-		SpaceResultList body = execute.body();
+		Call<SpaceResultList> spacesCall = confluenceApi.getSpaces();
+		retrofit2.Response<SpaceResultList> response = spacesCall.execute();
+		SpaceResultList body = response.body();
 		return body;
 	}
 	
