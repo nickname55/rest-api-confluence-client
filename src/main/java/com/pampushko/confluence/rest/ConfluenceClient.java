@@ -1,9 +1,11 @@
 package com.pampushko.confluence.rest;
 
+import com.pampushko.confluence.models.Space;
 import com.pampushko.confluence.models.SpaceResultList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 
 import java.io.IOException;
@@ -98,6 +100,25 @@ class ConfluenceClient
 		Call<SpaceResultList> spaces = confluenceApi.getSpaces();
 		retrofit2.Response<SpaceResultList> execute = spaces.execute();
 		SpaceResultList body = execute.body();
+		return body;
+	}
+	
+	/**
+	 * Создаём новую область Confluence - {@code Space}
+	 * <br />
+	 * с кодом {@code key} и
+	 * именем {@code name}.
+	 * <br />
+	 * @param space - область {@code Space} для создания.
+	 * <br />
+	 * @return возвращаёмое значение {@code Space}, как подтверждение, что область действительно создана
+	 * <br />
+	 */
+	public Space createSpace(final Space space) throws IOException
+	{
+		Call<Space> spaceCall = confluenceApi.createSpace(space);
+		Response<Space> response = spaceCall.execute();
+		Space body = response.body();
 		return body;
 	}
 }

@@ -39,5 +39,11 @@ public class Main
 		}
 		//печатаем найденные области
 		System.out.println(spaces);
+		
+		//создаём новую область
+		Space space = new Space("tndl2");
+		space.setName("tndls2");
+		Space newSpace = confluence.createSpace(space);
+		System.out.println(newSpace);
 	}
 }
