@@ -52,12 +52,6 @@
 		</dependency>
 		<!-- логирование sl4j конец -->
 
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-			<version>23.0</version>
-		</dependency>
-
 		<!-- retrofit 2 и сопутствующие зависимости начало -->
 		<dependency>
 			<groupId>com.squareup.retrofit2</groupId>
