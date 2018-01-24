@@ -1,5 +1,6 @@
 package com.pampushko.confluence.rest;
 
+import com.pampushko.confluence.models.NoContentResponse;
 import com.pampushko.confluence.models.Space;
 import com.pampushko.confluence.models.SpaceResultList;
 import org.slf4j.Logger;
@@ -103,7 +104,7 @@ class ConfluenceClient
 	public SpaceResultList getSpaces() throws IOException
 	{
 		Call<SpaceResultList> spacesCall = confluenceApi.getSpaces();
-		retrofit2.Response<SpaceResultList> response = spacesCall.execute();
+		Response<SpaceResultList> response = spacesCall.execute();
 		SpaceResultList body = response.body();
 		return body;
 	}
@@ -124,6 +125,47 @@ class ConfluenceClient
 		Call<Space> spaceCall = confluenceApi.createSpace(space);
 		Response<Space> response = spaceCall.execute();
 		Space body = response.body();
+		return body;
+	}
+	
+	/**
+	 * Создаём новую приватную (<strong>видимую только для создателя</strong>) область Confluence - {@code Space}
+	 * <br />
+	 * с кодом {@code key} и
+	 * именем {@code name}.
+	 * <br />
+	 * Но не ясно, чем этот способ создания отличается от обычного создания области,
+	 * <br />
+	 * т.к. область созданная обычным способом также доступна только для своего создателя
+	 * <br />
+	 * <strong>todo разобраться с назначением метода более подробно</strong>
+	 * <br />
+	 * @param space - область {@code Space} для создания.
+	 * <br />
+	 * @return возвращаёмое значение {@code Space}, как подтверждение, что область действительно создана
+	 * <br />
+	 */
+	public Space createPrivateSpace(final Space space) throws IOException
+	{
+		Call<Space> spaceCall = confluenceApi.createSpace(space);
+		Response<Space> response = spaceCall.execute();
+		Space body = response.body();
+		return body;
+	}
+	
+	/**
+	 * Удаляем область Confluence - {@code Space}
+	 * <br />
+	 * имеющую ключ {@code key}
+	 * <br />
+	 * @return возвращаёмое значение {@code Space}, как подтверждение, что область действительно удалена
+	 * <br />
+	 */
+	public NoContentResponse deleteSpace(final String key) throws IOException
+	{
+		Call<NoContentResponse> spaceCall = confluenceApi.deleteSpace(key);
+		Response<NoContentResponse> response = spaceCall.execute();
+		NoContentResponse body = response.body();
 		return body;
 	}
 }

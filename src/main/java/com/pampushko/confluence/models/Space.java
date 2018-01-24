@@ -8,7 +8,7 @@ import lombok.Data;
  * <br />
  */
 @Data
-public class Space
+public class Space extends BaseModel
 {
 	/**
 	 * Идентификатор области

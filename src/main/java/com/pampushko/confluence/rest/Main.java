@@ -40,10 +40,16 @@ public class Main
 		//печатаем найденные области
 		System.out.println(spaces);
 		
-		//создаём новую область
-		Space space = new Space("tndl2");
-		space.setName("tndls2");
-		Space newSpace = confluence.createSpace(space);
-		System.out.println(newSpace);
+		for(int i = 0; i < 3; i++)
+		{
+			//создаём новую область
+			Space space = new Space("tndl333333" + i);
+			space.setName("tndls33333" + i);
+			Space space1 = confluence.createPrivateSpace(space);
+			System.out.println(space1);
+			
+			//NoContentResponse response = confluence.deleteSpace("tndl2" + i);
+			//System.out.println(response);
+		}
 	}
 }

@@ -8,7 +8,7 @@ import lombok.Data;
  * <br />
  */
 @Data
-public class SpaceResultList
+public class SpaceResultList extends BaseModel
 {
 	//имя возвращаемой API коллекции в JSON
 	@SerializedName("results")
