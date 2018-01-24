@@ -5,16 +5,14 @@ import com.pampushko.confluence.models.Space;
 import com.pampushko.confluence.models.SpaceDescription;
 import com.pampushko.confluence.models.SpaceResultList;
 import com.pampushko.confluence.settings.SettingsManager;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
-import java.lang.invoke.MethodHandles;
 import java.util.Properties;
 
+@Slf4j
 public class Main
 {
-	private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 	public static final String url = "";
 	private static final String username = "";
 	private static final String password = "";
@@ -42,7 +40,7 @@ public class Main
 		//печатаем найденные области
 		System.out.println(spaces);
 		
-		//создаём новую область
+		//создаём область с данными для обновления
 		Space space = new Space();
 		space.setName("всехорошо ура ура !");
 		Plain plainForSpaceDescription = Plain.builder().value("Всё будет очень хорошо!!!")

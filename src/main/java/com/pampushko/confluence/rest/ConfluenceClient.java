@@ -3,23 +3,20 @@ package com.pampushko.confluence.rest;
 import com.pampushko.confluence.models.NoContentResponse;
 import com.pampushko.confluence.models.Space;
 import com.pampushko.confluence.models.SpaceResultList;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
 import java.io.IOException;
-import java.lang.invoke.MethodHandles;
 
 /**
  * Класс клиент для Atlassian Confluence
  * <br />
  */
+@Slf4j
 class ConfluenceClient
 {
-	private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
-	
 	/**
 	 * Имя пользователя
 	 * <br />

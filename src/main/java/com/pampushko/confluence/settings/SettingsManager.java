@@ -1,13 +1,11 @@
 package com.pampushko.confluence.settings;
 
 import com.google.common.io.Resources;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.lang.invoke.MethodHandles;
 import java.net.URL;
 import java.util.Properties;
 
@@ -15,10 +13,9 @@ import java.util.Properties;
  * Класс для чтения настроек приложения
  * <br />
  */
+@Slf4j
 public class SettingsManager
 {
-	private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
-	
 	//test
 	public static void main(String[] args) throws IOException
 	{

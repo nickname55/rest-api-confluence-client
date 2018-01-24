@@ -2,28 +2,25 @@ package com.pampushko.confluence.rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import lombok.extern.slf4j.Slf4j;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.io.IOException;
-import java.lang.invoke.MethodHandles;
 import java.util.Base64;
 
 /**
  * Класс для создании ско
  */
+@Slf4j
 public class RetrofitCreator
 {
-	private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
-	
 	Retrofit getRetrofitRestAdapter(ConfluenceClient confluenceClient)
 	{
 		final String username = confluenceClient.username;
