@@ -54,12 +54,22 @@ public interface ConfluenceApi
 	
 	
 	/**
-	 * Создание персональной области, которая будет видна только пользователю создавшему её
+	 * Создание приватной области, которая будет видна только пользователю создавшему её
 	 * <br />
 	 * @param space - область {@code Space} для создания
 	 * @return - {@code Space} подтверждение, возвращаемое Confluence в ответе на запрос
 	 */
 	@POST("/wiki/rest/api/space/_private")
-	Space createPrivateSpace(final @Body Space space);
+	Call<Space> createPrivateSpace(final @Body Space space);
+	
+	/**
+	 * Обновление области (в настоящий момент можно обновить только name, description и homepage)
+	 * <br />
+	 * @param space - область {@code Space} для создания
+	 * @param key
+	 * @return - {@code Space} подтверждение, возвращаемое Confluence в ответе на запрос (полное представлеине области)
+	 */
+	@PUT("/wiki/rest/api/space/{key}")
+	Call<Space> updateSpace(final @Body Space space, final @Path("key") String key);
 	
 }

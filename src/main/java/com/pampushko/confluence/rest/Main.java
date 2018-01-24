@@ -1,6 +1,8 @@
 package com.pampushko.confluence.rest;
 
+import com.pampushko.confluence.models.Plain;
 import com.pampushko.confluence.models.Space;
+import com.pampushko.confluence.models.SpaceDescription;
 import com.pampushko.confluence.models.SpaceResultList;
 import com.pampushko.confluence.settings.SettingsManager;
 import org.slf4j.Logger;
@@ -40,16 +42,15 @@ public class Main
 		//печатаем найденные области
 		System.out.println(spaces);
 		
-		for(int i = 0; i < 3; i++)
-		{
-			//создаём новую область
-			Space space = new Space("tndl333333" + i);
-			space.setName("tndls33333" + i);
-			Space space1 = confluence.createPrivateSpace(space);
-			System.out.println(space1);
-			
-			//NoContentResponse response = confluence.deleteSpace("tndl2" + i);
-			//System.out.println(response);
-		}
+		//создаём новую область
+		Space space = new Space();
+		space.setName("всехорошо ура ура !");
+		Plain plainForSpaceDescription = Plain.builder().value("Всё будет очень хорошо!!!")
+				.build();
+		SpaceDescription description = SpaceDescription.builder()
+				.plain(plainForSpaceDescription).build();
+		space.setDescription(description);
+		Space respSpace = confluence.updateSpace(space, "tndl3333330");
+		System.out.println(respSpace);
 	}
 }

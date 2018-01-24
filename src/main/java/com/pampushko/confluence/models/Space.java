@@ -31,6 +31,12 @@ public class Space extends BaseModel
 	private String name;
 	
 	/**
+	 * Описание области
+	 * <br />
+	 */
+	private SpaceDescription description;
+	
+	/**
 	 * Тип области
 	 * <br />
 	 */

@@ -154,6 +154,20 @@ class ConfluenceClient
 	}
 	
 	/**
+	 * Обновление области (в настоящий момент можно обновить только name, description и homepage)
+	 * <br />
+	 * @param space - область {@code Space} для создания
+	 * @return - {@code Space} подтверждение, возвращаемое Confluence в ответе на запрос (полное представлеине области)
+	 */
+	public Space updateSpace(final Space space, final String key) throws IOException
+	{
+		Call<Space> spaceCall = confluenceApi.updateSpace(space, key);
+		Response<Space> response = spaceCall.execute();
+		Space body = response.body();
+		return body;
+	}
+	
+	/**
 	 * Удаляем область Confluence - {@code Space}
 	 * <br />
 	 * имеющую ключ {@code key}
