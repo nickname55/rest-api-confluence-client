@@ -35,10 +35,7 @@ public class Main
 		SpaceResultList spaces = confluence.getSpaces();
 		for (Space space : spaces.getSpaces())
 		{
-			if (space.getKey().equals("idea"))
-			{
-				resultSpace = space;
-			}
+			System.out.println(space);
 		}
 		Map<String, String> params = new HashMap<String, String>()
 		{
@@ -46,7 +43,7 @@ public class Main
 				put("depth", "root");
 			}
 		};
-		ContentContainter spaceContent = confluence.getSpaceContent("idea", params);
+		ContentContainter spaceContent = confluence.getSpaceContent("MYR", params);
 		System.out.println(spaceContent.getPage().getPageResultItems()[0].getTitle());
 	}
 }
