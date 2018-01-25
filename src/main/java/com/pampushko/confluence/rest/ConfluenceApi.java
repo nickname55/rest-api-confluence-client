@@ -24,6 +24,7 @@ public interface ConfluenceApi
 	 * с кодом {@code key} и
 	 * именем {@code name}.
 	 * <br />
+	 *
 	 * @return возвращаёмое значение {@code SpaceResultList} - массив из областей {@code Space}
 	 * <br />
 	 */
@@ -35,12 +36,13 @@ public interface ConfluenceApi
 	 * <br />
 	 * с кодом {@code key}
 	 * <br />
+	 *
 	 * @return возвращаёмое значение {@code SpaceResultList} - массив из областей {@code Space}
 	 * <br />
 	 */
 	@GET("/wiki/rest/api/space/{key}")
 	Call<Space> getSpaceByKey(final @Path("key") String spaceKey,
-	                                    final @QueryMap Map<String, String> params);
+	                          final @QueryMap Map<String, String> params);
 	
 	/**
 	 * Создаём новую область Confluence - {@code Space}
@@ -48,8 +50,9 @@ public interface ConfluenceApi
 	 * с кодом {@code key} и
 	 * именем {@code name}.
 	 * <br />
+	 *
 	 * @param space - область {@code Space} для создания.
-	 * <br />
+	 *              <br />
 	 * @return возвращаёмое значение {@code Space}, как подтверждение, что область действительно создана
 	 * <br />
 	 */
@@ -61,6 +64,7 @@ public interface ConfluenceApi
 	 * <br />
 	 * имеющую ключ {@code key}
 	 * <br />
+	 *
 	 * @return возвращаёмое значение {@code Space}, как подтверждение, что область действительно удалена
 	 * <br />
 	 */
@@ -71,6 +75,7 @@ public interface ConfluenceApi
 	/**
 	 * Создание приватной области, которая будет видна только пользователю создавшему её
 	 * <br />
+	 *
 	 * @param space - область {@code Space} для создания
 	 * @return - {@code Space} подтверждение, возвращаемое Confluence в ответе на запрос
 	 */
@@ -80,6 +85,7 @@ public interface ConfluenceApi
 	/**
 	 * Обновление области (в настоящий момент можно обновить только name, description и homepage)
 	 * <br />
+	 *
 	 * @param space - область {@code Space} для создания
 	 * @param key
 	 * @return - {@code Space} подтверждение, возвращаемое Confluence в ответе на запрос (полное представлеине области)

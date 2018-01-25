@@ -14,21 +14,18 @@ import lombok.extern.slf4j.Slf4j;
 public class ContentContainter extends BaseModel
 {
 	/**
-	 *
 	 * <br />
 	 */
 	@SerializedName("page")
 	private Page page;
 	
 	/**
-	 *
 	 * <br />
 	 */
 	@SerializedName("blogpost")
 	private Blogpost blogpost;
 	
 	/**
-	 *
 	 * <br />
 	 */
 	@SerializedName("_links")

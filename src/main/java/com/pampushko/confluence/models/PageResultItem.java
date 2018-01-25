@@ -34,7 +34,6 @@ public class PageResultItem extends BaseModel
 	private String title;
 	
 	/**
-	 *
 	 * <br />
 	 */
 	private Extensions extensions;
@@ -46,7 +45,6 @@ public class PageResultItem extends BaseModel
 	private _Links links;
 	
 	/**
-	 *
 	 * <br />
 	 */
 	@SerializedName("_expandable")

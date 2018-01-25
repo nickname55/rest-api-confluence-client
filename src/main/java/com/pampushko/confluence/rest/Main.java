@@ -46,7 +46,7 @@ public class Main
 		};
 		
 		Space space = confluence.getSpaceByKey("KARMA", params);
-		
+
 //		space.setDescription("Hello! I love you");
 //		confluence.updateSpace(space, "KARMA");
 		

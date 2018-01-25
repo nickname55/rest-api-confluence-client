@@ -38,6 +38,7 @@ public class Space extends BaseModel
 	 * <br />
 	 */
 	private SpaceDescription description;
+	
 	public void setDescription(String description)
 	{
 		String representation = "";
@@ -58,7 +59,6 @@ public class Space extends BaseModel
 	private String status;
 	
 	/**
-	 *
 	 * <br />
 	 */
 	@SerializedName("_expandable")
@@ -66,7 +66,6 @@ public class Space extends BaseModel
 	
 	
 	/**
-	 *
 	 * <br />
 	 */
 	@SerializedName("_links")

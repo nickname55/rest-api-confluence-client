@@ -96,6 +96,7 @@ public class ConfluenceClient
 	 * <br />
 	 * с кодом {@code key}
 	 * <br />
+	 *
 	 * @return возвращаёмое значение {@code SpaceResultList} - массив из областей {@code Space}
 	 * <br />
 	 */
@@ -113,6 +114,7 @@ public class ConfluenceClient
 	 * с кодом {@code key} и
 	 * именем {@code name}.
 	 * <br />
+	 *
 	 * @return возвращаёмое значение {@code SpaceResultList} - массив из областей {@code Space}
 	 * <br />
 	 */
@@ -130,8 +132,9 @@ public class ConfluenceClient
 	 * с кодом {@code key} и
 	 * именем {@code name}.
 	 * <br />
+	 *
 	 * @param space - область {@code Space} для создания.
-	 * <br />
+	 *              <br />
 	 * @return возвращаёмое значение {@code Space}, как подтверждение, что область действительно создана
 	 * <br />
 	 */
@@ -155,8 +158,9 @@ public class ConfluenceClient
 	 * <br />
 	 * <strong>todo разобраться с назначением метода более подробно</strong>
 	 * <br />
+	 *
 	 * @param space - область {@code Space} для создания.
-	 * <br />
+	 *              <br />
 	 * @return возвращаёмое значение {@code Space}, как подтверждение, что область действительно создана
 	 * <br />
 	 */
@@ -171,6 +175,7 @@ public class ConfluenceClient
 	/**
 	 * Обновление области (в настоящий момент можно обновить только name, description и homepage)
 	 * <br />
+	 *
 	 * @param space - область {@code Space} для создания
 	 * @return - {@code Space} подтверждение, возвращаемое Confluence в ответе на запрос (полное представлеине области)
 	 */
@@ -187,6 +192,7 @@ public class ConfluenceClient
 	 * <br />
 	 * имеющую ключ {@code key}
 	 * <br />
+	 *
 	 * @return возвращаёмое значение {@code Space}, как подтверждение, что область действительно удалена
 	 * <br />
 	 */
@@ -201,6 +207,7 @@ public class ConfluenceClient
 	/**
 	 * Получить список элементов контента из данной области
 	 * <br />
+	 *
 	 * @param key
 	 * @param params
 	 * @return

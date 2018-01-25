@@ -21,28 +21,24 @@ public class Page extends BaseModel
 	private PageResultItem[] pageResultItems;
 	
 	/**
-	 *
 	 * <br />
 	 */
 	@SerializedName("start")
 	private int start;
 	
 	/**
-	 *
 	 * <br />
 	 */
 	@SerializedName("limit")
 	private int limit;
 	
 	/**
-	 *
 	 * <br />
 	 */
 	@SerializedName("size")
 	private int size;
 	
 	/**
-	 *
 	 * <br />
 	 */
 	@SerializedName("_links")

@@ -42,7 +42,7 @@ public class Blogpost extends BaseModel
 	
 	
 	//todo сделать _expandable;
-
+	
 	
 	@Override
 	public String toString()

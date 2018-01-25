@@ -17,5 +17,5 @@ public class SpaceDescription extends BaseModel
 	 * <br />
 	 */
 	private Plain plain;
-
+	
 }
