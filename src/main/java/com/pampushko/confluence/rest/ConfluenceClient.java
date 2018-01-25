@@ -1,5 +1,6 @@
 package com.pampushko.confluence.rest;
 
+import com.pampushko.confluence.models.ContentContainter;
 import com.pampushko.confluence.models.NoContentResponse;
 import com.pampushko.confluence.models.Space;
 import com.pampushko.confluence.models.SpaceResultList;
@@ -9,6 +10,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * Класс клиент для Atlassian Confluence
@@ -179,4 +181,21 @@ class ConfluenceClient
 		NoContentResponse body = response.body();
 		return body;
 	}
+	
+	/**
+	 * Получить список элементов контента из данной области
+	 * <br />
+	 * @param key
+	 * @param params
+	 * @return
+	 * @throws IOException
+	 */
+	public ContentContainter getSpaceContent(final String key, final Map<String, String> params) throws IOException
+	{
+		Call<ContentContainter> spaceContentCall = confluenceApi.getSpaceContent(key, params);
+		Response<ContentContainter> response = spaceContentCall.execute();
+		ContentContainter body = response.body();
+		return body;
+	}
+	
 }

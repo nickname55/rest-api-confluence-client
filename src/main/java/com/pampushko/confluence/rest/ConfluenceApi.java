@@ -1,10 +1,13 @@
 package com.pampushko.confluence.rest;
 
+import com.pampushko.confluence.models.ContentContainter;
 import com.pampushko.confluence.models.NoContentResponse;
 import com.pampushko.confluence.models.Space;
 import com.pampushko.confluence.models.SpaceResultList;
 import retrofit2.Call;
 import retrofit2.http.*;
+
+import java.util.Map;
 
 
 /**
@@ -72,4 +75,16 @@ public interface ConfluenceApi
 	@PUT("/wiki/rest/api/space/{key}")
 	Call<Space> updateSpace(final @Body Space space, final @Path("key") String key);
 	
+	
+	/**
+	 * Получить список элементов контента из данной области
+	 * <br />
+	 *
+	 * @param spaceKey
+	 * @param params
+	 * @return
+	 */
+	@GET("/wiki/rest/api/space/{key}/content")
+	Call<ContentContainter> getSpaceContent(final @Path("key") String spaceKey,
+	                                        final @QueryMap Map<String, String> params);
 }

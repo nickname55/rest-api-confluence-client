@@ -1,13 +1,14 @@
 package com.pampushko.confluence.rest;
 
-import com.pampushko.confluence.models.Plain;
+import com.pampushko.confluence.models.ContentContainter;
 import com.pampushko.confluence.models.Space;
-import com.pampushko.confluence.models.SpaceDescription;
 import com.pampushko.confluence.models.SpaceResultList;
 import com.pampushko.confluence.settings.SettingsManager;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 @Slf4j
@@ -29,26 +30,23 @@ public class Main
 				.password(settings.getProperty("password"))
 				.build();
 		
-		//получаем список областей
+		Space resultSpace = null;
+		
 		SpaceResultList spaces = confluence.getSpaces();
 		for (Space space : spaces.getSpaces())
 		{
-			log.info("\n");
-			log.info("Область {}", space.toString());
-			log.info("\n");
+			if (space.getKey().equals("idea"))
+			{
+				resultSpace = space;
+			}
 		}
-		//печатаем найденные области
-		System.out.println(spaces);
-		
-		//создаём область с данными для обновления
-		Space space = new Space();
-		space.setName("всехорошо ура ура !");
-		Plain plainForSpaceDescription = Plain.builder().value("Всё будет очень хорошо!!!")
-				.build();
-		SpaceDescription description = SpaceDescription.builder()
-				.plain(plainForSpaceDescription).build();
-		space.setDescription(description);
-		Space respSpace = confluence.updateSpace(space, "tndl3333330");
-		System.out.println(respSpace);
+		Map<String, String> params = new HashMap<String, String>()
+		{
+			{
+				put("depth", "root");
+			}
+		};
+		ContentContainter spaceContent = confluence.getSpaceContent("idea", params);
+		System.out.println(spaceContent.getPage().getPageResultItems()[0].getTitle());
 	}
 }
