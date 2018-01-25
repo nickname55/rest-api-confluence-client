@@ -31,6 +31,18 @@ public interface ConfluenceApi
 	Call<SpaceResultList> getSpaces();
 	
 	/**
+	 * Возвращает информацию об области Confluence - {@code Space}
+	 * <br />
+	 * с кодом {@code key}
+	 * <br />
+	 * @return возвращаёмое значение {@code SpaceResultList} - массив из областей {@code Space}
+	 * <br />
+	 */
+	@GET("/wiki/rest/api/space/{key}")
+	Call<Space> getSpaceByKey(final @Path("key") String spaceKey,
+	                                    final @QueryMap Map<String, String> params);
+	
+	/**
 	 * Создаём новую область Confluence - {@code Space}
 	 * <br />
 	 * с кодом {@code key} и
@@ -53,7 +65,7 @@ public interface ConfluenceApi
 	 * <br />
 	 */
 	@DELETE("/wiki/rest/api/space/{key}")
-	Call<NoContentResponse> deleteSpace(final @Path("key") String key);
+	Call<NoContentResponse> deleteSpace(final @Path("key") String spaceKey);
 	
 	
 	/**

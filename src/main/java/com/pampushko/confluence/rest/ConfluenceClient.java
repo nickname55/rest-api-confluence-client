@@ -17,7 +17,7 @@ import java.util.Map;
  * <br />
  */
 @Slf4j
-class ConfluenceClient
+public class ConfluenceClient
 {
 	/**
 	 * Имя пользователя
@@ -89,6 +89,22 @@ class ConfluenceClient
 			ConfluenceClient.this.confluenceApi = retrofit.create(ConfluenceApi.class);
 			return ConfluenceClient.this;
 		}
+	}
+	
+	/**
+	 * Возвращает информацию об области Confluence - {@code Space}
+	 * <br />
+	 * с кодом {@code key}
+	 * <br />
+	 * @return возвращаёмое значение {@code SpaceResultList} - массив из областей {@code Space}
+	 * <br />
+	 */
+	public Space getSpaceByKey(final String spaceKey, final Map<String, String> params) throws IOException
+	{
+		Call<Space> spaceCall = confluenceApi.getSpaceByKey(spaceKey, params);
+		Response<Space> response = spaceCall.execute();
+		Space body = response.body();
+		return body;
 	}
 	
 	/**

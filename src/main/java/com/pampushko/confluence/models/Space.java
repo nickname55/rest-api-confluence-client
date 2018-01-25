@@ -1,6 +1,7 @@
 package com.pampushko.confluence.models;
 
 import com.google.gson.GsonBuilder;
+import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,6 +38,12 @@ public class Space extends BaseModel
 	 * <br />
 	 */
 	private SpaceDescription description;
+	public void setDescription(String description)
+	{
+		String representation = "";
+		Plain plain = new Plain(description);
+		this.description = new SpaceDescription(plain);
+	}
 	
 	/**
 	 * Тип области
@@ -50,8 +57,20 @@ public class Space extends BaseModel
 	 */
 	private String status;
 	
-	//todo сделать _expandable;
-	//todo сделать _links;
+	/**
+	 *
+	 * <br />
+	 */
+	@SerializedName("_expandable")
+	_SpaceExpandable expandable;
+	
+	
+	/**
+	 *
+	 * <br />
+	 */
+	@SerializedName("_links")
+	_Links links;
 	
 	public Space()
 	{

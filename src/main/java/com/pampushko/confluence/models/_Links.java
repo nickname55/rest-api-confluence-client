@@ -61,5 +61,9 @@ public class _Links extends BaseModel
 	 */
 	private String context;
 	
-	
+	/**
+	 * space -> links
+	 * <br />
+	 */
+	private String collection;
 }

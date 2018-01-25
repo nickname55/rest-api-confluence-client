@@ -12,6 +12,22 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class Plain extends BaseModel
 {
+	public Plain()
+	{
+	
+	}
+	
+	public Plain(String value)
+	{
+		this.value = value;
+	}
+	
+	public Plain(String value, String representation)
+	{
+		this.value = value;
+		this.representation = representation;
+	}
+	
 	/**
 	 * Значение
 	 * <br />
@@ -25,4 +41,6 @@ public class Plain extends BaseModel
 	 */
 	@Builder.Default
 	private String representation = "plain";
+	
+	//todo embeddedContent  Array[0]
 }
