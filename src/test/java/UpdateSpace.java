@@ -1,21 +1,22 @@
-package com.pampushko.confluence.rest;
-
 import com.pampushko.confluence.models.Space;
 import com.pampushko.confluence.models.SpaceResultList;
+import com.pampushko.confluence.rest.ConfluenceClient;
 import com.pampushko.confluence.settings.SettingsManager;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.lang.invoke.MethodHandles;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-@Slf4j
-public class Main
+/**
+ *
+ */
+public class UpdateSpace
 {
-	public static final String url = "";
-	private static final String username = "";
-	private static final String password = "";
+	private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 	
 	public static void main(String[] args) throws IOException
 	{
@@ -51,6 +52,11 @@ public class Main
 		};
 		
 		Space space = confluence.getSpaceByKey("KARMA", params);
+		//обновляем описание области
+		space.setDescription("Hello! I love you, i am OK");
+		confluence.updateSpace(space, "KARMA");
+		
 		System.out.println(space);
 	}
 }
+
