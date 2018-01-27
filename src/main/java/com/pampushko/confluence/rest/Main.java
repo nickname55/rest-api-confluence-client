@@ -1,5 +1,6 @@
 package com.pampushko.confluence.rest;
 
+import com.pampushko.confluence.models.ContentContainter;
 import com.pampushko.confluence.models.Space;
 import com.pampushko.confluence.models.SpaceResultList;
 import com.pampushko.confluence.settings.SettingsManager;
@@ -39,18 +40,13 @@ public class Main
 		Map<String, String> params = new HashMap<String, String>()
 		{
 			{
-				//получаем значение параметра description
-				//который по умолчанию не присутствует в наборе полей
-				//а размещён в разделе _expand
-				//и также указываем, что хотим заэкспандить раздел plain из description
-				//так как description это тоже объект и чтобы получить в этом объекте поле plain,
-				//это поле также необходимо развернуть.
-				put("expand", "description");
-				put("expand", "description.plain");
+				put("expand", "body");
+				put("expand", "body.editor");
 			}
 		};
 		
-		Space space = confluence.getSpaceByKey("KARMA", params);
-		System.out.println(space);
+		ContentContainter content = confluence.getSpaceContent("KARMA", params);
+		
+		System.out.println(content);
 	}
 }

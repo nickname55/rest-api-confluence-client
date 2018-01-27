@@ -38,6 +38,81 @@ public class PageResultItem extends BaseModel
 	 */
 	private Extensions extensions;
 	
+	//------------------------------------------------------------------------------
+	
+	/**
+	 * <br />
+	 */
+	@SerializedName("childTypes")
+	String childTypes;
+	
+	/**
+	 * <br />
+	 */
+	@SerializedName("container")
+	String container;
+	
+	/**
+	 * <br />
+	 */
+	@SerializedName("metadata")
+	String metadata;
+	
+	/**
+	 * <br />
+	 */
+	@SerializedName("operations")
+	String operations;
+	
+	/**
+	 * <br />
+	 */
+	@SerializedName("children")
+	String children;
+	
+	/**
+	 * <br />
+	 */
+	@SerializedName("restrictions")
+	String restrictions;
+	
+	/**
+	 * <br />
+	 */
+	@SerializedName("history")
+	String history;
+	
+	/**
+	 * <br />
+	 */
+	@SerializedName("ancestors")
+	String ancestors;
+	
+	/**
+	 * <br />
+	 */
+	@SerializedName("body")
+	Body body;
+	
+	/**
+	 * <br />
+	 */
+	@SerializedName("version")
+	String version;
+	
+	/**
+	 * <br />
+	 */
+	@SerializedName("descendants")
+	String descendants;
+	
+	/**
+	 * <br />
+	 */
+	@SerializedName("space")
+	String space;
+	
+	//---------------------------------------------------------------------------
 	/**
 	 * <br />
 	 */
@@ -47,8 +122,8 @@ public class PageResultItem extends BaseModel
 	/**
 	 * <br />
 	 */
-	@SerializedName("_expandable")
-	private _PageExpandable expandable;
+//	@SerializedName("_expandable")
+//	private _PageExpandable expandable;
 	
 	//--------------------------------------------------------------------------
 	@Override

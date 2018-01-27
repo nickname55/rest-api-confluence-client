@@ -65,7 +65,7 @@ public class _PageExpandable extends BaseModel
 	 * <br />
 	 */
 	@SerializedName("body")
-	String body;
+	Body body;
 	
 	/**
 	 * <br />
