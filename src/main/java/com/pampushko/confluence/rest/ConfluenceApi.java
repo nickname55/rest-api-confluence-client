@@ -3,6 +3,7 @@ package com.pampushko.confluence.rest;
 import com.pampushko.confluence.models.*;
 import com.pampushko.confluence.models.group.Group;
 import com.pampushko.confluence.models.group.GroupResultList;
+import com.pampushko.confluence.models.user.UserResultList;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.*;
@@ -109,6 +110,7 @@ public interface ConfluenceApi
 	/**
 	 * Получить элемент контента по идентификатору этого элемента
 	 * <br />
+	 *
 	 * @param contentId
 	 * @param params
 	 * @return
@@ -120,6 +122,7 @@ public interface ConfluenceApi
 	/**
 	 * Получить версию контента по заданному индентификатору контента и номеру версии
 	 * <br />
+	 *
 	 * @param contentId
 	 * @param versionId
 	 * @param params
@@ -127,11 +130,12 @@ public interface ConfluenceApi
 	 */
 	@GET("/wiki/rest/api/content/{contentId}/version/{versionId}")
 	Call<Version> getVersionOfContent(final @Path("contentId") String contentId,
-	                                    final @Path("versionId") int versionId,
-	                                    final @QueryMap Map<String, String> params);
+	                                  final @Path("versionId") int versionId,
+	                                  final @QueryMap Map<String, String> params);
 	
 	/**
 	 * Получить список групп (разбитый на страницы)
+	 *
 	 * @param start
 	 * @param limit
 	 * @return
@@ -141,8 +145,26 @@ public interface ConfluenceApi
 	
 	/**
 	 * Получить группу по имени
+	 * <br />
+	 *
+	 * @param groupName
 	 * @return
 	 */
 	@GET("/wiki/rest/api/group/{groupName}")
 	Call<Group> getGroupsByName(final @Path("groupName") String groupName);
+	
+	/**
+	 * Получить коллекцию пользователей состоящих в группе с заданным именем
+	 * <br />
+	 *
+	 * @param groupName
+	 * @param start
+	 * @param limit
+	 * @return
+	 */
+	@GET("/wiki/rest/api/group/{groupName}/member")
+	Call<UserResultList> getUsersFromGroupByGroupName(final @Path("groupName") String groupName,
+	                                                  final @Query("start") int start,
+	                                                  final @Query("limit") int limit);
+	
 }

@@ -3,6 +3,7 @@ package com.pampushko.confluence.rest;
 import com.pampushko.confluence.models.*;
 import com.pampushko.confluence.models.group.Group;
 import com.pampushko.confluence.models.group.GroupResultList;
+import com.pampushko.confluence.models.user.UserResultList;
 import lombok.extern.slf4j.Slf4j;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -258,6 +259,7 @@ public class ConfluenceClient
 	
 	/**
 	 * Получить список групп (разбитый на страницы)
+	 * <br />
 	 * @param start
 	 * @param limit
 	 * @return
@@ -272,6 +274,7 @@ public class ConfluenceClient
 	
 	/**
 	 * Получить группу по имени
+	 * <br />
 	 * @return
 	 */
 	Group getGroupsByName(final String groupName) throws IOException
@@ -279,6 +282,39 @@ public class ConfluenceClient
 		Call<Group> groupCall = confluenceApi.getGroupsByName(groupName);
 		Response<Group> response = groupCall.execute();
 		Group body = response.body();
+		return body;
+	}
+	
+	/**
+	 * Получить список групп (разбитый на страницы)
+	 *
+	 * @param start
+	 * @param limit
+	 * @return
+	 */
+	GroupResultList getGetGroups(final String groupName, final int start, final int limit) throws IOException
+	{
+		Call<GroupResultList> groupResultListCall = confluenceApi.getGroups(start, limit);
+		Response<GroupResultList> response = groupResultListCall.execute();
+		GroupResultList body = response.body();
+		return body;
+	}
+	
+	
+	/**
+	 * Получить коллекцию пользователей состоящих в группе с заданным именем
+	 * <br />
+	 *
+	 * @param groupName
+	 * @param start
+	 * @param limit
+	 * @return
+	 */
+	UserResultList getUsersFromGroupByGroupName(String groupName, int start, int limit) throws IOException
+	{
+		Call<UserResultList> userResultListCall = confluenceApi.getUsersFromGroupByGroupName(groupName, start, limit);
+		Response<UserResultList> response = userResultListCall.execute();
+		UserResultList body = response.body();
 		return body;
 	}
 	

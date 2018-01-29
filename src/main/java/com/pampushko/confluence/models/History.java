@@ -23,7 +23,7 @@ public class History
 	
 	@SerializedName("_expandable")
 	_HistoryExpandable expandable;
-
+	
 	@SerializedName("_links")
 	_Links links;
 	

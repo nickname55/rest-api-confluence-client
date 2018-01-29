@@ -1,6 +1,6 @@
 package com.pampushko.confluence.rest;
 
-import com.pampushko.confluence.models.group.Group;
+import com.pampushko.confluence.models.user.UserResultList;
 import com.pampushko.confluence.settings.SettingsManager;
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,8 +27,8 @@ public class Main
 				.build();
 		
 		String groupName = "confluence-users";
-		Group group = confluence.getGroupsByName(groupName);
+		UserResultList userResultList = confluence.getUsersFromGroupByGroupName(groupName, 0, 200);
 		
-		System.out.println(group);
+		System.out.println(userResultList);
 	}
 }

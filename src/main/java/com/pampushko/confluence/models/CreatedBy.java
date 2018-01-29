@@ -46,7 +46,7 @@ public class CreatedBy
 	//-----------------------------------------------------------------
 	
 	@SerializedName("_expandable") //*
-	_HistoryExpandable expandable;
+			_HistoryExpandable expandable;
 	
 	@SerializedName("_links")
 	_Links links;

@@ -13,13 +13,13 @@ public class Details
 	 * <br />
 	 */
 	@SerializedName("business") //expand
-	String business;
+			String business;
 	
 	/**
 	 * <br />
 	 */
 	@SerializedName("personal") //expand
-	String personal;
+			String personal;
 	
 	//----------------------------------------------------------
 	

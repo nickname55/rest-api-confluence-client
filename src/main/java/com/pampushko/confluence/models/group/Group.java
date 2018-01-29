@@ -13,14 +13,12 @@ import lombok.extern.slf4j.Slf4j;
 public class Group extends BaseModel
 {
 	/**
-	 *
 	 * <br />
 	 */
 	@SerializedName("type")
 	String type;
 	
 	/**
-	 *
 	 * <br />
 	 */
 	@SerializedName("name")
