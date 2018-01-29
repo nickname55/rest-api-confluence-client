@@ -1,6 +1,7 @@
 package com.pampushko.confluence.rest;
 
 import com.pampushko.confluence.models.*;
+import com.pampushko.confluence.models.group.Group;
 import com.pampushko.confluence.models.group.GroupResultList;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -138,4 +139,10 @@ public interface ConfluenceApi
 	@GET("/wiki/rest/api/group")
 	Call<GroupResultList> getGroups(final @Query("start") int start, final @Query("limit") int limit);
 	
+	/**
+	 * Получить группу по имени
+	 * @return
+	 */
+	@GET("/wiki/rest/api/group/{groupName}")
+	Call<Group> getGroupsByName(final @Path("groupName") String groupName);
 }

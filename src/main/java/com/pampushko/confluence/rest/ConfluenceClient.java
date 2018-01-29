@@ -1,6 +1,7 @@
 package com.pampushko.confluence.rest;
 
 import com.pampushko.confluence.models.*;
+import com.pampushko.confluence.models.group.Group;
 import com.pampushko.confluence.models.group.GroupResultList;
 import lombok.extern.slf4j.Slf4j;
 import retrofit2.Call;
@@ -266,6 +267,18 @@ public class ConfluenceClient
 		Call<GroupResultList> groupResultListCall = confluenceApi.getGroups(start, limit);
 		Response<GroupResultList> response = groupResultListCall.execute();
 		GroupResultList body = response.body();
+		return body;
+	}
+	
+	/**
+	 * Получить группу по имени
+	 * @return
+	 */
+	Group getGroupsByName(final String groupName) throws IOException
+	{
+		Call<Group> groupCall = confluenceApi.getGroupsByName(groupName);
+		Response<Group> response = groupCall.execute();
+		Group body = response.body();
 		return body;
 	}
 	

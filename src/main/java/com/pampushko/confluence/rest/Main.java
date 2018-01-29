@@ -1,14 +1,10 @@
 package com.pampushko.confluence.rest;
 
-import com.pampushko.confluence.models.Space;
-import com.pampushko.confluence.models.SpaceResultList;
-import com.pampushko.confluence.models.group.GroupResultList;
+import com.pampushko.confluence.models.group.Group;
 import com.pampushko.confluence.settings.SettingsManager;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Properties;
 
 @Slf4j
@@ -30,23 +26,9 @@ public class Main
 				.password(settings.getProperty("password"))
 				.build();
 		
-		Space resultSpace = null;
+		String groupName = "confluence-users";
+		Group group = confluence.getGroupsByName(groupName);
 		
-		SpaceResultList spaces = confluence.getSpaces();
-		for (Space space : spaces.getSpaces())
-		{
-			System.out.println(space);
-		}
-		Map<String, String> params = new HashMap<String, String>()
-		{
-			{
-				put("expand", "body,version,body.editor");
-				put("expand", "body,version");
-			}
-		};
-		
-		GroupResultList groups = confluence.getGetGroups(1, 200);
-		
-		System.out.println(groups);
+		System.out.println(group);
 	}
 }
