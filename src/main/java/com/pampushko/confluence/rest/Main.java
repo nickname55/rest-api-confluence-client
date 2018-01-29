@@ -2,7 +2,7 @@ package com.pampushko.confluence.rest;
 
 import com.pampushko.confluence.models.Space;
 import com.pampushko.confluence.models.SpaceResultList;
-import com.pampushko.confluence.models.Version;
+import com.pampushko.confluence.models.group.GroupResultList;
 import com.pampushko.confluence.settings.SettingsManager;
 import lombok.extern.slf4j.Slf4j;
 
@@ -40,13 +40,13 @@ public class Main
 		Map<String, String> params = new HashMap<String, String>()
 		{
 			{
-				//put("expand", "body,version,body.editor");
+				put("expand", "body,version,body.editor");
 				put("expand", "body,version");
 			}
 		};
 		
-		Version version = confluence.getVersionOfContent("113868801", 5, params);
+		GroupResultList groups = confluence.getGetGroups(1, 200);
 		
-		System.out.println(version);
+		System.out.println(groups);
 	}
 }

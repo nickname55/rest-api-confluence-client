@@ -1,9 +1,10 @@
 package com.pampushko.confluence.rest;
 
 import com.pampushko.confluence.models.*;
+import com.pampushko.confluence.models.group.GroupResultList;
 import retrofit2.Call;
-import retrofit2.http.*;
 import retrofit2.http.Body;
+import retrofit2.http.*;
 
 import java.util.Map;
 
@@ -127,5 +128,14 @@ public interface ConfluenceApi
 	Call<Version> getVersionOfContent(final @Path("contentId") String contentId,
 	                                    final @Path("versionId") int versionId,
 	                                    final @QueryMap Map<String, String> params);
+	
+	/**
+	 * Получить список групп (разбитый на страницы)
+	 * @param start
+	 * @param limit
+	 * @return
+	 */
+	@GET("/wiki/rest/api/group")
+	Call<GroupResultList> getGetGroups(final @Query("start") int start, final @Query("limit") int limit);
 	
 }

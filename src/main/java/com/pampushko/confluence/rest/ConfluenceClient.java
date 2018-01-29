@@ -1,6 +1,7 @@
 package com.pampushko.confluence.rest;
 
 import com.pampushko.confluence.models.*;
+import com.pampushko.confluence.models.group.GroupResultList;
 import lombok.extern.slf4j.Slf4j;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -252,4 +253,20 @@ public class ConfluenceClient
 		Version body = response.body();
 		return body;
 	}
+	
+	
+	/**
+	 * Получить список групп (разбитый на страницы)
+	 * @param start
+	 * @param limit
+	 * @return
+	 */
+	GroupResultList getGetGroups(final int start, final int limit) throws IOException
+	{
+		Call<GroupResultList> groupResultListCall = confluenceApi.getGetGroups(start, limit);
+		Response<GroupResultList> response = groupResultListCall.execute();
+		GroupResultList body = response.body();
+		return body;
+	}
+	
 }
