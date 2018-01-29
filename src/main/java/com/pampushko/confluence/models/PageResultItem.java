@@ -80,7 +80,7 @@ public class PageResultItem extends BaseModel
 	 * <br />
 	 */
 	@SerializedName("history")
-	String history;
+	History history;
 	
 	/**
 	 * <br />
@@ -98,7 +98,7 @@ public class PageResultItem extends BaseModel
 	 * <br />
 	 */
 	@SerializedName("version")
-	String version;
+	Version version;
 	
 	/**
 	 * <br />
@@ -110,7 +110,7 @@ public class PageResultItem extends BaseModel
 	 * <br />
 	 */
 	@SerializedName("space")
-	String space;
+	Space space;
 	
 	//---------------------------------------------------------------------------
 	/**
@@ -122,8 +122,8 @@ public class PageResultItem extends BaseModel
 	/**
 	 * <br />
 	 */
-//	@SerializedName("_expandable")
-//	private _PageExpandable expandable;
+	@SerializedName("_expandable")
+	private _PageExpandable expandable;
 	
 	//--------------------------------------------------------------------------
 	@Override

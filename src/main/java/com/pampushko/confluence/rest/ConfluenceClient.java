@@ -1,9 +1,6 @@
 package com.pampushko.confluence.rest;
 
-import com.pampushko.confluence.models.ContentContainter;
-import com.pampushko.confluence.models.NoContentResponse;
-import com.pampushko.confluence.models.Space;
-import com.pampushko.confluence.models.SpaceResultList;
+import com.pampushko.confluence.models.*;
 import lombok.extern.slf4j.Slf4j;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -221,4 +218,38 @@ public class ConfluenceClient
 		return body;
 	}
 	
+	/**
+	 * Получить элемент контента по идентификатору этого элемента
+	 * <br />
+	 *
+	 * @param contentId
+	 * @param params
+	 * @return
+	 * @throws IOException
+	 */
+	public PageResultItem getContentById(final String contentId, final Map<String, String> params) throws IOException
+	{
+		Call<PageResultItem> pageContentCall = confluenceApi.getContentById(contentId, params);
+		Response<PageResultItem> response = pageContentCall.execute();
+		PageResultItem body = response.body();
+		return body;
+	}
+	
+	/**
+	 * Получить версию контента по заданному индентификатору контента и номеру версии
+	 * <br />
+	 *
+	 * @param contentId
+	 * @param versionNumber
+	 * @param params
+	 * @return
+	 */
+	Version getVersionOfContent(final String contentId, final int versionNumber,
+	                            final Map<String, String> params) throws IOException
+	{
+		Call<Version> versionCall = confluenceApi.getVersionOfContent(contentId, versionNumber, params);
+		Response<Version> response = versionCall.execute();
+		Version body = response.body();
+		return body;
+	}
 }

@@ -1,7 +1,9 @@
 package com.pampushko.confluence.models;
 
 import com.google.gson.GsonBuilder;
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
+import com.pampushko.confluence.custom_deserialazers.ExpandablePropDeserializer;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
@@ -11,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Data
 @Slf4j
-public class _PageExpandable extends BaseModel
+public class _PageExpandable
 {
 	/**
 	 * <br />
@@ -64,14 +66,17 @@ public class _PageExpandable extends BaseModel
 	/**
 	 * <br />
 	 */
+	
 	@SerializedName("body")
+	@JsonAdapter(value = ExpandablePropDeserializer.class)
 	Body body;
 	
 	/**
 	 * <br />
 	 */
+	@JsonAdapter(value = ExpandablePropDeserializer.class)
 	@SerializedName("version")
-	String version;
+	Version version;
 	
 	/**
 	 * <br />

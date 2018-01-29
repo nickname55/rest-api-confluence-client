@@ -16,7 +16,8 @@ import java.io.IOException;
 import java.util.Base64;
 
 /**
- * Класс для создании ско
+ * Класс для создании сконфигурированного объекта Retrofit
+ * <br />
  */
 @Slf4j
 public class RetrofitCreator

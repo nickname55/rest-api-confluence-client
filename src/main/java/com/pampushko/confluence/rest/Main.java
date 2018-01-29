@@ -1,8 +1,8 @@
 package com.pampushko.confluence.rest;
 
-import com.pampushko.confluence.models.ContentContainter;
 import com.pampushko.confluence.models.Space;
 import com.pampushko.confluence.models.SpaceResultList;
+import com.pampushko.confluence.models.Version;
 import com.pampushko.confluence.settings.SettingsManager;
 import lombok.extern.slf4j.Slf4j;
 
@@ -40,13 +40,13 @@ public class Main
 		Map<String, String> params = new HashMap<String, String>()
 		{
 			{
-				put("expand", "body");
-				put("expand", "body.editor");
+				//put("expand", "body,version,body.editor");
+				put("expand", "body,version");
 			}
 		};
 		
-		ContentContainter content = confluence.getSpaceContent("KARMA", params);
+		Version version = confluence.getVersionOfContent("113868801", 5, params);
 		
-		System.out.println(content);
+		System.out.println(version);
 	}
 }

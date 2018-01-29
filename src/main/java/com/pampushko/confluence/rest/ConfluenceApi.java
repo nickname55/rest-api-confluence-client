@@ -1,11 +1,9 @@
 package com.pampushko.confluence.rest;
 
-import com.pampushko.confluence.models.ContentContainter;
-import com.pampushko.confluence.models.NoContentResponse;
-import com.pampushko.confluence.models.Space;
-import com.pampushko.confluence.models.SpaceResultList;
+import com.pampushko.confluence.models.*;
 import retrofit2.Call;
 import retrofit2.http.*;
+import retrofit2.http.Body;
 
 import java.util.Map;
 
@@ -105,4 +103,29 @@ public interface ConfluenceApi
 	@GET("/wiki/rest/api/space/{key}/content")
 	Call<ContentContainter> getSpaceContent(final @Path("key") String spaceKey,
 	                                        final @QueryMap Map<String, String> params);
+	
+	/**
+	 * Получить элемент контента по идентификатору этого элемента
+	 * <br />
+	 * @param contentId
+	 * @param params
+	 * @return
+	 */
+	@GET("/wiki/rest/api/content/{contentId}")
+	Call<PageResultItem> getContentById(final @Path("contentId") String contentId,
+	                                    final @QueryMap Map<String, String> params);
+	
+	/**
+	 * Получить версию контента по заданному индентификатору контента и номеру версии
+	 * <br />
+	 * @param contentId
+	 * @param versionId
+	 * @param params
+	 * @return
+	 */
+	@GET("/wiki/rest/api/content/{contentId}/version/{versionId}")
+	Call<Version> getVersionOfContent(final @Path("contentId") String contentId,
+	                                    final @Path("versionId") int versionId,
+	                                    final @QueryMap Map<String, String> params);
+	
 }
