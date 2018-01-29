@@ -136,6 +136,6 @@ public interface ConfluenceApi
 	 * @return
 	 */
 	@GET("/wiki/rest/api/group")
-	Call<GroupResultList> getGetGroups(final @Query("start") int start, final @Query("limit") int limit);
+	Call<GroupResultList> getGroups(final @Query("start") int start, final @Query("limit") int limit);
 	
 }

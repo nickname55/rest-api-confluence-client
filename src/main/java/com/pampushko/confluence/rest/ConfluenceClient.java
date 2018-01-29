@@ -263,7 +263,7 @@ public class ConfluenceClient
 	 */
 	GroupResultList getGetGroups(final int start, final int limit) throws IOException
 	{
-		Call<GroupResultList> groupResultListCall = confluenceApi.getGetGroups(start, limit);
+		Call<GroupResultList> groupResultListCall = confluenceApi.getGroups(start, limit);
 		Response<GroupResultList> response = groupResultListCall.execute();
 		GroupResultList body = response.body();
 		return body;
