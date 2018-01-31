@@ -1,6 +1,6 @@
 import com.pampushko.confluence.models.Space;
 import com.pampushko.confluence.models.SpaceResultList;
-import com.pampushko.confluence.rest.ConfluenceClient;
+import com.pampushko.confluence.rest.Confluence;
 import com.pampushko.confluence.settings.SettingsManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +24,7 @@ public class UpdateSpace
 		Properties settings = SettingsManager.getValues();
 		
 		//вызываем билдер и создаем клиент
-		ConfluenceClient confluence = ConfluenceClient.newBuilder()
+		Confluence confluence = Confluence.newBuilder()
 				.baseUrl(settings.getProperty("baseUrl"))
 				.username(settings.getProperty("username"))
 				.password(settings.getProperty("password"))

@@ -22,10 +22,10 @@ import java.util.Base64;
 @Slf4j
 public class RetrofitCreator
 {
-	Retrofit getRetrofitRestAdapter(ConfluenceClient confluenceClient)
+	Retrofit getRetrofitRestAdapter(Confluence confluence)
 	{
-		final String username = confluenceClient.username;
-		final String password = confluenceClient.password;
+		final String username = confluence.username;
+		final String password = confluence.password;
 		
 		//HTTP Basic authentication для REST API Confluence
 		final String credentials = username + ":" + password;
@@ -64,7 +64,7 @@ public class RetrofitCreator
 		//создаем экземпляр Ретрофита - добавляем к ретрофиту созданный нами ранее Http-клиент
 		Retrofit retrofit = new Retrofit.Builder()
 				
-				.baseUrl(confluenceClient.baseUrl)
+				.baseUrl(confluence.baseUrl)
 				.addConverterFactory(GsonConverterFactory.create(gson))
 				.addCallAdapterFactory(RxJava2CallAdapterFactory.create())
 				.client(httpClient)

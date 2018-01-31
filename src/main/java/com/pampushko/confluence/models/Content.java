@@ -1,6 +1,7 @@
 package com.pampushko.confluence.models;
 
 import com.google.gson.GsonBuilder;
+import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
@@ -16,7 +17,8 @@ public class Content extends BaseModel
 	 * Идентификатор области
 	 * <br />
 	 */
-	private Long id;
+	@SerializedName("id")
+	private String id;
 	
 	/**
 	 * Ключ области, например {@literal "TEST"}.
@@ -24,34 +26,55 @@ public class Content extends BaseModel
 	 * Ключи областей могут содержать только латинские буквы и числа {@literal (A-Z, a-z, 0-9)}
 	 * <br />
 	 */
+	@SerializedName("key")
 	private String key;
 	
 	/**
 	 * Имя области
 	 * <br />
 	 */
+	@SerializedName("name")
 	private String name;
 	
 	/**
 	 * Описание области
 	 * <br />
 	 */
+	@SerializedName("description")
 	private SpaceDescription description;
 	
 	/**
 	 * Тип области
 	 * <br />
 	 */
+	@SerializedName("type")
 	private String type;
 	
 	/**
 	 * Статус области
 	 * <br />
 	 */
+	@SerializedName("status")
 	private String status;
 	
-	//todo сделать _expandable;
-	//todo сделать _links;
+	
+	/**
+	 * <br />
+	 */
+	@SerializedName("restrictions")
+	private Restrictions restrictions;
+	
+	/**
+	 * <br />
+	 */
+	@SerializedName("_expandable")
+	_ContentExpandable expandable;
+	
+	/**
+	 * <br />
+	 */
+	@SerializedName("_links")
+	_Links links;
 	
 	public Content()
 	{

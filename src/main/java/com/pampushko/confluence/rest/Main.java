@@ -1,6 +1,6 @@
 package com.pampushko.confluence.rest;
 
-import com.pampushko.confluence.models.user.UserResultList;
+import com.pampushko.confluence.models.search.SearchResultList;
 import com.pampushko.confluence.settings.SettingsManager;
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,15 +20,23 @@ public class Main
 		Properties settings = SettingsManager.getValues();
 		
 		//вызываем билдер и создаем клиент
-		ConfluenceClient confluence = ConfluenceClient.newBuilder()
+		Confluence confluence = Confluence.newBuilder()
 				.baseUrl(settings.getProperty("baseUrl"))
 				.username(settings.getProperty("username"))
 				.password(settings.getProperty("password"))
 				.build();
 		
-		String groupName = "confluence-users";
-		UserResultList userResultList = confluence.getUsersFromGroupByGroupName(groupName, 0, 200);
+		//получаем контент по запросу CQL, но только один элемент
+		Confluence.SearchParams searchParams = Confluence.SearchParams.builder().cql("space = KARMA order by created").limit(1).build();
+		SearchResultList searchResultList2 = confluence.search(searchParams);
 		
-		System.out.println(userResultList);
+		//получаем весь контент по запросу CQL
+		SearchResultList searchResultList1 = confluence.search("space = KARMA order by created");
+		
+		System.out.println("------------------------------------------------------------");
+		System.out.println(searchResultList1);
+		System.out.println("------------------------------------------------------------");
+		System.out.println(searchResultList2);
+		System.out.println("------------------------------------------------------------");
 	}
 }

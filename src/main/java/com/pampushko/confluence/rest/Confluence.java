@@ -3,6 +3,7 @@ package com.pampushko.confluence.rest;
 import com.pampushko.confluence.models.*;
 import com.pampushko.confluence.models.group.Group;
 import com.pampushko.confluence.models.group.GroupResultList;
+import com.pampushko.confluence.models.search.SearchResultList;
 import com.pampushko.confluence.models.user.UserResultList;
 import lombok.extern.slf4j.Slf4j;
 import retrofit2.Call;
@@ -10,6 +11,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -17,7 +19,7 @@ import java.util.Map;
  * <br />
  */
 @Slf4j
-public class ConfluenceClient
+public class Confluence
 {
 	/**
 	 * Имя пользователя
@@ -37,14 +39,14 @@ public class ConfluenceClient
 	
 	private ConfluenceApi confluenceApi;
 	
-	private ConfluenceClient()
+	private Confluence()
 	{
 	
 	}
 	
 	public static Builder newBuilder()
 	{
-		return new ConfluenceClient().new Builder();
+		return new Confluence().new Builder();
 	}
 	
 	////////////////////////////////////////////////////////////////////////
@@ -57,19 +59,19 @@ public class ConfluenceClient
 		
 		public Builder username(String username)
 		{
-			ConfluenceClient.this.username = username;
+			Confluence.this.username = username;
 			return this;
 		}
 		
 		public Builder password(String password)
 		{
-			ConfluenceClient.this.password = password;
+			Confluence.this.password = password;
 			return this;
 		}
 		
 		public Builder baseUrl(String baseUrl)
 		{
-			ConfluenceClient.this.baseUrl = baseUrl;
+			Confluence.this.baseUrl = baseUrl;
 			return this;
 		}
 		
@@ -83,11 +85,11 @@ public class ConfluenceClient
 		 *
 		 * @return
 		 */
-		public ConfluenceClient build()
+		public Confluence build()
 		{
-			Retrofit retrofit = new RetrofitCreator().getRetrofitRestAdapter(ConfluenceClient.this);
-			ConfluenceClient.this.confluenceApi = retrofit.create(ConfluenceApi.class);
-			return ConfluenceClient.this;
+			Retrofit retrofit = new RetrofitCreator().getRetrofitRestAdapter(Confluence.this);
+			Confluence.this.confluenceApi = retrofit.create(ConfluenceApi.class);
+			return Confluence.this;
 		}
 	}
 	
@@ -318,4 +320,95 @@ public class ConfluenceClient
 		return body;
 	}
 	
+	
+	@lombok.Builder
+	public static class SearchParams
+	{
+		/**
+		 * the CQL query see advanced searching in confluence using CQL
+		 */
+		@lombok.Builder.Default
+		String cql = "";
+		
+		/**
+		 * the execution context for CQL functions, provides current space key and content id. If this is not provided some CQL functions will not be available.
+		 */
+		@lombok.Builder.Default
+		String cqlcontext = "";
+		
+		/**
+		 * the excerpt strategy to apply to the result, one of : indexed, highlight, none. This defaults to highlight.
+		 */
+		@lombok.Builder.Default
+		String excerpt = "highlight";
+		
+		/**
+		 * the properties to expand on the search result, this may cause database requests for some properties
+		 */
+		@lombok.Builder.Default
+		String expand = "";
+		
+		/**
+		 * the start point of the collection to return
+		 */
+		@lombok.Builder.Default
+		int start = 0;
+		
+		/**
+		 * the limit of the number of items to return, this may be restricted by fixed system limits
+		 */
+		@lombok.Builder.Default
+		int limit = 25;
+		
+		/**
+		 *  whether to include content in archived spaces in the result, this defaults to false
+		 */
+		@lombok.Builder.Default
+		boolean includeArchivedSpaces = false;
+		
+		//----------------------------------------------------------------------
+		
+	}
+	
+	//---------------------------------------------------------------------------
+	/**
+	 * Выполнить поиск элементов при помощи CQL SearchService
+	 * <br />
+	 * @return Returns a full JSON representation of a list of search results
+	 * <br />
+	 */
+	SearchResultList search(final String cql) throws IOException
+	{
+		Call<SearchResultList> searchResultListCall = confluenceApi.search(cql, new HashMap<>());
+		Response<SearchResultList> response = searchResultListCall.execute();
+		SearchResultList body = response.body();
+		return body;
+	}
+	
+	/**
+	 * Выполнить поиск элементов при помощи CQL SearchService
+	 * <br />
+	 * @return Returns a full JSON representation of a list of search results
+	 * <br />
+	 */
+	SearchResultList search(final SearchParams params) throws IOException
+	{
+		Map<String, String> mapParams = new HashMap<String, String>()
+		{
+			{
+				put("cql", params.cql);
+				put("cqlcontext", params.cqlcontext);
+				put("excerpt", params.excerpt);
+				put("expand", params.expand);
+				put("start", String.valueOf(params.start));
+				put("limit", String.valueOf(params.limit));
+				put("includeArchivedSpaces", String.valueOf(params.includeArchivedSpaces));
+			}
+		};
+		Call<SearchResultList> searchResultListCall = confluenceApi.search(params.cql, mapParams);
+		Response<SearchResultList> response = searchResultListCall.execute();
+		SearchResultList body = response.body();
+		return body;
+	}
+	//---------------------------------------------------------------------------
 }
