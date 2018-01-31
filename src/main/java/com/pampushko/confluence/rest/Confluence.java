@@ -5,6 +5,7 @@ import com.pampushko.confluence.models.group.Group;
 import com.pampushko.confluence.models.group.GroupResultList;
 import com.pampushko.confluence.models.search.SearchResultList;
 import com.pampushko.confluence.models.user.UserResultList;
+import com.pampushko.confluence.models.user_watch.WatchObject;
 import lombok.extern.slf4j.Slf4j;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -411,4 +412,59 @@ public class Confluence
 		return body;
 	}
 	//---------------------------------------------------------------------------
+	
+	/**
+	 * Получить объект, содержащий информацию о том наблюдает ли пользователь
+	 * <br />
+	 * пославший запрос за контентом имеющим идентификатор contentId
+	 * <br />
+	 * @param contentId
+	 * @return
+	 * @throws IOException
+	 */
+	WatchObject watch(final String contentId) throws IOException
+	{
+		Call<WatchObject> watchObjectCall = confluenceApi.isWatch(contentId);
+		Response<WatchObject> response = watchObjectCall.execute();
+		WatchObject body = response.body();
+		return body;
+	}
+	
+	/**
+	 * Получить объект, содержащий информацию о том наблюдает ли пользователь
+	 * <br />
+	 * имеющий указанный <strong>userkey</strong>
+	 * <br />
+	 * за контентом имеющим идентификатор contentId
+	 * <br />
+	 * @param userkey
+	 * @return
+	 * @throws IOException
+	 */
+	WatchObject watchByKey(final String contentId, final String userkey) throws IOException
+	{
+		Call<WatchObject> watchObjectCall = confluenceApi.isWatchByKey(contentId, userkey);
+		Response<WatchObject> response = watchObjectCall.execute();
+		WatchObject body = response.body();
+		return body;
+	}
+	
+	/**
+	 * Получить объект, содержащий информацию о том наблюдает ли пользователь
+	 * <br />
+	 * имеющий указанный <strong>username</strong>
+	 * <br />
+	 * за контентом имеющим идентификатор contentId
+	 * <br />
+	 * @param contentId
+	 * @return
+	 * @throws IOException
+	 */
+	WatchObject watchByUsername(final String contentId, final String username) throws IOException
+	{
+		Call<WatchObject> watchObjectCall = confluenceApi.isWatchByUsername(contentId, username);
+		Response<WatchObject> response = watchObjectCall.execute();
+		WatchObject body = response.body();
+		return body;
+	}
 }

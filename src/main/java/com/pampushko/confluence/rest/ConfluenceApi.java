@@ -5,6 +5,7 @@ import com.pampushko.confluence.models.group.Group;
 import com.pampushko.confluence.models.group.GroupResultList;
 import com.pampushko.confluence.models.search.SearchResultList;
 import com.pampushko.confluence.models.user.UserResultList;
+import com.pampushko.confluence.models.user_watch.WatchObject;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.*;
@@ -183,4 +184,35 @@ public interface ConfluenceApi
 	@GET("/wiki/rest/api/search")
 	Call<SearchResultList> search(final @Query("cql") String cql, final @QueryMap Map<String, String> params);
 	
+	
+	//-----------------------------------------------------------------------------------------------------
+	
+	//-----------------------------------------начало, Is watching content
+	
+	/**
+	 *
+	 * @param contentId
+	 * @return
+	 */
+	@GET("/wiki/rest/api/user/watch/content/{contentId}")
+	Call<WatchObject> isWatch(final @Path("contentId") String contentId);
+	
+	/**
+	 *
+	 * @param contentId
+	 * @param userkey
+	 * @return
+	 */
+	@GET("/wiki/rest/api/user/watch/content/{contentId}")
+	Call<WatchObject> isWatchByKey(final @Path("contentId") String contentId, final @Query("key") String userkey);
+	
+	/**
+	 *
+	 * @param contentId
+	 * @param username
+	 * @return
+	 */
+	@GET("/wiki/rest/api/user/watch/content/{contentId}")
+	Call<WatchObject> isWatchByUsername(final @Path("contentId") String contentId, final @Query("username") String username);
+	//-----------------------------------------конец, Is watching content
 }

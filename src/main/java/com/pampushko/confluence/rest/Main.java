@@ -1,6 +1,6 @@
 package com.pampushko.confluence.rest;
 
-import com.pampushko.confluence.models.search.SearchResultList;
+import com.pampushko.confluence.models.user_watch.WatchObject;
 import com.pampushko.confluence.settings.SettingsManager;
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,17 +26,22 @@ public class Main
 				.password(settings.getProperty("password"))
 				.build();
 		
-		//получаем контент по запросу CQL, но только один элемент
-		Confluence.SearchParams searchParams = Confluence.SearchParams.builder().cql("space = KARMA order by created").limit(1).build();
-		SearchResultList searchResultList2 = confluence.search(searchParams);
+		final String contentId = "75563009";
+		final String userkey = "8a7f80835e12863a015e14c6d9910023";
+		final String username = "admin";
 		
-		//получаем весь контент по запросу CQL
-		SearchResultList searchResultList1 = confluence.search("space = KARMA order by created");
+		WatchObject watchObjectContent = confluence.watch(contentId);
+		WatchObject watchObjectUsername = confluence.watchByUsername(contentId, username);
+		WatchObject watchObjectUserkey = confluence.watchByKey(contentId, userkey);
 		
-		System.out.println("------------------------------------------------------------");
-		System.out.println(searchResultList1);
-		System.out.println("------------------------------------------------------------");
-		System.out.println(searchResultList2);
-		System.out.println("------------------------------------------------------------");
+		
+		System.out.println("--content by current user--");
+		System.out.println(watchObjectContent);
+		System.out.println("--content by userkey--");
+		System.out.println(watchObjectUserkey);
+		System.out.println("--content by username--");
+		System.out.println(watchObjectUsername);
+		
+		
 	}
 }
