@@ -37,6 +37,14 @@ public class Content extends BaseModel
 	private String name;
 	
 	/**
+	 * Заголовок
+	 * <br />
+	 */
+	@SerializedName("title")
+	private String title;
+	
+	
+	/**
 	 * Описание области
 	 * <br />
 	 */
@@ -63,6 +71,74 @@ public class Content extends BaseModel
 	 */
 	@SerializedName("restrictions")
 	private Restrictions restrictions;
+	
+	//-------------------------------------------------------------------------
+	/**
+	 * <br />
+	 */
+	//@SerializedName("container")
+	//String container; //todo разобраться что это за контенер? и зачем он нужен
+	
+	/**
+	 * <br />
+	 */
+	@SerializedName("metadata")
+	String metadata;
+	
+	/**
+	 * <br />
+	 */
+	//@SerializedName("extensions")
+	//String extensions; //todo разобраться
+	
+	/**
+	 * <br />
+	 */
+	@SerializedName("operations")
+	String operations;
+	
+	/**
+	 * <br />
+	 */
+	@SerializedName("children")
+	String children;
+	
+	/**
+	 * <br />
+	 */
+	@SerializedName("history")
+	History history;
+	
+	/**
+	 * <br />
+	 */
+	@SerializedName("ancestors")
+	Parent[] ancestors;
+	
+	/**
+	 * <br />
+	 */
+	@SerializedName("body")
+	Body body;
+	
+	/**
+	 * <br />
+	 */
+	@SerializedName("version")
+	Version version;
+	
+	/**
+	 * <br />
+	 */
+	@SerializedName("descendants")
+	String descendants;
+	
+	/**
+	 * <br />
+	 */
+	@SerializedName("space")
+	Space space;
+	//-------------------------------------------------------------------------
 	
 	/**
 	 * <br />

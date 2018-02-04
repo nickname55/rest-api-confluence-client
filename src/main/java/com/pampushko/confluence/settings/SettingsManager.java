@@ -38,7 +38,8 @@ public class SettingsManager
 		try (FileInputStream fileInputStream = new FileInputStream(new File(resource.getFile())))
 		{
 			properties.load(fileInputStream);
-		} catch (IOException ex)
+		}
+		catch (IOException ex)
 		{
 			log.error(ex.getMessage());
 		}

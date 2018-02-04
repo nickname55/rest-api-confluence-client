@@ -48,7 +48,6 @@ public class SearchResultItem extends BaseModel
 	ResultGlobalContainer resultGlobalContainer;
 	
 	/**
-	 *
 	 * <br />
 	 */
 	@SerializedName("breadcrumbs")

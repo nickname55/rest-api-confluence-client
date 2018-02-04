@@ -40,7 +40,7 @@ public class Body
 	/**
 	 * <br />
 	 */
-	String storage;
+	Storage storage;
 	
 	/**
 	 * <br />

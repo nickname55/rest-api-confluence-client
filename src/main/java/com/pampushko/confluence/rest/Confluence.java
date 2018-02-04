@@ -250,8 +250,7 @@ public class Confluence
 	 * @param params
 	 * @return
 	 */
-	Version getVersionOfContent(final String contentId, final int versionNumber,
-	                            final Map<String, String> params) throws IOException
+	Version getVersionOfContent(final String contentId, final int versionNumber, final Map<String, String> params) throws IOException
 	{
 		Call<Version> versionCall = confluenceApi.getVersionOfContent(contentId, versionNumber, params);
 		Response<Version> response = versionCall.execute();
@@ -263,6 +262,7 @@ public class Confluence
 	/**
 	 * Получить список групп (разбитый на страницы)
 	 * <br />
+	 *
 	 * @param start
 	 * @param limit
 	 * @return
@@ -278,6 +278,7 @@ public class Confluence
 	/**
 	 * Получить группу по имени
 	 * <br />
+	 *
 	 * @return
 	 */
 	Group getGroupsByName(final String groupName) throws IOException
@@ -362,7 +363,7 @@ public class Confluence
 		int limit = 25;
 		
 		/**
-		 *  whether to include content in archived spaces in the result, this defaults to false
+		 * whether to include content in archived spaces in the result, this defaults to false
 		 */
 		@lombok.Builder.Default
 		boolean includeArchivedSpaces = false;
@@ -372,9 +373,11 @@ public class Confluence
 	}
 	
 	//---------------------------------------------------------------------------
+	
 	/**
 	 * Выполнить поиск элементов при помощи CQL SearchService
 	 * <br />
+	 *
 	 * @return Returns a full JSON representation of a list of search results
 	 * <br />
 	 */
@@ -389,6 +392,7 @@ public class Confluence
 	/**
 	 * Выполнить поиск элементов при помощи CQL SearchService
 	 * <br />
+	 *
 	 * @return Returns a full JSON representation of a list of search results
 	 * <br />
 	 */
@@ -418,6 +422,7 @@ public class Confluence
 	 * <br />
 	 * пославший запрос за контентом имеющим идентификатор contentId
 	 * <br />
+	 *
 	 * @param contentId
 	 * @return
 	 * @throws IOException
@@ -437,6 +442,7 @@ public class Confluence
 	 * <br />
 	 * за контентом имеющим идентификатор contentId
 	 * <br />
+	 *
 	 * @param userkey
 	 * @return
 	 * @throws IOException
@@ -456,6 +462,7 @@ public class Confluence
 	 * <br />
 	 * за контентом имеющим идентификатор contentId
 	 * <br />
+	 *
 	 * @param contentId
 	 * @return
 	 * @throws IOException
@@ -465,6 +472,26 @@ public class Confluence
 		Call<WatchObject> watchObjectCall = confluenceApi.isWatchByUsername(contentId, username);
 		Response<WatchObject> response = watchObjectCall.execute();
 		WatchObject body = response.body();
+		return body;
+	}
+	
+	/**
+	 * Параметры
+	 * <ol>
+	 * <li>status (string), Default: current</li>
+	 * <li>expand	(string), Default: body.storage,history,space,container.history,container.version,version,ancestors</li>
+	 * </ol>
+	 *
+	 * @param content
+	 * @param params
+	 * @return
+	 * @throws IOException
+	 */
+	Content createContent(final Content content, final Map<String, String> params) throws IOException
+	{
+		Call<Content> contentCall = confluenceApi.createContent(content, params);
+		Response<Content> response = contentCall.execute();
+		Content body = response.body();
 		return body;
 	}
 }
