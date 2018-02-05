@@ -289,6 +289,16 @@ public interface ConfluenceApi
 	                                                     final @Path("version") String version,
 	                                                     final @Path("macroId") String macroId);
 	
+	/**
+	 * Получить список элементов контента,
+	 * используя для запроса Confluence Query Language (CQL)
+	 * @see <a href="https://developer.atlassian.com/display/CONFDEV/Advanced+Searching+using+CQL">
+	 * Advanced searching using CQL
+	 * </a>
+	 * @param cql текст запроса на Confluence Quiery Language
+	 * @param params дополнительные параметры для поиска
+	 * @return объект-контейнер, внутри которого находится коллекция найденных элементов контента
+	 */
 	@GET("/wiki/rest/api/content/search")
 	Call<ContentContainter> getContentSearch(final @Query("cql") String cql,
 	                                         final @QueryMap Map<String, String> params);
