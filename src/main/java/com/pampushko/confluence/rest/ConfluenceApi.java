@@ -284,6 +284,13 @@ public interface ConfluenceApi
 	                                                  final @Path("version") String version,
 	                                                  final @Path("hash") String hash);
 	
+	/**
+	 *
+	 * @param contentId
+	 * @param version
+	 * @param macroId
+	 * @return
+	 */
 	@GET("/wiki/rest/api/content/{contentId}/history/{version}/macro/id/{macroId}")
 	Call<ContentContainter> getContentMacroBodyByMacroId(final @Path("contentId") String contentId,
 	                                                     final @Path("version") String version,
@@ -295,6 +302,15 @@ public interface ConfluenceApi
 	 * @see <a href="https://developer.atlassian.com/display/CONFDEV/Advanced+Searching+using+CQL">
 	 * Advanced searching using CQL
 	 * </a>
+	 * <br />
+	 * Дополнительные параметры:
+	 * <ul>
+	 *     <li>cql (String) - задаётся отдельным параметром метода</li>
+	 *     <li>cqlcontext (String) - the context to execute a cql search in, this is the json serialized form of SearchContext</li>
+	 *     <li>expand (String) - a comma separated list of properties to expand on the content.</li>
+	 *     <li>start (int) - the start point of the collection to return</li>
+	 *     <li>limit (int, default:<strong>25</strong>) - the limit of the number of items to return, this may be restricted by fixed system limits </li>
+	 * </ul>
 	 * @param cql текст запроса на Confluence Quiery Language
 	 * @param params дополнительные параметры для поиска
 	 * @return объект-контейнер, внутри которого находится коллекция найденных элементов контента
