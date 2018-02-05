@@ -171,6 +171,8 @@ public interface ConfluenceApi
 	//начало, Is watching content
 	
 	/**
+	 * Текущий пользователь является наблюдателем контента с указанным contentId
+	 * <br />
 	 * @param contentId
 	 * @return
 	 */
@@ -178,15 +180,23 @@ public interface ConfluenceApi
 	Call<WatchObject> isWatch(final @Path("contentId") String contentId);
 	
 	/**
+	 * Является ли пользователь, имеющий указанный userKey, наблюдателем
+	 * <br />
+	 * контента (контент имеет идентификатор contentId)
+	 * <br />
 	 * @param contentId
-	 * @param userkey
+	 * @param userKey
 	 * @return
 	 */
 	@GET("/wiki/rest/api/user/watch/content/{contentId}")
 	Call<WatchObject> isWatchByKey(final @Path("contentId") String contentId,
-	                               final @Query("key") String userkey);
+	                               final @Query("key") String userKey);
 	
 	/**
+	 * Является ли пользователь, имеющий указанное имя для входа (username),
+	 * <br />
+	 * наблюдателем контента (контент имеет идентификатор contentId)
+	 * <br />
 	 * @param contentId
 	 * @param username
 	 * @return
