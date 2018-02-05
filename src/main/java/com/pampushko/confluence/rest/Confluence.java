@@ -3,6 +3,7 @@ package com.pampushko.confluence.rest;
 import com.pampushko.confluence.models.*;
 import com.pampushko.confluence.models.group.Group;
 import com.pampushko.confluence.models.group.GroupResultList;
+import com.pampushko.confluence.models.macros.Macros;
 import com.pampushko.confluence.models.search.SearchResultList;
 import com.pampushko.confluence.models.user.UserResultList;
 import com.pampushko.confluence.models.user_watch.WatchObject;
@@ -492,6 +493,31 @@ public class Confluence
 		Call<Content> contentCall = confluenceApi.createContent(content, params);
 		Response<Content> response = contentCall.execute();
 		Content body = response.body();
+		return body;
+	}
+	
+	
+	/**
+	 * Получить тело макроса с заданным идентификатором макроса (macroId)
+	 * <br />
+	 * для заданного элемента контента (contentId)
+	 * <br />
+	 * Для указанной вами версии контента (version)
+	 * <br />
+	 *
+	 * @param contentId
+	 * @param version
+	 * @param macroId
+	 * @return
+	 * @throws IOException
+	 */
+	Macros getContentMacroBodyByMacroId(final String contentId,
+	                                    final String version,
+	                                    final String macroId) throws IOException
+	{
+		Call<Macros> contentContainterCall = confluenceApi.getContentMacroBodyByMacroId(contentId, version, macroId);
+		Response<Macros> response = contentContainterCall.execute();
+		Macros body = response.body();
 		return body;
 	}
 }

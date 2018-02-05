@@ -3,6 +3,7 @@ package com.pampushko.confluence.rest;
 import com.pampushko.confluence.models.*;
 import com.pampushko.confluence.models.group.Group;
 import com.pampushko.confluence.models.group.GroupResultList;
+import com.pampushko.confluence.models.macros.Macros;
 import com.pampushko.confluence.models.search.SearchResultList;
 import com.pampushko.confluence.models.user.UserResultList;
 import com.pampushko.confluence.models.user_watch.WatchObject;
@@ -285,16 +286,38 @@ public interface ConfluenceApi
 	                                                  final @Path("hash") String hash);
 	
 	/**
-	 *
-	 * @param contentId
-	 * @param version
-	 * @param macroId
-	 * @return
+	 * Возращает тело макроса (в storage формате) с указанным id.
+	 * <br />
+	 * Этот ресурс в основном используется connect-приложениями
+	 * <br />
+	 * которым необходимо тело макроса для того чтобы выполнить свою работу
+	 * <br />
+	 * Когда контент создан, если macroId не указан,
+	 * <br />
+	 * то Confluence будет генерировать случайный id.
+	 * <br />
+	 * Идентификатор (id) сохраняется, когда сохраняется контент
+	 * <br />
+	 * и может быть изменен Confluence, если имеются конфликтующие идентификаторы
+	 * <br />
+	 * Чтобы сохранить обратную совместимость, этот ресурс также будет матчить hash of the macro body,
+	 * <br />
+	 * даже если присутствует macroId.
+	 * <br />
+	 * Эта проверка станет излишней так как страницы получают macroId сгенерированный для них
+	 * <br />
+	 * и прозрачно распространяемый на все экземпляры (all instances).
+	 * <br />
+	 * @param contentId идентификатор контента
+	 * @param version версия контента
+	 * @param macroId идентификатор макроса
+	 * @return контейнер, содержащий список элементов контента
 	 */
+	//готово
 	@GET("/wiki/rest/api/content/{contentId}/history/{version}/macro/id/{macroId}")
-	Call<ContentContainter> getContentMacroBodyByMacroId(final @Path("contentId") String contentId,
-	                                                     final @Path("version") String version,
-	                                                     final @Path("macroId") String macroId);
+	Call<Macros> getContentMacroBodyByMacroId(final @Path("contentId") String contentId,
+	                                          final @Path("version") String version,
+	                                          final @Path("macroId") String macroId);
 	
 	/**
 	 * Получить список элементов контента,
