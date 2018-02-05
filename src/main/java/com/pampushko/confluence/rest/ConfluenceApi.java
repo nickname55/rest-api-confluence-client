@@ -230,6 +230,7 @@ public interface ConfluenceApi
 	 * @return
 	 */
 	@GET("/wiki/rest/api/content/{contentId}")
+	//готово
 	Call<PageResultItem> getContentById(final @Path("contentId") String contentId,
 	                                    final @QueryMap Map<String, String> params);
 	
@@ -242,6 +243,7 @@ public interface ConfluenceApi
 	 * @param params
 	 * @return
 	 */
+	//готово
 	@GET("/wiki/rest/api/content/{contentId}/version/{versionId}")
 	Call<Version> getVersionOfContent(final @Path("contentId") String contentId,
 	                                  final @Path("versionId") int versionId,
