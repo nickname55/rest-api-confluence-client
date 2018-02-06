@@ -505,10 +505,10 @@ public class Confluence
 	 * Для указанной вами версии контента (version)
 	 * <br />
 	 *
-	 * @param contentId
-	 * @param version
-	 * @param macroId
-	 * @return
+	 * @param contentId идентификатор элемента контента
+	 * @param version версия элемента контента
+	 * @param macroId идентификатор макроса
+	 * @return макрос
 	 * @throws IOException
 	 */
 	Macros getContentMacroBodyByMacroId(final String contentId,
@@ -516,6 +516,30 @@ public class Confluence
 	                                    final String macroId) throws IOException
 	{
 		Call<Macros> contentContainterCall = confluenceApi.getContentMacroBodyByMacroId(contentId, version, macroId);
+		Response<Macros> response = contentContainterCall.execute();
+		Macros body = response.body();
+		return body;
+	}
+	
+	/**
+	 * Получить тело макроса с заданным хешем (hash) макроса (вместо macroId, для совместимости)
+	 * <br />
+	 * для заданного элемента контента (contentId)
+	 * <br />
+	 * Для указанной вами версии контента (version)
+	 * <br />
+	 *
+	 * @param contentId идентификатор элемента контента
+	 * @param version версия элемента контента
+	 * @param hash хеш макроса
+	 * @return макрос
+	 * @throws IOException
+	 */
+	Macros getContentMacroBodyByHash(final String contentId,
+	                                 final String version,
+	                                 final String hash) throws IOException
+	{
+		Call<Macros> contentContainterCall = confluenceApi.getContentMacroBodyByHash(contentId, version, hash);
 		Response<Macros> response = contentContainterCall.execute();
 		Macros body = response.body();
 		return body;

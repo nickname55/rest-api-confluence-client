@@ -32,8 +32,8 @@ public class Main
 			
 			}
 		};
-		String macroId = "36050d1a-60a4-4586-b5b2-a610e69dc933";
-		Macros contentMacroBodyByMacroId = confluence.getContentMacroBodyByMacroId(contentId, "4", macroId);
+		String macroId = "f26fc989-bc37-43b6-bfb8-95c0dcd69157"; //or hash?
+		Macros contentMacroBodyByMacroId = confluence.getContentMacroBodyByHash(contentId, "6", macroId);
 		System.out.println(contentMacroBodyByMacroId);
 	}
 }

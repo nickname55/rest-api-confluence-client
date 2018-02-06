@@ -1,6 +1,8 @@
 package com.pampushko.confluence.models.macros;
 
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
+import com.pampushko.confluence.custom_deserialazers.CustomJsonAdapter;
 import com.pampushko.confluence.models.BaseModel;
 import com.pampushko.confluence.models._Links;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +32,7 @@ public class Macros extends BaseModel
 	 * <br />
 	 */
 	@SerializedName("parameters")
+	@JsonAdapter(value = CustomJsonAdapter.class)
 	Parameters parameters;
 	
 	/**

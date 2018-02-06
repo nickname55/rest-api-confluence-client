@@ -283,15 +283,49 @@ public interface ConfluenceApi
 	@GET("/wiki/rest/api/content/{contentId}/history")
 	Call<ContentContainter> getContentHistory(final @Path("contentId") String contendId);
 	
+	/**
+	 * Возвращает тело макроса (в storage формате) с указанным хешем.
+	 * <br />
+	 * Эта функция в основном используется для connect-приложений
+	 * <br />
+	 * которым необходимо тело макроса для того чтобы выполнить какую-то свою работу.
+	 * <br />
+	 * Хеш генерируется connect-ом во время рендеринга выполняемого локальным обработчиком макросов
+	 * <br />
+	 * и обычно сохраняет своё значение в пределах одного запроса
+	 * <br />
+	 * В целях оптимизации этот хеш обычно используется для нескольких запросов
+	 * <br />
+	 * Сбор макросов путём поиска по хешу должен считаться устаревшим,
+	 * <br />
+	 * и заменяется теперь при помощи поиска по macroId (смотрите ещё один такой же метод, как и текущий,
+	 * <br />
+	 * но принимающий параметр macroId)
+	 * <br />
+	 * Этот ресурс в настоящее время вызывается только из connect плагинов,
+	 * <br />
+	 * которые в конечном итоге? будут использовать ресурс {@link #getContentById(com.atlassian.confluence.api.model.content.id.ContentId, java.util.List, Integer, String)}
+	 * <br />
+	 * Чтобы сделать переход максимально безболезненным,
+	 * <br />
+	 * этот ресурс будет соответствовать ресурсу с генерированым хешем или сохраненным macroId.
+	 * <br />
+	 * Это позволит работать плагинам во время периода миграции.
+	 * <br />
+	 * @param contentId идентификатор контента
+	 * @param version версия контента
+	 * @param hash хеш макроса
+	 * @return
+	 */
 	@GET("/wiki/rest/api/content/{contentId}/history/{version}/macro/hash/{hash}")
-	Call<ContentContainter> getContentMacroBodyByHash(final @Path("contentId") String contentId,
+	Call<Macros> getContentMacroBodyByHash(final @Path("contentId") String contentId,
 	                                                  final @Path("version") String version,
 	                                                  final @Path("hash") String hash);
 	
 	/**
 	 * Возращает тело макроса (в storage формате) с указанным id.
 	 * <br />
-	 * Этот ресурс в основном используется connect-приложениями
+	 * Этот функция в основном используется connect-приложениями
 	 * <br />
 	 * которым необходимо тело макроса для того чтобы выполнить свою работу
 	 * <br />
