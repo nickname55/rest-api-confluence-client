@@ -9,9 +9,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Сериализатор/десериализатор для параметров макросов в Confluence,
+ * <br />
+ * Необходим, так как у различных макросов может быть различный набор параметров
+ * <br />
+ * И, соответственно, не получается создать универсальный объект Properties,
+ * <br />
+ * который содержал бы свойства всех макросов,
+ * <br />
+ * потому мы создаем объект Properties с одним свойством типа Map
+ * <br />
+ * и в это свойство помещаем/извлекаем значения properties макросов
+ * <br />
+ * Таким образом нам не важно какие бывают у макросов properties.
+ * <br />
  */
 @Slf4j
-public class CustomJsonAdapter implements JsonDeserializer<Parameters>, JsonSerializer<Parameters>
+public class MacrosParameterJsonAdapter implements JsonDeserializer<Parameters>, JsonSerializer<Parameters>
 {
 	@Override
 	public Parameters deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException
