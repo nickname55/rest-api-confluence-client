@@ -1,5 +1,6 @@
 package com.pampushko.confluence.models.macros;
 
+import com.pampushko.confluence.models.BaseModel;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -7,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
  * <br />
  */
 @Slf4j
-public class Parameters
+public class Parameters extends BaseModel
 {
 	//todo добавить свойства. Наверное у различных макросов бывают различные наборы свойств, потому необходимо предусмотреть специальный сериализатор/десериализатор для объекта данного класса
 }

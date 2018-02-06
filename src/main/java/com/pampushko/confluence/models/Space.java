@@ -1,15 +1,18 @@
 package com.pampushko.confluence.models;
 
-import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.SerializedName;
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 /**
  * Класс модель для области Confluence (Space)
  * <br />
  */
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode
 @Slf4j
 public class Space extends BaseModel
 {
@@ -79,11 +82,5 @@ public class Space extends BaseModel
 	public Space(String key)
 	{
 		this.key = key;
-	}
-	
-	@Override
-	public String toString()
-	{
-		return new GsonBuilder().disableHtmlEscaping().create().toJson(this);
 	}
 }

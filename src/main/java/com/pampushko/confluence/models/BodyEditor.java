@@ -7,16 +7,18 @@ import lombok.extern.slf4j.Slf4j;
  *
  */
 @Slf4j
-public class BodyEditor
+public class BodyEditor extends BaseModel
 {
 	/**
 	 * <br />
 	 */
+	@SerializedName("value")
 	String value;
 	
 	/**
 	 * <br />
 	 */
+	@SerializedName("representation")
 	String representation;
 	
 	/**

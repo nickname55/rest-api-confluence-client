@@ -1,6 +1,9 @@
 package com.pampushko.confluence.models;
 
-import lombok.Data;
+import com.google.gson.annotations.SerializedName;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -8,16 +11,20 @@ import lombok.extern.slf4j.Slf4j;
  *
  */
 @Slf4j
-@Data
-public class Parent
+@Getter
+@Setter
+@EqualsAndHashCode
+public class Parent extends BaseModel
 {
 	/**
 	 * id родительского элемента
 	 */
+	@SerializedName("id")
 	private String id;
 	
 	/**
 	 * Тип родительского элемента
 	 */
+	@SerializedName("type")
 	private String type;
 }

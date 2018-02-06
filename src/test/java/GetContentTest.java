@@ -47,7 +47,8 @@ public class GetContentTest
 			}
 		};
 		ContentContainter spaceContent = confluence.getSpaceContent("MYR", params);
-		System.out.println(spaceContent.getPage().getPageResultItems()[0].getTitle());
+		System.out.println(spaceContent);
+		//System.out.println(spaceContent.getPage().getPageResultItems()[0].getTitle());
 	}
 	
 }

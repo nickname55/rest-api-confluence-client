@@ -1,15 +1,18 @@
 package com.pampushko.confluence.models;
 
-import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.SerializedName;
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 /**
  * Модель для запроса контента из Confluence API
  * <br />
  */
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode
 @Slf4j
 public class Blogpost extends BaseModel
 {
@@ -17,21 +20,25 @@ public class Blogpost extends BaseModel
 	 * todo подойдет ли здесь PageResultItem или нужен отдельный новый тип?
 	 * <br />
 	 */
+	@SerializedName("results")
 	private PageResultItem[] results;
 	
 	/**
 	 * <br />
 	 */
+	@SerializedName("start")
 	private String start;
 	
 	/**
 	 * <br />
 	 */
+	@SerializedName("limit")
 	private String limit;
 	
 	/**
 	 * <br />
 	 */
+	@SerializedName("size")
 	private String size;
 	
 	/**
@@ -40,13 +47,5 @@ public class Blogpost extends BaseModel
 	@SerializedName("_links")
 	private _Links links;
 	
-	
 	//todo сделать _expandable;
-	
-	
-	@Override
-	public String toString()
-	{
-		return new GsonBuilder().disableHtmlEscaping().create().toJson(this);
-	}
 }

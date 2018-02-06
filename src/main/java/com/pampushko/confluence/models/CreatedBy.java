@@ -9,24 +9,42 @@ import lombok.extern.slf4j.Slf4j;
  *
  */
 @Slf4j
-public class CreatedBy
+public class CreatedBy extends BaseModel
 {
+	/**
+	 * <br />
+	 */
 	@SerializedName("type")
 	String type;
 	
+	/**
+	 * <br />
+	 */
 	@SerializedName("username")
 	String username;
 	
+	/**
+	 * <br />
+	 */
 	@SerializedName("userKey")
 	String userKey;
 	
+	/**
+	 * <br />
+	 */
 	@SerializedName("accountId")
 	String accountId;
 	
+	/**
+	 * <br />
+	 */
 	@SerializedName("profilePicture")
 	@JsonAdapter(value = ExpandablePropDeserializer.class)
 	ProfilePicture profilePicture;
 	
+	/**
+	 * <br />
+	 */
 	@SerializedName("displayName")
 	String displayName;
 	
@@ -35,19 +53,27 @@ public class CreatedBy
 	 * <br />
 	 * todo это объект?
 	 */
+	@SerializedName("operations")
 	String operations;
 	
 	/**
 	 * <br />
 	 * todo это объект?
 	 */
+	@SerializedName("details")
 	String details;
 	
 	//-----------------------------------------------------------------
 	
-	@SerializedName("_expandable") //*
-			_HistoryExpandable expandable;
+	/**
+	 * <br />
+	 */
+	@SerializedName("_expandable")
+	_HistoryExpandable expandable;
 	
+	/**
+	 * <br />
+	 */
 	@SerializedName("_links")
 	_Links links;
 }

@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
  * <br />
  */
 @Slf4j
-public class ProfilePicture
+public class ProfilePicture extends BaseModel
 {
 	/**
 	 * <br />

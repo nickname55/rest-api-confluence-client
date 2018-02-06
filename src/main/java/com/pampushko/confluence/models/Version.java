@@ -1,6 +1,5 @@
 package com.pampushko.confluence.models;
 
-import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.SerializedName;
 import lombok.extern.slf4j.Slf4j;
 
@@ -11,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
  * <br />
  */
 @Slf4j
-public class Version
+public class Version extends BaseModel
 {
 	/**
 	 * <br />
@@ -72,13 +71,5 @@ public class Version
 	 */
 	@SerializedName("_links")
 	_Links links;
-	
-	//--------------------------------------------------------------
-	
-	@Override
-	public String toString()
-	{
-		return new GsonBuilder().disableHtmlEscaping().create().toJson(this);
-	}
 	
 }

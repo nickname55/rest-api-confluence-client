@@ -1,19 +1,25 @@
 package com.pampushko.confluence.models;
 
-import lombok.Data;
+import com.google.gson.annotations.SerializedName;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 /**
  *
  */
 @Slf4j
-@Data
-public class Storage
+@Getter
+@Setter
+@EqualsAndHashCode
+public class Storage extends BaseModel
 {
 	/**
 	 * markup или html
 	 * <br />
 	 */
+	@SerializedName("value")
 	private String value;
 	
 	/**
@@ -24,6 +30,7 @@ public class Storage
 	 * В большистве случаев используется {@literal "storage"}
 	 * <br />
 	 */
+	@SerializedName("representation")
 	private String representation = "storage";
 	
 	/**

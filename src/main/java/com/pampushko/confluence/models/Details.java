@@ -7,19 +7,21 @@ import lombok.extern.slf4j.Slf4j;
  * Детали юзера user.details
  */
 @Slf4j
-public class Details
+public class Details extends BaseModel
 {
 	/**
 	 * <br />
+	 * expandable
 	 */
-	@SerializedName("business") //expand
-			String business;
+	@SerializedName("business")
+	String business;
 	
 	/**
 	 * <br />
+	 * expandable
 	 */
-	@SerializedName("personal") //expand
-			String personal;
+	@SerializedName("personal")
+	String personal;
 	
 	//----------------------------------------------------------
 	

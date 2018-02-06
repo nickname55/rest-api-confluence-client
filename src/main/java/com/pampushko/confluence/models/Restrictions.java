@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
  * <br />
  */
 @Slf4j
-public class Restrictions
+public class Restrictions extends BaseModel
 {
 	//todo дополнить свойствами
 }

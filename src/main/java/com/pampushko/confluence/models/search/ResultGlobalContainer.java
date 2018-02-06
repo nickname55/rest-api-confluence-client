@@ -1,6 +1,7 @@
 package com.pampushko.confluence.models.search;
 
 import com.google.gson.annotations.SerializedName;
+import com.pampushko.confluence.models.BaseModel;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -8,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
  * <br />
  */
 @Slf4j
-public class ResultGlobalContainer
+public class ResultGlobalContainer extends BaseModel
 {
 	/**
 	 * <br />

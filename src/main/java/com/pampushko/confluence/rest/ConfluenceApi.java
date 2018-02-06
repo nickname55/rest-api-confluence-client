@@ -174,6 +174,7 @@ public interface ConfluenceApi
 	/**
 	 * Текущий пользователь является наблюдателем контента с указанным contentId
 	 * <br />
+	 *
 	 * @param contentId
 	 * @return
 	 */
@@ -185,6 +186,7 @@ public interface ConfluenceApi
 	 * <br />
 	 * контента (контент имеет идентификатор contentId)
 	 * <br />
+	 *
 	 * @param contentId
 	 * @param userKey
 	 * @return
@@ -198,6 +200,7 @@ public interface ConfluenceApi
 	 * <br />
 	 * наблюдателем контента (контент имеет идентификатор contentId)
 	 * <br />
+	 *
 	 * @param contentId
 	 * @param username
 	 * @return
@@ -308,9 +311,10 @@ public interface ConfluenceApi
 	 * <br />
 	 * и прозрачно распространяемый на все экземпляры (all instances).
 	 * <br />
+	 *
 	 * @param contentId идентификатор контента
-	 * @param version версия контента
-	 * @param macroId идентификатор макроса
+	 * @param version   версия контента
+	 * @param macroId   идентификатор макроса
 	 * @return контейнер, содержащий список элементов контента
 	 */
 	//готово
@@ -322,21 +326,22 @@ public interface ConfluenceApi
 	/**
 	 * Получить список элементов контента,
 	 * используя для запроса Confluence Query Language (CQL)
+	 *
+	 * @param cql    текст запроса на Confluence Quiery Language
+	 * @param params дополнительные параметры для поиска
+	 * @return объект-контейнер, внутри которого находится коллекция найденных элементов контента
 	 * @see <a href="https://developer.atlassian.com/display/CONFDEV/Advanced+Searching+using+CQL">
 	 * Advanced searching using CQL
 	 * </a>
 	 * <br />
 	 * Дополнительные параметры:
 	 * <ul>
-	 *     <li>cql (String) - задаётся отдельным параметром метода</li>
-	 *     <li>cqlcontext (String) - the context to execute a cql search in, this is the json serialized form of SearchContext</li>
-	 *     <li>expand (String) - a comma separated list of properties to expand on the content.</li>
-	 *     <li>start (int) - the start point of the collection to return</li>
-	 *     <li>limit (int, default:<strong>25</strong>) - the limit of the number of items to return, this may be restricted by fixed system limits </li>
+	 * <li>cql (String) - задаётся отдельным параметром метода</li>
+	 * <li>cqlcontext (String) - the context to execute a cql search in, this is the json serialized form of SearchContext</li>
+	 * <li>expand (String) - a comma separated list of properties to expand on the content.</li>
+	 * <li>start (int) - the start point of the collection to return</li>
+	 * <li>limit (int, default:<strong>25</strong>) - the limit of the number of items to return, this may be restricted by fixed system limits </li>
 	 * </ul>
-	 * @param cql текст запроса на Confluence Quiery Language
-	 * @param params дополнительные параметры для поиска
-	 * @return объект-контейнер, внутри которого находится коллекция найденных элементов контента
 	 */
 	@GET("/wiki/rest/api/content/search")
 	Call<ContentContainter> getContentSearch(final @Query("cql") String cql,

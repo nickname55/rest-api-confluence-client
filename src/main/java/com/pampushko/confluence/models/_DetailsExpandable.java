@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
  *
  */
 @Slf4j
-public class _DetailsExpandable
+public class _DetailsExpandable extends BaseModel
 {
 	/**
 	 * <br />

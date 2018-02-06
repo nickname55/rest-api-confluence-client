@@ -1,15 +1,20 @@
 package com.pampushko.confluence.models;
 
-import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.SerializedName;
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 /**
  * Возвращаемый Confluence REST API список элементов контента
  * <br />
  */
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode
+@RequiredArgsConstructor
 @Slf4j
 public class ContentContainter extends BaseModel
 {
@@ -30,11 +35,5 @@ public class ContentContainter extends BaseModel
 	 */
 	@SerializedName("_links")
 	private _Links links;
-	
-	@Override
-	public String toString()
-	{
-		return new GsonBuilder().disableHtmlEscaping().create().toJson(this);
-	}
 	
 }

@@ -1,14 +1,18 @@
 package com.pampushko.confluence.models;
 
 import com.google.gson.annotations.SerializedName;
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 /**
  * Возвращаемый Confluence REST API список областей (Spaces)
  * <br />
  */
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode
 @Slf4j
 public class SpaceResultList extends BaseModel
 {
