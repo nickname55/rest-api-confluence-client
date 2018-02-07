@@ -1,12 +1,9 @@
 package com.pampushko.confluence.rest;
 
-import com.pampushko.confluence.models.history.HistoryContainer;
 import com.pampushko.confluence.settings.SettingsManager;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Properties;
 
 @Slf4j
@@ -24,15 +21,9 @@ public class Main
 		//вызываем билдер и создаем клиент
 		Confluence confluence = Confluence.newBuilder().baseUrl(settings.getProperty("baseUrl")).username(settings.getProperty("username")).password(settings.getProperty("password")).build();
 		
-		final String contentId = "104955905";
-		
-		Map<String, String> params = new HashMap<String, String>()
-		{
-			{
-			
-			}
-		};
-		HistoryContainer historyContainer = confluence.getContentHistory(contentId);
-		System.out.println(historyContainer);
+		final String contentId = "127434773";
+		boolean isOk = confluence.deleteContentById(contentId);
+		System.out.println("contend with contentId = " + contentId + " deleted = " + isOk);
+		//Result : contend with contentId = 127434773 deleted = true
 	}
 }

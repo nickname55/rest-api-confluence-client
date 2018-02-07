@@ -498,6 +498,31 @@ public class Confluence
 		return body;
 	}
 	
+	
+	/**
+	 * Удаляет контента имеющий указанный идентификатор
+	 * <br />
+	 *
+	 * @param contentId идентификатор контента
+	 * @return
+	 */
+	//готово
+	boolean deleteContentById(final String contentId) throws IOException
+	{
+		Call<Response<Void>> responseCall = confluenceApi.deleteContentById(contentId);
+		Response<Response<Void>> response = responseCall.execute();
+		int code = response.code();
+		if (code == 204) //успешно удалили контент
+		{
+			return true;
+		}
+		else
+		{
+			//не удалось выполнить запрос или найти контент по указанному contentId
+			return false;
+		}
+	}
+	
 	/**
 	 * Возвращает историю от выбранного элемента контента
 	 * <br />

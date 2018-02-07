@@ -9,6 +9,7 @@ import com.pampushko.confluence.models.search.SearchResultList;
 import com.pampushko.confluence.models.user.UserResultList;
 import com.pampushko.confluence.models.user_watch.WatchObject;
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.*;
 
@@ -280,9 +281,15 @@ public interface ConfluenceApi
 	Call<ContentContainter> getContent(final @Path("contentId") String contentId,
 	                                   final @QueryMap Map<String, String> params);
 	
-	//не готово
+	/**
+	 * Удаляет контента имеющий указанный идентификатор
+	 * <br />
+	 * @param contentId идентификатор контента
+	 * @return
+	 */
+	//готово
 	@DELETE("/wiki/rest/api/content/{contentId}")
-	Call<ContentContainter> deleteContentById(final @Path("contentId") String contentId);
+	Call<Response<Void>> deleteContentById(final @Path("contentId") String contentId);
 	
 	/**
 	 * Возвращает историю от выбранного элемента контента
