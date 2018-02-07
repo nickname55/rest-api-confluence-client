@@ -3,6 +3,7 @@ package com.pampushko.confluence.rest;
 import com.pampushko.confluence.models.*;
 import com.pampushko.confluence.models.group.Group;
 import com.pampushko.confluence.models.group.GroupResultList;
+import com.pampushko.confluence.models.history.HistoryContainer;
 import com.pampushko.confluence.models.macros.Macros;
 import com.pampushko.confluence.models.search.SearchResultList;
 import com.pampushko.confluence.models.user.UserResultList;
@@ -11,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.http.GET;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -496,6 +498,28 @@ public class Confluence
 		return body;
 	}
 	
+	/**
+	 * Возвращает историю от выбранного элемента контента
+	 * <br />
+	 * Параметры:
+	 * <ul>
+	 *     <li>
+	 *         expand (String), Default: previousVersion, nextVersion, lastUpdated
+	 *     </li>
+	 * </ul>
+	 * @param contendId идентификатор контента
+	 * @return коллекция истории контента
+	 * @throws IOException
+	 */
+	//готово
+	@GET("/wiki/rest/api/content/{contentId}/history")
+	HistoryContainer getContentHistory(final String contendId) throws IOException
+	{
+		Call<HistoryContainer> contentContainterCall = confluenceApi.getContentHistory(contendId);
+		Response<HistoryContainer> response = contentContainterCall.execute();
+		HistoryContainer body = response.body();
+		return body;
+	}
 	
 	/**
 	 * Получить тело макроса с заданным идентификатором макроса (macroId)
@@ -535,6 +559,7 @@ public class Confluence
 	 * @return макрос
 	 * @throws IOException
 	 */
+	@Deprecated
 	Macros getContentMacroBodyByHash(final String contentId,
 	                                 final String version,
 	                                 final String hash) throws IOException

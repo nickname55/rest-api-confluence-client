@@ -1,6 +1,6 @@
 package com.pampushko.confluence.rest;
 
-import com.pampushko.confluence.models.macros.Macros;
+import com.pampushko.confluence.models.history.HistoryContainer;
 import com.pampushko.confluence.settings.SettingsManager;
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,7 +24,7 @@ public class Main
 		//вызываем билдер и создаем клиент
 		Confluence confluence = Confluence.newBuilder().baseUrl(settings.getProperty("baseUrl")).username(settings.getProperty("username")).password(settings.getProperty("password")).build();
 		
-		final String contentId = "983041";
+		final String contentId = "104955905";
 		
 		Map<String, String> params = new HashMap<String, String>()
 		{
@@ -32,8 +32,7 @@ public class Main
 			
 			}
 		};
-		String macroId = "f26fc989-bc37-43b6-bfb8-95c0dcd69157"; //or hash?
-		Macros contentMacroBodyByMacroId = confluence.getContentMacroBodyByHash(contentId, "6", macroId);
-		System.out.println(contentMacroBodyByMacroId);
+		HistoryContainer historyContainer = confluence.getContentHistory(contentId);
+		System.out.println(historyContainer);
 	}
 }

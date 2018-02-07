@@ -3,6 +3,7 @@ package com.pampushko.confluence.rest;
 import com.pampushko.confluence.models.*;
 import com.pampushko.confluence.models.group.Group;
 import com.pampushko.confluence.models.group.GroupResultList;
+import com.pampushko.confluence.models.history.HistoryContainer;
 import com.pampushko.confluence.models.macros.Macros;
 import com.pampushko.confluence.models.search.SearchResultList;
 import com.pampushko.confluence.models.user.UserResultList;
@@ -263,6 +264,7 @@ public interface ConfluenceApi
 	                                  final @Path("versionId") int versionId,
 	                                  final @QueryMap Map<String, String> params);
 	
+	//не готово
 	@GET("/wiki/rest/api/content")
 	Call<ContentContainter> getContent(@QueryMap Map<String, String> params);
 	
@@ -273,15 +275,24 @@ public interface ConfluenceApi
 	 * @param params
 	 * @return
 	 */
+	//не готово
 	@PUT("/wiki/rest/api/content/{contentId}")
 	Call<ContentContainter> getContent(final @Path("contentId") String contentId,
 	                                   final @QueryMap Map<String, String> params);
 	
+	//не готово
 	@DELETE("/wiki/rest/api/content/{contentId}")
 	Call<ContentContainter> deleteContentById(final @Path("contentId") String contentId);
 	
+	/**
+	 * Возвращает историю от выбранного элемента контента
+	 * <br />
+	 * @param contendId идентификатор контента
+	 * @return коллекция истории контента
+	 */
+	//готово todo дописать документацию к методу
 	@GET("/wiki/rest/api/content/{contentId}/history")
-	Call<ContentContainter> getContentHistory(final @Path("contentId") String contendId);
+	Call<HistoryContainer> getContentHistory(final @Path("contentId") String contendId);
 	
 	/**
 	 * Возвращает тело макроса (в storage формате) с указанным хешем.
@@ -317,6 +328,7 @@ public interface ConfluenceApi
 	 * @param hash хеш макроса
 	 * @return
 	 */
+	//готово
 	@GET("/wiki/rest/api/content/{contentId}/history/{version}/macro/hash/{hash}")
 	Call<Macros> getContentMacroBodyByHash(final @Path("contentId") String contentId,
 	                                                  final @Path("version") String version,
@@ -378,6 +390,7 @@ public interface ConfluenceApi
 	 * </ul>
 	 */
 	@GET("/wiki/rest/api/content/search")
+	//не готово
 	Call<ContentContainter> getContentSearch(final @Query("cql") String cql,
 	                                         final @QueryMap Map<String, String> params);
 	
