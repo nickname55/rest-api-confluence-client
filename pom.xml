@@ -36,7 +36,6 @@
 		<maven.compiler.showWarnings>true</maven.compiler.showWarnings>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<retrofit.version>2.3.0</retrofit.version>
-		<additionalJOption>-Xdoclint:none</additionalJOption>
 	</properties>
 
 	<dependencies>
@@ -184,24 +183,70 @@
 				</executions>
 			</plugin>
 
-			<!--
+
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>3.0.0</version>
+				<configuration>
+					<!-- doclet с поддержкой маркдауна -->
+					<doclet>ch.raffael.mddoclet.MarkdownDoclet</doclet>
+					<docletArtifact>
+						<groupId>ch.raffael.markdown-doclet</groupId>
+						<artifactId>markdown-doclet</artifactId>
+						<version>1.4</version>
+					</docletArtifact>
+					<useStandardDocletOptions>true</useStandardDocletOptions>
+					<verbose>true</verbose>
+					<show>private</show>
+					<javadocVersion>1.8</javadocVersion>
+				</configuration>
+				<!-- генерируем docbook, потом попрбовать из него нормальную документацию сделать -->
+				<!--<configuration>-->
+					<!--<doclet>org.dbdoclet.doclet.docbook.DocBookDoclet</doclet>-->
+					 <!--<docletArtifact>-->
+						 <!--<groupId>org.dbdoclet</groupId>-->
+						 <!--<artifactId>dbdoclet</artifactId>-->
+						 <!--<version>8.0.2</version>-->
+					 <!--</docletArtifact>-->
+					<!--<useStandardDocletOptions>false</useStandardDocletOptions>-->
+				<!--</configuration>-->
+			</plugin>
+
+			<!-- собираем jar-файл -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>3.1.0</version>
 				<executions>
 					<execution>
-						<id>attach-javadocs</id>
+						<phase>package</phase>
 						<goals>
-							<goal>jar</goal>
+							<goal>shade</goal>
 						</goals>
 						<configuration>
-							<doclint>none</doclint>
+							<transformers>
+								<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+									<mainClass>com.pampushko.confluence.rest.Main</mainClass>
+								</transformer>
+							</transformers>
 						</configuration>
 					</execution>
 				</executions>
 			</plugin>
-			-->
+
+			<!-- выгружаем зависимости, в т.ч. транзитивные в один каталог -->
+			<!-- зависимости нам нужны для генерации из docbook документации в HTML при помощи dodo -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>3.0.2</version>
+				<configuration>
+					<outputDirectory>${project.build.directory}/all-dependencies</outputDirectory>
+					<overWriteReleases>false</overWriteReleases>
+					<overWriteSnapshots>false</overWriteSnapshots>
+					<overWriteIfNewer>true</overWriteIfNewer>
+				</configuration>
+			</plugin>
 		</plugins>
 
 		<finalName>${project.artifactId}-${project.version}.${buildNumber}</finalName>

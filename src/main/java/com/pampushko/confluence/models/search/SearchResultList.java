@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * список (коллекция) результатов поиска
- * <br />
+ * <br>
  */
 @Getter
 @Setter
@@ -18,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 public class SearchResultList extends BaseModel
 {
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("results")
 	private SearchResultItem[] searchResultItems;

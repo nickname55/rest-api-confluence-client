@@ -16,13 +16,13 @@ import lombok.extern.slf4j.Slf4j;
 public class ResponseErrorMessage extends BaseModel
 {
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("translation")
 	private String translation;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("args")
 	private String[] args;

@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * Модель для запроса контента из Confluence API
- * <br />
+ * <br>
  */
 @Getter
 @Setter
@@ -17,113 +17,113 @@ import lombok.extern.slf4j.Slf4j;
 public class PageResultItem extends BaseModel
 {
 	/**
-	 * <br />
+	 * <br>
 	 */
 	private String id;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	private String type;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	private String status;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	private String title;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	private Extensions extensions;
 	
 	//------------------------------------------------------------------------------
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("childTypes")
 	String childTypes;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("container")
 	String container;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("metadata")
 	String metadata;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("operations")
 	String operations;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("children")
 	String children;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("restrictions")
 	String restrictions;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("history")
 	History history;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("ancestors")
 	String ancestors;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("body")
 	Body body;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("version")
 	Version version;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("descendants")
 	String descendants;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("space")
 	Space space;
 	
 	//---------------------------------------------------------------------------
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("_links")
 	private _Links links;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("_expandable")
 	private _PageExpandable expandable;

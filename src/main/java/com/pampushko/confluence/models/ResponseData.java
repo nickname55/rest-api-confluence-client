@@ -16,25 +16,25 @@ import lombok.extern.slf4j.Slf4j;
 public class ResponseData extends BaseModel
 {
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("authorized")
 	private boolean authorized;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("valid")
 	private boolean valid;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("errors")
 	private ResponseErrorMessageContainer[] errors;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("successful")
 	private boolean successful;

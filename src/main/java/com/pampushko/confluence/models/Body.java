@@ -16,49 +16,49 @@ import lombok.extern.slf4j.Slf4j;
 public class Body extends BaseModel
 {
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("editor")
 	BodyEditor editor;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("atlas_doc_format")
 	String atlas_doc_format;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("view")
 	String view;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("export_view")
 	String export_view;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("styled_view")
 	String styled_view;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("storage")
 	Storage storage;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("editor2")
 	String editor2;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("anonymous_export_view")
 	String anonymous_export_view;

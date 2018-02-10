@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * Expanded объкт для объекта By по результату запроса History of Content
- * <br />
+ * <br>
  */
 @Setter
 @Getter
@@ -17,13 +17,13 @@ import lombok.extern.slf4j.Slf4j;
 public class _ByExpandableHistory
 {
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("operations")
 	String operations;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("details")
 	String details;

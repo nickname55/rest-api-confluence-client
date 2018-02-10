@@ -16,13 +16,13 @@ import lombok.extern.slf4j.Slf4j;
 public class DeleteSpaceResponse extends BaseModel
 {
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("id")
 	private String id;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("links")
 	private Links links;

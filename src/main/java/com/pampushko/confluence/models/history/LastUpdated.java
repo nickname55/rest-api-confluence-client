@@ -18,61 +18,61 @@ import lombok.extern.slf4j.Slf4j;
 public class LastUpdated extends BaseModel
 {
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("by")
 	By by;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("when")
 	String when;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("friendlyWhen")
 	String friendlyWhen;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("message")
 	String message;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("number")
 	long number;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("minorEdit")
 	boolean minorEdit;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("syncRev")
 	String syncRev;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("confRev")
 	String confRev;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("_expandable")
 	LastUpdatedExpandable expandable;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("_links")
 	_Links links;

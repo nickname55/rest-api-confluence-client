@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * Ответ без контента
- * <br />
+ * <br>
  */
 @Getter
 @Setter
@@ -17,19 +17,19 @@ import lombok.extern.slf4j.Slf4j;
 public class NoContentResponse extends BaseModel
 {
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("statusCode")
 	private int statusCode;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("message")
 	private String message;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("data")
 	private ResponseData data;

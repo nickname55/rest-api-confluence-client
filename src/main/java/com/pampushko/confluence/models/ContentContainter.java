@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * Возвращаемый Confluence REST API список элементов контента
- * <br />
+ * <br>
  */
 @Getter
 @Setter
@@ -19,19 +19,19 @@ import lombok.extern.slf4j.Slf4j;
 public class ContentContainter extends BaseModel
 {
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("page")
 	private Page page;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("blogpost")
 	private Blogpost blogpost;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("_links")
 	private _Links links;

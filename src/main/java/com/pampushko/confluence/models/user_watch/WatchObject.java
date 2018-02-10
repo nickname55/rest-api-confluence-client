@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 public class WatchObject extends BaseModel
 {
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("watching")
 	boolean watching;

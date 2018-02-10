@@ -5,31 +5,31 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * Картинка профиля пользователя
- * <br />
+ * <br>
  */
 @Slf4j
 public class ProfilePicture extends BaseModel
 {
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("path")
 	String path;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("width")
 	int width;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("height")
 	int height;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("isDefault")
 	boolean isDefault;

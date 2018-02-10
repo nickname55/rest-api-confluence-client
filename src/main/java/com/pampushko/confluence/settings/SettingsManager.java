@@ -11,7 +11,7 @@ import java.util.Properties;
 
 /**
  * Класс для чтения настроек приложения
- * <br />
+ * <br>
  */
 @Slf4j
 public class SettingsManager

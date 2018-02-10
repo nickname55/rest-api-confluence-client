@@ -15,3 +15,5 @@ out/
 
 *.iml
 config.properties
+
+buildNumber.properties

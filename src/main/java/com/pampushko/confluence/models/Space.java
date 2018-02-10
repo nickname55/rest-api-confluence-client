@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * Класс модель для области Confluence (Space)
- * <br />
+ * <br>
  */
 @Getter
 @Setter
@@ -18,27 +18,27 @@ public class Space extends BaseModel
 {
 	/**
 	 * Идентификатор области
-	 * <br />
+	 * <br>
 	 */
 	private Long id;
 	
 	/**
 	 * Ключ области, например {@literal "TEST"}.
-	 * <br />
+	 * <br>
 	 * Ключи областей могут содержать только латинские буквы и числа {@literal (A-Z, a-z, 0-9)}
-	 * <br />
+	 * <br>
 	 */
 	private String key;
 	
 	/**
 	 * Имя области
-	 * <br />
+	 * <br>
 	 */
 	private String name;
 	
 	/**
 	 * Описание области
-	 * <br />
+	 * <br>
 	 */
 	private SpaceDescription description;
 	
@@ -51,25 +51,25 @@ public class Space extends BaseModel
 	
 	/**
 	 * Тип области
-	 * <br />
+	 * <br>
 	 */
 	private String type;
 	
 	/**
 	 * Статус области
-	 * <br />
+	 * <br>
 	 */
 	private String status;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("_expandable")
 	_SpaceExpandable expandable;
 	
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("_links")
 	_Links links;

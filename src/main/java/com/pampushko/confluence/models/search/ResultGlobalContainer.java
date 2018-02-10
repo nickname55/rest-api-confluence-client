@@ -6,19 +6,19 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * Один из дочерних объектов для результатов поиска
- * <br />
+ * <br>
  */
 @Slf4j
 public class ResultGlobalContainer extends BaseModel
 {
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("title")
 	String title;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("displayUrl")
 	String displayUrl;

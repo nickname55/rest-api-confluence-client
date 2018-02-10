@@ -17,18 +17,18 @@ public class Storage extends BaseModel
 {
 	/**
 	 * markup или html
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("value")
 	private String value;
 	
 	/**
 	 * Представление. Возможные значения: "view","page","storage".
-	 * <br />
+	 * <br>
 	 * Документация точного перечня всех значений не даёт
-	 * <br />
+	 * <br>
 	 * В большистве случаев используется {@literal "storage"}
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("representation")
 	private String representation = "storage";

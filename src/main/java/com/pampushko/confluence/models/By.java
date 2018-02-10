@@ -10,43 +10,43 @@ import lombok.extern.slf4j.Slf4j;
 public class By extends BaseModel
 {
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("type")
 	String type;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("username")
 	String username;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("userKey")
 	String userKey;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("accountId")
 	String accountId;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("profilePicture")
 	ProfilePicture profilePicture;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("displayName")
 	String displayName;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("_expandable")
 	_ByExpandable expandable;

@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * Возвращаемый Confluence REST API список областей (Spaces)
- * <br />
+ * <br>
  */
 @Getter
 @Setter

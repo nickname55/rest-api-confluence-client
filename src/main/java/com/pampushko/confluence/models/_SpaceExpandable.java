@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * Модель для запроса контента из Confluence API
- * <br />
+ * <br>
  */
 @Getter
 @Setter
@@ -17,61 +17,61 @@ import lombok.extern.slf4j.Slf4j;
 public class _SpaceExpandable extends BaseModel
 {
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("settings")
 	String settings;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("metadata")
 	String metadata;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("operations")
 	String operations;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("lookAndFeel")
 	String lookAndFeel;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("permissions")
 	String permissions;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("icon")
 	String icon;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("description")
 	String description;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("theme")
 	String theme;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("history")
 	String history;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("homepage")
 	String homepage;

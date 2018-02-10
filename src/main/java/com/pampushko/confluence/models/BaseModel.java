@@ -4,7 +4,7 @@ import com.google.gson.GsonBuilder;
 
 /**
  * Базовая модель
- * <br />
+ * <br>
  */
 public class BaseModel
 {

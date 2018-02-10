@@ -10,7 +10,7 @@ import java.util.Map;
 
 /**
  * объект содержащий параметры макроса
- * <br />
+ * <br>
  */
 @Slf4j
 @Setter

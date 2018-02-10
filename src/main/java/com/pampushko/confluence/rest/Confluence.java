@@ -20,24 +20,24 @@ import java.util.Map;
 
 /**
  * Класс клиент для Atlassian Confluence
- * <br />
+ * <br>
  */
 @Slf4j
 public class Confluence
 {
 	/**
 	 * Имя пользователя
-	 * <br />
+	 * <br>
 	 */
 	String username;
 	/**
 	 * Пароль
-	 * <br />
+	 * <br>
 	 */
 	String password;
 	/**
 	 * базовый URL вашего инстанса Confluence
-	 * <br />
+	 * <br>
 	 */
 	String baseUrl;
 	
@@ -83,9 +83,9 @@ public class Confluence
 		
 		/**
 		 * настраиваем REST-адаптер, который будет использоваться с нашим Confluence REST API
-		 * <br />
+		 * <br>
 		 * И создаем реализацию API, которая соответствует описанию в интерфейсе {@link com.pampushko.confluence.rest.ConfluenceApi}
-		 * <br />
+		 * <br>
 		 *
 		 * @return
 		 */
@@ -99,12 +99,12 @@ public class Confluence
 	
 	/**
 	 * Возвращает информацию об области Confluence - {@code Space}
-	 * <br />
+	 * <br>
 	 * с кодом {@code key}
-	 * <br />
+	 * <br>
 	 *
 	 * @return возвращаёмое значение {@code SpaceResultList} - массив из областей {@code Space}
-	 * <br />
+	 * <br>
 	 */
 	public Space getSpaceByKey(final String spaceKey, final Map<String, String> params) throws IOException
 	{
@@ -116,13 +116,13 @@ public class Confluence
 	
 	/**
 	 * Возвращает список областей Confluence - {@code Space}
-	 * <br />
+	 * <br>
 	 * с кодом {@code key} и
 	 * именем {@code name}.
-	 * <br />
+	 * <br>
 	 *
 	 * @return возвращаёмое значение {@code SpaceResultList} - массив из областей {@code Space}
-	 * <br />
+	 * <br>
 	 */
 	public SpaceResultList getSpaces() throws IOException
 	{
@@ -134,15 +134,15 @@ public class Confluence
 	
 	/**
 	 * Создаём новую область Confluence - {@code Space}
-	 * <br />
+	 * <br>
 	 * с кодом {@code key} и
 	 * именем {@code name}.
-	 * <br />
+	 * <br>
 	 *
 	 * @param space - область {@code Space} для создания.
-	 *              <br />
+	 *              <br>
 	 * @return возвращаёмое значение {@code Space}, как подтверждение, что область действительно создана
-	 * <br />
+	 * <br>
 	 */
 	public Space createSpace(final Space space) throws IOException
 	{
@@ -154,21 +154,21 @@ public class Confluence
 	
 	/**
 	 * Создаём новую приватную (<strong>видимую только для создателя</strong>) область Confluence - {@code Space}
-	 * <br />
+	 * <br>
 	 * с кодом {@code key} и
 	 * именем {@code name}.
-	 * <br />
+	 * <br>
 	 * Но не ясно, чем этот способ создания отличается от обычного создания области,
-	 * <br />
+	 * <br>
 	 * т.к. область созданная обычным способом также доступна только для своего создателя
-	 * <br />
+	 * <br>
 	 * <strong>todo разобраться с назначением метода более подробно</strong>
-	 * <br />
+	 * <br>
 	 *
 	 * @param space - область {@code Space} для создания.
-	 *              <br />
+	 *              <br>
 	 * @return возвращаёмое значение {@code Space}, как подтверждение, что область действительно создана
-	 * <br />
+	 * <br>
 	 */
 	public Space createPrivateSpace(final Space space) throws IOException
 	{
@@ -180,7 +180,7 @@ public class Confluence
 	
 	/**
 	 * Обновление области (в настоящий момент можно обновить только name, description и homepage)
-	 * <br />
+	 * <br>
 	 *
 	 * @param space - область {@code Space} для создания
 	 * @return - {@code Space} подтверждение, возвращаемое Confluence в ответе на запрос (полное представлеине области)
@@ -195,12 +195,12 @@ public class Confluence
 	
 	/**
 	 * Удаляем область Confluence - {@code Space}
-	 * <br />
+	 * <br>
 	 * имеющую ключ {@code key}
-	 * <br />
+	 * <br>
 	 *
 	 * @return возвращаёмое значение {@code Space}, как подтверждение, что область действительно удалена
-	 * <br />
+	 * <br>
 	 */
 	public NoContentResponse deleteSpace(final String key) throws IOException
 	{
@@ -212,7 +212,7 @@ public class Confluence
 	
 	/**
 	 * Получить список элементов контента из данной области
-	 * <br />
+	 * <br>
 	 *
 	 * @param key
 	 * @param params
@@ -229,7 +229,7 @@ public class Confluence
 	
 	/**
 	 * Получить элемент контента по идентификатору этого элемента
-	 * <br />
+	 * <br>
 	 *
 	 * @param contentId
 	 * @param params
@@ -246,7 +246,7 @@ public class Confluence
 	
 	/**
 	 * Получить версию контента по заданному индентификатору контента и номеру версии
-	 * <br />
+	 * <br>
 	 *
 	 * @param contentId
 	 * @param versionNumber
@@ -264,7 +264,7 @@ public class Confluence
 	
 	/**
 	 * Получить список групп (разбитый на страницы)
-	 * <br />
+	 * <br>
 	 *
 	 * @param start
 	 * @param limit
@@ -280,7 +280,7 @@ public class Confluence
 	
 	/**
 	 * Получить группу по имени
-	 * <br />
+	 * <br>
 	 *
 	 * @return
 	 */
@@ -310,7 +310,7 @@ public class Confluence
 	
 	/**
 	 * Получить коллекцию пользователей состоящих в группе с заданным именем
-	 * <br />
+	 * <br>
 	 *
 	 * @param groupName
 	 * @param start
@@ -379,10 +379,10 @@ public class Confluence
 	
 	/**
 	 * Выполнить поиск элементов при помощи CQL SearchService
-	 * <br />
+	 * <br>
 	 *
 	 * @return Returns a full JSON representation of a list of search results
-	 * <br />
+	 * <br>
 	 */
 	SearchResultList search(final String cql) throws IOException
 	{
@@ -394,10 +394,10 @@ public class Confluence
 	
 	/**
 	 * Выполнить поиск элементов при помощи CQL SearchService
-	 * <br />
+	 * <br>
 	 *
 	 * @return Returns a full JSON representation of a list of search results
-	 * <br />
+	 * <br>
 	 */
 	SearchResultList search(final SearchParams params) throws IOException
 	{
@@ -422,9 +422,9 @@ public class Confluence
 	
 	/**
 	 * Получить объект, содержащий информацию о том наблюдает ли пользователь
-	 * <br />
+	 * <br>
 	 * пославший запрос за контентом имеющим идентификатор contentId
-	 * <br />
+	 * <br>
 	 *
 	 * @param contentId
 	 * @return
@@ -440,11 +440,11 @@ public class Confluence
 	
 	/**
 	 * Получить объект, содержащий информацию о том наблюдает ли пользователь
-	 * <br />
+	 * <br>
 	 * имеющий указанный <strong>userkey</strong>
-	 * <br />
+	 * <br>
 	 * за контентом имеющим идентификатор contentId
-	 * <br />
+	 * <br>
 	 *
 	 * @param userkey
 	 * @return
@@ -460,11 +460,11 @@ public class Confluence
 	
 	/**
 	 * Получить объект, содержащий информацию о том наблюдает ли пользователь
-	 * <br />
+	 * <br>
 	 * имеющий указанный <strong>username</strong>
-	 * <br />
+	 * <br>
 	 * за контентом имеющим идентификатор contentId
-	 * <br />
+	 * <br>
 	 *
 	 * @param contentId
 	 * @return
@@ -498,10 +498,31 @@ public class Confluence
 		return body;
 	}
 	
+	/**
+	 * Параметры
+	 * <ol>
+	 * <li>status (string), Default: current</li>
+	 * <li>expand	(string), Default: body.storage,history,space,container.history,container.version,version,ancestors</li>
+	 * </ol>
+	 *
+	 * @param content
+	 * @param params
+	 * @return
+	 * @throws IOException
+	 */
+	Content updateContent(final Content content,
+	                      final String contentId,
+	                      final Map<String, String> params) throws IOException
+	{
+		Call<Content> contentCall = confluenceApi.updateContent(content, contentId, params);
+		Response<Content> response = contentCall.execute();
+		Content body = response.body();
+		return body;
+	}
 	
 	/**
 	 * Удаляет контента имеющий указанный идентификатор
-	 * <br />
+	 * <br>
 	 *
 	 * @param contentId идентификатор контента
 	 * @return
@@ -525,7 +546,7 @@ public class Confluence
 	
 	/**
 	 * Возвращает историю от выбранного элемента контента
-	 * <br />
+	 * <br>
 	 * Параметры:
 	 * <ul>
 	 *     <li>
@@ -548,11 +569,11 @@ public class Confluence
 	
 	/**
 	 * Получить тело макроса с заданным идентификатором макроса (macroId)
-	 * <br />
+	 * <br>
 	 * для заданного элемента контента (contentId)
-	 * <br />
+	 * <br>
 	 * Для указанной вами версии контента (version)
-	 * <br />
+	 * <br>
 	 *
 	 * @param contentId идентификатор элемента контента
 	 * @param version версия элемента контента
@@ -572,11 +593,11 @@ public class Confluence
 	
 	/**
 	 * Получить тело макроса с заданным хешем (hash) макроса (вместо macroId, для совместимости)
-	 * <br />
+	 * <br>
 	 * для заданного элемента контента (contentId)
-	 * <br />
+	 * <br>
 	 * Для указанной вами версии контента (version)
-	 * <br />
+	 * <br>
 	 *
 	 * @param contentId идентификатор элемента контента
 	 * @param version версия элемента контента

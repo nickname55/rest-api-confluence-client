@@ -19,43 +19,43 @@ import lombok.extern.slf4j.Slf4j;
 public class HistoryContainer extends BaseModel
 {
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("previousVersion")
 	PreviousVersion previousVersion;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("lastUpdated")
 	LastUpdated lastUpdated;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("latest")
 	boolean latest;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("createdBy")
 	CreatedBy createdBy;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("createdDate")
 	String createdDate;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("_expandable")
 	HistoryExpandable expandable;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("_links")
 	_Links links;

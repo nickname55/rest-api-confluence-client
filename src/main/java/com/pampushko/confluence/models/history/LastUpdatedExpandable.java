@@ -16,13 +16,13 @@ import lombok.Setter;
 public class LastUpdatedExpandable extends BaseModel
 {
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("collaborators")
 	String collaborators;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("content")
 	String content;

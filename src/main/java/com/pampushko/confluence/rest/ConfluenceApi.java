@@ -18,63 +18,64 @@ import java.util.Map;
 
 /**
  * Класс описывающий Confluence REST API
- * <br />
+ * <br>
  * В дальнейшем этот класс используется для создания retrofit адаптера
- * <br />
+ * <br>
  */
 public interface ConfluenceApi
 {
-	//----------------------------------------------------------------------------------------
 	
 	/**
 	 * Возвращает список областей Confluence - {@code Space}
-	 * <br />
+	 * <br>
 	 * с кодом {@code key} и
 	 * именем {@code name}.
-	 * <br />
+	 * <br>
 	 *
 	 * @return возвращаёмое значение {@code SpaceResultList} - массив из областей {@code Space}
-	 * <br />
+	 * <br>
 	 */
 	@GET("/wiki/rest/api/space")
 	Call<SpaceResultList> getSpaces();
 	
 	/**
 	 * Возвращает информацию об области Confluence - {@code Space}
-	 * <br />
+	 * <br>
 	 * с кодом {@code key}
-	 * <br />
+	 * <br>
 	 *
 	 * @return возвращаёмое значение {@code SpaceResultList} - массив из областей {@code Space}
-	 * <br />
+	 * <br>
 	 */
 	@GET("/wiki/rest/api/space/{key}")
-	Call<Space> getSpaceByKey(final @Path("key") String spaceKey,
-	                          final @QueryMap Map<String, String> params);
+	Call<Space> getSpaceByKey(@Path("key") String spaceKey,
+	                          @QueryMap Map<String, String> params);
 	
 	/**
 	 * Создаём новую область Confluence - {@code Space}
-	 * <br />
+	 * <br>
 	 * с кодом {@code key} и
 	 * именем {@code name}.
-	 * <br />
+	 * <br>
 	 *
-	 * @param space - область {@code Space} для создания.
-	 *              <br />
+	 * @param space
+	 * 		- область {@code Space} для создания.
+	 * 		<br>
+	 *
 	 * @return возвращаёмое значение {@code Space}, как подтверждение, что область действительно создана
-	 * <br />
+	 * <br>
 	 */
 	@POST("/wiki/rest/api/space")
 	Call<Space> createSpace(final @Body Space space);
 	
 	/**
 	 * Удаляем область Confluence - {@code Space}
-	 * <br />
+	 * <br>
 	 * имеющую ключ {@code key}
-	 * <br />
+	 * <br>
 	 *
 	 * @return возвращаёмое значение {@code Space}, как подтверждение, что область действительно удалена
-	 * <br />
+	 * <br>
 	 */
 	@DELETE("/wiki/rest/api/space/{key}")
 	Call<NoContentResponse> deleteSpace(final @Path("key") String spaceKey);
@@ -82,9 +83,11 @@ public interface ConfluenceApi
 	
 	/**
 	 * Создание приватной области, которая будет видна только пользователю создавшему её
-	 * <br />
+	 * <br>
 	 *
-	 * @param space - область {@code Space} для создания
+	 * @param space
+	 * 		- область {@code Space} для создания
+	 *
 	 * @return - {@code Space} подтверждение, возвращаемое Confluence в ответе на запрос
 	 */
 	@POST("/wiki/rest/api/space/_private")
@@ -92,10 +95,12 @@ public interface ConfluenceApi
 	
 	/**
 	 * Обновление области (в настоящий момент можно обновить только name, description и homepage)
-	 * <br />
+	 * <br>
 	 *
-	 * @param space - область {@code Space} для создания
+	 * @param space
+	 * 		- область {@code Space} для создания
 	 * @param key
+	 *
 	 * @return - {@code Space} подтверждение, возвращаемое Confluence в ответе на запрос (полное представлеине области)
 	 */
 	@PUT("/wiki/rest/api/space/{key}")
@@ -105,10 +110,11 @@ public interface ConfluenceApi
 	
 	/**
 	 * Получить список элементов контента из данной области
-	 * <br />
+	 * <br>
 	 *
 	 * @param spaceKey
 	 * @param params
+	 *
 	 * @return
 	 */
 	@GET("/wiki/rest/api/space/{key}/content")
@@ -120,6 +126,7 @@ public interface ConfluenceApi
 	 *
 	 * @param start
 	 * @param limit
+	 *
 	 * @return
 	 */
 	@GET("/wiki/rest/api/group")
@@ -128,9 +135,10 @@ public interface ConfluenceApi
 	
 	/**
 	 * Получить группу по имени
-	 * <br />
+	 * <br>
 	 *
 	 * @param groupName
+	 *
 	 * @return
 	 */
 	@GET("/wiki/rest/api/group/{groupName}")
@@ -138,11 +146,12 @@ public interface ConfluenceApi
 	
 	/**
 	 * Получить коллекцию пользователей состоящих в группе с заданным именем
-	 * <br />
+	 * <br>
 	 *
 	 * @param groupName
 	 * @param start
 	 * @param limit
+	 *
 	 * @return
 	 */
 	@GET("/wiki/rest/api/group/{groupName}/member")
@@ -154,15 +163,17 @@ public interface ConfluenceApi
 	
 	/**
 	 * Выполнить поиск элементов при помощи CQL SearchService
-	 * <br />
+	 * <br>
 	 *
-	 * @param cql the CQL query see advanced searching in confluence using CQL
-	 *            cqlcontext - the execution context for CQL functions, provides current space key and content id. If this is not provided some CQL functions will not be available.
-	 *            excerpt - the excerpt strategy to apply to the result, one of : indexed, highlight, none. This defaults to highlight.
-	 *            expand - the properties to expand on the search result, this may cause database requests for some properties
-	 *            start - the start point of the collection to return
-	 *            limit - the limit of the number of items to return, this may be restricted by fixed system limits
-	 *            includeArchivedSpaces - whether to include content in archived spaces in the result, this defaults to false
+	 * @param cql
+	 * 		the CQL query see advanced searching in confluence using CQL
+	 * 		cqlcontext - the execution context for CQL functions, provides current space key and content id. If this is not provided some CQL functions will not be available.
+	 * 		excerpt - the excerpt strategy to apply to the result, one of : indexed, highlight, none. This defaults to highlight.
+	 * 		expand - the properties to expand on the search result, this may cause database requests for some properties
+	 * 		start - the start point of the collection to return
+	 * 		limit - the limit of the number of items to return, this may be restricted by fixed system limits
+	 * 		includeArchivedSpaces - whether to include content in archived spaces in the result, this defaults to false
+	 *
 	 * @return Returns a full JSON representation of a list of search results
 	 */
 	@GET("/wiki/rest/api/search")
@@ -175,9 +186,10 @@ public interface ConfluenceApi
 	
 	/**
 	 * Текущий пользователь является наблюдателем контента с указанным contentId
-	 * <br />
+	 * <br>
 	 *
 	 * @param contentId
+	 *
 	 * @return
 	 */
 	@GET("/wiki/rest/api/user/watch/content/{contentId}")
@@ -185,12 +197,13 @@ public interface ConfluenceApi
 	
 	/**
 	 * Является ли пользователь, имеющий указанный userKey, наблюдателем
-	 * <br />
+	 * <br>
 	 * контента (контент имеет идентификатор contentId)
-	 * <br />
+	 * <br>
 	 *
 	 * @param contentId
 	 * @param userKey
+	 *
 	 * @return
 	 */
 	@GET("/wiki/rest/api/user/watch/content/{contentId}")
@@ -199,12 +212,13 @@ public interface ConfluenceApi
 	
 	/**
 	 * Является ли пользователь, имеющий указанное имя для входа (username),
-	 * <br />
+	 * <br>
 	 * наблюдателем контента (контент имеет идентификатор contentId)
-	 * <br />
+	 * <br>
 	 *
 	 * @param contentId
 	 * @param username
+	 *
 	 * @return
 	 */
 	@GET("/wiki/rest/api/user/watch/content/{contentId}")
@@ -219,82 +233,130 @@ public interface ConfluenceApi
 	
 	/**
 	 * Создаёт новый элемент контента
-	 * <br />
+	 * <br>
 	 * или публикует черновик, если в запросе присутствует идентификатор контента
-	 * <br />
+	 * <br>
 	 * Для случая публикации черновика,
-	 * <br />
+	 * <br>
 	 * будет создан новый элемент контента
-	 * <br />
+	 * <br>
 	 * и все метаданные из черновика будут перенесены во вновь созданный контент.
-	 * <br />
+	 * <br>
 	 *
 	 * @param content
+	 *
 	 * @return
 	 */
 	@POST("wiki/rest/api/content")
 	//готово
-	Call<Content> createContent(final @Body Content content,
-	                            final @QueryMap Map<String, String> param);
+	Call<Content> createContent(final @Body Content content, final @QueryMap Map<String, String> param);
+	
+	
 	
 	/**
 	 * Получить элемент контента по идентификатору этого элемента
-	 * <br />
 	 *
-	 * @param contentId
-	 * @param params
-	 * @return
+	 * @param contentId dfv df
+	 * @param params dfv d
+	 *
+	 * @return dfvdfv
 	 */
 	@GET("/wiki/rest/api/content/{contentId}")
-	//готово
-	Call<PageResultItem> getContentById(final @Path("contentId") String contentId,
-	                                    final @QueryMap Map<String, String> params);
+	Call<PageResultItem> getContentById(@Path("contentId")	final String contentId,
+	                                    @QueryMap	final Map<String, String> params);
+	
 	
 	/**
 	 * Получить версию контента по заданному индентификатору контента и номеру версии
-	 * <br />
+	 * <br>
 	 *
 	 * @param contentId
 	 * @param versionId
 	 * @param params
+	 *
 	 * @return
 	 */
-	//готово
-	@GET("/wiki/rest/api/content/{contentId}/version/{versionId}")
+	@GET("/wiki/rest/api/content/{contentId}/version/{versionId}") //готово
 	Call<Version> getVersionOfContent(final @Path("contentId") String contentId,
 	                                  final @Path("versionId") int versionId,
 	                                  final @QueryMap Map<String, String> params);
 	
-	//не готово
-	@GET("/wiki/rest/api/content")
-	Call<ContentContainter> getContent(@QueryMap Map<String, String> params);
-	
 	/**
-	 * Updates a piece of Content, including changes to content status
 	 *
-	 * @param contentId
 	 * @param params
 	 * @return
 	 */
+	@GET("/wiki/rest/api/content")
 	//не готово
-	@PUT("/wiki/rest/api/content/{contentId}")
-	Call<ContentContainter> getContent(final @Path("contentId") String contentId,
-	                                   final @QueryMap Map<String, String> params);
+	Call<ContentContainter> getContent(@QueryMap Map<String, String> params);
+	
 	
 	/**
-	 * Удаляет контента имеющий указанный идентификатор
-	 * <br />
+	 * Updates a piece of Content, including changes to content status
+	 * <p>
+	 * Чтобы обновить элемент контента, вы должны увеличить номер версии,
+	 * <p>
+	 * задавая номер версии, которую сейчас создаёте.
+	 * <p>
+	 * Свойство title может быть обновлено для всего контента.
+	 * <p>
+	 * Тело может быть обновлено для всего контента, у которого есть тело (не вложения!).
+	 * <p>
+	 * Например, чтобы обновить содержимое blogpost,
+	 * <p>
+	 * имеющего в настоящее время версию 1:
+	 * <p>
+	 * PUT /rest/api/content/456
+	 * <!-- @formatter:off -->
+	 *<blockquote><pre>
+{
+  "version":
+  {
+    "number": 2
+  },
+  "title": "My new title",
+  "type": "page",
+  "body":
+  {
+    "storage":
+    {
+      "value": "&lt;p&gt;New page data.&lt;/p&gt;",
+      "representation": "storage"
+    }
+  }
+}
+	 *</pre></blockquote>
+	 *<!-- @formatter:on -->
+	 *
 	 * @param contentId идентификатор контента
+	 * @param params параметры
+	 * @return обновлённый контент ??й
+	 */
+	@PUT("/wiki/rest/api/content/{contentId}")
+	Call<Content> updateContent(final @Body Content content,
+	                            final @Path("contentId") String contentId,
+	                            final @QueryMap Map<String, String> params);
+	
+	/**
+	 * Удаляет контент имеющий указанный идентификатор
+	 * <br>
+	 *
+	 * @param contentId
+	 * 		идентификатор контента
+	 *
 	 * @return
 	 */
 	//готово
 	@DELETE("/wiki/rest/api/content/{contentId}")
-	Call<Response<Void>> deleteContentById(final @Path("contentId") String contentId);
+	Call<Response<Void>> deleteContentById(@Path(value = "contentId") final String contentId);
 	
 	/**
 	 * Возвращает историю от выбранного элемента контента
-	 * <br />
-	 * @param contendId идентификатор контента
+	 * <br>
+	 *
+	 * @param contendId
+	 * 		идентификатор контента
+	 *
 	 * @return коллекция истории контента
 	 */
 	//готово todo дописать документацию к методу
@@ -303,71 +365,81 @@ public interface ConfluenceApi
 	
 	/**
 	 * Возвращает тело макроса (в storage формате) с указанным хешем.
-	 * <br />
+	 * <br>
 	 * Эта функция в основном используется для connect-приложений
-	 * <br />
+	 * <br>
 	 * которым необходимо тело макроса для того чтобы выполнить какую-то свою работу.
-	 * <br />
+	 * <br>
 	 * Хеш генерируется connect-ом во время рендеринга выполняемого локальным обработчиком макросов
-	 * <br />
+	 * <br>
 	 * и обычно сохраняет своё значение в пределах одного запроса
-	 * <br />
+	 * <br>
 	 * В целях оптимизации этот хеш обычно используется для нескольких запросов
-	 * <br />
+	 * <br>
 	 * Сбор макросов путём поиска по хешу должен считаться устаревшим,
-	 * <br />
+	 * <br>
 	 * и заменяется теперь при помощи поиска по macroId (смотрите ещё один такой же метод, как и текущий,
-	 * <br />
+	 * <br>
 	 * но принимающий параметр macroId)
-	 * <br />
+	 * <br>
 	 * Этот ресурс в настоящее время вызывается только из connect плагинов,
-	 * <br />
-	 * которые в конечном итоге? будут использовать ресурс {@link #getContentById(com.atlassian.confluence.api.model.content.id.ContentId, java.util.List, Integer, String)}
-	 * <br />
+	 * <br>
+	 * которые в конечном итоге? будут использовать ресурс
+	 * #getContentById(com.atlassian.confluence.api.model.content.id.ContentId, java.util.List, Integer, String)
+	 * <br>
 	 * Чтобы сделать переход максимально безболезненным,
-	 * <br />
+	 * <br>
 	 * этот ресурс будет соответствовать ресурсу с генерированым хешем или сохраненным macroId.
-	 * <br />
+	 * <br>
 	 * Это позволит работать плагинам во время периода миграции.
-	 * <br />
-	 * @param contentId идентификатор контента
-	 * @param version версия контента
-	 * @param hash хеш макроса
+	 * <br>
+	 *
+	 * @param contentId
+	 * 		идентификатор контента
+	 * @param version
+	 * 		версия контента
+	 * @param hash
+	 * 		хеш макроса
+	 *
 	 * @return
 	 */
 	//готово
 	@GET("/wiki/rest/api/content/{contentId}/history/{version}/macro/hash/{hash}")
-	Call<Macros> getContentMacroBodyByHash(final @Path("contentId") String contentId,
-	                                                  final @Path("version") String version,
-	                                                  final @Path("hash") String hash);
+	Call<Macros> getContentMacroBodyByHash(final @Path("contentId")String contentId,
+	                                       final @Path("version")String version,
+	                                       final @Path("hash")String hash);
 	
 	/**
 	 * Возращает тело макроса (в storage формате) с указанным id.
-	 * <br />
+	 * <br>
 	 * Этот функция в основном используется connect-приложениями
-	 * <br />
+	 * <br>
 	 * которым необходимо тело макроса для того чтобы выполнить свою работу
-	 * <br />
+	 * <br>
 	 * Когда контент создан, если macroId не указан,
-	 * <br />
+	 * <br>
 	 * то Confluence будет генерировать случайный id.
-	 * <br />
+	 * <br>
 	 * Идентификатор (id) сохраняется, когда сохраняется контент
-	 * <br />
+	 * <br>
 	 * и может быть изменен Confluence, если имеются конфликтующие идентификаторы
-	 * <br />
+	 * <br>
 	 * Чтобы сохранить обратную совместимость, этот ресурс также будет матчить hash of the macro body,
-	 * <br />
+	 * <br>
 	 * даже если присутствует macroId.
-	 * <br />
+	 * <br>
 	 * Эта проверка станет излишней так как страницы получают macroId сгенерированный для них
-	 * <br />
+	 * <br>
 	 * и прозрачно распространяемый на все экземпляры (all instances).
-	 * <br />
+	 * <br>
 	 *
-	 * @param contentId идентификатор контента
-	 * @param version   версия контента
-	 * @param macroId   идентификатор макроса
+	 * @param contentId
+	 * 		идентификатор контента
+	 * @param version
+	 * 		версия контента
+	 * @param macroId
+	 * 		идентификатор макроса
+	 *
 	 * @return контейнер, содержащий список элементов контента
 	 */
 	//готово
@@ -380,13 +452,17 @@ public interface ConfluenceApi
 	 * Получить список элементов контента,
 	 * используя для запроса Confluence Query Language (CQL)
 	 *
-	 * @param cql    текст запроса на Confluence Quiery Language
-	 * @param params дополнительные параметры для поиска
+	 * @param cql
+	 * 		текст запроса на Confluence Quiery Language
+	 * @param params
+	 * 		дополнительные параметры для поиска
+	 *
 	 * @return объект-контейнер, внутри которого находится коллекция найденных элементов контента
+	 *
 	 * @see <a href="https://developer.atlassian.com/display/CONFDEV/Advanced+Searching+using+CQL">
 	 * Advanced searching using CQL
 	 * </a>
-	 * <br />
+	 * <br>
 	 * Дополнительные параметры:
 	 * <ul>
 	 * <li>cql (String) - задаётся отдельным параметром метода</li>

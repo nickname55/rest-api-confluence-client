@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * Модель для запроса контента из Confluence API
- * <br />
+ * <br>
  */
 @Getter
 @Setter
@@ -17,32 +17,32 @@ import lombok.extern.slf4j.Slf4j;
 public class Page extends BaseModel
 {
 	/**
-	 * <br />
+	 * <br>
 	 */
 	//имя возвращаемой API коллекции в JSON
 	@SerializedName("results")
 	private PageResultItem[] pageResultItems;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("start")
 	private int start;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("limit")
 	private int limit;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("size")
 	private int size;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("_links")
 	private _Links links;

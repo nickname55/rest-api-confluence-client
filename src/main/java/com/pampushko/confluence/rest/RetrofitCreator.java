@@ -17,7 +17,7 @@ import java.util.Base64;
 
 /**
  * Класс для создании сконфигурированного объекта Retrofit
- * <br />
+ * <br>
  */
 @Slf4j
 public class RetrofitCreator

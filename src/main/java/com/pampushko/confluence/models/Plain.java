@@ -31,14 +31,14 @@ public class Plain extends BaseModel
 	
 	/**
 	 * Значение
-	 * <br />
+	 * <br>
 	 */
 	@Builder.Default
 	private String value = "";
 	
 	/**
 	 * Формат представления данных размещенных в значении
-	 * <br />
+	 * <br>
 	 */
 	@Builder.Default
 	private String representation = "plain";

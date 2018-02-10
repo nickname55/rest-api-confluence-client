@@ -9,34 +9,34 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * Макрос (макросы могут быть частью тела страницы)
- * <br />
+ * <br>
  */
 @Slf4j
 public class Macros extends BaseModel
 {
 	/**
 	 * имя макроса
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("name")
 	String name;
 	
 	/**
 	 * тело макроса
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("body")
 	String body;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("parameters")
 	@JsonAdapter(value = MacrosParameterJsonAdapter.class)
 	Parameters parameters;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("_links")
 	_Links links;

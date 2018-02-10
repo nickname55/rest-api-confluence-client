@@ -19,50 +19,50 @@ import lombok.extern.slf4j.Slf4j;
 public class By extends BaseModel
 {
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("type")
 	String type; //"known"
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("username")
 	String username; //"admin"
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("userKey")
 	String userKey;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("accountId")
 	String accountId;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("profilePicture")
 	ProfilePicture profilePicture;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("displayName")
 	String displayName; //"Alexander Ivanov"
 	
 	/**
 	 * todo подходит ли для этого объекта _ByExpandable тип?
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("_expandable")
 	_ByExpandableHistory expandable;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("_links")
 	_Links links;

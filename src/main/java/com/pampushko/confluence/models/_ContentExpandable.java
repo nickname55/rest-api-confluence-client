@@ -5,75 +5,75 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * Дополнительные свойства, которые мы при желании можете добавить к объекту Content,
- * <br />
+ * <br>
  * если вы получаете объект Content в ответе
- * <br />
+ * <br>
  */
 @Slf4j
 public class _ContentExpandable extends BaseModel
 {
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("container")
 	String container;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("metadata")
 	String metadata;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("extensions")
 	String extensions;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("operations")
 	String operations;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("children")
 	String children;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("history")
 	String history;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("ancestors")
 	String ancestors;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("body")
 	String body;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("version")
 	String version;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("descendants")
 	String descendants;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("space")
 	String space;

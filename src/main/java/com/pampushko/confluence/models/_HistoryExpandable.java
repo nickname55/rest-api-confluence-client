@@ -10,13 +10,13 @@ import lombok.extern.slf4j.Slf4j;
 public class _HistoryExpandable extends BaseModel
 {
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("operations")
 	String operations;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("details")
 	String details;

@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * Модель для запроса контента из Confluence API
- * <br />
+ * <br>
  */
 @Getter
 @Setter
@@ -19,55 +19,55 @@ import lombok.extern.slf4j.Slf4j;
 public class _PageExpandable extends BaseModel
 {
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("childTypes")
 	String childTypes;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("container")
 	String container;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("metadata")
 	String metadata;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("operations")
 	String operations;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("children")
 	String children;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("restrictions")
 	String restrictions;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("history")
 	String history;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("ancestors")
 	String ancestors;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	
 	@SerializedName("body")
@@ -75,20 +75,20 @@ public class _PageExpandable extends BaseModel
 	Body body;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@JsonAdapter(value = ExpandablePropDeserializer.class)
 	@SerializedName("version")
 	Version version;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("descendants")
 	String descendants;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("space")
 	String space;

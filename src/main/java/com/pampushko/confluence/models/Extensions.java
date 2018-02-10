@@ -19,7 +19,7 @@ public class Extensions extends BaseModel
 {
 	/**
 	 * Значение
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("position")
 	@Builder.Default

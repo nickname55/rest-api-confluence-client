@@ -10,19 +10,19 @@ import lombok.extern.slf4j.Slf4j;
 public class BodyEditor extends BaseModel
 {
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("value")
 	String value;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("representation")
 	String representation;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("_expandable")
 	_BodyEditorExpandable expandable;

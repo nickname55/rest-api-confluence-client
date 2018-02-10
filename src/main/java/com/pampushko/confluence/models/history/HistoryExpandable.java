@@ -16,7 +16,7 @@ import lombok.Setter;
 public class HistoryExpandable extends BaseModel
 {
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("contributors")
 	String contributors;

@@ -5,37 +5,37 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * история изменений страницы
- * <br />
+ * <br>
  */
 @Slf4j
 public class History extends BaseModel
 {
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("latest")
 	boolean latest;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("createdBy")
 	CreatedBy createdBy;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("createdDate")
 	String createdDate;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("_expandable")
 	_HistoryExpandable expandable;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("_links")
 	_Links links;

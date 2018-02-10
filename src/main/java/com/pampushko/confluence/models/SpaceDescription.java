@@ -19,7 +19,7 @@ public class SpaceDescription extends BaseModel
 {
 	/**
 	 * Объект, хранящий описание области
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("plain")
 	private Plain plain;

@@ -10,14 +10,14 @@ import lombok.extern.slf4j.Slf4j;
 public class Details extends BaseModel
 {
 	/**
-	 * <br />
+	 * <br>
 	 * expandable
 	 */
 	@SerializedName("business")
 	String business;
 	
 	/**
-	 * <br />
+	 * <br>
 	 * expandable
 	 */
 	@SerializedName("personal")
@@ -26,7 +26,7 @@ public class Details extends BaseModel
 	//----------------------------------------------------------
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("_expandable")
 	_DetailsExpandable expandable;

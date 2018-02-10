@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * Модель для запроса контента из Confluence API
- * <br />
+ * <br>
  */
 @Getter
 @Setter
@@ -18,31 +18,31 @@ public class Blogpost extends BaseModel
 {
 	/**
 	 * todo подойдет ли здесь PageResultItem или нужен отдельный новый тип?
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("results")
 	private PageResultItem[] results;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("start")
 	private String start;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("limit")
 	private String limit;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("size")
 	private String size;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("_links")
 	private _Links links;

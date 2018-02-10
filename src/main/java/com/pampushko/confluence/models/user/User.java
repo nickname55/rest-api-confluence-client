@@ -8,55 +8,55 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * Элемент содержащий группу пользователей Confluence
- * <br />
+ * <br>
  */
 @Slf4j
 public class User extends BaseModel
 {
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("type")
 	String type;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("username")
 	String username;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("userKey")
 	String userKey;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("accountId")
 	String accountId;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("profilePicture")
 	ProfilePicture profilePicture;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("displayName")
 	String displayName;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("_expandable")
 	_UserExpandable expandable;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("_links")
 	_Links links;

@@ -5,69 +5,69 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * Версия контента (например, версия страницы)
- * <br />
+ * <br>
  * Нумерация версий начинается с 1
- * <br />
+ * <br>
  */
 @Slf4j
 public class Version extends BaseModel
 {
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("by")
 	By by;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("when")
 	String when;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("friendlyWhen")
 	String friendlyWhen;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("message")
 	String message;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("number")
 	String number;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("minorEdit")
 	boolean minorEdit;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("syncRev")
 	String syncRev;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("confRev")
 	String confRev;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("_expandable")
 	_VersionExpandable expandable;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("_links")
 	_Links links;

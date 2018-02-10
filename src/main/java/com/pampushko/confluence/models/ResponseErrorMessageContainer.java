@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ResponseErrorMessageContainer extends BaseModel
 {
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("message")
 	private ResponseErrorMessage message;

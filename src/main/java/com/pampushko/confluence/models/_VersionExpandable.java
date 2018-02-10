@@ -10,13 +10,13 @@ import lombok.extern.slf4j.Slf4j;
 public class _VersionExpandable extends BaseModel
 {
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("collaborators")
 	String collaborators;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("content")
 	String content;

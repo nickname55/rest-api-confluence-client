@@ -11,9 +11,9 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * Поиск возвращает коллекцию элементов,
- * <br />
+ * <br>
  * текущий класс представляет элемент коллекции
- * <br />
+ * <br>
  */
 @Getter
 @Setter
@@ -22,61 +22,61 @@ import lombok.extern.slf4j.Slf4j;
 public class SearchResultItem extends BaseModel
 {
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("content")
 	Content content;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("title")
 	String title;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("excerpt")
 	String excerpt;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("url")
 	String url;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("resultGlobalContainer")
 	ResultGlobalContainer resultGlobalContainer;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("breadcrumbs")
 	Breadcrumb[] breadcrumbs;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("entityType")
 	String entityType;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("iconCssClass")
 	String iconCssClass;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("lastModified")
 	String lastModified;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("friendlyLastModified")
 	String friendlyLastModified;

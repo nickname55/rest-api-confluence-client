@@ -7,25 +7,25 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * Элемент содержащий группу пользователей Confluence
- * <br />
+ * <br>
  */
 @Slf4j
 public class Group extends BaseModel
 {
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("type")
 	String type;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("name")
 	String name;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("_links")
 	_Links links;

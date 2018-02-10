@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * Хлебные крошки? в результатах поиска
- * <br />
+ * <br>
  */
 @Slf4j
 public class Breadcrumb extends BaseModel

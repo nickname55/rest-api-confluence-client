@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * Модель для запроса контента из Confluence API
- * <br />
+ * <br>
  */
 @Getter
 @Setter
@@ -18,30 +18,30 @@ public class Content extends BaseModel
 {
 	/**
 	 * Идентификатор области
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("id")
 	private String id;
 	
 	/**
 	 * Ключ области, например {@literal "TEST"}.
-	 * <br />
+	 * <br>
 	 * Ключи областей могут содержать только латинские буквы и числа {@literal (A-Z, a-z, 0-9)}
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("key")
 	private String key;
 	
 	/**
 	 * Имя области
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("name")
 	private String name;
 	
 	/**
 	 * Заголовок
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("title")
 	private String title;
@@ -49,108 +49,108 @@ public class Content extends BaseModel
 	
 	/**
 	 * Описание области
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("description")
 	private SpaceDescription description;
 	
 	/**
 	 * Тип области
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("type")
 	private String type;
 	
 	/**
 	 * Статус области
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("status")
 	private String status;
 	
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("restrictions")
 	private Restrictions restrictions;
 	
 	//-------------------------------------------------------------------------
 	/**
-	 * <br />
+	 * <br>
 	 */
 	//@SerializedName("container")
 	//String container; //todo разобраться что это за контенер? и зачем он нужен
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("metadata")
 	String metadata;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	//@SerializedName("extensions")
 	//String extensions; //todo разобраться
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("operations")
 	String operations;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("children")
 	String children;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("history")
 	History history;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("ancestors")
 	Parent[] ancestors;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("body")
 	Body body;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("version")
 	Version version;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("descendants")
 	String descendants;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("space")
 	Space space;
 	//-------------------------------------------------------------------------
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("_expandable")
 	_ContentExpandable expandable;
 	
 	/**
-	 * <br />
+	 * <br>
 	 */
 	@SerializedName("_links")
 	_Links links;
