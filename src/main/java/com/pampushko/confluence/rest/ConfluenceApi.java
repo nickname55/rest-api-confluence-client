@@ -62,7 +62,7 @@ public interface ConfluenceApi
 	 * 		- область {@code Space} для создания.
 	 * 		<br>
 	 *
-	 * @return возвращаёмое значение {@code Space}, как подтверждение, что область действительно создана
+	 * @return возвращаёмое значение {@code Call<Space>}, как подтверждение, что область действительно создана
 	 * <br>
 	 */
 	@POST("/wiki/rest/api/space")
@@ -290,7 +290,7 @@ public interface ConfluenceApi
 	//не готово
 	Call<ContentContainter> getContent(@QueryMap Map<String, String> params);
 	
-	
+	//@formatter:off
 	/**
 	 * Updates a piece of Content, including changes to content status
 	 * <p>
@@ -307,8 +307,10 @@ public interface ConfluenceApi
 	 * имеющего в настоящее время версию 1:
 	 * <p>
 	 * PUT /rest/api/content/456
-	 * <!-- @formatter:off -->
-	 *<blockquote><pre>
+	 * todo доделать вставку примеров кода в документацию! (сейчас код не форматирован а склеивается в одну строку)
+
+
+	 *<blockquote><PRE>
 {
   "version":
   {
@@ -325,13 +327,239 @@ public interface ConfluenceApi
     }
   }
 }
-	 *</pre></blockquote>
-	 *<!-- @formatter:on -->
+	 *</PRE></blockquote>
+	 *
+
+
+	 *
+	 * Чтобы обновить страницу и одновременно изменить её страницу-родителя,
+	 * установите в свойство ancestors
+	 * первым значением родительскую страницу.
+	 * Таким образом вы переместите текущую страницу
+	 * и сделаете ее дочерней страницей от страницы с идентфикатором 789,
+	 * как на примере ниже:
+	 * <strong>PUT /rest/api/content/456</strong>
+	 * <p><blockquote>
+	 * <PRE>
+	 *
+{
+    "version": {
+        "number": 2
+    },
+    "ancestors": [
+        {
+            "id": 789
+        }
+    ],
+    "type": "page",
+    "body": {
+        "storage": {
+            "value": "<p>New page data.</p>",
+            "representation": "storage"
+        }
+    }
+}
+	 *</PRE>
+	 *</blockquote>
+	 *
+	 *<strong>Изменение статуса страницы</strong>
+	 *
+	 * Чтобы восстановить формат теста, который имеет статус "trashed" (помещенного в корзину содержимого)
+	 * Вам необходимо установить для этого элемента контента увеличенную версию
+	 * и его статус установить на текущий (<strong>current</strong>)
+	 * Никакие другие изменения полей не будут выполнены
+	 * при восстановлении элемента контента из корзины.
+	 *<br>
+	 * Пример запроса для восстановления из корзины:
+	 * { "id": "557059", "status": "current", "version": { "number": 2 } }
+	 *<br>
+	 *Если контент, который вы обновляете, имеет черновик,
+	 * то указание status=draft будет удаляте этот черновик,
+	 * а тело элемента контента будет заменено на тело указанное вами в запросе.
+	 *<br>
+	 * Пример запроса на удаление черновика:
+	 *<br>
+	 *<strong>PUT: http://localhost:9096/confluence/rest/api/content/2149384202?status=draft</strong>
+	 *<p><blockquote>
+	 *<PRE>
+{
+    "id": "2149384202",
+    "status": "current",
+    "version": {
+        "number": 4
+    },
+    "space": {
+        "key": "TST"
+    },
+    "type": "page",
+    "title": "page title",
+    "body": {
+        "storage": {
+            "value": "<p>New page data.</p>",
+            "representation": "storage"
+        }
+    }
+}
+	 *</PRE>
+	 *</blockquote>
+	 *
+	 *<br>
+	 * Обновление черновиков в настоящее время не поддерживается.
+	 *<br>
+	 * <strong>Дополнительные параметры</strong>
+	 * <ul>
+	 *     <li>status (String) -- существующий статус для обновляемого контента</li>
+	 *     <li>conflictPolicy (String) -- Default : <strong>abort</strong></li>
+	 * </ul>
+	 *<br>
+	 * <strong>Пример</strong>
+	 *
+	 * <p><blockquote>
+	 * <PRE>
+{
+    "id": "3604482",
+    "type": "page",
+    "status": "current",
+    "title": "Example Content title",
+    "space": {
+        "key": "TST",
+        "metadata": {}
+    },
+    "version": {
+        "number": 2,
+        "minorEdit": false,
+        "hidden": false
+    },
+    "ancestors": [],
+    "operations": [],
+    "children": {},
+    "descendants": {},
+    "body": {
+        "storage": {
+            "value": "<p>This is the updated text for the new page</p>",
+            "representation": "storage"
+        }
+    },
+    "metadata": {},
+    "restrictions": {}
+}
+
+	 </PRE>
+	 </blockquote>
+	 
+	 <p>
+	 *
+	 * <strong>Ответы</strong>
+	 * 200 - application/json Returns a full JSON representation of a piece of content
+	 
+	 <p>
+	 
+	 
+	 <blockquote>
+	 <PRE>
+{
+    "id": "1234",
+    "type": "page",
+    "status": "current",
+    "title": "Example Content title",
+    "space": {
+        "id": 11,
+        "key": "TST",
+        "name": "Example space",
+        "description": {
+            "plain": {
+                "value": "This is an example space",
+                "representation": "plain"
+            }
+        },
+        "metadata": {},
+        "_links": {
+            "self": "http://myhost:8080/confluence/rest/api/space/TST"
+        }
+    },
+    "version": {
+        "by": {
+            "type": "known",
+            "username": "username",
+            "userKey": "",
+            "displayName": "Full Name",
+            "_expandable": {
+                "status": ""
+            }
+        },
+        "when": "2017-12-11T03:52:47.153Z",
+        "message": "change message for this edit",
+        "number": 2,
+        "minorEdit": false,
+        "hidden": false
+    },
+    "ancestors": [
+        {
+            "id": "123",
+            "type": "page",
+            "status": "current",
+            "ancestors": [],
+            "operations": [],
+            "children": {},
+            "descendants": {},
+            "body": {},
+            "metadata": {},
+            "restrictions": {},
+            "_links": {
+                "self": "http://myhost:8080/confluence/rest/api/content/123"
+            }
+        }
+    ],
+    "operations": [],
+    "children": {},
+    "descendants": {},
+    "container": {
+        "id": 11,
+        "key": "TST",
+        "name": "Example space",
+        "description": {
+            "plain": {
+                "value": "This is an example space",
+                "representation": "plain"
+            }
+        },
+        "metadata": {},
+        "_links": {
+            "self": "http://myhost:8080/confluence/rest/api/space/TST"
+        }
+    },
+    "body": {
+        "view": {
+            "value": "&lt;p&gt;&lt;h1&gt;Example&lt;/h1&gt;Some example content body&lt;/p&gt;",
+            "representation": "view",
+            "_expandable": {
+                "content": "/rest/api/content/1234"
+            }
+        }
+    },
+    "metadata": {},
+    "restrictions": {},
+    "_links": {
+        "collection": "/rest/api/content",
+        "base": "http://myhost:8080/confluence",
+        "context": "/confluence",
+        "self": "http://myhost:8080/confluence/rest/api/content/1234"
+    }
+}
+	 </PRE>
+	 </blockquote>
+	 *
+	 * <br>
+	 * STATUS 400 -- if no space or no content type, or setup a wrong version type set to content, or status param is not draft and status content is current
+	 * <br>
+	 STATUS 404 -- if can not find draft with current content
+	 * <br>
 	 *
 	 * @param contentId идентификатор контента
 	 * @param params параметры
 	 * @return обновлённый контент ??й
 	 */
+	//@formatter:on
 	@PUT("/wiki/rest/api/content/{contentId}")
 	Call<Content> updateContent(final @Body Content content,
 	                            final @Path("contentId") String contentId,
