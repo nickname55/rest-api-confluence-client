@@ -1,6 +1,7 @@
-package com.pampushko.confluence.models;
+package com.pampushko.confluence.models.content;
 
 import com.google.gson.annotations.SerializedName;
+import com.pampushko.confluence.models.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;

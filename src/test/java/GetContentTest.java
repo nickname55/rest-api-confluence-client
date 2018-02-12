@@ -1,4 +1,4 @@
-import com.pampushko.confluence.models.ContentContainter;
+import com.pampushko.confluence.models.content.ContentContainter;
 import com.pampushko.confluence.models.Space;
 import com.pampushko.confluence.models.SpaceResultList;
 import com.pampushko.confluence.rest.Confluence;

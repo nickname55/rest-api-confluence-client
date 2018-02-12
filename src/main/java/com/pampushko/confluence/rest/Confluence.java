@@ -1,6 +1,8 @@
 package com.pampushko.confluence.rest;
 
 import com.pampushko.confluence.models.*;
+import com.pampushko.confluence.models.content.Content;
+import com.pampushko.confluence.models.content.ContentContainter;
 import com.pampushko.confluence.models.group.Group;
 import com.pampushko.confluence.models.group.GroupResultList;
 import com.pampushko.confluence.models.history.HistoryContainer;
@@ -498,6 +500,9 @@ public class Confluence
 		return body;
 	}
 	
+	////////////////////////////////////////////////////
+	// update content START
+	////////////////////////////////////////////////////
 	/**
 	 * Параметры
 	 * <ol>
@@ -519,6 +524,35 @@ public class Confluence
 		Content body = response.body();
 		return body;
 	}
+	
+	/**
+	 * Параметры
+	 * <ol>
+	 * <li>status (string), Default: current</li>
+	 * <li>expand	(string), Default: body.storage,history,space,container.history,container.version,version,ancestors</li>
+	 * </ol>
+	 *
+	 * @param content экземпляр конента, который мы хотим обновить
+	 * @return обновленный экземпляр контента
+	 * @throws IOException
+	 */
+	Content updateContent(final Content content,
+	                      final String contentId) throws IOException
+	{
+		Map<String, String> params = new HashMap<String, String>()
+		{
+			{
+			
+			}
+		};
+		Call<Content> contentCall = confluenceApi.updateContent(content, contentId, params);
+		Response<Content> response = contentCall.execute();
+		Content body = response.body();
+		return body;
+	}
+	////////////////////////////////////////////////////
+	// update content STOP
+	////////////////////////////////////////////////////
 	
 	/**
 	 * Удаляет контента имеющий указанный идентификатор

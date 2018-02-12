@@ -1,6 +1,9 @@
 package com.pampushko.confluence.models;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -10,6 +13,9 @@ import lombok.extern.slf4j.Slf4j;
  * <br>
  */
 @Slf4j
+@Setter
+@Getter
+@EqualsAndHashCode
 public class Version extends BaseModel
 {
 	/**
@@ -40,7 +46,7 @@ public class Version extends BaseModel
 	 * <br>
 	 */
 	@SerializedName("number")
-	String number;
+	long number;
 	
 	/**
 	 * <br>

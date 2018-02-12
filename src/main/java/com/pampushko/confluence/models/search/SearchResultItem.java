@@ -3,7 +3,7 @@ package com.pampushko.confluence.models.search;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.SerializedName;
 import com.pampushko.confluence.models.BaseModel;
-import com.pampushko.confluence.models.Content;
+import com.pampushko.confluence.models.content.Content;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
