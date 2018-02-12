@@ -258,10 +258,10 @@ public interface ConfluenceApi
 	/**
 	 * Получить элемент контента по идентификатору этого элемента
 	 *
-	 * @param contentId dfv df
-	 * @param params dfv d
+	 * @param contentId идентификатор контента
+	 * @param params коллекция дополнительных параметров
 	 *
-	 * @return dfvdfv
+	 * @return Call<PageResultItem> обертка для результата запроса (содержит внутри себя элемент контента)
 	 */
 	@GET("/wiki/rest/api/content/{contentId}")
 	Call<PageResultItem> getContentById(@Path("contentId")	final String contentId,
@@ -272,17 +272,18 @@ public interface ConfluenceApi
 	 * Получить версию контента по заданному индентификатору контента и номеру версии
 	 * <br>
 	 *
-	 * @param contentId
-	 * @param versionId
-	 * @param params
+	 * @param contentId идентификатор элемента контента
+	 * @param versionId версия элемента контента
+	 * @param params коллекция дополнительных параметров
 	 *
-	 * @return
+	 * @return запрошенная версия контента
 	 */
 	@GET("/wiki/rest/api/content/{contentId}/version/{versionId}") //готово
 	Call<Version> getVersionOfContent(final @Path("contentId") String contentId,
 	                                  final @Path("versionId") int versionId,
 	                                  final @QueryMap Map<String, String> params);
 	
+	//@formatter:off
 	/**
 	 *
 	 * @param params
@@ -291,6 +292,7 @@ public interface ConfluenceApi
 	@GET("/wiki/rest/api/content")
 	//не готово
 	Call<ContentContainter> getContent(@QueryMap Map<String, String> params);
+	//@formatter:on
 	
 	//@formatter:off
 	/**
