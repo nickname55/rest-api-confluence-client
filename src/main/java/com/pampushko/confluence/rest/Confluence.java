@@ -513,7 +513,7 @@ public class Confluence
 	 * @return
 	 * @throws IOException
 	 */
-	Content createContent(final Content content, final Map<String, String> params) throws IOException
+	public Content createContent(final Content content, final Map<String, String> params) throws IOException
 	{
 		Call<Content> contentCall = confluenceApi.createContent(content, params);
 		Response<Content> response = contentCall.execute();

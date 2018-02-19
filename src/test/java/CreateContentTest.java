@@ -1,7 +1,6 @@
-package com.pampushko.confluence.rest;
-
 import com.pampushko.confluence.models.Space;
 import com.pampushko.confluence.models.content.Content;
+import com.pampushko.confluence.rest.Confluence;
 import com.pampushko.confluence.settings.SettingsManager;
 import com.pampushko.confluence.utils.ContentUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -12,16 +11,11 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * Базовый класс для запуска клиента
- * <br>
+ *
  */
 @Slf4j
-public class Main
+public class CreateContentTest
 {
-	public static final String url = "";
-	private static final String username = "";
-	private static final String password = "";
-	
 	public static void main(String[] args) throws IOException
 	{
 		//читаем настройки приложения
@@ -34,7 +28,7 @@ public class Main
 		Map<String, String> params = new HashMap<String, String>()
 		{
 			{
-			
+				
 			}
 		};
 		
@@ -44,4 +38,5 @@ public class Main
 		Content content = confluence.createContent(page, params);
 		System.out.println(content);
 	}
+	
 }
