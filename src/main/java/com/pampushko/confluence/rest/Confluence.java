@@ -118,6 +118,26 @@ public class Confluence
 	}
 	
 	/**
+	 * Возвращает информацию об области Confluence - {@code Space}
+	 * <br>
+	 * с кодом {@code key}
+	 * <br>
+	 *
+	 * @return возвращаёмое значение {@code SpaceResultList} - массив из областей {@code Space}
+	 * <br>
+	 */
+	public Space getSpaceByKey(final String spaceKey) throws IOException
+	{
+		//заглушка
+		Map<String, String> params = new HashMap<String, String>(){{}};
+		
+		Call<Space> spaceCall = confluenceApi.getSpaceByKey(spaceKey, params);
+		Response<Space> response = spaceCall.execute();
+		Space body = response.body();
+		return body;
+	}
+	
+	/**
 	 * Возвращает список областей Confluence - {@code Space}
 	 * <br>
 	 * с кодом {@code key} и
@@ -484,7 +504,7 @@ public class Confluence
 	/**
 	 * Параметры
 	 * <ol>
-	 * <li>status (string), Default: current</li>
+	 * <li>status (string), Default: <strong>current</strong></li>
 	 * <li>expand	(string), Default: body.storage,history,space,container.history,container.version,version,ancestors</li>
 	 * </ol>
 	 *

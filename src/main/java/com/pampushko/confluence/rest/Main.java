@@ -1,9 +1,9 @@
 package com.pampushko.confluence.rest;
 
 import com.pampushko.confluence.models.Space;
-import com.pampushko.confluence.models.SpaceResultList;
-import com.pampushko.confluence.models.content.ContentResultList;
+import com.pampushko.confluence.models.content.Content;
 import com.pampushko.confluence.settings.SettingsManager;
+import com.pampushko.confluence.utils.ContentUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -30,20 +30,18 @@ public class Main
 		//вызываем билдер и создаем клиент
 		Confluence confluence = Confluence.newBuilder().baseUrl(settings.getProperty("baseUrl")).username(settings.getProperty("username")).password(settings.getProperty("password")).build();
 		
-		Space resultSpace = null;
-		
-		SpaceResultList spaces = confluence.getSpaces();
-		for (Space space : spaces.getSpaces())
-		{
-			System.out.println(space);
-		}
+		//пустой набор параметров - заглушка
 		Map<String, String> params = new HashMap<String, String>()
 		{
 			{
-				put("spaceKey", "KARMA");
+			
 			}
 		};
-		ContentResultList contentResultList = confluence.getContent(params);
-		System.out.println(contentResultList);
+		
+		Space space = confluence.getSpaceByKey("javaDoc");
+		Content page = ContentUtils.createNewContent();
+		page.setSpace(space);
+		Content content = confluence.createContent(page, params);
+		System.out.println(content);
 	}
 }
