@@ -11,8 +11,13 @@
 
 	<developers>
 		<developer>
+			<id>pampushko</id>
 			<name>Alexander Pampushko</name>
 			<email>pampushko@gmail.com</email>
+			<organization />
+			<roles>
+				<role>Java Developer</role>
+			</roles>
 		</developer>
 	</developers>
 
