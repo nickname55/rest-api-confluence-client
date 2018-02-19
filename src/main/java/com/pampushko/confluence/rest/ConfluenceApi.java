@@ -3,6 +3,7 @@ package com.pampushko.confluence.rest;
 import com.pampushko.confluence.models.*;
 import com.pampushko.confluence.models.content.Content;
 import com.pampushko.confluence.models.content.ContentContainter;
+import com.pampushko.confluence.models.content.ContentResultList;
 import com.pampushko.confluence.models.group.Group;
 import com.pampushko.confluence.models.group.GroupResultList;
 import com.pampushko.confluence.models.history.HistoryContainer;
@@ -285,13 +286,35 @@ public interface ConfluenceApi
 	
 	//@formatter:off
 	/**
+	 * Returns a paginated list of Content.
+	 * <br>
+	 * Example request URI(s):
+	 * <br>
+	 * <strong>
+http://example.com/rest/api/content?spaceKey=TST&title=Cheese&expand=space,body.view,version,container
+	 <br>
+http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&postingDay=2014-02-13&expand=space,body.view,version,container
+	 * </strong>
 	 *
+	 * <br>
+	 * Дополнительные параметры:
+	 * <ul>
+	 * <li>type (String, default:<strong>page</strong>) - the content type to return. Valid values: page, blogpost.</li>
+	 * <li>spaceKey (String) - the space key to find content under</li>
+	 * <li>title (String) - the title of the page to find. Required for page type.</li>
+	 * <li>status (String) - list of statuses the content to be found is in. Defaults to current is not specified. If set to 'any', content in 'current' and 'trashed' status will be fetched. Does not support 'historical' status for now</li>
+	 * <li>postingDay (String) - the posting day of the blog post. Required for blogpost type. Format: yyyy-mm-dd. Example: 2013-02-13</li>
+	 * <li>
+	 *    expand (String) - a comma separated list of properties to expand on the content. Default value: history,space,version.
+	 * </li>
+	 * <li>start (int) - the start point of the collection to return</li>
+	 * <li>limit (int, default:<strong>25</strong>) - the limit of the number of items to return, this may be restricted by fixed system limits</li>
 	 * @param params
 	 * @return
 	 */
 	@GET("/wiki/rest/api/content")
 	//не готово
-	Call<ContentContainter> getContent(@QueryMap Map<String, String> params);
+	Call<ContentResultList> getContent(@QueryMap Map<String, String> params);
 	//@formatter:on
 	
 	//@formatter:off

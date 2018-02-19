@@ -13,7 +13,7 @@ import java.util.Properties;
 
 /**
  */
-public class GetSpaceByKey
+public class GetSpaceByKeyTest
 {
 	private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 	

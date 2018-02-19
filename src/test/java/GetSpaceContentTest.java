@@ -1,28 +1,30 @@
-package com.pampushko.confluence.rest;
-
+import com.pampushko.confluence.models.content.ContentContainter;
 import com.pampushko.confluence.models.Space;
 import com.pampushko.confluence.models.SpaceResultList;
-import com.pampushko.confluence.models.content.ContentResultList;
+import com.pampushko.confluence.rest.Confluence;
 import com.pampushko.confluence.settings.SettingsManager;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.lang.invoke.MethodHandles;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
 /**
- * Базовый класс для запуска клиента
- * <br>
+ *
  */
-@Slf4j
-public class Main
+public class GetSpaceContentTest
 {
-	public static final String url = "";
-	private static final String username = "";
-	private static final String password = "";
+	private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 	
 	public static void main(String[] args) throws IOException
+	{
+		test();
+	}
+	
+	private static void test() throws IOException
 	{
 		//читаем настройки приложения
 		Properties settings = SettingsManager.getValues();
@@ -40,10 +42,13 @@ public class Main
 		Map<String, String> params = new HashMap<String, String>()
 		{
 			{
-				put("spaceKey", "KARMA");
+				//получаем только контент из главной страницы (передавая параметр depth)
+				put("depth", "all");
 			}
 		};
-		ContentResultList contentResultList = confluence.getContent(params);
-		System.out.println(contentResultList);
+		ContentContainter spaceContent = confluence.getSpaceContent("MYR", params);
+		System.out.println(spaceContent);
+		//System.out.println(spaceContent.getPage().getPageResultItems()[0].getTitle());
 	}
+	
 }

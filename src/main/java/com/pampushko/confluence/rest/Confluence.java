@@ -3,6 +3,7 @@ package com.pampushko.confluence.rest;
 import com.pampushko.confluence.models.*;
 import com.pampushko.confluence.models.content.Content;
 import com.pampushko.confluence.models.content.ContentContainter;
+import com.pampushko.confluence.models.content.ContentResultList;
 import com.pampushko.confluence.models.group.Group;
 import com.pampushko.confluence.models.group.GroupResultList;
 import com.pampushko.confluence.models.history.HistoryContainer;
@@ -536,8 +537,8 @@ public class Confluence
 	 * @return обновленный экземпляр контента
 	 * @throws IOException
 	 */
-	Content updateContent(final Content content,
-	                      final String contentId) throws IOException
+	public Content updateContent(final Content content,
+	                             final String contentId) throws IOException
 	{
 		Map<String, String> params = new HashMap<String, String>()
 		{
@@ -647,6 +648,22 @@ public class Confluence
 		Call<Macros> contentContainterCall = confluenceApi.getContentMacroBodyByHash(contentId, version, hash);
 		Response<Macros> response = contentContainterCall.execute();
 		Macros body = response.body();
+		return body;
+	}
+	
+	/**
+	 * Returns a paginated list of Content.
+	 * <br>
+	 *
+	 * @param params
+	 * @return
+	 * @throws IOException
+	 */
+	public ContentResultList getContent(final Map<String, String> params) throws IOException
+	{
+		Call<ContentResultList> contentResultListCall = confluenceApi.getContent(params);
+		Response<ContentResultList> response = contentResultListCall.execute();
+		ContentResultList body = response.body();
 		return body;
 	}
 }

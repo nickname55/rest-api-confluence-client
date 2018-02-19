@@ -14,7 +14,7 @@ import java.util.Properties;
 /**
  *
  */
-public class UpdateSpace
+public class UpdateSpaceTest
 {
 	private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 	

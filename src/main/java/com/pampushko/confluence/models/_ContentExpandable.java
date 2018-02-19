@@ -13,6 +13,14 @@ import lombok.extern.slf4j.Slf4j;
 public class _ContentExpandable extends BaseModel
 {
 	/**
+	 * todo добавил для функции getContent (это поле первоначально в этом классе отсутствовало)
+	 * <br>
+	 */
+	@SerializedName("childTypes")
+	String childTypes;
+	
+	
+	/**
 	 * <br>
 	 */
 	@SerializedName("container")
@@ -41,6 +49,13 @@ public class _ContentExpandable extends BaseModel
 	 */
 	@SerializedName("children")
 	String children;
+	
+	/**
+	 * todo добавил для функции getContent (это поле первоначально в этом классе отсутствовало)
+	 * <br>
+	 */
+	@SerializedName("restrictions")
+	String restrictions;
 	
 	/**
 	 * <br>
