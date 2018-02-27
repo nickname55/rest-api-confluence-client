@@ -1,6 +1,7 @@
 package com.pampushko.confluence.rest;
 
 import com.pampushko.confluence.models.*;
+import com.pampushko.confluence.models.audit.Audit;
 import com.pampushko.confluence.models.audit.AuditResultList;
 import com.pampushko.confluence.models.content.Content;
 import com.pampushko.confluence.models.content.ContentContainter;
@@ -16,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.http.GET;
+import retrofit2.http.*;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -705,6 +706,20 @@ public class Confluence
 		Call<AuditResultList> auditResultListCall = confluenceApi.getAudit(params);
 		Response<AuditResultList> response = auditResultListCall.execute();
 		AuditResultList body = response.body();
+		return body;
+	}
+	
+	/**
+	 * Store record
+	 * <br>
+	 * @param audit
+	 * @return
+	 */
+	Audit createAudit(final Audit audit) throws IOException
+	{
+		Call<Audit> auditCall = confluenceApi.createAudit(audit);
+		Response<Audit> response = auditCall.execute();
+		Audit body = response.body();
 		return body;
 	}
 	

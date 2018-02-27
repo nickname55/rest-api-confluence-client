@@ -1,6 +1,7 @@
 package com.pampushko.confluence.rest;
 
 import com.pampushko.confluence.models.*;
+import com.pampushko.confluence.models.audit.Audit;
 import com.pampushko.confluence.models.audit.AuditResultList;
 import com.pampushko.confluence.models.content.Content;
 import com.pampushko.confluence.models.content.ContentContainter;
@@ -756,6 +757,15 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 */
 	@GET("/wiki/rest/api/audit")
 	Call<AuditResultList> getAudit(final @QueryMap Map<String, String> params);
+	
+	/**
+	 * Store record
+	 * <br>
+	 * @param audit
+	 * @return
+	 */
+	@POST("/wiki/rest/api/audit")
+	Call<Audit> createAudit(final @Body Audit audit);
 	
 	//-----------Audit Конец ---------------
 	//----------------------------------------------------------------------------------------

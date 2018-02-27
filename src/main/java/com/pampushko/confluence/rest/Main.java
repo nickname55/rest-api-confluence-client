@@ -1,6 +1,7 @@
 package com.pampushko.confluence.rest;
 
-import com.pampushko.confluence.models.audit.AuditResultList;
+import com.pampushko.confluence.models.audit.Audit;
+import com.pampushko.confluence.models.audit.Author;
 import com.pampushko.confluence.settings.SettingsManager;
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,7 +36,26 @@ public class Main
 				put("limit", "2");
 			}
 		};
-		AuditResultList auditResultList = confluence.getAudit(params);
-		System.out.println(auditResultList);
+		
+		Audit auditObj = Audit.builder()
+				.author(
+						Author.builder()
+								.type("user")
+								.displayName("Alexander Pampushko")
+								.operations(null)
+								.username("admin")
+								.userKey("8a7f80835e12863a015e14c6d9910023")
+								.build()
+				)
+				
+				.remoteAddress("91.240.50.178")
+				.creationDate(1518274997993L)
+				.summary("я создал!")
+				.description("я создал тестовую запись")
+				.category("TEST")
+				.sysAdmin(false)
+				.build();
+		Audit auditRecord = confluence.createAudit(auditObj);
+		System.out.println(auditRecord);
 	}
 }
