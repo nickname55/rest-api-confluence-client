@@ -1,6 +1,7 @@
 package com.pampushko.confluence.rest;
 
 import com.pampushko.confluence.models.*;
+import com.pampushko.confluence.models.audit.AuditResultList;
 import com.pampushko.confluence.models.content.Content;
 import com.pampushko.confluence.models.content.ContentContainter;
 import com.pampushko.confluence.models.content.ContentResultList;
@@ -686,4 +687,29 @@ public class Confluence
 		ContentResultList body = response.body();
 		return body;
 	}
+	
+	////////////////////////////////////////////////////
+	// Audit - START
+	////////////////////////////////////////////////////
+	
+	/**
+	 * Fetch a paginated list of AuditRecord instances dating back to a certain time
+	 * <br>
+	 *
+	 * @param params
+	 * @return
+	 * @throws IOException
+	 */
+	public AuditResultList getAudit(final Map<String, String> params) throws IOException
+	{
+		Call<AuditResultList> auditResultListCall = confluenceApi.getAudit(params);
+		Response<AuditResultList> response = auditResultListCall.execute();
+		AuditResultList body = response.body();
+		return body;
+	}
+	
+	////////////////////////////////////////////////////
+	// Audit - STOP
+	////////////////////////////////////////////////////
+
 }

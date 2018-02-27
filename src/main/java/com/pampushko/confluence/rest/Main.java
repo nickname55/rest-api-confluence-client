@@ -1,9 +1,7 @@
 package com.pampushko.confluence.rest;
 
-import com.pampushko.confluence.models.Space;
-import com.pampushko.confluence.models.content.Content;
+import com.pampushko.confluence.models.audit.AuditResultList;
 import com.pampushko.confluence.settings.SettingsManager;
-import com.pampushko.confluence.utils.ContentUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -34,14 +32,10 @@ public class Main
 		Map<String, String> params = new HashMap<String, String>()
 		{
 			{
-			
+				put("limit", "2");
 			}
 		};
-		
-		Space space = confluence.getSpaceByKey("KARMA");
-		Content page = ContentUtils.createNewContent();
-		page.setSpace(space);
-		Content content = confluence.createContent(page, params);
-		System.out.println(content);
+		AuditResultList auditResultList = confluence.getAudit(params);
+		System.out.println(auditResultList);
 	}
 }

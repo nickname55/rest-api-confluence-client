@@ -1,6 +1,7 @@
 package com.pampushko.confluence.rest;
 
 import com.pampushko.confluence.models.*;
+import com.pampushko.confluence.models.audit.AuditResultList;
 import com.pampushko.confluence.models.content.Content;
 import com.pampushko.confluence.models.content.ContentContainter;
 import com.pampushko.confluence.models.content.ContentResultList;
@@ -734,4 +735,29 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	
 	//-----------Content Конец ---------------
 	//----------------------------------------------------------------------------------------
+
+	
+	//-----------Audit Начало ---------------
+	//----------------------------------------------------------------------------------------
+	
+	/**
+	 * Fetch a paginated list of AuditRecord instances dating back to a certain time
+	 * <br>
+	 * <strong>Дополнительные параметры</strong>
+	 * <ul>
+	 *     <li>startDate (String) -- </li>
+	 *     <li>endDate (String) -- </li>
+	 *     <li>start (int) -- where to start within results set</li>
+	 *     <li>limit (int) -- Default : <strong>1000</strong> -- the maximum results to fetch</li>
+	 *     <li>searchString (String) -- </li>
+	 * </ul>
+	 *<br>
+	 * <strong>Пример</strong>	 * @return
+	 */
+	@GET("/wiki/rest/api/audit")
+	Call<AuditResultList> getAudit(final @QueryMap Map<String, String> params);
+	
+	//-----------Audit Конец ---------------
+	//----------------------------------------------------------------------------------------
+	
 }
