@@ -13,6 +13,7 @@ import com.pampushko.confluence.models.macros.Macros;
 import com.pampushko.confluence.models.search.SearchResultList;
 import com.pampushko.confluence.models.user.UserResultList;
 import com.pampushko.confluence.models.user_watch.WatchObject;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.http.Body;
@@ -767,6 +768,27 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	@POST("/wiki/rest/api/audit")
 	Call<Audit> createAudit(final @Body Audit audit);
 	
+	/**
+	 * <br>
+	 * <strong>Дополнительные параметры</strong>
+	 * <ul>
+	 *     <li>startDate (String) -- </li>
+	 *     <li>endDate (String) -- </li>
+	 *     <li>searchString (String) -- </li>
+	 *     <li>format (String) -- Default: <strong>csv</strong> -- </li>
+	 * </ul>
+	 * <br>
+	 * <strong>Responses</strong>
+	 * <ul>
+	 *     <li>application/zip</li>
+	 *     <li>text/csv</li>
+	 * </ul>
+	 * @param params
+	 * @return
+	 */
+	@Streaming
+	@GET("/wiki/rest/api/audit/export")
+	Call<ResponseBody> exportAudit(@Header("Accept") String acceptHeader, final @QueryMap Map<String, String> params);
 	//-----------Audit Конец ---------------
 	//----------------------------------------------------------------------------------------
 	

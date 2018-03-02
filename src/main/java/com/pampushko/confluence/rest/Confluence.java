@@ -13,11 +13,14 @@ import com.pampushko.confluence.models.macros.Macros;
 import com.pampushko.confluence.models.search.SearchResultList;
 import com.pampushko.confluence.models.user.UserResultList;
 import com.pampushko.confluence.models.user_watch.WatchObject;
+import com.pampushko.confluence.utils.FilesUtils;
 import lombok.extern.slf4j.Slf4j;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.http.*;
+import retrofit2.http.GET;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -131,7 +134,9 @@ public class Confluence
 	public Space getSpaceByKey(final String spaceKey) throws IOException
 	{
 		//заглушка
-		Map<String, String> params = new HashMap<String, String>(){{}};
+		Map<String, String> params = new HashMap<String, String>()
+		{{
+		}};
 		
 		Call<Space> spaceCall = confluenceApi.getSpaceByKey(spaceKey, params);
 		Response<Space> response = spaceCall.execute();
@@ -164,8 +169,10 @@ public class Confluence
 	 * именем {@code name}.
 	 * <br>
 	 *
-	 * @param space - область {@code Space} для создания.
-	 *              <br>
+	 * @param space
+	 * 		- область {@code Space} для создания.
+	 * 		<br>
+	 *
 	 * @return возвращаёмое значение {@code Space}, как подтверждение, что область действительно создана
 	 * <br>
 	 */
@@ -190,8 +197,10 @@ public class Confluence
 	 * <strong>todo разобраться с назначением метода более подробно</strong>
 	 * <br>
 	 *
-	 * @param space - область {@code Space} для создания.
-	 *              <br>
+	 * @param space
+	 * 		- область {@code Space} для создания.
+	 * 		<br>
+	 *
 	 * @return возвращаёмое значение {@code Space}, как подтверждение, что область действительно создана
 	 * <br>
 	 */
@@ -207,7 +216,9 @@ public class Confluence
 	 * Обновление области (в настоящий момент можно обновить только name, description и homepage)
 	 * <br>
 	 *
-	 * @param space - область {@code Space} для создания
+	 * @param space
+	 * 		- область {@code Space} для создания
+	 *
 	 * @return - {@code Space} подтверждение, возвращаемое Confluence в ответе на запрос (полное представлеине области)
 	 */
 	public Space updateSpace(final Space space, final String key) throws IOException
@@ -241,7 +252,9 @@ public class Confluence
 	 *
 	 * @param key
 	 * @param params
+	 *
 	 * @return
+	 *
 	 * @throws IOException
 	 */
 	public ContentContainter getSpaceContent(final String key, final Map<String, String> params) throws IOException
@@ -258,7 +271,9 @@ public class Confluence
 	 *
 	 * @param contentId
 	 * @param params
+	 *
 	 * @return
+	 *
 	 * @throws IOException
 	 */
 	public PageResultItem getContentById(final String contentId, final Map<String, String> params) throws IOException
@@ -276,6 +291,7 @@ public class Confluence
 	 * @param contentId
 	 * @param versionNumber
 	 * @param params
+	 *
 	 * @return
 	 */
 	Version getVersionOfContent(final String contentId, final int versionNumber, final Map<String, String> params) throws IOException
@@ -293,6 +309,7 @@ public class Confluence
 	 *
 	 * @param start
 	 * @param limit
+	 *
 	 * @return
 	 */
 	GroupResultList getGetGroups(final int start, final int limit) throws IOException
@@ -322,6 +339,7 @@ public class Confluence
 	 *
 	 * @param start
 	 * @param limit
+	 *
 	 * @return
 	 */
 	GroupResultList getGetGroups(final String groupName, final int start, final int limit) throws IOException
@@ -340,6 +358,7 @@ public class Confluence
 	 * @param groupName
 	 * @param start
 	 * @param limit
+	 *
 	 * @return
 	 */
 	UserResultList getUsersFromGroupByGroupName(String groupName, int start, int limit) throws IOException
@@ -452,7 +471,9 @@ public class Confluence
 	 * <br>
 	 *
 	 * @param contentId
+	 *
 	 * @return
+	 *
 	 * @throws IOException
 	 */
 	WatchObject watch(final String contentId) throws IOException
@@ -472,7 +493,9 @@ public class Confluence
 	 * <br>
 	 *
 	 * @param userkey
+	 *
 	 * @return
+	 *
 	 * @throws IOException
 	 */
 	WatchObject watchByKey(final String contentId, final String userkey) throws IOException
@@ -492,7 +515,9 @@ public class Confluence
 	 * <br>
 	 *
 	 * @param contentId
+	 *
 	 * @return
+	 *
 	 * @throws IOException
 	 */
 	WatchObject watchByUsername(final String contentId, final String username) throws IOException
@@ -512,7 +537,9 @@ public class Confluence
 	 *
 	 * @param content
 	 * @param params
+	 *
 	 * @return
+	 *
 	 * @throws IOException
 	 */
 	public Content createContent(final Content content, final Map<String, String> params) throws IOException
@@ -526,6 +553,7 @@ public class Confluence
 	////////////////////////////////////////////////////
 	// update content START
 	////////////////////////////////////////////////////
+	
 	/**
 	 * Параметры
 	 * <ol>
@@ -535,7 +563,9 @@ public class Confluence
 	 *
 	 * @param content
 	 * @param params
+	 *
 	 * @return
+	 *
 	 * @throws IOException
 	 */
 	Content updateContent(final Content content,
@@ -555,8 +585,11 @@ public class Confluence
 	 * <li>expand	(string), Default: body.storage,history,space,container.history,container.version,version,ancestors</li>
 	 * </ol>
 	 *
-	 * @param content экземпляр конента, который мы хотим обновить
+	 * @param content
+	 * 		экземпляр конента, который мы хотим обновить
+	 *
 	 * @return обновленный экземпляр контента
+	 *
 	 * @throws IOException
 	 */
 	public Content updateContent(final Content content,
@@ -581,7 +614,9 @@ public class Confluence
 	 * Удаляет контента имеющий указанный идентификатор
 	 * <br>
 	 *
-	 * @param contentId идентификатор контента
+	 * @param contentId
+	 * 		идентификатор контента
+	 *
 	 * @return
 	 */
 	//готово
@@ -593,8 +628,7 @@ public class Confluence
 		if (code == 204) //успешно удалили контент
 		{
 			return true;
-		}
-		else
+		} else
 		{
 			//не удалось выполнить запрос или найти контент по указанному contentId
 			return false;
@@ -606,12 +640,16 @@ public class Confluence
 	 * <br>
 	 * Параметры:
 	 * <ul>
-	 *     <li>
-	 *         expand (String), Default: previousVersion, nextVersion, lastUpdated
-	 *     </li>
+	 * <li>
+	 * expand (String), Default: previousVersion, nextVersion, lastUpdated
+	 * </li>
 	 * </ul>
-	 * @param contendId идентификатор контента
+	 *
+	 * @param contendId
+	 * 		идентификатор контента
+	 *
 	 * @return коллекция истории контента
+	 *
 	 * @throws IOException
 	 */
 	//готово
@@ -632,10 +670,15 @@ public class Confluence
 	 * Для указанной вами версии контента (version)
 	 * <br>
 	 *
-	 * @param contentId идентификатор элемента контента
-	 * @param version версия элемента контента
-	 * @param macroId идентификатор макроса
+	 * @param contentId
+	 * 		идентификатор элемента контента
+	 * @param version
+	 * 		версия элемента контента
+	 * @param macroId
+	 * 		идентификатор макроса
+	 *
 	 * @return макрос
+	 *
 	 * @throws IOException
 	 */
 	Macros getContentMacroBodyByMacroId(final String contentId,
@@ -656,10 +699,15 @@ public class Confluence
 	 * Для указанной вами версии контента (version)
 	 * <br>
 	 *
-	 * @param contentId идентификатор элемента контента
-	 * @param version версия элемента контента
-	 * @param hash хеш макроса
+	 * @param contentId
+	 * 		идентификатор элемента контента
+	 * @param version
+	 * 		версия элемента контента
+	 * @param hash
+	 * 		хеш макроса
+	 *
 	 * @return макрос
+	 *
 	 * @throws IOException
 	 */
 	@Deprecated
@@ -678,7 +726,9 @@ public class Confluence
 	 * <br>
 	 *
 	 * @param params
+	 *
 	 * @return
+	 *
 	 * @throws IOException
 	 */
 	public ContentResultList getContent(final Map<String, String> params) throws IOException
@@ -698,7 +748,9 @@ public class Confluence
 	 * <br>
 	 *
 	 * @param params
+	 *
 	 * @return
+	 *
 	 * @throws IOException
 	 */
 	public AuditResultList getAudit(final Map<String, String> params) throws IOException
@@ -712,10 +764,12 @@ public class Confluence
 	/**
 	 * Store record
 	 * <br>
+	 *
 	 * @param audit
+	 *
 	 * @return
 	 */
-	Audit createAudit(final Audit audit) throws IOException
+	public Audit createAudit(final Audit audit) throws IOException
 	{
 		Call<Audit> auditCall = confluenceApi.createAudit(audit);
 		Response<Audit> response = auditCall.execute();
@@ -723,8 +777,53 @@ public class Confluence
 		return body;
 	}
 	
+	/**
+	 * <br>
+	 *
+	 * @param params
+	 *
+	 * @return
+	 */
+	public void exportAudit(final String directoryName,
+	                        final Map<String, String> params) throws IOException
+	{
+		String acceptHeader = "text/csv";
+		Call<ResponseBody> exportAuditCall = confluenceApi.exportAudit(acceptHeader, params);
+		
+		exportAuditCall.enqueue(new Callback<ResponseBody>()
+		{
+			@Override
+			public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response)
+			{
+				if (response.isSuccessful())
+				{
+					log.debug("server contacted and has file");
+					// получаем заголовок, содержащий в т.ч. имя файла для сохранения
+					String contentDisposition = response.headers().get("Content-Disposition");
+					//извлекаем имя файла из строки содержащейся в заголовке Content-Disposition
+					String fileName = FilesUtils.getFileNameFromContentDispositionHeader(contentDisposition);
+					//записываем содержимое тела ответа в директорию с именем directoryName, в файл fileName
+					boolean writtenToDisk = FilesUtils.writeResponseBodyToDisk(response.body(), directoryName, fileName);
+					
+					
+					log.debug("file download was a success? " + writtenToDisk);
+				}
+				else
+				{
+					log.debug("server contact failed");
+				}
+			}
+			
+			@Override
+			public void onFailure(Call<ResponseBody> call, Throwable throwable)
+			{
+				log.error("error! filed to write file to disk!");
+			}
+		});
+	}
+	
 	////////////////////////////////////////////////////
 	// Audit - STOP
 	////////////////////////////////////////////////////
-
+	
 }

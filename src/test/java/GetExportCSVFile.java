@@ -1,5 +1,4 @@
-package com.pampushko.confluence.rest;
-
+import com.pampushko.confluence.rest.Confluence;
 import com.pampushko.confluence.settings.SettingsManager;
 import com.pampushko.confluence.utils.FilesUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -10,16 +9,11 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * Базовый класс для запуска клиента
- * <br>
+ *
  */
 @Slf4j
-public class Main
+public class GetExportCSVFile
 {
-	public static final String url = "";
-	private static final String username = "";
-	private static final String password = "";
-	
 	public static void main(String[] args) throws IOException
 	{
 		//читаем настройки приложения
