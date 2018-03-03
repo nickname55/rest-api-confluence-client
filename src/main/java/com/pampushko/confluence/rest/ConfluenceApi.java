@@ -3,6 +3,7 @@ package com.pampushko.confluence.rest;
 import com.pampushko.confluence.models.*;
 import com.pampushko.confluence.models.audit.Audit;
 import com.pampushko.confluence.models.audit.AuditResultList;
+import com.pampushko.confluence.models.audit.RetentionPeriod;
 import com.pampushko.confluence.models.content.Content;
 import com.pampushko.confluence.models.content.ContentContainter;
 import com.pampushko.confluence.models.content.ContentResultList;
@@ -789,6 +790,16 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	@Streaming
 	@GET("/wiki/rest/api/audit/export")
 	Call<ResponseBody> exportAudit(@Header("Accept") String acceptHeader, final @QueryMap Map<String, String> params);
+	
+	/**
+	 * Получаем текущий период хранения (Fetches the current retention period)
+	 * <p>
+	 * <strong>Responses</strong>
+	 * application/json
+	 * @return
+	 */
+	@GET("/wiki/rest/api/audit/retention")
+	Call<RetentionPeriod> getRetentionPeriodOfAudit();
 	//-----------Audit Конец ---------------
 	//----------------------------------------------------------------------------------------
 	

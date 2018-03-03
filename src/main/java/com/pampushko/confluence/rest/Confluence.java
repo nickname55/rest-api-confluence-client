@@ -3,6 +3,7 @@ package com.pampushko.confluence.rest;
 import com.pampushko.confluence.models.*;
 import com.pampushko.confluence.models.audit.Audit;
 import com.pampushko.confluence.models.audit.AuditResultList;
+import com.pampushko.confluence.models.audit.RetentionPeriod;
 import com.pampushko.confluence.models.content.Content;
 import com.pampushko.confluence.models.content.ContentContainter;
 import com.pampushko.confluence.models.content.ContentResultList;
@@ -822,6 +823,20 @@ public class Confluence
 		});
 	}
 	
+	/**
+	 * Получаем текущий период хранения (Fetches the current retention period)
+	 * <p>
+	 * <strong>Responses</strong>
+	 * application/json
+	 * @return
+	 */
+	public RetentionPeriod getRetentionPeriodOfAudit() throws IOException
+	{
+		Call<RetentionPeriod> retentionPeriodOfAuditCall = confluenceApi.getRetentionPeriodOfAudit();
+		Response<RetentionPeriod> response = retentionPeriodOfAuditCall.execute();
+		RetentionPeriod retentionPeriod = response.body();
+		return retentionPeriod;
+	}
 	////////////////////////////////////////////////////
 	// Audit - STOP
 	////////////////////////////////////////////////////
