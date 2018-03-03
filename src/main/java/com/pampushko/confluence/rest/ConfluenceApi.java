@@ -812,6 +812,29 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
      */
 	@PUT("/wiki/rest/api/audit/retention")
 	Call<RetentionPeriod> setRetentionPeriodOfAudit(final @Body RetentionPeriod newRetentionPeriod);
+	
+	/**
+	 * Fetch a paginated list of AuditRecord instances dating back to a certain time
+     * <br>
+     * <strong>Дополнительные параметры</strong>
+     * <ul>
+     * <li>number (long) -- Default: <strong>3</strong> -- the amount of time periods</li>
+     * <li>units (String) -- the units to use for the time periods eg. 'days', 'months' etc</li>
+     * <li>start (int) -- where to start within results set</li>
+     * <li>limit (int) -- Default: <strong>1000</strong> -- the maximum results to fetch</li>
+     * <li>searchString (String) -- </li>
+     * </ul>
+     * <br>
+     * <p>
+     * <strong>Responses</strong>
+     * application/json
+     *
+     * @param params
+     *
+     * @return
+     */
+	@GET("/wiki/rest/api/audit/since")
+	Call<AuditResultList> getAuditSince(final @QueryMap Map<String, String> params);
 	//-----------Audit Конец ---------------
 	//----------------------------------------------------------------------------------------
 	

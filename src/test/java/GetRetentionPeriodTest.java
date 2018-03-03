@@ -10,7 +10,7 @@ import java.util.Properties;
  *
  */
 @Slf4j
-public class GetRetentionPeriod
+public class GetRetentionPeriodTest
 {
 	public static void main(String[] args) throws IOException
 	{

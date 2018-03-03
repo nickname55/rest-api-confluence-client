@@ -1,10 +1,12 @@
 package com.pampushko.confluence.rest;
 
-import com.pampushko.confluence.models.audit.RetentionPeriod;
+import com.pampushko.confluence.models.audit.AuditResultList;
 import com.pampushko.confluence.settings.SettingsManager;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -26,11 +28,14 @@ public class Main
 		//вызываем билдер и создаем клиент
 		Confluence confluence = Confluence.newBuilder().baseUrl(settings.getProperty("baseUrl")).username(settings.getProperty("username")).password(settings.getProperty("password")).build();
 		
-		//создаём текущий retention период
-		RetentionPeriod retentionPeriod = RetentionPeriod.builder().number(3).units("YEARS").build();
-		
-		//устанавливаем текущий retention period
-		RetentionPeriod retentionPeriodOfAudit = confluence.setRetentionPeriodOfAudit(retentionPeriod);
-		System.out.println(retentionPeriodOfAudit);
+		//пустой набор параметров - заглушка
+		Map<String, String> params = new HashMap<String, String>()
+		{
+			{
+				put("limit", "2");
+			}
+		};
+		AuditResultList auditResultList = confluence.getAuditSince(params);
+		System.out.println(auditResultList);
 	}
 }

@@ -1,16 +1,24 @@
-import com.pampushko.confluence.models.audit.RetentionPeriod;
+import com.pampushko.confluence.models.audit.AuditResultList;
 import com.pampushko.confluence.rest.Confluence;
 import com.pampushko.confluence.settings.SettingsManager;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 /**
  *
  */
+@Getter
+@Setter
+@EqualsAndHashCode
 @Slf4j
-public class SetRetentionPeriod
+public class GetAuditSinceTest
 {
 	
 	public static void main(String[] args) throws IOException
@@ -21,11 +29,14 @@ public class SetRetentionPeriod
 		//вызываем билдер и создаем клиент
 		Confluence confluence = Confluence.newBuilder().baseUrl(settings.getProperty("baseUrl")).username(settings.getProperty("username")).password(settings.getProperty("password")).build();
 		
-		//создаём текущий retention период
-		RetentionPeriod retentionPeriod = RetentionPeriod.builder().number(3).units("YEARS").build();
-		
-		//устанавливаем текущий retention period
-		RetentionPeriod retentionPeriodOfAudit = confluence.setRetentionPeriodOfAudit(retentionPeriod);
-		System.out.println(retentionPeriodOfAudit);
+		//пустой набор параметров - заглушка
+		Map<String, String> params = new HashMap<String, String>()
+		{
+			{
+				put("limit", "2");
+			}
+		};
+		AuditResultList auditResultList = confluence.getAuditSince(params);
+		System.out.println(auditResultList);
 	}
 }

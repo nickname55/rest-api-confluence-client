@@ -854,6 +854,35 @@ public class Confluence
 		RetentionPeriod retentionPeriod = response.body();
 		return retentionPeriod;
 	}
+	
+	/**
+	 * Fetch a paginated list of AuditRecord instances dating back to a certain time
+	 * <br>
+	 * <strong>Дополнительные параметры</strong>
+	 * <ul>
+	 * <li>number (long) -- Default: <strong>3</strong> -- the amount of time periods</li>
+	 * <li>units (String) -- the units to use for the time periods eg. 'days', 'months' etc</li>
+	 * <li>start (int) -- where to start within results set</li>
+	 * <li>limit (int) -- Default: <strong>1000</strong> -- the maximum results to fetch</li>
+	 * <li>searchString (String) -- </li>
+	 * </ul>
+	 * <br>
+	 * <p>
+	 * <strong>Responses</strong>
+	 * application/json
+	 *
+	 * @param params
+	 *
+	 * @return
+	 */
+	public AuditResultList getAuditSince(final Map<String, String> params) throws IOException
+	{
+		Call<AuditResultList> auditResultListCall = confluenceApi.getAuditSince(params);
+		Response<AuditResultList> response = auditResultListCall.execute();
+		AuditResultList body = response.body();
+		return body;
+	}
+	
 	////////////////////////////////////////////////////
 	// Audit - STOP
 	////////////////////////////////////////////////////

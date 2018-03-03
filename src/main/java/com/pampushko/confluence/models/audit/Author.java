@@ -31,6 +31,7 @@ public class Author extends BaseModel
 	String displayName;
 	
 	/**
+	 * todo  - в данный момент это свойство почему отствутствует в получаяемом в результате запроса JSON-не, а должно быть "operations": null, как я вижу ответе на запрос, выполняемом без Retrofit-клиента
 	 * <br>
 	 */
 	@SerializedName("operations")
