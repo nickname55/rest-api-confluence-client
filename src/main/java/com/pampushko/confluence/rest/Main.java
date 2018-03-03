@@ -32,6 +32,8 @@ public class Main
 		Map<String, String> params = new HashMap<String, String>()
 		{
 			{
+				put("number", "1");
+				put("units", "days");
 				put("limit", "2");
 			}
 		};
