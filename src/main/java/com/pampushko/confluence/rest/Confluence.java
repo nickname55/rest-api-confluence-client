@@ -837,6 +837,23 @@ public class Confluence
 		RetentionPeriod retentionPeriod = response.body();
 		return retentionPeriod;
 	}
+	
+	/**
+	 * Устанавливаем текущий период хранения (Set the retention period to a new value.)
+	 * <p>
+	 * Can throw ServiceException if the retention period is too long (Retention period cannot be longer than 20 Years)
+	 *
+	 * @param newRetentionPeriod
+	 *
+	 * @return
+	 */
+	public RetentionPeriod setRetentionPeriodOfAudit(final RetentionPeriod newRetentionPeriod) throws IOException
+	{
+		Call<RetentionPeriod> retentionPeriodCall = confluenceApi.setRetentionPeriodOfAudit(newRetentionPeriod);
+		Response<RetentionPeriod> response = retentionPeriodCall.execute();
+		RetentionPeriod retentionPeriod = response.body();
+		return retentionPeriod;
+	}
 	////////////////////////////////////////////////////
 	// Audit - STOP
 	////////////////////////////////////////////////////

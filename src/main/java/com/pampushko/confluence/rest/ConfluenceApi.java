@@ -800,6 +800,18 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 */
 	@GET("/wiki/rest/api/audit/retention")
 	Call<RetentionPeriod> getRetentionPeriodOfAudit();
+	
+	/**
+	 * Устанавливаем текущий период хранения (Set the retention period to a new value.)
+     * <p>
+     * Can throw ServiceException if the retention period is too long
+     *
+     * @param newRetentionPeriod
+     *
+     * @return
+     */
+	@PUT("/wiki/rest/api/audit/retention")
+	Call<RetentionPeriod> setRetentionPeriodOfAudit(final @Body RetentionPeriod newRetentionPeriod);
 	//-----------Audit Конец ---------------
 	//----------------------------------------------------------------------------------------
 	
