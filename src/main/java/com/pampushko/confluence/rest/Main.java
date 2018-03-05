@@ -1,6 +1,6 @@
 package com.pampushko.confluence.rest;
 
-import com.pampushko.confluence.models.audit.AuditResultList;
+import com.pampushko.confluence.models.child_content.ChildContentResult;
 import com.pampushko.confluence.settings.SettingsManager;
 import lombok.extern.slf4j.Slf4j;
 
@@ -32,12 +32,12 @@ public class Main
 		Map<String, String> params = new HashMap<String, String>()
 		{
 			{
-				put("number", "1");
-				put("units", "days");
-				put("limit", "2");
+				put("expand", "page,attachment,comment");
 			}
 		};
-		AuditResultList auditResultList = confluence.getAuditSince(params);
-		System.out.println(auditResultList);
+		
+		final String contentId = "5210113";
+		ChildContentResult contentResultList = confluence.getChild(contentId, params);
+		System.out.println(contentResultList);
 	}
 }

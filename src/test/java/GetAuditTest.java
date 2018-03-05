@@ -28,7 +28,7 @@ public class GetAuditTest
 		//вызываем билдер и создаем клиент
 		Confluence confluence = Confluence.newBuilder().baseUrl(settings.getProperty("baseUrl")).username(settings.getProperty("username")).password(settings.getProperty("password")).build();
 		
-		//пустой набор параметров - заглушка
+		//набор параметров
 		Map<String, String> params = new HashMap<String, String>()
 		{
 			{

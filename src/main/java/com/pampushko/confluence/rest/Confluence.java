@@ -4,6 +4,7 @@ import com.pampushko.confluence.models.*;
 import com.pampushko.confluence.models.audit.Audit;
 import com.pampushko.confluence.models.audit.AuditResultList;
 import com.pampushko.confluence.models.audit.RetentionPeriod;
+import com.pampushko.confluence.models.child_content.ChildContentResult;
 import com.pampushko.confluence.models.content.Content;
 import com.pampushko.confluence.models.content.ContentContainter;
 import com.pampushko.confluence.models.content.ContentResultList;
@@ -828,6 +829,7 @@ public class Confluence
 	 * <p>
 	 * <strong>Responses</strong>
 	 * application/json
+	 *
 	 * @return
 	 */
 	public RetentionPeriod getRetentionPeriodOfAudit() throws IOException
@@ -1044,10 +1046,13 @@ public class Confluence
 	 * @return набор дочерних элементов
 	 */
 	//@formatter:on
-	ContentResultList getChild(final String contentId,
-	                           final Map<String, String> params)
+	ChildContentResult getChild(final String contentId,
+	                            final Map<String, String> params) throws IOException
 	{
-		return null;
+		Call<ChildContentResult> childContentResultListCall = confluenceApi.getChild(contentId, params);
+		Response<ChildContentResult> response = childContentResultListCall.execute();
+		ChildContentResult body = response.body();
+		return body;
 	}
 	
 	//@formatter:off
