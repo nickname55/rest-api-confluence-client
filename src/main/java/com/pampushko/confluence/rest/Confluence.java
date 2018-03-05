@@ -887,4 +887,464 @@ public class Confluence
 	// Audit - STOP
 	////////////////////////////////////////////////////
 	
+	
+	//----------- content/{id}/child Начало ---------------
+	//----------------------------------------------------------------------------------------
+	
+	//@formatter:off
+	/**
+	 * Возвращает map прямых (непосредственных) дочерних элементов (child) для некоторого элемента контента.
+	 * <p>
+	 * Контент может иметь несколько типов дочерних элементов,
+	 * <p>
+	 * которые могут также являться страницами, но кроме того это могут быть комментарии
+	 * <p>
+	 * и вложения.
+	 * <p>
+	 * ContentType дочерних элементов, которые будут возвращены запросом,
+	 * <p>
+	 * описывается в query параметре запроса - expand
+	 * <p>
+	 * Этот параметр может включать развёртывание множества дочерних типов.
+	 * <p>
+	 * Если в параметр expand не включены никакие типы,
+	 * <p>
+	 * возвращаемая map будет просто перечислять дочерние типы,
+	 * <p>
+	 * доступные для развёртывания для элемента контента Content,
+	 * <p>
+	 * на который (элемент контента) указывает параметр @Path - contentId.
+	 * <p>
+	 * <strong>Примеры URI запросов:</strong>
+	 * <ul>
+	 *     <li>http://example.com/rest/api/content/1234/child</li>
+	 *     <li>http://example.com/rest/api/content/1234/child?expand=page.body.VIEW</li>
+	 *     <li>http://example.com/rest/api/content/1234/child?expand=page&start=20&limit=10</li>
+	 * </ul>
+	 * <p>
+	 * <strong>Дополнительные параметры</strong>
+	 * <ul>
+	 *     <li>expand (String) -- разделённый запятыми список свойств, для разворачивания (expand) дочерних элементов</li>
+	 *     <li>parentVersion (int) -- Default: <strong>0</strong> -- int, представляющий собой версию контента, для этой версии контента мы и будем получать дочерние элементы</li>
+	 *     <li>start (int) -- </li>
+	 *     <li>limit (int) -- Default: <strong>25</strong> -- </li>
+	 * </ul>
+	 * <br>
+	 *<h2><strong>Responses</strong></h2>
+	 * <strong>STATUS 200</strong> -- возвращает JSON-map,
+	 * представляющую собой несколько упорядоченных наборов дочерних элементов контента
+	 * <p>
+	 * с ключами по типу содержимого
+	 * <blockquote><PRE>
+{
+    "page": {
+        "results": [
+            {
+                "id": "1234",
+                "type": "page",
+                "status": "current",
+                "title": "Example Content title",
+                "links": {},
+                "space": {
+                    "id": 11,
+                    "key": "TST",
+                    "name": "Example space",
+                    "icon": null,
+                    "description": {
+                        "plain": {
+                            "representation": "plain",
+                            "value": "This is an example space",
+                            "webresource": null
+                        }
+                    },
+                    "homepage": null,
+                    "links": {},
+                    "metadata": {}
+                },
+                "history": null,
+                "version": {
+                    "by": {
+                        "type": "known",
+                        "username": "username",
+                        "displayName": "Full Name",
+                        "userKey": "",
+                        "status": null
+                    },
+                    "when": "2017-12-11T03:52:47.431Z",
+                    "message": "change message for this edit",
+                    "number": 2,
+                    "minorEdit": false,
+                    "hidden": false,
+                    "content": null
+                },
+                "ancestors": [
+                    {
+                        "id": "123",
+                        "type": "page",
+                        "status": "current",
+                        "links": {},
+                        "space": null,
+                        "history": null,
+                        "version": null,
+                        "ancestors": [],
+                        "operations": [],
+                        "children": {},
+                        "descendants": {},
+                        "container": null,
+                        "body": {},
+                        "metadata": {},
+                        "extensions": {},
+                        "restrictions": {}
+                    }
+                ],
+                "operations": [],
+                "children": {},
+                "descendants": {},
+                "container": {
+                    "id": 11,
+                    "key": "TST",
+                    "name": "Example space",
+                    "icon": null,
+                    "description": {
+                        "plain": {
+                            "representation": "plain",
+                            "value": "This is an example space",
+                            "webresource": null
+                        }
+                    },
+                    "homepage": null,
+                    "links": {},
+                    "metadata": {}
+                },
+                "body": {
+                    "view": {
+                        "representation": "view",
+                        "value": "&lt;p&gt;&lt;h1&gt;Example&lt;/h1&gt;Some example content body&lt;/p&gt;",
+                        "webresource": null,
+                        "content": null
+                    }
+                },
+                "metadata": {},
+                "extensions": {},
+                "restrictions": {}
+            }
+        ],
+        "size": 1
+    }
+}
+	 * </PRE></blockquote>
+	 *
+	 * <p>
+	 * <strong>STATUS 404</strong> -- такой статус вы получите, если не существует элемента контента
+	 * с указанным вами идентификатором
+	 * <br>
+	 * или если пользователь выполняющий запрос, не имеет разрешения на просмотр содержимого.
+	 * @param contentId идентификатор элемента контента (для этого элемента контента мы получаем дочерние элементы)
+	 * @param params дополнительные параметры запроса
+	 * @return набор дочерних элементов
+	 */
+	//@formatter:on
+	ContentResultList getChild(final String contentId,
+	                           final Map<String, String> params)
+	{
+		return null;
+	}
+	
+	//@formatter:off
+	/**
+	 * Метод возвращает непосредственные дочерние элементы для данного элемента контента.
+	 * <p>
+	 * Отобранные дочерние элементы будут ограничены одним типом.
+	 * <p>
+	 * Тип контента (или типы) - ContentType - возвращаемых дочерних элементов,
+	 * <p>
+	 * задаётся параметром "type" заданным в пути (path) запроса.
+	 * <p>
+	 * <strong>Примеры URI запросов:</strong>
+	 * <ul>
+	 *     <li>http://example.com/rest/api/content/1234/child/page</li>
+	 *     <li>http://example.com/rest/api/content/1234/child/comment</li>
+	 *     <li>http://example.com/rest/api/content/1234/child/page?expand=body.view</li>
+	 *     <li>http://example.com/rest/api/content/1234/child/comment?start=20&limit=10</li>
+	 * </ul>
+	 *
+	 * <p>
+	 * <strong>Дополнительные параметры</strong>
+	 * <ul>
+	 *     <li>expand (String) -- разделённый запятыми список свойств, для разворачивания (expand) дочерних элементов</li>
+	 *     <li>parentVersion (int) -- Default: <strong>0</strong> -- int, представляющий собой версию контента, для этой версии контента мы и будем получать дочерние элементы</li>
+	 *     <li>start (int) -- Optional -- Default: <strong>0</strong> -- индекс первого элемента в результирующем возвращаемом наборе элементов</li>
+	 *     <li>limit (int) -- Optional -- Default: <strong>25</strong> -- сколько элементов из результирующего возвращаемого набора вы хотите получить (после начального индекса, после start)</li>
+	 * </ul>
+	 * <br>
+	 *<h2><strong>Responses</strong></h2>
+	 * <strong>STATUS 200</strong> -- возвращает JSON-map,
+	 * представляющую собой несколько упорядоченных наборов дочерних элементов контента
+	 * <p>
+	 * с ключами по типу содержимого
+	 *
+	 * <blockquote><PRE>
+{
+    "page": {
+        "results": [
+            {
+                "id": "1234",
+                "type": "page",
+                "status": "current",
+                "title": "Example Content title",
+                "links": {},
+                "space": {
+                    "id": 11,
+                    "key": "TST",
+                    "name": "Example space",
+                    "icon": null,
+                    "description": {
+                        "plain": {
+                            "representation": "plain",
+                            "value": "This is an example space",
+                            "webresource": null
+                        }
+                    },
+                    "homepage": null,
+                    "links": {},
+                    "metadata": {}
+                },
+                "history": null,
+                "version": {
+                    "by": {
+                        "type": "known",
+                        "username": "username",
+                        "displayName": "Full Name",
+                        "userKey": "",
+                        "status": null
+                    },
+                    "when": "2017-12-11T03:52:47.431Z",
+                    "message": "change message for this edit",
+                    "number": 2,
+                    "minorEdit": false,
+                    "hidden": false,
+                    "content": null
+                },
+                "ancestors": [
+                    {
+                        "id": "123",
+                        "type": "page",
+                        "status": "current",
+                        "links": {},
+                        "space": null,
+                        "history": null,
+                        "version": null,
+                        "ancestors": [],
+                        "operations": [],
+                        "children": {},
+                        "descendants": {},
+                        "container": null,
+                        "body": {},
+                        "metadata": {},
+                        "extensions": {},
+                        "restrictions": {}
+                    }
+                ],
+                "operations": [],
+                "children": {},
+                "descendants": {},
+                "container": {
+                    "id": 11,
+                    "key": "TST",
+                    "name": "Example space",
+                    "icon": null,
+                    "description": {
+                        "plain": {
+                            "representation": "plain",
+                            "value": "This is an example space",
+                            "webresource": null
+                        }
+                    },
+                    "homepage": null,
+                    "links": {},
+                    "metadata": {}
+                },
+                "body": {
+                    "view": {
+                        "representation": "view",
+                        "value": "&lt;p&gt;&lt;h1&gt;Example&lt;/h1&gt;Some example content body&lt;/p&gt;",
+                        "webresource": null,
+                        "content": null
+                    }
+                },
+                "metadata": {},
+                "extensions": {},
+                "restrictions": {}
+            }
+        ],
+        "size": 1
+    }
+}
+	 </PRE></blockquote>
+	 *
+	 * <p>
+	 * <strong>STATUS 404</strong> -- такой статус вы получите, если не существует элемента контента
+	 * с указанным вами идентификатором
+	 * <br>
+	 *
+	 * @param contentId идентификатор элемента контента (для этого элемента контента мы получаем дочерние элементы)
+	 * @param type тип дочерних элементов (мы отберем дочерние элементы для элемента контента и отфильтруем по нужному нам типу, элементов других типов в ответе не будет)
+	 * @param params дополнительные параметры
+	 * @return набор дочерних элементов
+	 */
+	//@formatter:on
+	ContentResultList getChildByType(final String contentId,
+	                                 final String type,
+	                                 final Map<String, String> params)
+	{
+		return null;
+	}
+	
+	//@formatter:off
+	/**
+	 * Возвращает комментарии для заданного элемента контента.
+	 * <p>
+	 * <strong>Примеры URI запросов:</strong>
+	 * <ul>
+	 *     <li>http://example.com/rest/api/content/1234/child/comment</li>
+	 *     <li>http://example.com/rest/api/content/1234/child/comment?expand=body.view</li>
+	 *     <li>http://example.com/rest/api/content/1234/child/comment?start=20&limit=10</li>
+	 *     <li>http://example.com/rest/api/content/1234/child/comment?location=footer&location=inline&location=resolved</li>
+	 *     <li>http://example.com/rest/api/content/1234/child/comment?expand=extensions.inlineProperties,extensions.resolution</li>
+	 * </ul>
+	 * <p>
+	 * <p>
+	 * <strong>Дополнительные параметры</strong>
+	 * <ul>
+	 *     <li>expand (String) -- разделённый запятыми список свойств, для разворачивания (expand) дочерних элементов. Мы также можем указать некоторые расширения (extensions) такие как extensions.inlineProperties (для получения inline-свойств специфичных для комментариев) или можем указать extensions.resolution для получения resolution status для каждого комментария в результатах</li>
+	 *     <li>parentVersion (int) -- Default: <strong>0</strong> -- int, представляющий собой версию контента, для этой версии контента мы и будем получать дочерние элементы</li>
+	 *     <li>start (int) -- Optional -- Default: <strong>0</strong> -- индекс первого элемента в результирующем возвращаемом наборе элементов</li>
+	 *     <li>limit (int) -- Optional -- Default: <strong>25</strong> -- сколько элементов из результирующего возвращаемого набора вы хотите получить (после начального индекса, после start)</li>
+	 *     <li>location (String) -- Optional -- Default: <strong>""</strong> -- расположение комментариев. Возможные значения : "inline", "footer", "resolved". Вы можете несколько параметров location. Результатом выборки будут комментарии, соответствующие любому значению из указанного вами списка местоположений.</li>
+	 *     <li>depth (String) -- Optional -- Default: <strong>""</strong> -- Возможные значения: <strong>""</strong> (ROOT only) и <strong>"all"</strong> </li>
+	 * </ul>
+	 *
+	 *<h2><strong>Responses</strong></h2>
+	 * <strong>STATUS 200</strong> -- возвращает JSON-map,
+	 * представляющую собой несколько упорядоченных наборов дочерних элементов контента
+	 * <p>
+	 * с ключами по типу содержимого
+	 *
+	 *<blockquote><PRE>
+{
+    "page": {
+        "results": [
+            {
+                "id": "1234",
+                "type": "page",
+                "status": "current",
+                "title": "Example Content title",
+                "links": {},
+                "space": {
+                    "id": 11,
+                    "key": "TST",
+                    "name": "Example space",
+                    "icon": null,
+                    "description": {
+                        "plain": {
+                            "representation": "plain",
+                            "value": "This is an example space",
+                            "webresource": null
+                        }
+                    },
+                    "homepage": null,
+                    "links": {},
+                    "metadata": {}
+                },
+                "history": null,
+                "version": {
+                    "by": {
+                        "type": "known",
+                        "username": "username",
+                        "displayName": "Full Name",
+                        "userKey": "",
+                        "status": null
+                    },
+                    "when": "2017-12-11T03:52:47.431Z",
+                    "message": "change message for this edit",
+                    "number": 2,
+                    "minorEdit": false,
+                    "hidden": false,
+                    "content": null
+                },
+                "ancestors": [
+                    {
+                        "id": "123",
+                        "type": "page",
+                        "status": "current",
+                        "links": {},
+                        "space": null,
+                        "history": null,
+                        "version": null,
+                        "ancestors": [],
+                        "operations": [],
+                        "children": {},
+                        "descendants": {},
+                        "container": null,
+                        "body": {},
+                        "metadata": {},
+                        "extensions": {},
+                        "restrictions": {}
+                    }
+                ],
+                "operations": [],
+                "children": {},
+                "descendants": {},
+                "container": {
+                    "id": 11,
+                    "key": "TST",
+                    "name": "Example space",
+                    "icon": null,
+                    "description": {
+                        "plain": {
+                            "representation": "plain",
+                            "value": "This is an example space",
+                            "webresource": null
+                        }
+                    },
+                    "homepage": null,
+                    "links": {},
+                    "metadata": {}
+                },
+                "body": {
+                    "view": {
+                        "representation": "view",
+                        "value": "&lt;p&gt;&lt;h1&gt;Example&lt;/h1&gt;Some example content body&lt;/p&gt;",
+                        "webresource": null,
+                        "content": null
+                    }
+                },
+                "metadata": {},
+                "extensions": {},
+                "restrictions": {}
+            }
+        ],
+        "size": 1
+    }
+}
+	 *</PRE></blockquote>
+	 *
+	 * <p>
+	 * <strong>STATUS 404</strong> -- такой статус вы получите, если не существует элемента контента
+	 * с указанным вами идентификатором
+	 * <br>
+	 * @param contentId идентификатор элемента контента (для этого элемента контента мы получаем дочерние элементы)
+	 * @param params дополнительные параметры
+	 * @return набор дочерних элементов
+	 */
+	//@formatter:on
+	ContentResultList getChildComment(final String contentId,
+	                                  final Map<String, String> params)
+	{
+		return null;
+	}
+	
+	
+	//----------- content/{id}/child Конец ---------------
+	//----------------------------------------------------------------------------------------
 }
