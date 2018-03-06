@@ -1046,8 +1046,8 @@ public class Confluence
 	 * @return набор дочерних элементов
 	 */
 	//@formatter:on
-	ChildContentResult getChild(final String contentId,
-	                            final Map<String, String> params) throws IOException
+	public ChildContentResult getChild(final String contentId,
+	                                   final Map<String, String> params) throws IOException
 	{
 		Call<ChildContentResult> childContentResultListCall = confluenceApi.getChild(contentId, params);
 		Response<ChildContentResult> response = childContentResultListCall.execute();
