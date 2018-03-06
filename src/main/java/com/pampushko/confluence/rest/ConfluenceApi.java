@@ -4,7 +4,10 @@ import com.pampushko.confluence.models.*;
 import com.pampushko.confluence.models.audit.Audit;
 import com.pampushko.confluence.models.audit.AuditResultList;
 import com.pampushko.confluence.models.audit.RetentionPeriod;
-import com.pampushko.confluence.models.child_content.ChildContentResult;
+import com.pampushko.confluence.models.child_content.ChildContentContainer;
+import com.pampushko.confluence.models.child_content.attachment.ChildAttachment;
+import com.pampushko.confluence.models.child_content.comment.ChildComment;
+import com.pampushko.confluence.models.child_content.page.ChildPage;
 import com.pampushko.confluence.models.content.Content;
 import com.pampushko.confluence.models.content.ContentContainter;
 import com.pampushko.confluence.models.content.ContentResultList;
@@ -1002,8 +1005,8 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 */
 	//@formatter:on
 	@GET("/wiki/rest/api/content/{contentId}/child")
-	Call<ChildContentResult> getChild(final @Path("contentId") String contentId,
-	                                  final @QueryMap Map<String, String> params);
+	Call<ChildContentContainer> getChild(final @Path("contentId") String contentId,
+	                                     final @QueryMap Map<String, String> params);
 	
 	//@formatter:off
 	/**
@@ -1149,9 +1152,20 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 */
 	//@formatter:on
 	@GET("/wiki/rest/api/content/{contentId}/child/{type}")
-	Call<ChildContentResult> getChildByType(final @Path("contentId") String contentId,
-	                                        final @Path("type") String type,
-	                                        final @QueryMap Map<String, String> params);
+	Call<ChildContentContainer> getChildByType(final @Path("contentId") String contentId,
+	                                           final @Path("type") String type,
+	                                           final @QueryMap Map<String, String> params);
+	
+	@GET("/wiki/rest/api/content/{contentId}/child/page")
+	Call<ChildPage> getChildPage(final @Path("contentId") String contentId,
+	                             final @QueryMap Map<String, String> params);
+	
+	@GET("/wiki/rest/api/content/{contentId}/child/attachment")
+	Call<ChildAttachment> getChildAttachment(final @Path("contentId") String contentId,
+	                                         final @QueryMap Map<String, String> params);
+
+
+
 	
 	//@formatter:off
 	/**
@@ -1292,8 +1306,8 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 */
 	//@formatter:on
 	@GET("/wiki/rest/api/content/{contentId}/child/comment")
-	Call<ChildContentResult> getChildComment(final @Path("contentId") String contentId,
-	                                         final @QueryMap Map<String, String> params);
+	Call<ChildComment> getChildComment(final @Path("contentId") String contentId,
+	                                   final @QueryMap Map<String, String> params);
 	
 	
 	//----------- content/{id}/child Конец ---------------

@@ -15,7 +15,7 @@ public class ChildComment extends BaseModel
 	 * <p>
 	 */
 	@SerializedName("results")
-	ChildCommentResultItem[] results;
+	ChildCommentContainer[] results;
 	
 	/**
 	 * <p>
@@ -39,6 +39,6 @@ public class ChildComment extends BaseModel
 	 * <p>
 	 */
 	@SerializedName("_links")
-	ChildCommentResultItemLinks links;
+	ChildCommentContainerLinks links;
 	
 }

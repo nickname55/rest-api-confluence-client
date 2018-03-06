@@ -8,9 +8,23 @@ import lombok.extern.slf4j.Slf4j;
  *
  */
 @Slf4j
-public class ChildAttachmentResultItemLinks extends BaseModel
+public class ChildAttachmentContainerLinks extends BaseModel
 {
 	/**
+	 *
+	 * <p>
+	 */
+	@SerializedName("base")
+	String base;
+	
+	/**
+	 * <p>
+	 */
+	@SerializedName("context")
+	String context;
+	
+	/**
+	 *
 	 * <p>
 	 */
 	@SerializedName("self")

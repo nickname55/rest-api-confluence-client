@@ -1,6 +1,6 @@
 package com.pampushko.confluence.rest;
 
-import com.pampushko.confluence.models.child_content.ChildContentResult;
+import com.pampushko.confluence.models.child_content.attachment.ChildAttachment;
 import com.pampushko.confluence.settings.SettingsManager;
 import lombok.extern.slf4j.Slf4j;
 
@@ -32,12 +32,12 @@ public class Main
 		Map<String, String> params = new HashMap<String, String>()
 		{
 			{
-				put("expand", "page,attachment,comment");
+			
 			}
 		};
 		
 		final String contentId = "5210113";
-		ChildContentResult contentResultList = confluence.getChild(contentId, params);
-		System.out.println(contentResultList);
+		ChildAttachment childAttachment = confluence.getChildAttachment(contentId, params);
+		System.out.println(childAttachment);
 	}
 }

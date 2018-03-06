@@ -1,4 +1,4 @@
-import com.pampushko.confluence.models.child_content.ChildContentResult;
+import com.pampushko.confluence.models.child_content.comment.ChildComment;
 import com.pampushko.confluence.rest.Confluence;
 import com.pampushko.confluence.settings.SettingsManager;
 import lombok.extern.slf4j.Slf4j;
@@ -26,12 +26,12 @@ public class GetChildCommentTest
 		Map<String, String> params = new HashMap<String, String>()
 		{
 			{
-				put("expand", "page,attachment,comment");
+			
 			}
 		};
 		
 		final String contentId = "5210113";
-		ChildContentResult contentResultList = confluence.getChild(contentId, params);
-		System.out.println(contentResultList);
+		ChildComment childComments = confluence.getChildComment(contentId, params);
+		System.out.println(childComments);
 	}
 }

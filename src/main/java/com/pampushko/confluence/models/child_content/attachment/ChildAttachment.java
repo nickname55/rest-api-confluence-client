@@ -14,7 +14,7 @@ public class ChildAttachment extends BaseModel
 	 * <p>
 	 */
 	@SerializedName("results")
-	ChildAttachmentResultItem[] results;
+	ChildAttachmentContainer[] results;
 	
 	/**
 	 * <p>
@@ -38,5 +38,5 @@ public class ChildAttachment extends BaseModel
 	 * <p>
 	 */
 	@SerializedName("_links")
-	ChildAttachmentResultItemLinks links;
+	ChildAttachmentContainerLinks links;
 }

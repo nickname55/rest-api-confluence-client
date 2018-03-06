@@ -8,8 +8,22 @@ import lombok.extern.slf4j.Slf4j;
  *
  */
 @Slf4j
-public class ChildPageResultItemLinks extends BaseModel
+public class ChildPageContainerLinks extends BaseModel
 {
+	/**
+	 * Пример: "https://java-java.atlassian.net/wiki"
+	 * <p>
+	 */
+	@SerializedName("base")
+	String base;
+	
+	/**
+	 * Пример: "/wiki"
+	 * <p>
+	 */
+	@SerializedName("context")
+	String context;
+	
 	/**
 	 * <p>
 	 */

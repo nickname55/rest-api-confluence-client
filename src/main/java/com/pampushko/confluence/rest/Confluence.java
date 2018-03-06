@@ -4,7 +4,11 @@ import com.pampushko.confluence.models.*;
 import com.pampushko.confluence.models.audit.Audit;
 import com.pampushko.confluence.models.audit.AuditResultList;
 import com.pampushko.confluence.models.audit.RetentionPeriod;
-import com.pampushko.confluence.models.child_content.ChildContentResult;
+import com.pampushko.confluence.models.child_content.ChildContentContainer;
+import com.pampushko.confluence.models.enums.ContentType;
+import com.pampushko.confluence.models.child_content.attachment.ChildAttachment;
+import com.pampushko.confluence.models.child_content.comment.ChildComment;
+import com.pampushko.confluence.models.child_content.page.ChildPage;
 import com.pampushko.confluence.models.content.Content;
 import com.pampushko.confluence.models.content.ContentContainter;
 import com.pampushko.confluence.models.content.ContentResultList;
@@ -1046,12 +1050,12 @@ public class Confluence
 	 * @return набор дочерних элементов
 	 */
 	//@formatter:on
-	public ChildContentResult getChild(final String contentId,
-	                                   final Map<String, String> params) throws IOException
+	public ChildContentContainer getChild(final String contentId,
+	                                      final Map<String, String> params) throws IOException
 	{
-		Call<ChildContentResult> childContentResultListCall = confluenceApi.getChild(contentId, params);
-		Response<ChildContentResult> response = childContentResultListCall.execute();
-		ChildContentResult body = response.body();
+		Call<ChildContentContainer> childContentResultListCall = confluenceApi.getChild(contentId, params);
+		Response<ChildContentContainer> response = childContentResultListCall.execute();
+		ChildContentContainer body = response.body();
 		return body;
 	}
 	
@@ -1198,11 +1202,41 @@ public class Confluence
 	 * @return набор дочерних элементов
 	 */
 	//@formatter:on
-	ContentResultList getChildByType(final String contentId,
-	                                 final String type,
-	                                 final Map<String, String> params)
+	ChildContentContainer getChildByType(final String contentId,
+	                                     final ContentType type,
+	                                     final Map<String, String> params) throws IOException
 	{
-		return null;
+		Call<ChildContentContainer> childContentResultListCall = confluenceApi.getChildByType(contentId, type.toString(), params);
+		Response<ChildContentContainer> response = childContentResultListCall.execute();
+		ChildContentContainer body = response.body();
+		return body;
+	}
+	
+	public ChildPage getChildPage(final String contentId,
+	                              final Map<String, String> params) throws IOException
+	{
+		Call<ChildPage> childPageCall = confluenceApi.getChildPage(contentId, params);
+		Response<ChildPage> response = childPageCall.execute();
+		ChildPage body = response.body();
+		return body;
+	}
+	
+	public ChildComment getChildComment(final String contentId,
+	                                    final Map<String, String> params) throws IOException
+	{
+		Call<ChildComment> childCommentCall = confluenceApi.getChildComment(contentId, params);
+		Response<ChildComment> response = childCommentCall.execute();
+		ChildComment body = response.body();
+		return body;
+	}
+	
+	public ChildAttachment getChildAttachment(final String contentId,
+	                                final Map<String, String> params) throws IOException
+	{
+		Call<ChildAttachment> childAttachmentCall = confluenceApi.getChildAttachment(contentId, params);
+		Response<ChildAttachment> response = childAttachmentCall.execute();
+		ChildAttachment body = response.body();
+		return body;
 	}
 	
 	//@formatter:off
@@ -1343,11 +1377,11 @@ public class Confluence
 	 * @return набор дочерних элементов
 	 */
 	//@formatter:on
-	ContentResultList getChildComment(final String contentId,
-	                                  final Map<String, String> params)
-	{
-		return null;
-	}
+//	ContentResultList getChildComment(final String contentId,
+//	                                  final Map<String, String> params)
+//	{
+//		return null;
+//	}
 	
 	
 	//----------- content/{id}/child Конец ---------------

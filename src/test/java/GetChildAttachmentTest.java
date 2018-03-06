@@ -1,4 +1,4 @@
-import com.pampushko.confluence.models.child_content.ChildContentContainer;
+import com.pampushko.confluence.models.child_content.attachment.ChildAttachment;
 import com.pampushko.confluence.rest.Confluence;
 import com.pampushko.confluence.settings.SettingsManager;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +12,7 @@ import java.util.Properties;
  *
  */
 @Slf4j
-public class GetChildTest
+public class GetChildAttachmentTest
 {
 	public static void main(String[] args) throws IOException
 	{
@@ -26,12 +26,12 @@ public class GetChildTest
 		Map<String, String> params = new HashMap<String, String>()
 		{
 			{
-				put("expand", "page,attachment,comment");
+				
 			}
 		};
 		
 		final String contentId = "5210113";
-		ChildContentContainer contentResultList = confluence.getChild(contentId, params);
-		System.out.println(contentResultList);
+		ChildAttachment childAttachment = confluence.getChildAttachment(contentId, params);
+		System.out.println(childAttachment);
 	}
 }

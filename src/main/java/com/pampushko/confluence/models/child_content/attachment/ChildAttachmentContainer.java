@@ -1,4 +1,4 @@
-package com.pampushko.confluence.models.child_content.comment;
+package com.pampushko.confluence.models.child_content.attachment;
 
 import com.google.gson.annotations.SerializedName;
 import com.pampushko.confluence.models.BaseModel;
@@ -14,16 +14,16 @@ import lombok.extern.slf4j.Slf4j;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 @Slf4j
-public class ChildCommentResultItem extends BaseModel
+public class ChildAttachmentContainer extends BaseModel
 {
 	/**
-	 * "171671553"
+	 * "att172261377"
 	 * <p>
 	 */
 	private String id;
 	
 	/**
-	 * "comment"
+	 * "attachment"
 	 * <p>
 	 */
 	private String type;
@@ -35,7 +35,7 @@ public class ChildCommentResultItem extends BaseModel
 	private String status;
 	
 	/**
-	 * "Re: Change Item"
+	 * "IdeaProject.png"
 	 * <p>
 	 */
 	private String title;
@@ -43,7 +43,13 @@ public class ChildCommentResultItem extends BaseModel
 	/**
 	 * <p>
 	 */
-	private ChildCommentExtensions extensions;
+	private ChildAttachmentMetadata metadata;
+	
+	
+	/**
+	 * <p>
+	 */
+	private ChildAttachmentExtensions extensions;
 	
 	
 	//---------------------------------------------------------------------------
@@ -51,13 +57,13 @@ public class ChildCommentResultItem extends BaseModel
 	 * <p>
 	 */
 	@SerializedName("_expandable")
-	private ChildCommentExpandable expandable;
+	private ChildAttachmentExpandable expandable;
 	
 	
 	/**
 	 * <p>
 	 */
 	@SerializedName("_links")
-	private ChildCommentLinks links;
+	private ChildAttachmentLinks links;
 	
 }

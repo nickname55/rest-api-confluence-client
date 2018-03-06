@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 @Slf4j
-public class ChildPageResultItem extends BaseModel
+public class ChildPageContainer extends BaseModel
 {
 	/**
 	 * <br>
@@ -121,7 +121,7 @@ public class ChildPageResultItem extends BaseModel
 	 * <br>
 	 */
 	@SerializedName("_links")
-	private ChildPageResultItemLinks links;
+	private ChildPageContainerLinks links;
 	
 	/**
 	 * <br>

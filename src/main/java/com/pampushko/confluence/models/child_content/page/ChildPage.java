@@ -16,7 +16,7 @@ public class ChildPage extends BaseModel
 	 * <p>
 	 */
 	@SerializedName("results")
-	ChildPageResultItem[] results;
+	ChildPageContainer[] results;
 	
 	/**
 	 * <p>
@@ -40,5 +40,5 @@ public class ChildPage extends BaseModel
 	 * <p>
 	 */
 	@SerializedName("_links")
-	ChildPageResultItemLinks links;
+	ChildPageContainerLinks links;
 }

@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 @Slf4j
-public class ChildContentResult extends BaseModel
+public class ChildContentContainer extends BaseModel
 {
 	@SerializedName("page")
 	ChildPage page;
@@ -32,8 +32,8 @@ public class ChildContentResult extends BaseModel
 	ChildComment comment;
 	
 	@SerializedName("_expandable")
-	ChildContentExpandable expandable;
+	ChildContentContainerExpandable expandable;
 	
 	@SerializedName("_links")
-	ChildContentLinks links;
+	ChildContentContainerLinks links;
 }

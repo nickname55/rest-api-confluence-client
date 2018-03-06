@@ -10,27 +10,27 @@ import lombok.extern.slf4j.Slf4j;
 /**
  *
  */
-@Setter
 @Getter
+@Setter
 @EqualsAndHashCode(callSuper = false)
 @Slf4j
-public class ChildContentExpandable extends BaseModel
+public class ChildContentContainerLinks extends BaseModel
 {
 	/**
 	 * <p>
 	 */
-	@SerializedName("attachment")
-	String attachment;
+	@SerializedName("self")
+	String self;
 	
 	/**
 	 * <p>
 	 */
-	@SerializedName("comment")
-	String comment;
+	@SerializedName("base")
+	String base;
 	
 	/**
 	 * <p>
 	 */
-	@SerializedName("page")
-	String page;
+	@SerializedName("context")
+	String context;
 }
