@@ -10,6 +10,6 @@ public class GetChildByTypeTest
 {
 	public static void main(String[] args) throws IOException
 	{
-		
+	
 	}
 }

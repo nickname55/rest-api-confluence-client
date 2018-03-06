@@ -1,22 +1,21 @@
-package com.pampushko.confluence.models.child_content.page;
+package com.pampushko.confluence.models.child_content.comment;
 
 import com.google.gson.annotations.SerializedName;
 import com.pampushko.confluence.models.BaseModel;
-
 import lombok.extern.slf4j.Slf4j;
 
 /**
  *
  */
 @Slf4j
-public class ChChildPage extends BaseModel
+public class ChildComment extends BaseModel
 {
 	/**
-	 * todo дописать
+	 * todo проверить что все свойства мапятся
 	 * <p>
 	 */
 	@SerializedName("results")
-	ChPageResultItem[] results;
+	ChildCommentResultItem[] results;
 	
 	/**
 	 * <p>
@@ -40,5 +39,6 @@ public class ChChildPage extends BaseModel
 	 * <p>
 	 */
 	@SerializedName("_links")
-	ChPageResultItemLinks links;
+	ChildCommentResultItemLinks links;
+	
 }

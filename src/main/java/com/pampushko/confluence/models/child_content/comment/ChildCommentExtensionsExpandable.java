@@ -12,20 +12,13 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Getter
 @Setter
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @Slf4j
-public class ChCommentExtensions extends BaseModel
+public class ChildCommentExtensionsExpandable extends BaseModel
 {
 	/**
 	 * <p>
 	 */
-	@SerializedName("location")
-	String location;
-	
-	/**
-	 * <p>
-	 */
-	@SerializedName("_expandable")
-	ChCommentExtensionsExpandable expandable;
-	
+	@SerializedName("resolution")
+	String resolution;
 }

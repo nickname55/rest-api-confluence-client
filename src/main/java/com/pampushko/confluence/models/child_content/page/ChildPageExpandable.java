@@ -1,49 +1,23 @@
 package com.pampushko.confluence.models.child_content.page;
 
 import com.google.gson.annotations.SerializedName;
-import com.pampushko.confluence.models.*;
+import com.pampushko.confluence.models.BaseModel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 /**
+ * todo этот класс случайно не дублируется?
  * Модель для запроса контента из Confluence API
  * <br>
  */
 @Getter
 @Setter
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @Slf4j
-public class ChPageResultItem extends BaseModel
+public class ChildPageExpandable extends BaseModel
 {
-	/**
-	 * <br>
-	 */
-	private String id;
-	
-	/**
-	 * <br>
-	 */
-	private String type;
-	
-	/**
-	 * <br>
-	 */
-	private String status;
-	
-	/**
-	 * <br>
-	 */
-	private String title;
-	
-	/**
-	 * <br>
-	 */
-	private Extensions extensions;
-	
-	//------------------------------------------------------------------------------
-	
 	/**
 	 * <br>
 	 */
@@ -84,7 +58,7 @@ public class ChPageResultItem extends BaseModel
 	 * <br>
 	 */
 	@SerializedName("history")
-	History history;
+	String history;
 	
 	/**
 	 * <br>
@@ -95,14 +69,15 @@ public class ChPageResultItem extends BaseModel
 	/**
 	 * <br>
 	 */
+	
 	@SerializedName("body")
-	Body body;
+	String body;
 	
 	/**
 	 * <br>
 	 */
 	@SerializedName("version")
-	Version version;
+	String version;
 	
 	/**
 	 * <br>
@@ -114,19 +89,5 @@ public class ChPageResultItem extends BaseModel
 	 * <br>
 	 */
 	@SerializedName("space")
-	Space space;
-	
-	//---------------------------------------------------------------------------
-	/**
-	 * <br>
-	 */
-	@SerializedName("_links")
-	private ChPageResultItemLinks links;
-	
-	/**
-	 * <br>
-	 */
-	@SerializedName("_expandable")
-	private ChPageExpandable expandable;
-	
+	String space;
 }

@@ -13,10 +13,10 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Getter
 @Setter
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @Builder
 @Slf4j
-public class ChPageExtensions extends BaseModel
+public class ChildPageExtensions extends BaseModel
 {
 	/**
 	 * Значение

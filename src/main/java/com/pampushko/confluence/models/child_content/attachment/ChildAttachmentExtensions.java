@@ -1,4 +1,4 @@
-package com.pampushko.confluence.models.child_content;
+package com.pampushko.confluence.models.child_content.attachment;
 
 import com.google.gson.annotations.SerializedName;
 import com.pampushko.confluence.models.BaseModel;
@@ -10,17 +10,23 @@ import lombok.extern.slf4j.Slf4j;
 /**
  *
  */
-@Setter
 @Getter
+@Setter
 @EqualsAndHashCode(callSuper = false)
 @Slf4j
-public class ChildContentExpandable extends BaseModel
+public class ChildAttachmentExtensions extends BaseModel
 {
 	/**
 	 * <p>
 	 */
-	@SerializedName("attachment")
-	String attachment;
+	@SerializedName("mediaType")
+	String mediaType;
+	
+	/**
+	 * <p>
+	 */
+	@SerializedName("fileSize")
+	long fileSize;
 	
 	/**
 	 * <p>
@@ -31,6 +37,7 @@ public class ChildContentExpandable extends BaseModel
 	/**
 	 * <p>
 	 */
-	@SerializedName("page")
-	String page;
+	@SerializedName("mediaTypeDescription")
+	String mediaTypeDescription;
+	
 }

@@ -1,7 +1,6 @@
-package com.pampushko.confluence.models.child_content.comment;
+package com.pampushko.confluence.models.child_content.attachment;
 
 import com.google.gson.annotations.SerializedName;
-import com.pampushko.confluence.models.BaseModel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 @Setter
 @EqualsAndHashCode
 @Slf4j
-public class ChCommentExpandable extends BaseModel
+public class ChildAttachmentExpandable
 {
 	/**
 	 * Пример: ""
@@ -34,32 +33,25 @@ public class ChCommentExpandable extends BaseModel
 	 * Пример: ""
 	 * <p>
 	 */
-	@SerializedName("metadata")
-	String metadata;
-	
-	/**
-	 * Пример: ""
-	 * <p>
-	 */
 	@SerializedName("operations")
 	String operations;
 	
 	/**
-	 * Пример: "/rest/api/content/171671553/child"
+	 * Пример: "/rest/api/content/att172261377/child"
 	 * <p>
 	 */
 	@SerializedName("children")
 	String children;
 	
 	/**
-	 * Пример: "/rest/api/content/171671553/restriction/byOperation"
+	 * Пример: "/rest/api/content/att172261377/restriction/byOperation"
 	 * <p>
 	 */
 	@SerializedName("restrictions")
 	String restrictions;
 	
 	/**
-	 * Пример: "/rest/api/content/171671553/history"
+	 * Пример: "/rest/api/content/att172261377/history"
 	 * <p>
 	 */
 	@SerializedName("history")
@@ -87,7 +79,7 @@ public class ChCommentExpandable extends BaseModel
 	String version;
 	
 	/**
-	 * Пример: "/rest/api/content/171671553/descendant"
+	 * Пример: "/rest/api/content/att172261377/descendant"
 	 * <p>
 	 */
 	@SerializedName("descendants")

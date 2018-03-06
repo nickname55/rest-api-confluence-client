@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
  *
  */
 @Slf4j
-public class ChPageResultItemLinks extends BaseModel
+public class ChildPageResultItemLinks extends BaseModel
 {
 	/**
 	 * <p>

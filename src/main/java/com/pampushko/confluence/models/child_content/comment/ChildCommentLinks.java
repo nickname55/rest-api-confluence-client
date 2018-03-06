@@ -1,4 +1,4 @@
-package com.pampushko.confluence.models.child_content.attachment;
+package com.pampushko.confluence.models.child_content.comment;
 
 import com.google.gson.annotations.SerializedName;
 import com.pampushko.confluence.models.BaseModel;
@@ -12,15 +12,19 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Getter
 @Setter
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @Slf4j
-public class ChAttachmentMetadata extends BaseModel
+public class ChildCommentLinks extends BaseModel
 {
 	/**
-	 * Пример: "image/png"
 	 * <p>
 	 */
-	@SerializedName("mediaType")
-	String mediaType;
+	@SerializedName("webui")
+	String webui;
 	
+	/**
+	 * <p>
+	 */
+	@SerializedName("self")
+	String self;
 }

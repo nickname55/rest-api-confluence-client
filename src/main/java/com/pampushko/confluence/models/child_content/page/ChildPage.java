@@ -1,20 +1,22 @@
-package com.pampushko.confluence.models.child_content.attachment;
+package com.pampushko.confluence.models.child_content.page;
 
 import com.google.gson.annotations.SerializedName;
 import com.pampushko.confluence.models.BaseModel;
+
 import lombok.extern.slf4j.Slf4j;
 
 /**
  *
  */
 @Slf4j
-public class ChChildAttachment extends BaseModel
+public class ChildPage extends BaseModel
 {
 	/**
+	 * todo дописать
 	 * <p>
 	 */
 	@SerializedName("results")
-	ChAttachmentResultItem[] results;
+	ChildPageResultItem[] results;
 	
 	/**
 	 * <p>
@@ -38,5 +40,5 @@ public class ChChildAttachment extends BaseModel
 	 * <p>
 	 */
 	@SerializedName("_links")
-	ChAttachmentResultItemLinks links;
+	ChildPageResultItemLinks links;
 }
