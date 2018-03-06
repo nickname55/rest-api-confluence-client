@@ -5,13 +5,13 @@ import com.pampushko.confluence.models.audit.Audit;
 import com.pampushko.confluence.models.audit.AuditResultList;
 import com.pampushko.confluence.models.audit.RetentionPeriod;
 import com.pampushko.confluence.models.child_content.ChildContentContainer;
-import com.pampushko.confluence.models.enums.ContentType;
 import com.pampushko.confluence.models.child_content.attachment.ChildAttachment;
 import com.pampushko.confluence.models.child_content.comment.ChildComment;
 import com.pampushko.confluence.models.child_content.page.ChildPage;
 import com.pampushko.confluence.models.content.Content;
 import com.pampushko.confluence.models.content.ContentContainter;
 import com.pampushko.confluence.models.content.ContentResultList;
+import com.pampushko.confluence.models.enums.ContentType;
 import com.pampushko.confluence.models.group.Group;
 import com.pampushko.confluence.models.group.GroupResultList;
 import com.pampushko.confluence.models.history.HistoryContainer;
@@ -1212,6 +1212,13 @@ public class Confluence
 		return body;
 	}
 	
+	/**
+	 * todo добавить документацию к методу
+	 * @param contentId
+	 * @param params
+	 * @return
+	 * @throws IOException
+	 */
 	public ChildPage getChildPage(final String contentId,
 	                              final Map<String, String> params) throws IOException
 	{
@@ -1221,15 +1228,14 @@ public class Confluence
 		return body;
 	}
 	
-	public ChildComment getChildComment(final String contentId,
-	                                    final Map<String, String> params) throws IOException
-	{
-		Call<ChildComment> childCommentCall = confluenceApi.getChildComment(contentId, params);
-		Response<ChildComment> response = childCommentCall.execute();
-		ChildComment body = response.body();
-		return body;
-	}
 	
+	/**
+	 * todo добавить документацию к методу
+	 * @param contentId
+	 * @param params
+	 * @return
+	 * @throws IOException
+	 */
 	public ChildAttachment getChildAttachment(final String contentId,
 	                                final Map<String, String> params) throws IOException
 	{
@@ -1375,15 +1381,26 @@ public class Confluence
 	 * @param contentId идентификатор элемента контента (для этого элемента контента мы получаем дочерние элементы)
 	 * @param params дополнительные параметры
 	 * @return набор дочерних элементов
+	 * @throws IOException
 	 */
 	//@formatter:on
-//	ContentResultList getChildComment(final String contentId,
-//	                                  final Map<String, String> params)
-//	{
-//		return null;
-//	}
-	
+	public ChildComment getChildComment(final String contentId,
+	                                    final Map<String, String> params) throws IOException
+	{
+		Call<ChildComment> childCommentCall = confluenceApi.getChildComment(contentId, params);
+		Response<ChildComment> response = childCommentCall.execute();
+		ChildComment body = response.body();
+		return body;
+	}
 	
 	//----------- content/{id}/child Конец ---------------
 	//----------------------------------------------------------------------------------------
+	
+	
+	//----------- content/{id}/child/attachment Начало ---------------
+	//----------------------------------------------------------------------------------------
+	
+	//----------- content/{id}/child/attachment Конец ---------------
+	//----------------------------------------------------------------------------------------
+	
 }
