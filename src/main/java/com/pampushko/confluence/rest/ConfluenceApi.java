@@ -1156,10 +1156,295 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	                                           final @Path("type") String type,
 	                                           final @QueryMap Map<String, String> params);
 	
+	//@formatter:off
+	/**
+	 * Метод возвращает непосредственные дочерние элементы для данного элемента контента.
+	 * <p>
+	 * Отобранные дочерние элементы будут ограничены одним типом.
+	 * <p>
+	 * Тип контента (или типы) - ContentType - возвращаемых дочерних элементов,
+	 * <p>
+	 * задаётся параметром "type" заданным в пути (path) запроса.
+	 * <p>
+	 * <strong>Примеры URI запросов:</strong>
+	 * <ul>
+	 *     <li>http://example.com/rest/api/content/1234/child/page</li>
+	 *     <li>http://example.com/rest/api/content/1234/child/comment</li>
+	 *     <li>http://example.com/rest/api/content/1234/child/page?expand=body.view</li>
+	 *     <li>http://example.com/rest/api/content/1234/child/comment?start=20&limit=10</li>
+	 * </ul>
+	 *
+	 * <p>
+	 * <strong>Дополнительные параметры</strong>
+	 * <ul>
+	 *     <li>expand (String) -- разделённый запятыми список свойств, для разворачивания (expand) дочерних элементов</li>
+	 *     <li>parentVersion (int) -- Default: <strong>0</strong> -- int, представляющий собой версию контента, для этой версии контента мы и будем получать дочерние элементы</li>
+	 *     <li>start (int) -- Optional -- Default: <strong>0</strong> -- индекс первого элемента в результирующем возвращаемом наборе элементов</li>
+	 *     <li>limit (int) -- Optional -- Default: <strong>25</strong> -- сколько элементов из результирующего возвращаемого набора вы хотите получить (после начального индекса, после start)</li>
+	 * </ul>
+	 * <br>
+	 *<h2><strong>Responses</strong></h2>
+	 * <strong>STATUS 200</strong> -- возвращает JSON-map,
+	 * представляющую собой несколько упорядоченных наборов дочерних элементов контента
+	 * <p>
+	 * с ключами по типу содержимого
+	 *
+	 * <blockquote><PRE>
+{
+    "page": {
+        "results": [
+            {
+                "id": "1234",
+                "type": "page",
+                "status": "current",
+                "title": "Example Content title",
+                "links": {},
+                "space": {
+                    "id": 11,
+                    "key": "TST",
+                    "name": "Example space",
+                    "icon": null,
+                    "description": {
+                        "plain": {
+                            "representation": "plain",
+                            "value": "This is an example space",
+                            "webresource": null
+                        }
+                    },
+                    "homepage": null,
+                    "links": {},
+                    "metadata": {}
+                },
+                "history": null,
+                "version": {
+                    "by": {
+                        "type": "known",
+                        "username": "username",
+                        "displayName": "Full Name",
+                        "userKey": "",
+                        "status": null
+                    },
+                    "when": "2017-12-11T03:52:47.431Z",
+                    "message": "change message for this edit",
+                    "number": 2,
+                    "minorEdit": false,
+                    "hidden": false,
+                    "content": null
+                },
+                "ancestors": [
+                    {
+                        "id": "123",
+                        "type": "page",
+                        "status": "current",
+                        "links": {},
+                        "space": null,
+                        "history": null,
+                        "version": null,
+                        "ancestors": [],
+                        "operations": [],
+                        "children": {},
+                        "descendants": {},
+                        "container": null,
+                        "body": {},
+                        "metadata": {},
+                        "extensions": {},
+                        "restrictions": {}
+                    }
+                ],
+                "operations": [],
+                "children": {},
+                "descendants": {},
+                "container": {
+                    "id": 11,
+                    "key": "TST",
+                    "name": "Example space",
+                    "icon": null,
+                    "description": {
+                        "plain": {
+                            "representation": "plain",
+                            "value": "This is an example space",
+                            "webresource": null
+                        }
+                    },
+                    "homepage": null,
+                    "links": {},
+                    "metadata": {}
+                },
+                "body": {
+                    "view": {
+                        "representation": "view",
+                        "value": "&lt;p&gt;&lt;h1&gt;Example&lt;/h1&gt;Some example content body&lt;/p&gt;",
+                        "webresource": null,
+                        "content": null
+                    }
+                },
+                "metadata": {},
+                "extensions": {},
+                "restrictions": {}
+            }
+        ],
+        "size": 1
+    }
+}
+	 </PRE></blockquote>
+	 *
+	 * <p>
+	 * <strong>STATUS 404</strong> -- такой статус вы получите, если не существует элемента контента
+	 * с указанным вами идентификатором
+	 * <br>
+	 *
+	 * @param contentId идентификатор элемента контента (для этого элемента контента мы получаем дочерние элементы)
+	 * @param params дополнительные параметры
+	 * @return набор дочерних элементов
+	 */
+	//@formatter:on
 	@GET("/wiki/rest/api/content/{contentId}/child/page")
 	Call<ChildPage> getChildPage(final @Path("contentId") String contentId,
 	                             final @QueryMap Map<String, String> params);
 	
+	
+	//@formatter:off
+	/**
+	 * Метод возвращает непосредственные дочерние элементы для данного элемента контента.
+	 * <p>
+	 * Отобранные дочерние элементы будут ограничены одним типом.
+	 * <p>
+	 * Тип контента (или типы) - ContentType - возвращаемых дочерних элементов,
+	 * <p>
+	 * задаётся параметром "type" заданным в пути (path) запроса.
+	 * <p>
+	 * <strong>Примеры URI запросов:</strong>
+	 * <ul>
+	 *     <li>http://example.com/rest/api/content/1234/child/page</li>
+	 *     <li>http://example.com/rest/api/content/1234/child/comment</li>
+	 *     <li>http://example.com/rest/api/content/1234/child/page?expand=body.view</li>
+	 *     <li>http://example.com/rest/api/content/1234/child/comment?start=20&limit=10</li>
+	 * </ul>
+	 *
+	 * <p>
+	 * <strong>Дополнительные параметры</strong>
+	 * <ul>
+	 *     <li>expand (String) -- разделённый запятыми список свойств, для разворачивания (expand) дочерних элементов</li>
+	 *     <li>parentVersion (int) -- Default: <strong>0</strong> -- int, представляющий собой версию контента, для этой версии контента мы и будем получать дочерние элементы</li>
+	 *     <li>start (int) -- Optional -- Default: <strong>0</strong> -- индекс первого элемента в результирующем возвращаемом наборе элементов</li>
+	 *     <li>limit (int) -- Optional -- Default: <strong>25</strong> -- сколько элементов из результирующего возвращаемого набора вы хотите получить (после начального индекса, после start)</li>
+	 * </ul>
+	 * <br>
+	 *<h2><strong>Responses</strong></h2>
+	 * <strong>STATUS 200</strong> -- возвращает JSON-map,
+	 * представляющую собой несколько упорядоченных наборов дочерних элементов контента
+	 * <p>
+	 * с ключами по типу содержимого
+	 *
+	 * <blockquote><PRE>
+{
+    "page": {
+        "results": [
+            {
+                "id": "1234",
+                "type": "page",
+                "status": "current",
+                "title": "Example Content title",
+                "links": {},
+                "space": {
+                    "id": 11,
+                    "key": "TST",
+                    "name": "Example space",
+                    "icon": null,
+                    "description": {
+                        "plain": {
+                            "representation": "plain",
+                            "value": "This is an example space",
+                            "webresource": null
+                        }
+                    },
+                    "homepage": null,
+                    "links": {},
+                    "metadata": {}
+                },
+                "history": null,
+                "version": {
+                    "by": {
+                        "type": "known",
+                        "username": "username",
+                        "displayName": "Full Name",
+                        "userKey": "",
+                        "status": null
+                    },
+                    "when": "2017-12-11T03:52:47.431Z",
+                    "message": "change message for this edit",
+                    "number": 2,
+                    "minorEdit": false,
+                    "hidden": false,
+                    "content": null
+                },
+                "ancestors": [
+                    {
+                        "id": "123",
+                        "type": "page",
+                        "status": "current",
+                        "links": {},
+                        "space": null,
+                        "history": null,
+                        "version": null,
+                        "ancestors": [],
+                        "operations": [],
+                        "children": {},
+                        "descendants": {},
+                        "container": null,
+                        "body": {},
+                        "metadata": {},
+                        "extensions": {},
+                        "restrictions": {}
+                    }
+                ],
+                "operations": [],
+                "children": {},
+                "descendants": {},
+                "container": {
+                    "id": 11,
+                    "key": "TST",
+                    "name": "Example space",
+                    "icon": null,
+                    "description": {
+                        "plain": {
+                            "representation": "plain",
+                            "value": "This is an example space",
+                            "webresource": null
+                        }
+                    },
+                    "homepage": null,
+                    "links": {},
+                    "metadata": {}
+                },
+                "body": {
+                    "view": {
+                        "representation": "view",
+                        "value": "&lt;p&gt;&lt;h1&gt;Example&lt;/h1&gt;Some example content body&lt;/p&gt;",
+                        "webresource": null,
+                        "content": null
+                    }
+                },
+                "metadata": {},
+                "extensions": {},
+                "restrictions": {}
+            }
+        ],
+        "size": 1
+    }
+}
+	 </PRE></blockquote>
+	 *
+	 * <p>
+	 * <strong>STATUS 404</strong> -- такой статус вы получите, если не существует элемента контента
+	 * с указанным вами идентификатором
+	 * <br>
+	 *
+	 * @param contentId идентификатор элемента контента (для этого элемента контента мы получаем дочерние элементы)
+	 * @param params дополнительные параметры
+	 * @return набор дочерних элементов
+	 */
+	//@formatter:on
 	@GET("/wiki/rest/api/content/{contentId}/child/attachment")
 	Call<ChildAttachment> getChildAttachment(final @Path("contentId") String contentId,
 	                                         final @QueryMap Map<String, String> params);
