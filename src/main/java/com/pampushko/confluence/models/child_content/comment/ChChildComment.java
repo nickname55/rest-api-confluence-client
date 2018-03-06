@@ -1,4 +1,4 @@
-package com.pampushko.confluence.models.child_content.attachment;
+package com.pampushko.confluence.models.child_content.comment;
 
 import com.google.gson.annotations.SerializedName;
 import com.pampushko.confluence.models.BaseModel;
@@ -8,13 +8,14 @@ import lombok.extern.slf4j.Slf4j;
  *
  */
 @Slf4j
-public class ChildAttachment extends BaseModel
+public class ChChildComment extends BaseModel
 {
 	/**
+	 * todo проверить что все свойства мапятся
 	 * <p>
 	 */
 	@SerializedName("results")
-	AttachmentResultItem[] results;
+	ChCommentResultItem[] results;
 	
 	/**
 	 * <p>
@@ -38,5 +39,6 @@ public class ChildAttachment extends BaseModel
 	 * <p>
 	 */
 	@SerializedName("_links")
-	AttachmentResultItemLinks links;
+	ChCommentResultItemLinks links;
+	
 }

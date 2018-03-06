@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 @Setter
 @EqualsAndHashCode
 @Slf4j
-public class CommentExtensionsExpandable extends BaseModel
+public class ChCommentExtensionsExpandable extends BaseModel
 {
 	/**
 	 * <p>

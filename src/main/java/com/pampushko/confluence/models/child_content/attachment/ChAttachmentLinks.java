@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 @Setter
 @EqualsAndHashCode
 @Slf4j
-public class AttachmentLinks extends BaseModel
+public class ChAttachmentLinks extends BaseModel
 {
 	/**
 	 * Пример: "/spaces/4654313/pages/5210113/Change+Item?preview=%2F5210113%2F172261377%2FIdeaProject.png"

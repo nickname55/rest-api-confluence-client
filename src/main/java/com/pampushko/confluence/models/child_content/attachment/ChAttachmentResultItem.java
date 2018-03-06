@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 @Setter
 @EqualsAndHashCode
 @Slf4j
-public class AttachmentResultItem extends BaseModel
+public class ChAttachmentResultItem extends BaseModel
 {
 	/**
 	 * "att172261377"
@@ -43,13 +43,13 @@ public class AttachmentResultItem extends BaseModel
 	/**
 	 * <p>
 	 */
-	private AttachmentMetadata metadata;
+	private ChAttachmentMetadata metadata;
 	
 	
 	/**
 	 * <p>
 	 */
-	private AttachmentExtensions extensions;
+	private ChAttachmentExtensions extensions;
 	
 	
 	//---------------------------------------------------------------------------
@@ -57,13 +57,13 @@ public class AttachmentResultItem extends BaseModel
 	 * <p>
 	 */
 	@SerializedName("_expandable")
-	private AttachmentExpandable expandable;
+	private ChAttachmentExpandable expandable;
 	
 	
 	/**
 	 * <p>
 	 */
 	@SerializedName("_links")
-	private AttachmentLinks links;
+	private ChAttachmentLinks links;
 	
 }

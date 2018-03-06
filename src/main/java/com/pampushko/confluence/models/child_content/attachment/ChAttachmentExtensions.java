@@ -14,13 +14,30 @@ import lombok.extern.slf4j.Slf4j;
 @Setter
 @EqualsAndHashCode
 @Slf4j
-public class AttachmentMetadata extends BaseModel
+public class ChAttachmentExtensions extends BaseModel
 {
 	/**
-	 * Пример: "image/png"
 	 * <p>
 	 */
 	@SerializedName("mediaType")
 	String mediaType;
+	
+	/**
+	 * <p>
+	 */
+	@SerializedName("fileSize")
+	long fileSize;
+	
+	/**
+	 * <p>
+	 */
+	@SerializedName("comment")
+	String comment;
+	
+	/**
+	 * <p>
+	 */
+	@SerializedName("mediaTypeDescription")
+	String mediaTypeDescription;
 	
 }

@@ -24,19 +24,19 @@ public class ContentResultList extends BaseModel
 	 * <br>
 	 */
 	@SerializedName("start")
-	private String start;
+	private long start;
 	
 	/**
 	 * <br>
 	 */
 	@SerializedName("limit")
-	private String limit;
+	private long limit;
 	
 	/**
 	 * <br>
 	 */
 	@SerializedName("size")
-	private String size;
+	private long size;
 	
 	/**
 	 * <br>

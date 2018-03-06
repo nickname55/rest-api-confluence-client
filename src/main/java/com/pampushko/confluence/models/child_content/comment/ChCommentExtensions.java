@@ -14,17 +14,18 @@ import lombok.extern.slf4j.Slf4j;
 @Setter
 @EqualsAndHashCode
 @Slf4j
-public class CommentLinks extends BaseModel
+public class ChCommentExtensions extends BaseModel
 {
 	/**
 	 * <p>
 	 */
-	@SerializedName("webui")
-	String webui;
+	@SerializedName("location")
+	String location;
 	
 	/**
 	 * <p>
 	 */
-	@SerializedName("self")
-	String self;
+	@SerializedName("_expandable")
+	ChCommentExtensionsExpandable expandable;
+	
 }

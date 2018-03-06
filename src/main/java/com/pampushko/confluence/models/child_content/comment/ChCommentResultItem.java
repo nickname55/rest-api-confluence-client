@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 @Setter
 @EqualsAndHashCode
 @Slf4j
-public class CommentResultItem extends BaseModel
+public class ChCommentResultItem extends BaseModel
 {
 	/**
 	 * "171671553"
@@ -43,7 +43,7 @@ public class CommentResultItem extends BaseModel
 	/**
 	 * <p>
 	 */
-	private CommentExtensions extensions;
+	private ChCommentExtensions extensions;
 	
 	
 	//---------------------------------------------------------------------------
@@ -51,13 +51,13 @@ public class CommentResultItem extends BaseModel
 	 * <p>
 	 */
 	@SerializedName("_expandable")
-	private CommentExpandable expandable;
+	private ChCommentExpandable expandable;
 	
 	
 	/**
 	 * <p>
 	 */
 	@SerializedName("_links")
-	private CommentLinks links;
+	private ChCommentLinks links;
 	
 }

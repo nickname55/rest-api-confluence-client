@@ -1,93 +1,92 @@
-package com.pampushko.confluence.models.child_content.attachment;
+package com.pampushko.confluence.models.child_content.page;
 
 import com.google.gson.annotations.SerializedName;
+import com.pampushko.confluence.models.BaseModel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- *
+ * todo этот класс случайно не дублируется?
+ * Модель для запроса контента из Confluence API
+ * <br>
  */
 @Getter
 @Setter
 @EqualsAndHashCode
 @Slf4j
-public class AttachmentExpandable
+public class ChPageExpandable extends BaseModel
 {
 	/**
-	 * Пример: ""
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("childTypes")
 	String childTypes;
 	
 	/**
-	 * Пример: "/rest/api/content/5210113"
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("container")
 	String container;
 	
 	/**
-	 * Пример: ""
-	 * <p>
+	 * <br>
+	 */
+	@SerializedName("metadata")
+	String metadata;
+	
+	/**
+	 * <br>
 	 */
 	@SerializedName("operations")
 	String operations;
 	
 	/**
-	 * Пример: "/rest/api/content/att172261377/child"
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("children")
 	String children;
 	
 	/**
-	 * Пример: "/rest/api/content/att172261377/restriction/byOperation"
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("restrictions")
 	String restrictions;
 	
 	/**
-	 * Пример: "/rest/api/content/att172261377/history"
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("history")
 	String history;
 	
 	/**
-	 * Пример: ""
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("ancestors")
 	String ancestors;
 	
 	/**
-	 * Пример: ""
-	 * <p>
+	 * <br>
 	 */
+	
 	@SerializedName("body")
 	String body;
 	
 	/**
-	 * Пример: ""
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("version")
 	String version;
 	
 	/**
-	 * Пример: "/rest/api/content/att172261377/descendant"
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("descendants")
 	String descendants;
 	
 	/**
-	 * Пример: "/rest/api/space/4654313"
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("space")
 	String space;
