@@ -1,6 +1,7 @@
 package com.pampushko.confluence.rest;
 
 import com.pampushko.confluence.models.*;
+import com.pampushko.confluence.models.attachment.CreateAttachmentResponseContainer;
 import com.pampushko.confluence.models.audit.Audit;
 import com.pampushko.confluence.models.audit.AuditResultList;
 import com.pampushko.confluence.models.audit.RetentionPeriod;
@@ -18,7 +19,7 @@ import com.pampushko.confluence.models.macros.Macros;
 import com.pampushko.confluence.models.search.SearchResultList;
 import com.pampushko.confluence.models.user.UserResultList;
 import com.pampushko.confluence.models.user_watch.WatchObject;
-import okhttp3.RequestBody;
+import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -1604,8 +1605,10 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	//----------------------------------------------------------------------------------------
 	
 	/**
-	 * @param parentContentId
-	 * @param file
+	 * todo написать документацию к методу
+	 * <p>
+	 * @param parentContentId идентификатор страницы к котороый добавляем контент
+	 * @param fileBodyAndFileName
 	 * @param comment
 	 * @param params
 	 *
@@ -1613,8 +1616,8 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 */
 	@Multipart
 	@POST("/wiki/rest/api/content/{contentId}/child/attachment")
-	Response createAttachment(final @Path("contentId") String parentContentId,
-	                          @Part("file") RequestBody file,
+	Call<CreateAttachmentResponseContainer> createAttachment(final @Path("contentId") String parentContentId,
+	                          @Part MultipartBody.Part fileBodyAndFileName,
 	                          @Part("comment") String comment,
 	                          final @QueryMap Map<String, String> params);
 	

@@ -50,4 +50,10 @@ public class By extends BaseModel
 	 */
 	@SerializedName("_expandable")
 	_ByExpandable expandable;
+	
+	/**
+	 * <br>
+	 */
+	@SerializedName("_links")
+	ByLinks links;
 }

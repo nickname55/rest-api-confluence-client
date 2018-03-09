@@ -1,6 +1,7 @@
 package com.pampushko.confluence.rest;
 
 import com.pampushko.confluence.models.*;
+import com.pampushko.confluence.models.attachment.CreateAttachmentResponseContainer;
 import com.pampushko.confluence.models.audit.Audit;
 import com.pampushko.confluence.models.audit.AuditResultList;
 import com.pampushko.confluence.models.audit.RetentionPeriod;
@@ -21,6 +22,7 @@ import com.pampushko.confluence.models.user.UserResultList;
 import com.pampushko.confluence.models.user_watch.WatchObject;
 import com.pampushko.confluence.utils.FilesUtils;
 import lombok.extern.slf4j.Slf4j;
+import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -1399,7 +1401,24 @@ public class Confluence
 	
 	//----------- content/{id}/child/attachment Начало ---------------
 	//----------------------------------------------------------------------------------------
-	
+	/**
+	 * @param parentContentId
+	 * @param fileBodyAndFileName
+	 * @param comment
+	 * @param params
+	 *
+	 * @return
+	 */
+	CreateAttachmentResponseContainer createAttachment(final String parentContentId,
+	                                                   final MultipartBody.Part fileBodyAndFileName,
+	                                                   final String comment,
+	                                                   final Map<String, String> params)throws IOException
+	{
+		Call<CreateAttachmentResponseContainer> call = confluenceApi.createAttachment(parentContentId, fileBodyAndFileName, comment, params);
+		Response<CreateAttachmentResponseContainer> response = call.execute();
+		CreateAttachmentResponseContainer body = response.body();
+		return body;
+	}
 	//----------- content/{id}/child/attachment Конец ---------------
 	//----------------------------------------------------------------------------------------
 	
