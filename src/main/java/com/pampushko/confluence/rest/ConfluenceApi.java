@@ -1604,6 +1604,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	//----------- content/{id}/child/attachment Начало ---------------
 	//----------------------------------------------------------------------------------------
 	
+	//@formatter:off
 	/**
 	 * <strong>
 	 * Здесь выдержки из официальной документации к текущему эндпоинту Confluence
@@ -1671,6 +1672,156 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 * <PRE>
 	 * http://example.com/rest/api/content/1234/child/attachment
 	 * </PRE>
+	 * <p>
+	 * <strong>Дополнительные параметры</strong>
+	 * <ul>
+	 *     <li>status (String) -- Default: <strong>current</strong> -- строка, содержащая статус контейнера к которому мы хотим добавить вложение, поддерживаются 2-ва значения: current или draft</li>
+	 * </ul>
+	 *
+	 * <p>
+	 *
+	 *<h2><strong>Responses</strong></h2>
+	 * <strong>STATUS 200</strong> -- application/json
+	 *
+	 *<blockquote><PRE>
+{
+    "results": [
+        {
+            "id": "att5678",
+            "type": "attachment",
+            "status": "current",
+            "title": "myfile.txt",
+            "version": {
+                "by": {
+                    "type": "known",
+                    "username": "username",
+                    "userKey": "",
+                    "displayName": "Full Name",
+                    "_expandable": {
+                        "status": ""
+                    }
+                },
+                "when": "2017-12-11T03:52:47.483Z",
+                "message": "change message for this edit",
+                "number": 2,
+                "minorEdit": false,
+                "hidden": false
+            },
+            "ancestors": [],
+            "operations": [],
+            "children": {},
+            "descendants": {},
+            "container": {
+                "id": "1234",
+                "type": "page",
+                "status": "current",
+                "title": "Example Content title",
+                "space": {
+                    "id": 11,
+                    "key": "TST",
+                    "name": "Example space",
+                    "description": {
+                        "plain": {
+                            "value": "This is an example space",
+                            "representation": "plain"
+                        }
+                    },
+                    "metadata": {},
+                    "_links": {
+                        "self": "http://myhost:8080/confluence/rest/api/space/TST"
+                    }
+                },
+                "version": {
+                    "by": {
+                        "type": "known",
+                        "username": "username",
+                        "userKey": "",
+                        "displayName": "Full Name",
+                        "_expandable": {
+                            "status": ""
+                        }
+                    },
+                    "when": "2017-12-11T03:52:47.483Z",
+                    "message": "change message for this edit",
+                    "number": 2,
+                    "minorEdit": false,
+                    "hidden": false
+                },
+                "ancestors": [
+                    {
+                        "id": "123",
+                        "type": "page",
+                        "status": "current",
+                        "ancestors": [],
+                        "operations": [],
+                        "children": {},
+                        "descendants": {},
+                        "body": {},
+                        "metadata": {},
+                        "restrictions": {},
+                        "_links": {
+                            "self": "http://myhost:8080/confluence/rest/api/content/123"
+                        }
+                    }
+                ],
+                "operations": [],
+                "children": {},
+                "descendants": {},
+                "container": {
+                    "id": 11,
+                    "key": "TST",
+                    "name": "Example space",
+                    "description": {
+                        "plain": {
+                            "value": "This is an example space",
+                            "representation": "plain"
+                        }
+                    },
+                    "metadata": {},
+                    "_links": {
+                        "self": "http://myhost:8080/confluence/rest/api/space/TST"
+                    }
+                },
+                "body": {
+                    "view": {
+                        "value": "&lt;p&gt;&lt;h1&gt;Example&lt;/h1&gt;Some example content body&lt;/p&gt;",
+                        "representation": "view",
+                        "_expandable": {
+                            "content": "/rest/api/content/1234"
+                        }
+                    }
+                },
+                "metadata": {},
+                "restrictions": {},
+                "_links": {
+                    "self": "http://myhost:8080/confluence/rest/api/content/1234"
+                }
+            },
+            "body": {},
+            "metadata": {
+                "comment": "This is my File",
+                "mediaType": "text/plain"
+            },
+            "restrictions": {},
+            "_links": {
+                "self": "http://myhost:8080/confluence/rest/api/content/att5678"
+            }
+        }
+    ],
+    "size": 1,
+    "_links": {
+        "base": "http://myhost:8080/confluence",
+        "context": "/confluence"
+    }
+}
+	 *</PRE></blockquote>
+	 *
+	 * <p>
+	 * <strong>STATUS 403</strong> -- такой статус вы получите, если вложения отключены или вы не имеете разрешения на добавление вложения к указанному вами контенту
+	 * <p>
+	 * <strong>STATUS 404</strong> -- такой статус вы получите, запрашиваемый контент не найден,
+	 * у пользователя нет разрешения на просмотр, или если размер вложения превышает максимально допустимый (установленный в настройках Confluence)
+	 * <br>
 	 * @param parentContentId идентификатор страницы к которой мы добавляем контент
 	 * @param fileBodyAndFileName параметр содержащий тела добавляемых файлов вложений и имена этих файлов
 	 * @param comment комментарий (или, возможно, набор комментариев <strong>в том же количестве и том же порядке, что и вложения</strong>), которые мы добавляем к нашим вложениям
@@ -1678,6 +1829,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 *
 	 * @return специальный-объект контейнер, содержащий коллекцию с информацией о добавленных вложениях
 	 */
+	//@formatter:on
 	@Multipart
 	@POST("/wiki/rest/api/content/{contentId}/child/attachment")
 	Call<CreateAttachmentResponseContainer> createAttachment(final @Path("contentId") String parentContentId,
