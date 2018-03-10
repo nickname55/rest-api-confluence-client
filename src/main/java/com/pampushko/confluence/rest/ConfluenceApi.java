@@ -1644,7 +1644,33 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 * должно быть "file"
 	 * <br>
 	 * </strong>
+	 * <hr>
+	 * <strong>
+	 * Примеры:
+	 * </strong>
 	 * <p>
+	 * Простой пример для добавления вложения с именем "myfile.txt" к контейнеру с идентификатором
+	 * "123" и включенным комментарием:
+	 * <PRE>
+	 * curl -D- -u admin:admin -X POST -H "X-Atlassian-Token: nocheck" -F "file=@myfile.txt" -F "comment=This is my File" http://myhost/rest/api/content/123/child/attachment
+	 * </PRE>
+	 * <p>
+	 * Пример добавления вложения с именем "myfile.txt" к контейнеру с идентификатором "123",
+	 * с добавлением комментария,
+	 * и с установкой флага minorEdits в значение true:
+	 * <PRE>
+	 * curl -D- -u admin:admin -X POST -H "X-Atlassian-Token: nocheck" -F "file=@myfile.txt" -F "minorEdit=true" -F "comment=This is my File" http://myhost/rest/api/content/123/child/attachment
+	 * </PRE>
+	 * <p>
+	 * Пример присоединения только файла - без комментария:
+	 * <PRE>
+	 * curl -D- -u admin:admin -X POST -H "X-Atlassian-Token: nocheck" -F "file=@myfile.txt" http://myhost/rest/api/content/123/child/attachment
+	 * </PRE>
+	 * <p>
+	 * Пример запрашиваемого URI:
+	 * <PRE>
+	 * http://example.com/rest/api/content/1234/child/attachment
+	 * </PRE>
 	 * @param parentContentId идентификатор страницы к которой мы добавляем контент
 	 * @param fileBodyAndFileName параметр содержащий тела добавляемых файлов вложений и имена этих файлов
 	 * @param comment комментарий (или, возможно, набор комментариев <strong>в том же количестве и том же порядке, что и вложения</strong>), которые мы добавляем к нашим вложениям
