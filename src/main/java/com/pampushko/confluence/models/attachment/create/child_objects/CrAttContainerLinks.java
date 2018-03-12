@@ -1,4 +1,4 @@
-package com.pampushko.confluence.models.attachment.item;
+package com.pampushko.confluence.models.attachment.create.child_objects;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.EqualsAndHashCode;
@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 @Slf4j
-public class AttContainerLinks
+public class CrAttContainerLinks
 {
 	/**
 	 * Пример: "https://java-java.atlassian.net/wiki/rest/api/content/5210113"

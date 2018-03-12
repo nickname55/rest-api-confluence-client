@@ -1,7 +1,9 @@
 package com.pampushko.confluence.rest;
 
 import com.pampushko.confluence.models.*;
-import com.pampushko.confluence.models.attachment.CreateAttachmentResponseContainer;
+import com.pampushko.confluence.models.attachment.create.CreateAttResponseContainer;
+import com.pampushko.confluence.models.attachment.update.UpdAttRequest;
+import com.pampushko.confluence.models.attachment.update.UpdAttResponse;
 import com.pampushko.confluence.models.audit.Audit;
 import com.pampushko.confluence.models.audit.AuditResultList;
 import com.pampushko.confluence.models.audit.RetentionPeriod;
@@ -1832,10 +1834,207 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	//@formatter:on
 	@Multipart
 	@POST("/wiki/rest/api/content/{contentId}/child/attachment")
-	Call<CreateAttachmentResponseContainer> createAttachment(final @Path("contentId") String parentContentId,
-	                          @Part MultipartBody.Part fileBodyAndFileName,
-	                          @Part("comment") String comment,
-	                          final @QueryMap Map<String, String> params);
+	Call<CreateAttResponseContainer> createAttachment(final @Path("contentId") String parentContentId,
+	                                                  @Part MultipartBody.Part fileBodyAndFileName,
+	                                                  @Part("comment") String comment,
+	                                                  final @QueryMap Map<String, String> params);
+	
+	//@formatter:off
+	/**
+	 * Функция обновляет не-двоичные данные вложения
+	 * <br>
+	 * (не содержимое самого файла вложения, а различные сопутствующие данные)
+	 * <br>
+	 * Эту функцию можно использовать для обновления
+	 * <ul>
+	 *     <li>имени файла-вложения</li>
+	 *     <li>media-type</li>
+	 *     <li>комментария</li>
+	 *     <li>родительского контейнера вложения</li>
+	 * </ul>
+	 * <p>
+	 * <strong>Примеры URI запроса:</strong>
+	 * <ul>
+	 *     <li>http://example.com/rest/api/content/1234/child/attachment/5678</li>
+	 * </ul>
+	 *
+	 * <br>
+	 * <h2><strong>Request</strong></h2>
+	 * <strong>Пример</strong>
+	 * <blockquote><PRE>
+{
+    "id": "att5678",
+    "type": "attachment",
+    "status": "current",
+    "title": "new_file_name.txt",
+    "version": {
+        "number": 2,
+        "minorEdit": false,
+        "hidden": false
+    },
+    "ancestors": [],
+    "operations": [],
+    "children": {},
+    "descendants": {},
+    "body": {},
+    "metadata": {},
+    "restrictions": {}
+}
+	 * </PRE></blockquote>
+	 * <br>
+	 *<h2><strong>Responses</strong></h2>
+	 * <strong>STATUS 200</strong> -- application/json
+	 *
+	 * <blockquote><PRE>
+{
+    "id": "att5678",
+    "type": "attachment",
+    "status": "current",
+    "title": "myfile.txt",
+    "version": {
+        "by": {
+            "type": "known",
+            "username": "username",
+            "userKey": "",
+            "displayName": "Full Name",
+            "_expandable": {
+                "status": ""
+            }
+        },
+        "when": "2017-12-11T03:52:47.421Z",
+        "message": "change message for this edit",
+        "number": 2,
+        "minorEdit": false,
+        "hidden": false
+    },
+    "ancestors": [],
+    "operations": [],
+    "children": {},
+    "descendants": {},
+    "container": {
+        "id": "1234",
+        "type": "page",
+        "status": "current",
+        "title": "Example Content title",
+        "space": {
+            "id": 11,
+            "key": "TST",
+            "name": "Example space",
+            "description": {
+                "plain": {
+                    "value": "This is an example space",
+                    "representation": "plain"
+                }
+            },
+            "metadata": {},
+            "_links": {
+                "self": "http://myhost:8080/confluence/rest/api/space/TST"
+            }
+        },
+        "version": {
+            "by": {
+                "type": "known",
+                "username": "username",
+                "userKey": "",
+                "displayName": "Full Name",
+                "_expandable": {
+                    "status": ""
+                }
+            },
+            "when": "2017-12-11T03:52:47.421Z",
+            "message": "change message for this edit",
+            "number": 2,
+            "minorEdit": false,
+            "hidden": false
+        },
+        "ancestors": [
+            {
+                "id": "123",
+                "type": "page",
+                "status": "current",
+                "ancestors": [],
+                "operations": [],
+                "children": {},
+                "descendants": {},
+                "body": {},
+                "metadata": {},
+                "restrictions": {},
+                "_links": {
+                    "self": "http://myhost:8080/confluence/rest/api/content/123"
+                }
+            }
+        ],
+        "operations": [],
+        "children": {},
+        "descendants": {},
+        "container": {
+            "id": 11,
+            "key": "TST",
+            "name": "Example space",
+            "description": {
+                "plain": {
+                    "value": "This is an example space",
+                    "representation": "plain"
+                }
+            },
+            "metadata": {},
+            "_links": {
+                "self": "http://myhost:8080/confluence/rest/api/space/TST"
+            }
+        },
+        "body": {
+            "view": {
+                "value": "&lt;p&gt;&lt;h1&gt;Example&lt;/h1&gt;Some example content body&lt;/p&gt;",
+                "representation": "view",
+                "_expandable": {
+                    "content": "/rest/api/content/1234"
+                }
+            }
+        },
+        "metadata": {},
+        "restrictions": {},
+        "_links": {
+            "self": "http://myhost:8080/confluence/rest/api/content/1234"
+        }
+    },
+    "body": {},
+    "metadata": {
+        "comment": "This is my File",
+        "mediaType": "text/plain"
+    },
+    "restrictions": {},
+    "_links": {
+        "collection": "/rest/api/content",
+        "base": "http://myhost:8080/confluence",
+        "context": "/confluence",
+        "self": "http://myhost:8080/confluence/rest/api/content/att5678"
+    }
+}
+	 </PRE></blockquote>
+	 *
+	 * <p>
+	 * <strong>STATUS 400</strong> -- такой статус вы получите, если id вложения (attachment id) или версия вложения - не валидны
+	 * <br>
+	 * <p>
+	 * <strong>STATUS 403</strong> -- такой статус вы получите, если вам не разрешено обновлять вложение или помещать это вложение в другой контейнер
+	 * <br>
+	 * <p>
+	 * <strong>STATUS 404</strong> -- такой статус вы получите, если не существует вложения с таким идентификатором, который вы указали (attachment id)
+	 * <br>
+	 * <p>
+	 * <strong>STATUS 409</strong> -- такой статус вы получите, если версия прилагаемого вложения, не совпадает с точной версией вложения (с номером версии вложения который хранится в базе данных Confluence)
+	 * <br>
+	 * @param parentContentId идентификатор контейнера в котором находится вложение (это может быть страница, например)
+	 * @param attachmentId идентификатор вложения
+	 * @param params дополнительные параметры, которые мы передаем в запросе
+	 * @return
+	 */
+	//@formatter:on
+	@PUT("/wiki/rest/api/content/{contentId}/child/attachment/{attachmentId}")
+	Call<UpdAttResponse> updateAttachment(final @Path("contentId") String parentContentId,
+	                                      final @Path("attachmentId") String attachmentId,
+	                                      final @Body UpdAttRequest body,
+	                                      final @QueryMap Map<String, String> params);
 	
 	//----------- content/{id}/child/attachment Конец ---------------
 	//----------------------------------------------------------------------------------------

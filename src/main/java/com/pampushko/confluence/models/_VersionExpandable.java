@@ -21,4 +21,10 @@ public class _VersionExpandable extends BaseModel
 	@SerializedName("content")
 	String content;
 	
+	/**
+	 * todo добавил как expandable для функции UpdateAttachment
+	 * <br>
+	 */
+	@SerializedName("status")
+	String status;
 }

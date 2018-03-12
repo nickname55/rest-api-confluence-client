@@ -1,4 +1,4 @@
-package com.pampushko.confluence.models.attachment.item;
+package com.pampushko.confluence.models.attachment.create.child_objects;
 
 import com.google.gson.annotations.SerializedName;
 import com.pampushko.confluence.models.BaseModel;
@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 @Slf4j
-public class CreateAttachmentItem extends BaseModel
+public class CrAttItem extends BaseModel
 {
 	/**
 	 * Пример: "att184516614"
@@ -54,13 +54,13 @@ public class CreateAttachmentItem extends BaseModel
 	 * <p>
 	 */
 	@SerializedName("container")
-	AttContainer container;
+	CrAttContainer container;
 	
 	/**
 	 * <p>
 	 */
 	@SerializedName("macroRenderedOutput")
-	AttMacroRenderedOutput macroRenderedOutput;
+	CrAttMacroRenderedOutput macroRenderedOutput;
 	
 	/**
 	 * <p>

@@ -2,7 +2,7 @@ package com.pampushko.confluence.models.child_content.attachment;
 
 import com.google.gson.annotations.SerializedName;
 import com.pampushko.confluence.models.BaseModel;
-import com.pampushko.confluence.models.attachment.item.AttMetadataExpandable;
+import com.pampushko.confluence.models.attachment.create.child_objects.CrAttMetadataExpandable;
 import com.pampushko.confluence.models.label.Labels;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -41,6 +41,6 @@ public class ChildAttachmentMetadata extends BaseModel
 	 *
 	 */
 	@SerializedName("_expandable")
-	AttMetadataExpandable expandable;
+	CrAttMetadataExpandable expandable;
 	
 }

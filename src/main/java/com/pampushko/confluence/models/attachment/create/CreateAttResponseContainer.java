@@ -1,8 +1,8 @@
-package com.pampushko.confluence.models.attachment;
+package com.pampushko.confluence.models.attachment.create;
 
 import com.google.gson.annotations.SerializedName;
 import com.pampushko.confluence.models.BaseModel;
-import com.pampushko.confluence.models.attachment.item.CreateAttachmentItem;
+import com.pampushko.confluence.models.attachment.create.child_objects.CrAttItem;
 import com.pampushko.confluence.models.child_content.attachment.ChildAttachmentContainerLinks;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -18,13 +18,13 @@ import lombok.extern.slf4j.Slf4j;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 @Slf4j
-public class CreateAttachmentResponseContainer extends BaseModel
+public class CreateAttResponseContainer extends BaseModel
 {
 	/**
 	 * <p>
 	 */
 	@SerializedName("results")
-	CreateAttachmentItem[] results;
+	CrAttItem[] results;
 	
 	/**
 	 * <p>

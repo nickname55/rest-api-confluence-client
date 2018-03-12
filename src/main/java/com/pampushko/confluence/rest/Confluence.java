@@ -1,7 +1,9 @@
 package com.pampushko.confluence.rest;
 
 import com.pampushko.confluence.models.*;
-import com.pampushko.confluence.models.attachment.CreateAttachmentResponseContainer;
+import com.pampushko.confluence.models.attachment.create.CreateAttResponseContainer;
+import com.pampushko.confluence.models.attachment.update.UpdAttRequest;
+import com.pampushko.confluence.models.attachment.update.UpdAttResponse;
 import com.pampushko.confluence.models.audit.Audit;
 import com.pampushko.confluence.models.audit.AuditResultList;
 import com.pampushko.confluence.models.audit.RetentionPeriod;
@@ -1401,6 +1403,7 @@ public class Confluence
 	
 	//----------- content/{id}/child/attachment Начало ---------------
 	//----------------------------------------------------------------------------------------
+	
 	/**
 	 * @param parentContentId
 	 * @param fileBodyAndFileName
@@ -1409,15 +1412,36 @@ public class Confluence
 	 *
 	 * @return
 	 */
-	CreateAttachmentResponseContainer createAttachment(final String parentContentId,
+	public CreateAttResponseContainer createAttachment(final String parentContentId,
 	                                                   final MultipartBody.Part fileBodyAndFileName,
 	                                                   final String comment,
 	                                                   final Map<String, String> params)throws IOException
 	{
-		Call<CreateAttachmentResponseContainer> call = confluenceApi.createAttachment(parentContentId, fileBodyAndFileName, comment, params);
-		Response<CreateAttachmentResponseContainer> response = call.execute();
-		CreateAttachmentResponseContainer body = response.body();
+		Call<CreateAttResponseContainer> call = confluenceApi.createAttachment(parentContentId, fileBodyAndFileName, comment, params);
+		Response<CreateAttResponseContainer> response = call.execute();
+		CreateAttResponseContainer body = response.body();
 		return body;
+	}
+	
+	
+	/**
+	 * <br>
+	 * @param parentContentId
+	 * @param attachmentId
+	 * @param requestBody
+	 * @param params
+	 * @return
+	 * @throws IOException
+	 */
+	public UpdAttResponse updateAttachment(final String parentContentId,
+	                                                 final String attachmentId,
+	                                                 final UpdAttRequest requestBody,
+	                                                 final Map<String, String> params) throws IOException
+	{
+		Call<UpdAttResponse> call = confluenceApi.updateAttachment(parentContentId, attachmentId, requestBody, params);
+		Response<UpdAttResponse> response = call.execute();
+		UpdAttResponse responseBody = response.body();
+		return responseBody;
 	}
 	//----------- content/{id}/child/attachment Конец ---------------
 	//----------------------------------------------------------------------------------------

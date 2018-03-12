@@ -1,6 +1,5 @@
-package com.pampushko.confluence.models.attachment.item;
+package com.pampushko.confluence.models.attachment.update.child_objects;
 
-import com.google.gson.annotations.SerializedName;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,29 +12,29 @@ import lombok.extern.slf4j.Slf4j;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 @Slf4j
-public class AttMetadataExpandable
+public class UpdAttMetadataExpandable
 {
 	/**
-	 * <p>
+	 * Пример: ""
+	 * <br>
 	 */
-	@SerializedName("currentuser")
 	String currentuser;
 	
 	/**
-	 * <p>
+	 * Пример: ""
+	 * <br>
 	 */
-	@SerializedName("properties")
 	String properties;
 	
 	/**
-	 * <p>
+	 * Пример: ""
+	 * <br>
 	 */
-	@SerializedName("frontend")
 	String frontend;
 	
 	/**
-	 * <p>
+	 * Пример: ""
+	 * <br>
 	 */
-	@SerializedName("likes")
 	String likes;
 }

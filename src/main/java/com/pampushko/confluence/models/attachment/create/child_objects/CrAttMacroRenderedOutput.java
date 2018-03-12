@@ -1,5 +1,6 @@
-package com.pampushko.confluence.models.attachment.item;
+package com.pampushko.confluence.models.attachment.create.child_objects;
 
+import com.pampushko.confluence.models.BaseModel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 @Slf4j
-public class AttContainerMacroRenderedOutput
+public class CrAttMacroRenderedOutput extends BaseModel
 {
 
 }
