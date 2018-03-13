@@ -1,7 +1,6 @@
-package com.pampushko.confluence.rest;
-
 import com.google.common.io.Resources;
 import com.pampushko.confluence.models.attachment.update.UpdAttResponse;
+import com.pampushko.confluence.rest.Confluence;
 import com.pampushko.confluence.settings.SettingsManager;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.MediaType;
@@ -16,16 +15,11 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * Базовый класс для запуска клиента
- * <br>
+ * Обновление <strong>НЕ</strong> бинарных данных вложения (комментарий, media-type, filename, parent container)
  */
 @Slf4j
-public class Main
+public class UpdateBinaryDataAttachmentTest
 {
-	public static final String url = "";
-	private static final String username = "";
-	private static final String password = "";
-	
 	public static void main(String[] args) throws IOException
 	{
 		

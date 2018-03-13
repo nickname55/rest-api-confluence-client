@@ -267,7 +267,6 @@ public interface ConfluenceApi
 	Call<Content> createContent(final @Body Content content, final @QueryMap Map<String, String> param);
 	
 	
-	
 	/**
 	 * Получить элемент контента по идентификатору этого элемента
 	 *
@@ -279,8 +278,8 @@ public interface ConfluenceApi
 	 * @return Call<PageResultItem> обертка для результата запроса (содержит внутри себя элемент контента)
 	 */
 	@GET("/wiki/rest/api/content/{contentId}")
-	Call<PageResultItem> getContentById(@Path("contentId")	final String contentId,
-	                                    @QueryMap	final Map<String, String> params);
+	Call<PageResultItem> getContentById(@Path("contentId")    final String contentId,
+	                                    @QueryMap    final Map<String, String> params);
 	
 	
 	/**
@@ -296,7 +295,8 @@ public interface ConfluenceApi
 	 *
 	 * @return запрошенная версия контента
 	 */
-	@GET("/wiki/rest/api/content/{contentId}/version/{versionId}") //готово
+	@GET("/wiki/rest/api/content/{contentId}/version/{versionId}")
+	//готово
 	Call<Version> getVersionOfContent(final @Path("contentId") String contentId,
 	                                  final @Path("versionId") int versionId,
 	                                  final @QueryMap Map<String, String> params);
@@ -677,43 +677,43 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 */
 	//готово
 	@GET("/wiki/rest/api/content/{contentId}/history/{version}/macro/hash/{hash}")
-	Call<Macros> getContentMacroBodyByHash(final @Path("contentId")String contentId,
-	                                       final @Path("version")String version,
-	                                       final @Path("hash")String hash);
+	Call<Macros> getContentMacroBodyByHash(final @Path("contentId") String contentId,
+	                                       final @Path("version") String version,
+	                                       final @Path("hash") String hash);
 	
 	/**
 	 * Возращает тело макроса (в storage формате) с указанным id.
 	 * <br>
-	 * Этот функция в основном используется connect-приложениями
-	 * <br>
-	 * которым необходимо тело макроса для того чтобы выполнить свою работу
-	 * <br>
-	 * Когда контент создан, если macroId не указан,
-	 * <br>
-	 * то Confluence будет генерировать случайный id.
-	 * <br>
-	 * Идентификатор (id) сохраняется, когда сохраняется контент
-	 * <br>
-	 * и может быть изменен Confluence, если имеются конфликтующие идентификаторы
-	 * <br>
-	 * Чтобы сохранить обратную совместимость, этот ресурс также будет матчить hash of the macro body,
-	 * <br>
-	 * даже если присутствует macroId.
-	 * <br>
-	 * Эта проверка станет излишней так как страницы получают macroId сгенерированный для них
-	 * <br>
-	 * и прозрачно распространяемый на все экземпляры (all instances).
-	 * <br>
-	 *
-	 * @param contentId
-	 * 		идентификатор контента
-	 * @param version
-	 * 		версия контента
-	 * @param macroId
-	 * 		идентификатор макроса
-	 *
-	 * @return контейнер, содержащий список элементов контента
-	 */
+     * Этот функция в основном используется connect-приложениями
+     * <br>
+     * которым необходимо тело макроса для того чтобы выполнить свою работу
+     * <br>
+     * Когда контент создан, если macroId не указан,
+     * <br>
+     * то Confluence будет генерировать случайный id.
+     * <br>
+     * Идентификатор (id) сохраняется, когда сохраняется контент
+     * <br>
+     * и может быть изменен Confluence, если имеются конфликтующие идентификаторы
+     * <br>
+     * Чтобы сохранить обратную совместимость, этот ресурс также будет матчить hash of the macro body,
+     * <br>
+     * даже если присутствует macroId.
+     * <br>
+     * Эта проверка станет излишней так как страницы получают macroId сгенерированный для них
+     * <br>
+     * и прозрачно распространяемый на все экземпляры (all instances).
+     * <br>
+     *
+     * @param contentId
+     * 		идентификатор контента
+     * @param version
+     * 		версия контента
+     * @param macroId
+     * 		идентификатор макроса
+     *
+     * @return контейнер, содержащий список элементов контента
+     */
 	//готово
 	@GET("/wiki/rest/api/content/{contentId}/history/{version}/macro/id/{macroId}")
 	Call<Macros> getContentMacroBodyByMacroId(final @Path("contentId") String contentId,
@@ -722,28 +722,28 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	
 	/**
 	 * Получить список элементов контента,
-	 * используя для запроса Confluence Query Language (CQL)
-	 *
-	 * @param cql
-	 * 		текст запроса на Confluence Quiery Language
-	 * @param params
-	 * 		дополнительные параметры для поиска
-	 *
-	 * @return объект-контейнер, внутри которого находится коллекция найденных элементов контента
-	 *
-	 * @see <a href="https://developer.atlassian.com/display/CONFDEV/Advanced+Searching+using+CQL">
-	 * Advanced searching using CQL
-	 * </a>
-	 * <br>
-	 * Дополнительные параметры:
-	 * <ul>
-	 * <li>cql (String) - задаётся отдельным параметром метода</li>
-	 * <li>cqlcontext (String) - the context to execute a cql search in, this is the json serialized form of SearchContext</li>
-	 * <li>expand (String) - a comma separated list of properties to expand on the content.</li>
-	 * <li>start (int) - the start point of the collection to return</li>
-	 * <li>limit (int, default:<strong>25</strong>) - the limit of the number of items to return, this may be restricted by fixed system limits </li>
-	 * </ul>
-	 */
+     * используя для запроса Confluence Query Language (CQL)
+     *
+     * @param cql
+     * 		текст запроса на Confluence Quiery Language
+     * @param params
+     * 		дополнительные параметры для поиска
+     *
+     * @return объект-контейнер, внутри которого находится коллекция найденных элементов контента
+     *
+     * @see <a href="https://developer.atlassian.com/display/CONFDEV/Advanced+Searching+using+CQL">
+     * Advanced searching using CQL
+     * </a>
+     * <br>
+     * Дополнительные параметры:
+     * <ul>
+     * <li>cql (String) - задаётся отдельным параметром метода</li>
+     * <li>cqlcontext (String) - the context to execute a cql search in, this is the json serialized form of SearchContext</li>
+     * <li>expand (String) - a comma separated list of properties to expand on the content.</li>
+     * <li>start (int) - the start point of the collection to return</li>
+     * <li>limit (int, default:<strong>25</strong>) - the limit of the number of items to return, this may be restricted by fixed system limits </li>
+     * </ul>
+     */
 	@GET("/wiki/rest/api/content/search")
 	//не готово
 	Call<ContentContainter> getContentSearch(final @Query("cql") String cql,
@@ -751,7 +751,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	
 	//-----------Content Конец ---------------
 	//----------------------------------------------------------------------------------------
-
+	
 	
 	//-----------Audit Начало ---------------
 	//----------------------------------------------------------------------------------------
@@ -759,58 +759,63 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	/**
 	 * Fetch a paginated list of AuditRecord instances dating back to a certain time
 	 * <br>
-	 * <strong>Дополнительные параметры</strong>
-	 * <ul>
-	 *     <li>startDate (String) -- </li>
-	 *     <li>endDate (String) -- </li>
-	 *     <li>start (int) -- where to start within results set</li>
-	 *     <li>limit (int) -- Default : <strong>1000</strong> -- the maximum results to fetch</li>
-	 *     <li>searchString (String) -- </li>
-	 * </ul>
-	 *<br>
-	 * <strong>Пример</strong>	 * @return
-	 */
+     * <strong>Дополнительные параметры</strong>
+     * <ul>
+     * <li>startDate (String) -- </li>
+     * <li>endDate (String) -- </li>
+     * <li>start (int) -- where to start within results set</li>
+     * <li>limit (int) -- Default : <strong>1000</strong> -- the maximum results to fetch</li>
+     * <li>searchString (String) -- </li>
+     * </ul>
+     * <br>
+     * <strong>Пример</strong>	 * @return
+     */
 	@GET("/wiki/rest/api/audit")
 	Call<AuditResultList> getAudit(final @QueryMap Map<String, String> params);
 	
 	/**
 	 * Store record
-	 * <br>
-	 * @param audit
-	 * @return
-	 */
+     * <br>
+     *
+     * @param audit
+     *
+     * @return
+     */
 	@POST("/wiki/rest/api/audit")
 	Call<Audit> createAudit(final @Body Audit audit);
 	
 	/**
 	 * <br>
-	 * <strong>Дополнительные параметры</strong>
-	 * <ul>
-	 *     <li>startDate (String) -- </li>
-	 *     <li>endDate (String) -- </li>
-	 *     <li>searchString (String) -- </li>
-	 *     <li>format (String) -- Default: <strong>csv</strong> -- </li>
-	 * </ul>
-	 * <br>
-	 * <strong>Responses</strong>
-	 * <ul>
-	 *     <li>application/zip</li>
-	 *     <li>text/csv</li>
-	 * </ul>
-	 * @param params
-	 * @return
-	 */
+     * <strong>Дополнительные параметры</strong>
+     * <ul>
+     * <li>startDate (String) -- </li>
+     * <li>endDate (String) -- </li>
+     * <li>searchString (String) -- </li>
+     * <li>format (String) -- Default: <strong>csv</strong> -- </li>
+     * </ul>
+     * <br>
+     * <strong>Responses</strong>
+     * <ul>
+     * <li>application/zip</li>
+     * <li>text/csv</li>
+     * </ul>
+     *
+     * @param params
+     *
+     * @return
+     */
 	@Streaming
 	@GET("/wiki/rest/api/audit/export")
 	Call<ResponseBody> exportAudit(@Header("Accept") String acceptHeader, final @QueryMap Map<String, String> params);
 	
 	/**
 	 * Получаем текущий период хранения (Fetches the current retention period)
-	 * <p>
-	 * <strong>Responses</strong>
-	 * application/json
-	 * @return
-	 */
+     * <p>
+     * <strong>Responses</strong>
+     * application/json
+     *
+     * @return
+     */
 	@GET("/wiki/rest/api/audit/retention")
 	Call<RetentionPeriod> getRetentionPeriodOfAudit();
 	
@@ -1452,9 +1457,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	@GET("/wiki/rest/api/content/{contentId}/child/attachment")
 	Call<ChildAttachment> getChildAttachment(final @Path("contentId") String contentId,
 	                                         final @QueryMap Map<String, String> params);
-
-
-
+	
 	
 	//@formatter:off
 	/**
@@ -2035,6 +2038,239 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	                                      final @Path("attachmentId") String attachmentId,
 	                                      final @Body UpdAttRequest body,
 	                                      final @QueryMap Map<String, String> params);
+	
+	
+	//@formatter:off
+	/**
+	 * <strong>
+	 * Здесь выдержки из официальной документации к текущему эндпоинту Confluence
+	 * <br>
+	 * c моими небольшими комментариями:
+	 * </strong>
+	 * <br>
+	 * Функция обновляет двоичные данные вложения (тело вложенного файла)
+	 * <p>
+	 * <br>
+	 * И также, возможно, комментарий и поле minor edit todo уточнить, зачем нужно поле minor edit
+	 * Комментарий будет потом отображаться при просмотре вложения, например в истории
+	 * <br>
+	 * Эта функция добавляет новую версию вложения, содержащую новые двоичные данные,
+	 * новое имя файла и новый тип содержимого.
+	 * При обновлении двоичных данных, комментарий связанный с файлом
+	 * with the field that specifies if it's a minor edit can be updated as well, but are not required.
+	 * <p>
+	 * Если обновление считается незначительным <strong>(minor edit)</strong>,
+	 * то уведомления не будут отправляться наблюдателям подписанным на этот контент.
+	 * <p>
+	 * Этот ресурс в API Confluence ожидает multipart post.
+	 * <br>
+	 * Media-type multipart/form-data определён в RFC 1867.
+	 * <br>
+	 * Большинство клиентских библиотек имеют классы, которые упрощают работу с multipart post,
+	 * <br>
+	 * Retrofit, который мы используем в качестве клиента, тоже это делает при помощи классов MultipartBody.Part и RequestBody.
+	 * <br>
+	 * Чтобы защититься от атак XSRF (поскольку этот эндпоинт принимает multipart/form-data)
+	 * <br>
+	 * в нем присутствует защита (XSRF protection).
+	 * <br>
+	 * Это означает, что вы должны отправить заголовок X-Atlassian-Token: nocheck в своём запросе,
+	 * <br>
+	 * иначе этот запрос будет заблокирован.
+	 * <br>
+	 * (сейчас мы отправляем такой заголовок для всех запросов из нашего клиента)
+	 * <br>
+	 * <strong>Важно:
+	 * Имя параметра multipart/form-data, который содержит вложения,
+	 * должно быть "file"
+	 * <br>
+	 * </strong>
+	 * <hr>
+	 * <strong>
+	 * Примеры:
+	 * </strong>
+	 * <p>
+	 * Простой пример для добавления файла с именем "myfile.txt" к вложению с идентификатором
+	 * "456", находящемуся в контейнере с идентификатором "123", с обновляемым комментарием,
+	 * с ключом minorEdit установленным в true:
+	 * <PRE>
+	 * curl -D- -u admin:admin -X POST -H "X-Atlassian-Token: nocheck" -F "file=@myfile.txt" -F "minorEdit=true" -F "comment=This is my updated File" http://myhost/rest/api/content/123/child/attachment/456/data
+	 * </PRE>
+	 * <p>
+	 * Пример добавления загрузки того же файла, но без комментария
+	 * <PRE>
+	 * curl -D- -u admin:admin -X POST -H "X-Atlassian-Token: nocheck" -F "file=@myfile.txt" http://myhost/rest/api/content/123/child/attachment/456/data
+	 * </PRE>
+	 * <p>
+	 * <p>
+	 * Пример запрашиваемого URI:
+	 * <PRE>
+	 * http://example.com/rest/api/content/1234/child/attachment/5678/data
+	 * </PRE>
+	 * <p>
+	 * <h2><strong>Responses</strong></h2>
+	 * <strong>STATUS 200</strong> -- application/json
+	 * <p>
+	 * <blockquote><PRE>
+{
+    "results": [
+        {
+            "id": "att5678",
+            "type": "attachment",
+            "status": "current",
+            "title": "myfile.txt",
+            "version": {
+                "by": {
+                    "type": "known",
+                    "username": "username",
+                    "userKey": "",
+                    "displayName": "Full Name",
+                    "_expandable": {
+                        "status": ""
+                    }
+                },
+                "when": "2018-03-05T02:39:02.582Z",
+                "message": "change message for this edit",
+                "number": 2,
+                "minorEdit": false,
+                "hidden": false
+            },
+            "ancestors": [],
+            "operations": [],
+            "children": {},
+            "descendants": {},
+            "container": {
+                "id": "1234",
+                "type": "page",
+                "status": "current",
+                "title": "Example Content title",
+                "space": {
+                    "id": 11,
+                    "key": "TST",
+                    "name": "Example space",
+                    "description": {
+                        "plain": {
+                            "value": "This is an example space",
+                            "representation": "plain"
+                        }
+                    },
+                    "metadata": {},
+                    "_links": {
+                        "self": "http://myhost:8080/confluence/rest/api/space/TST"
+                    }
+                },
+                "version": {
+                    "by": {
+                        "type": "known",
+                        "username": "username",
+                        "userKey": "",
+                        "displayName": "Full Name",
+                        "_expandable": {
+                            "status": ""
+                        }
+                    },
+                    "when": "2018-03-05T02:39:02.582Z",
+                    "message": "change message for this edit",
+                    "number": 2,
+                    "minorEdit": false,
+                    "hidden": false
+                },
+                "ancestors": [
+                    {
+                        "id": "123",
+                        "type": "page",
+                        "status": "current",
+                        "ancestors": [],
+                        "operations": [],
+                        "children": {},
+                        "descendants": {},
+                        "body": {},
+                        "metadata": {},
+                        "restrictions": {},
+                        "_links": {
+                            "self": "http://myhost:8080/confluence/rest/api/content/123"
+                        }
+                    }
+                ],
+                "operations": [],
+                "children": {},
+                "descendants": {},
+                "container": {
+                    "id": 11,
+                    "key": "TST",
+                    "name": "Example space",
+                    "description": {
+                        "plain": {
+                            "value": "This is an example space",
+                            "representation": "plain"
+                        }
+                    },
+                    "metadata": {},
+                    "_links": {
+                        "self": "http://myhost:8080/confluence/rest/api/space/TST"
+                    }
+                },
+                "body": {
+                    "view": {
+                        "value": "&lt;p&gt;&lt;h1&gt;Example&lt;/h1&gt;Some example content body&lt;/p&gt;",
+                        "representation": "view",
+                        "_expandable": {
+                            "content": "/rest/api/content/1234"
+                        }
+                    }
+                },
+                "metadata": {},
+                "restrictions": {},
+                "_links": {
+                    "self": "http://myhost:8080/confluence/rest/api/content/1234"
+                }
+            },
+            "body": {},
+            "metadata": {
+                "comment": "This is my File",
+                "mediaType": "text/plain"
+            },
+            "restrictions": {},
+            "_links": {
+                "self": "http://myhost:8080/confluence/rest/api/content/att5678"
+            }
+        }
+    ],
+    "size": 1,
+    "_links": {
+        "base": "http://myhost:8080/confluence",
+        "context": "/confluence"
+    }
+}
+	 * </PRE></blockquote>
+	 * <p>
+	 * <p>
+	 * <strong>STATUS 400</strong> -- такой статус вы получите, если идентификатор вложения не валиден <strong>следует обратить внимание что id вложения должен иметь префикс att, например att1353453</strong>
+	 * <p>
+	 * <strong>STATUS 404</strong> -- такой статус вы получите, если по указанному идентификатору не удалось найти вложение
+	 * <br>
+	 *
+	 *
+	 * todo проверить все параметры и возвращаемые значения в методе!
+	 * @param parentContentId
+	 * 		идентификатор страницы к которой мы добавляем контент
+	 * @param fileBody
+	 * 		параметр содержащий тела добавляемых файлов вложений и имена этих файлов
+	 * @param comment
+	 * 		комментарий (или, возможно, набор комментариев <strong>в том же количестве и том же порядке, что и вложения</strong>), которые мы добавляем к нашим вложениям
+	 * @param params
+	 * 		другие параметры, передаваемые в запросе
+	 *
+	 * @return специальный-объект контейнер, содержащий коллекцию с информацией о добавленных вложениях
+	 */
+	//@formatter:on
+	@Multipart
+	@POST("/wiki/rest/api/content/{contentId}/child/attachment/{attachmentId}/data")
+	Call<UpdAttResponse> updateAttachmentFileBody(final @Path("contentId") String parentContentId,
+	                                              final @Path("attachmentId") String attachmentId,
+	                                              final @Part MultipartBody.Part fileBody,
+	                                              final @Part("comment") String comment,
+	                                              final @QueryMap Map<String, String> params);
 	
 	//----------- content/{id}/child/attachment Конец ---------------
 	//----------------------------------------------------------------------------------------

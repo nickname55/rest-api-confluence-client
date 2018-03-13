@@ -14,7 +14,7 @@ import java.util.Properties;
  * Обновление <strong>НЕ</strong> бинарных данных вложения (комментарий, media-type, filename, parent container)
  */
 @Slf4j
-public class UpdateAttachmentTest
+public class UpdateNonBinaryAttachmentTest
 {
 	public static void main(String[] args) throws IOException
 	{

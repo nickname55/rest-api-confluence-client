@@ -30,7 +30,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.http.GET;
+import retrofit2.http.*;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -1415,7 +1415,7 @@ public class Confluence
 	public CreateAttResponseContainer createAttachment(final String parentContentId,
 	                                                   final MultipartBody.Part fileBodyAndFileName,
 	                                                   final String comment,
-	                                                   final Map<String, String> params)throws IOException
+	                                                   final Map<String, String> params) throws IOException
 	{
 		Call<CreateAttResponseContainer> call = confluenceApi.createAttachment(parentContentId, fileBodyAndFileName, comment, params);
 		Response<CreateAttResponseContainer> response = call.execute();
@@ -1426,23 +1426,51 @@ public class Confluence
 	
 	/**
 	 * <br>
+	 *
 	 * @param parentContentId
 	 * @param attachmentId
 	 * @param requestBody
 	 * @param params
+	 *
 	 * @return
+	 *
 	 * @throws IOException
 	 */
 	public UpdAttResponse updateAttachment(final String parentContentId,
-	                                                 final String attachmentId,
-	                                                 final UpdAttRequest requestBody,
-	                                                 final Map<String, String> params) throws IOException
+	                                       final String attachmentId,
+	                                       final UpdAttRequest requestBody,
+	                                       final Map<String, String> params) throws IOException
 	{
 		Call<UpdAttResponse> call = confluenceApi.updateAttachment(parentContentId, attachmentId, requestBody, params);
 		Response<UpdAttResponse> response = call.execute();
 		UpdAttResponse responseBody = response.body();
 		return responseBody;
 	}
+	
+	
+	/**
+	 *
+	 * @param parentContentId
+	 * @param attachmentId
+	 * @param fileBody
+	 * @param comment
+	 * @param params
+	 * @return
+	 * @throws IOException
+	 */
+	public UpdAttResponse updateAttachmentFileBody(final String parentContentId,
+	                                               final String attachmentId,
+	                                               final MultipartBody.Part fileBody,
+	                                               final String comment,
+	                                               final Map<String, String> params) throws IOException
+	{
+		Call<UpdAttResponse> updAttResponseCall = confluenceApi.updateAttachmentFileBody(parentContentId, attachmentId, fileBody, comment, params);
+		Response<UpdAttResponse> response = updAttResponseCall.execute();
+		UpdAttResponse responseBody = response.body();
+		return responseBody;
+	}
+	
+
 	//----------- content/{id}/child/attachment Конец ---------------
 	//----------------------------------------------------------------------------------------
 	
