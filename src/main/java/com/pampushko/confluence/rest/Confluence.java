@@ -1405,10 +1405,16 @@ public class Confluence
 	//----------------------------------------------------------------------------------------
 	
 	/**
-	 * @param parentContentId
-	 * @param fileBodyAndFileName
-	 * @param comment
-	 * @param params
+	 * При помощи этой функции мы можем у заданного элемента контента создать вложение.
+	 * <br>
+	 * <strong>
+	 * Для того чтобы получить более подробные данные о данной функции Confluence API смотрите документацию {@link ConfluenceApi#createAttachment(String, MultipartBody.Part, String, Map)} (String, String, UpdAttRequest, Map)}
+	 *</strong>	 *
+	 *
+	 * @param parentContentId идентификатор страницы к которой мы добавляем вложение
+	 * @param fileBodyAndFileName обернутые в специальный объект тело файла и имя файла - для создания вложения
+	 * @param comment комментарий (или, возможно, набор комментариев <strong>в том же количестве и том же порядке, что и вложения</strong>), которые мы добавляем к нашим вложениям
+	 * @param params другие параметры, передаваемые в запросе
 	 *
 	 * @return
 	 */
@@ -1425,14 +1431,31 @@ public class Confluence
 	
 	
 	/**
+	 * При помощи этой фунции мы можем обновить различные сопровождающие вложение данные:
+	 * <ul>
+	 *     <li>имени файла-вложения</li>
+	 *     <li>media-type</li>
+	 *     <li>комментария</li>
+	 *     <li>родительского контейнера вложения</li>
+	 * </ul>
+	 * <strong>
+	 * Само вложение мы обновить не можем!
+	 * <br>
+	 * Если вы хотите обновить тело файла-вложения, то следует использовать метод {@link #updateAttachmentFileBody(String, String, MultipartBody.Part, String, Map)}
+	 * </strong>
 	 * <br>
 	 *
-	 * @param parentContentId
-	 * @param attachmentId
-	 * @param requestBody
-	 * @param params
+	 * <br>
+	 * <strong>
+	 * Для того чтобы получить более подробные данные о данной функции Confluence API смотрите документацию {@link ConfluenceApi#updateAttachment(String, String, UpdAttRequest, Map)}
+	 *</strong>
 	 *
-	 * @return
+	 * @param parentContentId идентификатор страницы к которой мы добавляем вложение
+	 * @param attachmentId идентификатор вложения, над этим вложением мы хотим выполнить действие
+	 * @param requestBody тело запроса, содержит JSON с некоторыми обязательными полями с обновляемыми данными вложения
+	 * @param params другие параметры, передаваемые в запросе
+	 *
+	 * @return JSON объект
 	 *
 	 * @throws IOException
 	 */
@@ -1449,13 +1472,19 @@ public class Confluence
 	
 	
 	/**
-	 *
-	 * @param parentContentId
-	 * @param attachmentId
-	 * @param fileBody
-	 * @param comment
-	 * @param params
-	 * @return
+	 * При помощи этой функции мы можем обновить (загрузить <strong>новую</strong> версию вложения).
+	 * <br>
+	 * <br>
+	 * <strong>
+	 * Для того чтобы получить более подробные данные о данной функции Confluence API смотрите документацию {@link ConfluenceApi#updateAttachmentFileBody(String, String, MultipartBody.Part, String, Map)} (String, String, UpdAttRequest, Map)}
+	 * </strong>
+	 * <br>
+	 * @param parentContentId идентификатор страницы к которой мы добавляем вложение
+	 * @param attachmentId идентфикатор вложения, над этим вложением мы хотим выполнить действие
+	 * @param fileBody тело файла обернутое в {@link MultipartBody.Part}
+	 * @param comment комментарий к новой версии файла-вложения
+	 * @param params дополнительные параметры, передаваемые в запросе
+	 * @return JSON-объект
 	 * @throws IOException
 	 */
 	public UpdAttResponse updateAttachmentFileBody(final String parentContentId,
