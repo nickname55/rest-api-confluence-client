@@ -14,6 +14,7 @@ import com.pampushko.confluence.models.child_content.page.ChildPage;
 import com.pampushko.confluence.models.content.Content;
 import com.pampushko.confluence.models.content.ContentContainter;
 import com.pampushko.confluence.models.content.ContentResultList;
+import com.pampushko.confluence.models.content_descendant.DescendantsResult;
 import com.pampushko.confluence.models.group.Group;
 import com.pampushko.confluence.models.group.GroupResultList;
 import com.pampushko.confluence.models.history.HistoryContainer;
@@ -683,7 +684,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	
 	/**
 	 * Возращает тело макроса (в storage формате) с указанным id.
-	 * <br>
+     * <br>
      * Этот функция в основном используется connect-приложениями
      * <br>
      * которым необходимо тело макроса для того чтобы выполнить свою работу
@@ -758,7 +759,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	
 	/**
 	 * Fetch a paginated list of AuditRecord instances dating back to a certain time
-	 * <br>
+     * <br>
      * <strong>Дополнительные параметры</strong>
      * <ul>
      * <li>startDate (String) -- </li>
@@ -2274,4 +2275,157 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	
 	//----------- content/{id}/child/attachment Конец ---------------
 	//----------------------------------------------------------------------------------------
+	
+	
+	//----------- content/{id}/descendant Начало ---------------
+	//----------------------------------------------------------------------------------------
+	//@formatter:off
+	/**
+	 * Возвращает map дочерних элементов (descendants) для указанного вами элемента контента
+	 * <br>
+	 * Контент может иметь несколько типов дочерних элементов, например,
+	 * <br>
+	 * страница может иметь потомков, которые также являются страницами,
+	 * <br>
+	 * но также она может иметь в виде дочерних элементов - комментарии и вложения.
+	 * <br>
+	 * <br>
+	 * ContentType дочерних элементов возвращается, если указан параметр http-запроса "expand"
+	 * <br>
+	 * Параметр "expand" может включать expands для нескольких типов дочерних элементов
+	 * <br>
+	 * Если в параметр "expand" не включены никакие типы,
+	 * <br>
+	 * то возвращаемое отображение (map) будет просто перечислять типы дочерних элементов,
+	 * <br>
+	 * которые могут быть expanded для элемента на контента, на который мы указываем path-параметром "contentId"
+	 * <br>
+	 * В настоящее время поддерживаемыми descendants являются comment descendants относящиеся к non-comment Content.
+	 * <p>
+	 * <strong>Примеры URI запросов:</strong>
+	 * <ul>
+	 * <li>http://example.com/rest/api/content/1234/descendant</li>
+	 * <li>http://example.com/rest/api/content/1234/descendant?expand=comment.body.VIEW</li>
+	 * <li>http://example.com/rest/api/content/1234/descendant?expand=comment</li>
+	 * </ul>
+	 * <h2><strong>Responses:</strong></h2>
+	 * <strong>STATUS 200</strong> -- application/json, возвращает JSON map, представляющую собой несколько упорядоченных
+	 * <br>
+	 * коллекций дочерних элементов (descendants) указанного элемента контента. С ключом по типу содержимого
+	 * <blockquote><PRE>
+{
+    "page": {
+        "results": [
+            {
+                "id": "1234",
+                "typeq": "page",
+                "status": "current",
+                "title": "Example Content title",
+                "links": {},
+                "space": {
+                    "id": 11,
+                    "key": "TST",
+                    "name": "Example space",
+                    "icon": null,
+                    "description": {
+                        "plain": {
+                            "representation": "plain",
+                            "value": "This is an example space",
+                            "webresource": null
+                        }
+                    },
+                    "homepage": null,
+                    "links": {},
+                    "metadata": {}
+                },
+                "history": null,
+                "version": {
+                    "by": {
+                        "type": "known",
+                        "username": "username",
+                        "displayName": "Full Name",
+                        "userKey": "",
+                        "status": null
+                    },
+                    "when": "2018-03-05T02:39:02.546Z",
+                    "message": "change message for this edit",
+                    "number": 2,
+                    "minorEdit": false,
+                    "hidden": false,
+                    "content": null
+                },
+                "ancestors": [
+                    {
+                        "id": "123",
+                        "type": "page",
+                        "status": "current",
+                        "links": {},
+                        "space": null,
+                        "history": null,
+                        "version": null,
+                        "ancestors": [],
+                        "operations": [],
+                        "children": {},
+                        "descendants": {},
+                        "container": null,
+                        "body": {},
+                        "metadata": {},
+                        "extensions": {},
+                        "restrictions": {}
+                    }
+                ],
+                "operations": [],
+                "children": {},
+                "descendants": {},
+                "container": {
+                    "id": 11,
+                    "key": "TST",
+                    "name": "Example space",
+                    "icon": null,
+                    "description": {
+                        "plain": {
+                            "representation": "plain",
+                            "value": "This is an example space",
+                            "webresource": null
+                        }
+                    },
+                    "homepage": null,
+                    "links": {},
+                    "metadata": {}
+                },
+                "body": {
+                    "view": {
+                        "representation": "view",
+                        "value": "&lt;p&gt;&lt;h1&gt;Example&lt;/h1&gt;Some example content body&lt;/p&gt;",
+                        "webresource": null,
+                        "content": null
+                    }
+                },
+                "metadata": {},
+                "extensions": {},
+                "restrictions": {}
+            }
+        ],
+        "size": 1
+    }
 }
+	 * </PRE></blockquote>
+	 * <p>
+	 * <strong>STATUS 404</strong> -- такой статус вы получите, если по указанному идентификатору элемент контента не найден, или же, если пользователь не имеет разрешения на просмотр содержимого
+	 * <br>
+	 *
+	 * @param expand разделяемый запятыми список, состоящий из свойств потомков (descendants) перечисляя свойства в списке, мы указываем, что хотим их развернуть (expand)
+	 *
+	 * @return несколько упорядоченных коллекций дочерних элементов (descendants) указанного элемента контента. С ключом по типу содержимого.
+	 */
+	//@formatter:on
+	@GET("/wiki/rest/api/content/{contentId}/descendant")
+	Call<DescendantsResult> getContentDescendants(final @Path("contentId") String parentContentId,
+	                                              final @Query("expand") String expand);
+	//----------- content/{id}/descendant Конец ---------------
+	//----------------------------------------------------------------------------------------
+	
+	
+}
+
+

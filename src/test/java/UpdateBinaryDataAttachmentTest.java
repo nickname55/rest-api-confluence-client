@@ -20,6 +20,7 @@ import java.util.Properties;
 @Slf4j
 public class UpdateBinaryDataAttachmentTest
 {
+	
 	public static void main(String[] args) throws IOException
 	{
 		

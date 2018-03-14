@@ -14,6 +14,7 @@ import com.pampushko.confluence.models.child_content.page.ChildPage;
 import com.pampushko.confluence.models.content.Content;
 import com.pampushko.confluence.models.content.ContentContainter;
 import com.pampushko.confluence.models.content.ContentResultList;
+import com.pampushko.confluence.models.content_descendant.DescendantsResult;
 import com.pampushko.confluence.models.enums.ContentType;
 import com.pampushko.confluence.models.group.Group;
 import com.pampushko.confluence.models.group.GroupResultList;
@@ -1501,6 +1502,20 @@ public class Confluence
 	
 
 	//----------- content/{id}/child/attachment Конец ---------------
+	//----------------------------------------------------------------------------------------
+	
+	
+	//----------- content/{id}/descendant Начало ---------------
+	//----------------------------------------------------------------------------------------
+	DescendantsResult getContentDescendants(final String parentContentId,
+	                                  final String expand)throws IOException
+	{
+		Call<DescendantsResult> contentDescendantCall = confluenceApi.getContentDescendants(parentContentId, expand);
+		Response<DescendantsResult> response = contentDescendantCall.execute();
+		DescendantsResult body = response.body();
+		return body;
+	}
+	//----------- content/{id}/descendant Конец ---------------
 	//----------------------------------------------------------------------------------------
 	
 }
