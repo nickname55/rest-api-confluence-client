@@ -1508,9 +1508,10 @@ public class Confluence
 	//----------- content/{id}/descendant Начало ---------------
 	//----------------------------------------------------------------------------------------
 	DescendantsResult getContentDescendants(final String parentContentId,
-	                                  final String expand)throws IOException
+	                                        final String expand,
+	                                        final Map<String, String> params) throws IOException
 	{
-		Call<DescendantsResult> contentDescendantCall = confluenceApi.getContentDescendants(parentContentId, expand);
+		Call<DescendantsResult> contentDescendantCall = confluenceApi.getContentDescendants(parentContentId, expand, params);
 		Response<DescendantsResult> response = contentDescendantCall.execute();
 		DescendantsResult body = response.body();
 		return body;

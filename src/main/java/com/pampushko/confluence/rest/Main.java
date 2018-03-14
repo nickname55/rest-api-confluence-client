@@ -4,6 +4,8 @@ import com.pampushko.confluence.settings.SettingsManager;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -26,14 +28,23 @@ public class Main
 		//вызываем билдер и создаем клиент
 		Confluence confluence = Confluence.newBuilder().baseUrl(settings.getProperty("baseUrl")).username(settings.getProperty("username")).password(settings.getProperty("password")).build();
 		
-		//параметр запроса expand
-		final String expand = "";
-		
 		//идентификатор страницы на которую добавляется вложение
 		final String contentId = "5210113";
 		
+		//параметр запроса expand
+		final String expand = "";
+		
+		//пустой набор параметров - заглушка
+		Map<String, String> params = new HashMap<String, String>()
+		{
+			{
+				put("start", "0");
+				put("limit", "25");
+			}
+		};
+		
 		//выполняем запрос и печатаем результат
-		Object contentDescendantsMap = confluence.getContentDescendants(contentId, expand);
+		Object contentDescendantsMap = confluence.getContentDescendants(contentId, expand, params);
 		System.out.println(contentDescendantsMap);
 	}
 }

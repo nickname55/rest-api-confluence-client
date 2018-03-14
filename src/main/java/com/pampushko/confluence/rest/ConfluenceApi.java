@@ -2308,6 +2308,14 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 * <li>http://example.com/rest/api/content/1234/descendant?expand=comment.body.VIEW</li>
 	 * <li>http://example.com/rest/api/content/1234/descendant?expand=comment</li>
 	 * </ul>
+	 * <p>
+	 * <strong>Дополнительные параметры</strong>
+	 * <ul>
+	 *     <li>expand (String) -- разделённый запятыми список свойств, для разворачивания (expand) дочерних элементов <br>
+	 *         (<strong>добавлен в качестве отдельного параметра в текущий метод. Это параметр final @Query("expand") String expand</strong>)</li>
+	 *     <li>start (int) -- Optional -- Default: <strong>0</strong> -- индекс первого элемента в результирующем возвращаемом наборе элементов</li>
+	 *     <li>limit (int) -- Optional -- Default: <strong>25</strong> -- сколько элементов из результирующего возвращаемого набора вы хотите получить (после начального индекса, после start)</li>
+	 * </ul>
 	 * <h2><strong>Responses:</strong></h2>
 	 * <strong>STATUS 200</strong> -- application/json, возвращает JSON map, представляющую собой несколько упорядоченных
 	 * <br>
@@ -2421,7 +2429,8 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	//@formatter:on
 	@GET("/wiki/rest/api/content/{contentId}/descendant")
 	Call<DescendantsResult> getContentDescendants(final @Path("contentId") String parentContentId,
-	                                              final @Query("expand") String expand);
+	                                              final @Query("expand") String expand,
+	                                              final @QueryMap Map<String, String> params);
 	//----------- content/{id}/descendant Конец ---------------
 	//----------------------------------------------------------------------------------------
 	
