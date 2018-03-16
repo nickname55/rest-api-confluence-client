@@ -1507,13 +1507,48 @@ public class Confluence
 	
 	//----------- content/{id}/descendant Начало ---------------
 	//----------------------------------------------------------------------------------------
-	DescendantsResult getContentDescendants(final String parentContentId,
-	                                        final String expand,
-	                                        final Map<String, String> params) throws IOException
+	
+	/**
+	 * Получить дочерние элементы для заданного элемента контента
+     * <br>
+     *
+     * @param parentContentId
+     * @param expand
+     *
+     * @return
+     *
+     * @throws IOException
+     */
+	public DescendantsResult getContentDescendants(final String parentContentId,
+	                                        final String expand) throws IOException
 	{
-		Call<DescendantsResult> contentDescendantCall = confluenceApi.getContentDescendants(parentContentId, expand, params);
+		Call<DescendantsResult> contentDescendantCall = confluenceApi.getContentDescendants(parentContentId, expand);
 		Response<DescendantsResult> response = contentDescendantCall.execute();
 		DescendantsResult body = response.body();
+		return body;
+	}
+	
+	/**
+	 * Получить дочерние элементы (отобранные по типу)
+     * <br>
+     *
+     * @param parentContentId
+     * @param type
+     * @param expand
+     * @param params
+     *
+     * @return
+     *
+     * @throws IOException
+     */
+	public ContentResultList getContentDescendantsByType(final String parentContentId,
+	                                              final String type,
+	                                              final String expand,
+	                                              final Map<String, String> params) throws IOException
+	{
+		Call<ContentResultList> contentDescendantCall = confluenceApi.getContentDescendantsByType(parentContentId, type, expand, params);
+		Response<ContentResultList> response = contentDescendantCall.execute();
+		ContentResultList body = response.body();
 		return body;
 	}
 	//----------- content/{id}/descendant Конец ---------------

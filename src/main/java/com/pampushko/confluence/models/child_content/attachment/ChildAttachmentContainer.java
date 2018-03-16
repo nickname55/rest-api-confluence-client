@@ -1,6 +1,8 @@
 package com.pampushko.confluence.models.child_content.attachment;
 
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
+import com.pampushko.confluence.custom_deserialazers.ExpandablePropDeserializer;
 import com.pampushko.confluence.models.BaseModel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -45,6 +47,14 @@ public class ChildAttachmentContainer extends BaseModel
 	 */
 	private ChildAttachmentMetadata metadata;
 	
+	
+	/**
+	 * todo проверить необходимость наличия этого свойства
+	 * <p>
+	 */
+	@JsonAdapter(value = ExpandablePropDeserializer.class)
+	@SerializedName("macroRenderedOutput")
+	private ChildAttachmentMacroRenderedOutput macroRenderedOutput;
 	
 	/**
 	 * <p>

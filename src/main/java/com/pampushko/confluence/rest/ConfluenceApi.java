@@ -2313,8 +2313,6 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 * <ul>
 	 *     <li>expand (String) -- разделённый запятыми список свойств, для разворачивания (expand) дочерних элементов <br>
 	 *         (<strong>добавлен в качестве отдельного параметра в текущий метод. Это параметр final @Query("expand") String expand</strong>)</li>
-	 *     <li>start (int) -- Optional -- Default: <strong>0</strong> -- индекс первого элемента в результирующем возвращаемом наборе элементов</li>
-	 *     <li>limit (int) -- Optional -- Default: <strong>25</strong> -- сколько элементов из результирующего возвращаемого набора вы хотите получить (после начального индекса, после start)</li>
 	 * </ul>
 	 * <h2><strong>Responses:</strong></h2>
 	 * <strong>STATUS 200</strong> -- application/json, возвращает JSON map, представляющую собой несколько упорядоченных
@@ -2429,8 +2427,148 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	//@formatter:on
 	@GET("/wiki/rest/api/content/{contentId}/descendant")
 	Call<DescendantsResult> getContentDescendants(final @Path("contentId") String parentContentId,
-	                                              final @Query("expand") String expand,
-	                                              final @QueryMap Map<String, String> params);
+	                                              final @Query("expand") String expand);
+	
+	
+	//@formatter:off
+	/**
+	 * Возвращает direct descendants (непосредственных потомков) для указанного вами элемента контента,
+	 * <br>
+	 * Дочерние элементы ограничены определённым типом (это path-параметр "type")
+	 * <br>
+	 * Currently the only supported descendants are comment descendants of non-comment Content.
+	 * <br>
+	 * <p>
+	 * <strong>Примеры URI запросов:</strong>
+	 * <ul>
+	 * <li>http://example.com/rest/api/content/1234/descendant/comment</li>
+	 * <li>http://example.com/rest/api/content/1234/descendant/comment?expand=body.VIEW</li>
+	 * <li>http://example.com/rest/api/content/1234/descendant/comment?start=20&limit=10</li>
+	 * </ul>
+	 * <p>
+	 * <strong>Дополнительные параметры</strong>
+	 * <ul>
+	 *     <li>expand (String) -- разделённый запятыми список свойств, для разворачивания (expand) дочерних элементов <br>
+	 *         (<strong>добавлен в качестве отдельного параметра в текущий метод. Это параметр final @Query("expand") String expand</strong>)</li>
+	 *     <li>start (int) -- Optional -- Default: <strong>0</strong> -- индекс первого элемента в результирующем возвращаемом наборе элементов</li>
+	 *     <li>limit (int) -- Optional -- Default: <strong>25</strong> -- сколько элементов из результирующего возвращаемого набора вы хотите получить (после начального индекса, после start)</li>
+	 * </ul>
+	 * <h2><strong>Responses:</strong></h2>
+	 * <strong>STATUS 200</strong> -- application/json, возвращает JSON map, представляющую собой несколько упорядоченных
+	 * <br>
+	 * коллекций дочерних элементов (descendants) указанного элемента контента. С ключом по типу содержимого
+	 * <blockquote><PRE>
+{
+    "page": {
+        "results": [
+            {
+                "id": "1234",
+                "typeq": "page",
+                "status": "current",
+                "title": "Example Content title",
+                "links": {},
+                "space": {
+                    "id": 11,
+                    "key": "TST",
+                    "name": "Example space",
+                    "icon": null,
+                    "description": {
+                        "plain": {
+                            "representation": "plain",
+                            "value": "This is an example space",
+                            "webresource": null
+                        }
+                    },
+                    "homepage": null,
+                    "links": {},
+                    "metadata": {}
+                },
+                "history": null,
+                "version": {
+                    "by": {
+                        "type": "known",
+                        "username": "username",
+                        "displayName": "Full Name",
+                        "userKey": "",
+                        "status": null
+                    },
+                    "when": "2018-03-05T02:39:02.546Z",
+                    "message": "change message for this edit",
+                    "number": 2,
+                    "minorEdit": false,
+                    "hidden": false,
+                    "content": null
+                },
+                "ancestors": [
+                    {
+                        "id": "123",
+                        "type": "page",
+                        "status": "current",
+                        "links": {},
+                        "space": null,
+                        "history": null,
+                        "version": null,
+                        "ancestors": [],
+                        "operations": [],
+                        "children": {},
+                        "descendants": {},
+                        "container": null,
+                        "body": {},
+                        "metadata": {},
+                        "extensions": {},
+                        "restrictions": {}
+                    }
+                ],
+                "operations": [],
+                "children": {},
+                "descendants": {},
+                "container": {
+                    "id": 11,
+                    "key": "TST",
+                    "name": "Example space",
+                    "icon": null,
+                    "description": {
+                        "plain": {
+                            "representation": "plain",
+                            "value": "This is an example space",
+                            "webresource": null
+                        }
+                    },
+                    "homepage": null,
+                    "links": {},
+                    "metadata": {}
+                },
+                "body": {
+                    "view": {
+                        "representation": "view",
+                        "value": "&lt;p&gt;&lt;h1&gt;Example&lt;/h1&gt;Some example content body&lt;/p&gt;",
+                        "webresource": null,
+                        "content": null
+                    }
+                },
+                "metadata": {},
+                "extensions": {},
+                "restrictions": {}
+            }
+        ],
+        "size": 1
+    }
+}
+	 * </PRE></blockquote>
+	 * <p>
+	 * <strong>STATUS 404</strong> -- такой статус вы получите, если по указанному идентификатору элемент контента не найден, или же, если пользователь не имеет разрешения на просмотр содержимого
+	 * <br>
+	 *
+	 * @param expand разделяемый запятыми список, состоящий из свойств потомков (descendants) перечисляя свойства в списке, мы указываем, что хотим их развернуть (expand)
+	 *
+	 * @return несколько упорядоченных коллекций дочерних элементов (descendants) указанного элемента контента. С ключом по типу содержимого.
+	 */
+	//@formatter:on
+	@GET("/wiki/rest/api/content/{contentId}/descendant/{type}")
+	Call<ContentResultList> getContentDescendantsByType(final @Path("contentId") String parentContentId,
+	                                                    final @Path("type") String type,
+	                                                    final @Query("expand") String expand,
+	                                                    final @QueryMap Map<String, String> params);
 	//----------- content/{id}/descendant Конец ---------------
 	//----------------------------------------------------------------------------------------
 	

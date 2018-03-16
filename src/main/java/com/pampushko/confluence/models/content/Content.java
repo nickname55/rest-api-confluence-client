@@ -1,6 +1,8 @@
 package com.pampushko.confluence.models.content;
 
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
+import com.pampushko.confluence.custom_deserialazers.ExpandablePropDeserializer;
 import com.pampushko.confluence.models.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -142,6 +144,25 @@ public class Content extends BaseModel
 	 */
 	@SerializedName("space")
 	Space space;
+	
+	//-------------------------------------------------------------------------
+	
+	/**
+	 * свойство добавлено для совместимости с функцией get descendant content by type
+	 * <br>
+	 */
+	@JsonAdapter(value = ExpandablePropDeserializer.class)
+	@SerializedName("macroRenderedOutput")
+	ContentResultListMacroRenderedOutput macroRenderedOutput;
+	
+	/**
+	 * свойство добавлено для совместимости с функцией get descendant content by type
+	 * <br>
+	 */
+	@JsonAdapter(value = ExpandablePropDeserializer.class)
+	@SerializedName("extensions")
+	ContentResultListExtensions extensions;
+	
 	//-------------------------------------------------------------------------
 	
 	/**

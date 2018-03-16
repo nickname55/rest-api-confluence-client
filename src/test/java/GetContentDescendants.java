@@ -1,8 +1,8 @@
-package com.pampushko.confluence.rest;
-
-import com.pampushko.confluence.models.content.ContentResultList;
-import com.pampushko.confluence.models.enums.ContentType;
+import com.pampushko.confluence.rest.Confluence;
 import com.pampushko.confluence.settings.SettingsManager;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -10,17 +10,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-/**
- * Базовый класс для запуска клиента
- * <br>
- */
+@Getter
+@Setter
+@EqualsAndHashCode
 @Slf4j
-public class Main
+public class GetContentDescendants
 {
-	public static final String url = "";
-	private static final String username = "";
-	private static final String password = "";
-	
 	public static void main(String[] args) throws IOException
 	{
 		
@@ -40,13 +35,13 @@ public class Main
 		Map<String, String> params = new HashMap<String, String>()
 		{
 			{
-				put("start", "0");
-				put("limit", "10");
+				put("start", "3");
+				put("limit", "0");
 			}
 		};
 		
 		//выполняем запрос и печатаем результат
-		ContentResultList contentDescendantsMap = confluence.getContentDescendantsByType(contentId, ContentType.page.toString(), expand, params);
+		Object contentDescendantsMap = confluence.getContentDescendants(contentId, expand);
 		System.out.println(contentDescendantsMap);
 	}
 }

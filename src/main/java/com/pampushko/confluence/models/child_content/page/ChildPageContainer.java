@@ -1,6 +1,8 @@
 package com.pampushko.confluence.models.child_content.page;
 
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
+import com.pampushko.confluence.custom_deserialazers.ExpandablePropDeserializer;
 import com.pampushko.confluence.models.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -42,6 +44,12 @@ public class ChildPageContainer extends BaseModel
 	 */
 	private Extensions extensions;
 	
+	/**
+	 * <br>
+	 */
+	@JsonAdapter(value = ExpandablePropDeserializer.class)
+	@SerializedName("macroRenderedOutput")
+	private ChildPageMacroRenderedOutput macroRenderedOutput;
 	//------------------------------------------------------------------------------
 	
 	/**

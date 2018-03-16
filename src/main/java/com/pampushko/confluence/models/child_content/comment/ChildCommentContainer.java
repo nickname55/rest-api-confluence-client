@@ -1,6 +1,8 @@
 package com.pampushko.confluence.models.child_content.comment;
 
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
+import com.pampushko.confluence.custom_deserialazers.ExpandablePropDeserializer;
 import com.pampushko.confluence.models.BaseModel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -39,6 +41,14 @@ public class ChildCommentContainer extends BaseModel
 	 * <p>
 	 */
 	private String title;
+	
+	
+	/**
+	 * todo проверить необходимость этого свойства
+	 */
+	@JsonAdapter(value = ExpandablePropDeserializer.class)
+	@SerializedName("macroRenderedOutput")
+	ChildCommentMacroRenderedOutput macroRenderedOutput;
 	
 	/**
 	 * <p>
