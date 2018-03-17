@@ -35,7 +35,7 @@ public class DeleteLabelsTest
 		//создаём список из меток
 		List<Label> labels = new ArrayList<>();
 		final String labelName1 = "test1";
-		final String labelName2 = "test\\2"; //а вот эта метка не удаляется?
+		final String labelName2 = "test\\2"; //а вот эта метка не удаляется? //todo проверить как удалять такие метки
 		
 		final String labelName3 = "test/3";
 		
