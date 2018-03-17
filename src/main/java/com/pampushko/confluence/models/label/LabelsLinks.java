@@ -28,4 +28,18 @@ public class LabelsLinks
 	 */
 	@SerializedName("self")
 	String self;
+	
+	/**
+	 * Пример: "https://java-java.atlassian.net/wiki"
+	 * <p>
+	 */
+	@SerializedName("base")
+	String base;
+	
+	/**
+	 * Пример: "/wiki"
+	 * <p>
+	 */
+	@SerializedName("context")
+	String context;
 }

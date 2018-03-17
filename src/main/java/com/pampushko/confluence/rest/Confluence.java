@@ -19,6 +19,8 @@ import com.pampushko.confluence.models.enums.ContentType;
 import com.pampushko.confluence.models.group.Group;
 import com.pampushko.confluence.models.group.GroupResultList;
 import com.pampushko.confluence.models.history.HistoryContainer;
+import com.pampushko.confluence.models.label.Label;
+import com.pampushko.confluence.models.label.LabelResultList;
 import com.pampushko.confluence.models.macros.Macros;
 import com.pampushko.confluence.models.search.SearchResultList;
 import com.pampushko.confluence.models.user.UserResultList;
@@ -31,10 +33,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.http.*;
+import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -1529,7 +1533,7 @@ public class Confluence
 	}
 	
 	/**
-	 * Получить дочерние элементы (отобранные по типу)
+     * Получить дочерние элементы (отобранные по типу)
      * <br>
      *
      * @param parentContentId
@@ -1552,6 +1556,59 @@ public class Confluence
 		return body;
 	}
 	//----------- content/{id}/descendant Конец ---------------
+	//----------------------------------------------------------------------------------------
+	
+	
+	//----------- content/{id}/label Начало ---------------
+	//----------------------------------------------------------------------------------------
+	
+	/**
+	 * @param contentId
+     *
+     * @return
+     */
+	public LabelResultList getLabels(final @Path("contentId") String contentId)throws IOException
+	{
+		Call<LabelResultList> labelsCall = confluenceApi.getLabels(contentId);
+		Response<LabelResultList> response = labelsCall.execute();
+		LabelResultList labelResultList = response.body();
+		return labelResultList;
+	}
+	
+	/**
+	 * Добавляет метку к заданному контенту
+	 * <br>
+	 * Если метка уже присутствует, то ничего не происходит, но она возращается в списке добавленных.
+	 * <br>
+	 * @param contentId
+	 * @param labels
+	 * @return
+	 */
+	public LabelResultList addLabels(final String contentId,
+	                                 final List<Label> labels)throws IOException
+	{
+		Call<LabelResultList> responseCall = confluenceApi.addLabels(contentId, labels);
+		Response<LabelResultList> response = responseCall.execute();
+		LabelResultList body = response.body();
+		return body;
+	}
+	
+	/**
+	 * удаляем метку
+	 * @param contentId
+	 * @param labelName
+	 * @return
+	 */
+	public Object deleteLabels(final String contentId,
+	                    final String labelName)throws IOException
+	{
+		Call<Object> responseCall = confluenceApi.deleteLabels(contentId, labelName);
+		Response<Object> objectResponse = responseCall.execute();
+		Object body = objectResponse.body();
+		return body;
+	}
+	
+	//----------- content/{id}/label Конец ---------------
 	//----------------------------------------------------------------------------------------
 	
 }

@@ -18,6 +18,8 @@ import com.pampushko.confluence.models.content_descendant.DescendantsResult;
 import com.pampushko.confluence.models.group.Group;
 import com.pampushko.confluence.models.group.GroupResultList;
 import com.pampushko.confluence.models.history.HistoryContainer;
+import com.pampushko.confluence.models.label.Label;
+import com.pampushko.confluence.models.label.LabelResultList;
 import com.pampushko.confluence.models.macros.Macros;
 import com.pampushko.confluence.models.search.SearchResultList;
 import com.pampushko.confluence.models.user.UserResultList;
@@ -29,6 +31,7 @@ import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.*;
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -683,7 +686,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	                                       final @Path("hash") String hash);
 	
 	/**
-	 * Возращает тело макроса (в storage формате) с указанным id.
+     * Возращает тело макроса (в storage формате) с указанным id.
      * <br>
      * Этот функция в основном используется connect-приложениями
      * <br>
@@ -722,7 +725,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	                                          final @Path("macroId") String macroId);
 	
 	/**
-	 * Получить список элементов контента,
+     * Получить список элементов контента,
      * используя для запроса Confluence Query Language (CQL)
      *
      * @param cql
@@ -758,7 +761,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	//----------------------------------------------------------------------------------------
 	
 	/**
-	 * Fetch a paginated list of AuditRecord instances dating back to a certain time
+     * Fetch a paginated list of AuditRecord instances dating back to a certain time
      * <br>
      * <strong>Дополнительные параметры</strong>
      * <ul>
@@ -775,7 +778,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	Call<AuditResultList> getAudit(final @QueryMap Map<String, String> params);
 	
 	/**
-	 * Store record
+     * Store record
      * <br>
      *
      * @param audit
@@ -786,7 +789,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	Call<Audit> createAudit(final @Body Audit audit);
 	
 	/**
-	 * <br>
+     * <br>
      * <strong>Дополнительные параметры</strong>
      * <ul>
      * <li>startDate (String) -- </li>
@@ -810,7 +813,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	Call<ResponseBody> exportAudit(@Header("Accept") String acceptHeader, final @QueryMap Map<String, String> params);
 	
 	/**
-	 * Получаем текущий период хранения (Fetches the current retention period)
+     * Получаем текущий период хранения (Fetches the current retention period)
      * <p>
      * <strong>Responses</strong>
      * application/json
@@ -821,7 +824,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	Call<RetentionPeriod> getRetentionPeriodOfAudit();
 	
 	/**
-	 * Устанавливаем текущий период хранения (Set the retention period to a new value.)
+     * Устанавливаем текущий период хранения (Set the retention period to a new value.)
      * <p>
      * Can throw ServiceException if the retention period is too long
      *
@@ -833,7 +836,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	Call<RetentionPeriod> setRetentionPeriodOfAudit(final @Body RetentionPeriod newRetentionPeriod);
 	
 	/**
-	 * Fetch a paginated list of AuditRecord instances dating back to a certain time
+     * Fetch a paginated list of AuditRecord instances dating back to a certain time
      * <br>
      * <strong>Дополнительные параметры</strong>
      * <ul>
@@ -2572,7 +2575,127 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	//----------- content/{id}/descendant Конец ---------------
 	//----------------------------------------------------------------------------------------
 	
+	//----------- content/{id}/label Начало ---------------
+	//----------------------------------------------------------------------------------------
+	
+	/**
+	 * Возвращает список меток, для указанного элемента контента.
+	 * <p>
+	 * <strong>Примеры URI запросов:</strong>
+	 * <ul>
+	 * <li>http://example.com/rest/api/content/1234/label</li>
+	 * <li>http://example.com/rest/api/content/1234/label?prefix=global&start=0&limit=200</li>
+	 * </ul>
+	 * <p>
+	 * <strong>Дополнительные параметры</strong>
+	 * <ul>
+	 * <li>prefix (String) -- префиксы для фильтрации меток с помощью Label.Prefix (смотрите дополнительно)</li>
+	 * <li>start (int) -- Optional -- Default: <strong>0</strong> -- индекс первого элемента в результирующем возвращаемом наборе элементов</li>
+	 * <li>limit (int) -- Optional -- Default: <strong>200</strong> -- сколько элементов из результирующего возвращаемого набора вы хотите получить (после начального индекса, после start)</li>
+	 * </ul>
+	 * <h2><strong>Responses:</strong></h2>
+	 * <strong>STATUS 200</strong> -- application/json, возвращает список меток в JSON-формате (меток привязанных к элементу контента, id которого мы указали в запросе)
+	 * <br>
+	 * <strong>STATUS 404</strong> -- возвращается, если не существует элемента контента, соответствующего указанному нами идентификатору, или если пользователь выполняющий запрос не имеет достаточных прав доступа для просмотра контента.
+	 *
+	 * @param contentId
+	 * 		идентификатор элемента контента, метки этого элемента контента мы хотим получить
+	 *
+	 * @return объект содержащий список меток
+	 */
+	@GET("/wiki/rest/api/content/{contentId}/label")
+	Call<LabelResultList> getLabels(final @Path("contentId") String contentId);
+	
+	//@formatter:off
+	/**
+	 * Функция добавляет список меток к указанному элементу контента.
+	 * <br>
+	 * Тело запроса представляет собой JSON-представление списка меток.
+	 * <br>
+	 * <h2><strong>Request:</strong></h2>
+	 * <strong>Пример</strong>
+	 * <blockquote><PRE>
+[
+    {
+        "prefix": "global",
+        "name": "label1"
+    },
+    {
+        "prefix": "global",
+        "name": "label2"
+    }
+]
+	 * </PRE></blockquote>
+	 *
+	 * <h2><strong>Responses:</strong></h2>
+	 * <strong>STATUS 200</strong> -- application/json, возвращает список меток в JSON-формате (меток привязанных к элементу контента, id которого мы указали в запросе)
+	 * <br>
+	 * <strong>STATUS 404</strong> -- возвращается, если не существует элемента контента, соответствующего указанному нами идентификатору, или если пользователь выполняющий запрос не имеет достаточных прав доступа для просмотра контента.
+	 *
+	 * <br>
+	 * @param contentId идентификатор элемента контента, к этому элементу контента мы добавляем метки
+	 * @param labels список объектов Label, которые при отправке запроса конвертируется в JSON-список
+	 * @return todo описать возвращаемое значение
+	 */
+	//@formatter:on
+	@POST("/wiki/rest/api/content/{contentId}/label")
+	Call<LabelResultList> addLabels(final @Path("contentId") String contentId,
+	                                final @Body List<Label> labels);
+	
+	/**
+	 * Удаляет метки (?) для указанного при помощи id элемента контента
+	 * <h2><strong>Responses:</strong></h2>
+	 * <strong>STATUS 204</strong> -- пустой ответ, возвращается при успешном удалении
+	 * <br>
+	 * <strong>STATUS 403</strong> -- возвращается, если у пользователя есть разрешение на просмотр, но отсутствует разрешение на редактирование контента.
+	 * <br>
+	 * <strong>STATUS 404</strong> -- возвращается, если не существует элемента контента, соответствующего указанному нами идентификатору, или если пользователь выполняющий запрос не имеет достаточных прав доступа для просмотра контента.
+	 * <br>
+	 *
+	 * @param contentId
+	 * 		идентификатор интересующего нас элемента контента
+	 * @param labelName
+	 * 		имя метки, которую мы хотим удалить
+	 *
+	 * @return todo описать возвращаемое значение
+	 */
+	@DELETE("/wiki/rest/api/content/{contentId}/label")
+	Call<Object> deleteLabels(final @Path("contentId") String contentId,
+	                          @Query(value = "name", encoded = false) String labelName);
+	
+	/**
+	 * Удаляет метки (?) для указанного при помощи id элемента контента,
+	 * <br>
+	 * Отличается от метода {@link #deleteLabels(String, String)} тем,
+	 * <br>
+	 * что при вызове текущего метода нельзя передать в строке-значение параметра labelName символ "/"
+	 * <br>
+	 * (то есть нельзя указать имя метки, если она содержит такой символ).
+	 * <br>
+	 * Выполнить это не позволяют ограничения безопасности.
+	 * <br>
+	 * В данном случае предлагается вместо текущего метода, модификацию {@link #deleteLabels(String, String)}
+	 * <h2><strong>Responses:</strong></h2>
+	 * <strong>STATUS 204</strong> -- пустой ответ, возвращается при успешном удалении
+	 * <br>
+	 * <strong>STATUS 400</strong> -- возвращается, если вы пытаетесь удалить метку с символом "/" в имени метки.
+	 * <br>
+	 * <strong>STATUS 403</strong> -- возвращается, если у пользователя есть разрешение на просмотр, но отсутствует разрешение на редактирование контента.
+	 * <br>
+	 * <strong>STATUS 404</strong> -- возвращается, если не существует элемента контента, соответствующего указанному нами идентификатору, или если пользователь выполняющий запрос не имеет достаточных прав доступа для просмотра контента.
+	 * <br>
+	 *
+	 * @param contentId
+	 * 		идентификатор интересующего нас элемента контента
+	 * @param labelName
+	 * 		имя метки, которую мы хотим удалить
+	 *
+	 * @return todo описать возвращаемое значение
+	 */
+	@DELETE("/wiki/rest/api/content/{contentId}/label/{labelName}")
+	Call<Object> deleteLabelsWithoutQueryParam(final @Path("contentId") String contentId,
+	                                           final @Path("labelName") String labelName);
+	//----------- content/{id}/label Конец ---------------
+	//----------------------------------------------------------------------------------------
 	
 }
-
-

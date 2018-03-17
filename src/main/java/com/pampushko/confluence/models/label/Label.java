@@ -1,6 +1,7 @@
 package com.pampushko.confluence.models.label;
 
 import com.google.gson.annotations.SerializedName;
+import com.pampushko.confluence.models.BaseModel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -41,23 +42,39 @@ import lombok.extern.slf4j.Slf4j;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 @Slf4j
-public class Label
+public class Label extends BaseModel
 {
-	/**
-	 * <p>
-	 */
-	@SerializedName("id")
-	private String id;
 	
 	/**
+	 * Пример: "global"
+	 * <p>
+	 */
+	@SerializedName("prefix")
+	private String prefix;
+	
+	/**
+	 * Пример: "test1" (обычно значение совпадает со значением свойства label)
 	 * <p>
 	 */
 	@SerializedName("name")
 	private String name;
 	
 	/**
+	 * Пример: "208666625"
 	 * <p>
 	 */
-	@SerializedName("prefix")
-	private String prefix;
+	@SerializedName("id")
+	private String id;
+	
+	/**
+	 * имя метки
+	 * <p>
+	 */
+	@SerializedName("label")
+	private String label;
+	
+	public Label(final String labelName)
+	{
+		this.name = labelName;
+	}
 }

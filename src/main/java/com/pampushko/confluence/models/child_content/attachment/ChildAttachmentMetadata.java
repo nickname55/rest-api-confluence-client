@@ -3,7 +3,7 @@ package com.pampushko.confluence.models.child_content.attachment;
 import com.google.gson.annotations.SerializedName;
 import com.pampushko.confluence.models.BaseModel;
 import com.pampushko.confluence.models.attachment.create.child_objects.CrAttMetadataExpandable;
-import com.pampushko.confluence.models.label.Labels;
+import com.pampushko.confluence.models.label.LabelResultList;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,7 +35,7 @@ public class ChildAttachmentMetadata extends BaseModel
 	 *
 	 */
 	@SerializedName("labels")
-	Labels labels;
+	LabelResultList labels;
 	
 	/**
 	 *
