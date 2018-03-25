@@ -15,6 +15,10 @@ import com.pampushko.confluence.models.content.Content;
 import com.pampushko.confluence.models.content.ContentContainter;
 import com.pampushko.confluence.models.content.ContentResultList;
 import com.pampushko.confluence.models.content_descendant.DescendantsResult;
+import com.pampushko.confluence.models.content_property.PropListResponseContainer;
+import com.pampushko.confluence.models.content_property.PropResponse;
+import com.pampushko.confluence.models.content_property.PropertyOfContent;
+import com.pampushko.confluence.models.content_property.PropertyOfContentWithVersion;
 import com.pampushko.confluence.models.group.Group;
 import com.pampushko.confluence.models.group.GroupResultList;
 import com.pampushko.confluence.models.history.HistoryContainer;
@@ -2696,6 +2700,398 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	Call<Object> deleteLabelsWithoutQueryParam(final @Path("contentId") String contentId,
 	                                           final @Path("labelName") String labelName);
 	//----------- content/{id}/label Конец ---------------
+	//----------------------------------------------------------------------------------------
+	
+	
+	//----------- content/{id}/property Начало ---------------
+	//----------------------------------------------------------------------------------------
+	
+	
+	//@formatter:off
+	/**
+	 * Функция возвращает свойства для указанного элемента контента
+	 * <p>
+	 * <strong>Примеры URI запросов:</strong>
+	 * <ul>
+	 * <li>http://example.com/rest/api/content/1234/property/example-property-key?expand=content,version</li>
+	 * </ul>
+	 * <br>
+	 *
+	 *<br>
+	 * <strong>Дополнительные параметры</strong>
+	 * <ul>
+	 *     <li>expand (String) -- Default : <strong>version</strong> -- список свойств, с запятыми в качестве разделителя, для того чтобы вы могли указать какое содержимое вы хотите видеть в ответе на запрос.</li>
+	 *     <li>start (int) -- the start point of the collection to return</li>
+	 *     <li>limit (int) -- Default : <strong>10</strong> -- the limit of the number of items to return, this may be restricted by fixed system limits</li>
+	 * </ul>
+	 * <br>
+	 * <h2><strong>Responses:</strong></h2>
+	 * <strong>STATUS 200</strong> -- application/json, возвращает список свойств контента в JSON-формате (для контента, id которого мы указали в запросе)
+	 * <br>
+	 * <blockquote><PRE>
+{
+    "results": [
+        {
+            "content": {
+                "id": "1234",
+                "type": "page",
+                "status": "current",
+                "ancestors": [],
+                "operations": [],
+                "children": {},
+                "descendants": {},
+                "body": {},
+                "metadata": {},
+                "restrictions": {},
+                "_links": {
+                    "self": "http://myhost:8080/confluence/rest/api/content/1234"
+                }
+            },
+            "key": "example-property-key",
+            "value": {
+                "anything": "goes"
+            },
+            "version": {
+                "number": 2,
+                "minorEdit": false,
+                "hidden": false
+            },
+            "_links": {
+                "self": "http://myhost:8080/confluence/rest/api/content/1234/property/example-property-key"
+            }
+        }
+    ],
+    "size": 1,
+    "_links": {
+        "base": "http://myhost:8080/confluence",
+        "context": "/confluence"
+    }
+}
+	 * </PRE></blockquote>
+	 *
+	 * <strong>STATUS 404</strong> -- возвращается, если не существует элемента контента, соответствующего указанному нами идентификатору, или если пользователь выполняющий запрос не имеет достаточных прав доступа для просмотра контента.
+	 *
+	 * <br>
+	 * @param contentId идентификатор элемента контента, к этому элементу контента относятся свойства (properties)
+	 * @return todo описать возвращаемое значение
+	 */
+	//@formatter:on
+	@GET("/wiki/rest/api/content/{contentId}/property")
+	Call<PropListResponseContainer> getContentProperties(final @Path("contentId") String contentId);
+	
+	//@formatter:off
+	/**
+	 * Функция возвращает свойства для указанного элемента контента
+	 * <p>
+	 * <strong>Примеры URI запросов:</strong>
+	 * <ul>
+	 * <li>http://example.com/rest/api/content/1234/property/example-property-key?expand=content,version</li>
+	 * </ul>
+	 * <br>
+	 *
+	 *<br>
+	 * <strong>Дополнительные параметры</strong>
+	 * <ul>
+	 *     <li>expand (String) -- Default : <strong>version</strong> -- список свойств, с запятыми в качестве разделителя, для того чтобы вы могли указать какое содержимое вы хотите видеть в ответе на запрос.</li>
+	 * </ul>
+	 * <br>
+	 * <h2><strong>Responses:</strong></h2>
+	 * <strong>STATUS 200</strong> -- application/json, возвращает полный список свойств контента в JSON-формате (для контента, id которого мы указали в запросе)
+	 * <br>
+	 * <blockquote><PRE>
+{
+    "content": {
+        "id": "1234",
+        "type": "page",
+        "status": "current",
+        "ancestors": [],
+        "operations": [],
+        "children": {},
+        "descendants": {},
+        "body": {},
+        "metadata": {},
+        "restrictions": {},
+        "_links": {
+            "self": "http://myhost:8080/confluence/rest/api/content/1234"
+        }
+    },
+    "key": "example-property-key",
+    "value": {
+        "anything": "goes"
+    },
+    "version": {
+        "number": 2,
+        "minorEdit": false,
+        "hidden": false
+    },
+    "_links": {
+        "base": "http://myhost:8080/confluence",
+        "context": "/confluence",
+        "self": "http://myhost:8080/confluence/rest/api/content/1234/property/example-property-key"
+    }
+}
+	 * </PRE></blockquote>
+	 *
+	 * <strong>STATUS 404</strong> -- возвращается, если не существует элемента контента, соответствующего указанному нами идентификатору, или нет свойства с заданным ключом (key), или если пользователь отправляющий запрос не имеет разрешения на просмотр данного контента.
+	 *
+	 * <br>
+	 * @param contentId идентификатор элемента контента, к этому элементу контента относятся свойства (properties)
+	 * @param propKey ключ, принадлежащий свойству (property) элемента контента
+	 * @return todo описать возвращаемое значение
+	 */
+	//@formatter:on
+	@GET("/wiki/rest/api/content/{contentId}/property/{propKey}")
+	Call<PropResponse> findByKeyContentProperties(final @Path("contentId") String contentId,
+	                                              final @Path("propKey") String propKey);
+	
+	
+	//@formatter:off
+	/**
+	 * Функция обновляет свойство элемента контента.
+	 * <br>
+	 * Тело запроса представляет собой JSON-представление свойства элемента контента.
+	 * <br>
+	 * Оно должно включать идентификаторо свойства и номер новой версии.
+	 * <br>
+	 * Попытка создать новое свойство, если заданный номер версии равен 1,
+	 * <br>
+	 * Выглядит как: {@link #create(com.atlassian.confluence.api.model.content.id.ContentId, String, com.atlassian.confluence.api.model.content.JsonContentProperty)}.
+	 * <br>
+	 * <h2><strong>Request:</strong></h2>
+	 * <strong>Пример</strong>
+	 * <blockquote><PRE>
+{
+    "key": "example-property-key",
+    "value": {
+        "anything": "goes"
+    },
+    "version": {
+        "number": 2,
+        "minorEdit": false,
+        "hidden": false
+    }
+}
+	 * </PRE></blockquote>
+	 *
+	 * <h2><strong>Responses:</strong></h2>
+	 * <strong>STATUS 200</strong> -- application/json, возвращает полное JSON-представление элемента контента
+	 * <br>
+	 * <blockquote><PRE>
+{
+    "content": {
+        "id": "1234",
+        "type": "page",
+        "status": "current",
+        "ancestors": [],
+        "operations": [],
+        "children": {},
+        "descendants": {},
+        "body": {},
+        "metadata": {},
+        "restrictions": {},
+        "_links": {
+            "self": "http://myhost:8080/confluence/rest/api/content/1234"
+        }
+    },
+    "key": "example-property-key",
+    "value": {
+        "anything": "goes"
+    },
+    "version": {
+        "number": 2,
+        "minorEdit": false,
+        "hidden": false
+    },
+    "_links": {
+        "base": "http://myhost:8080/confluence",
+        "context": "/confluence",
+        "self": "http://myhost:8080/confluence/rest/api/content/1234/property/example-property-key"
+    }
+}
+	 </PRE></blockquote>
+	 * <strong>STATUS 400</strong> -- возвращается, если заданное свойство имеет не совпадающий с указанным в path идентификатор (ContentId), или если свойство имеет ключ (key), не совпдаающий с указанным в path ключом (key), или значение отсутствует, или значение имеет слишком большую длину.
+	 * <br>
+	 * <strong>STATUS 403</strong> -- возвращается, если у пользователя нет разрешения на редактирование содержимого с данным ContentId
+	 * <br>
+	 * <strong>STATUS 404</strong> -- возвращается, если нет элемента контента с указанным id, или если нет свойства с указанным ключом (key), или пользователь, выполняющий запрос, не имеет разрешения на просмотр данного элемента контента.
+	 * <br>
+	 * <strong>STATUS 409</strong> -- возвращается, если данная версия не соответствует ожидаемой целевой версии для обновляемого свойства.
+	 * <br>
+	 * <strong>STATUS 413</strong> -- возвращается, если значение имеет слишком большую длину.
+	 * <br>
+	 * @param contentId идентификатор элемента контента, к этому элементу контента мы добавляем новые свойства (properties)
+	 * @param propKey ключ, принадлежащий свойству (property) элемента контента
+	 * @return todo описать возвращаемое значение
+	 */
+	//@formatter:on
+	@PUT("/wiki/rest/api/content/{contentId}/property/{propKey}")
+	Call<PropResponse> updateContentProperties(final @Path("contentId") String contentId,
+	                                           final @Path("propKey") String propKey,
+	                                           final @Body PropertyOfContentWithVersion body);
+	
+	
+	//@formatter:off
+	/**
+	 * Функция удаляет свойство заданного элемента контента
+	 * <br>
+	 * </PRE></blockquote>
+	 *
+	 * <h2><strong>Responses:</strong></h2>
+	 * <strong>STATUS 204</strong> -- возвращается, если данное свойство успешно удалено
+	 * <br>
+	 * <strong>STATUS 403</strong> -- возвращается, если свойство с указанным ключом не найдено
+	 * <br>
+	 * <strong>STATUS 404</strong> -- возвращается, если нет контента с данным идентификатором (contentId)
+	 * или если отправляющий запрос пользователь не имеет достаточных прав доступа для просмотра указанного элемента контента.
+	 *
+	 * <br>
+	 * @param contentId идентификатор элемента контента, к этому элементу контента мы добавляем новые свойства (properties)
+	 * @param propKey ключ, принадлежащий свойству (property) элемента контента
+	 * @return todo описать возвращаемое значение
+	 */
+	//@formatter:on
+	@DELETE("/wiki/rest/api/content/{contentId}/property/{propKey}")
+	Call<Void> deleteContentProperties(final @Path("contentId") String contentId,
+	                                   final @Path("propKey") String propKey);
+	
+	
+	//@formatter:off
+	/**
+	 * Функция создаёт новое свойство для указанного элемента контента.
+	 * <br>
+	 * <h2><strong>Request:</strong></h2>
+	 * <strong>Пример</strong>
+	 * <blockquote><PRE>
+{
+    "key": "example-property-key",
+    "value": {
+        "anything": "goes"
+    }
+}
+	 * </PRE></blockquote>
+	 *
+	 * <h2><strong>Responses:</strong></h2>
+	 * <strong>STATUS 200</strong> -- application/json, возвращает полное JSON представление свойств контента
+	 * <br>
+	 * <blockquote><PRE>
+{
+    "content": {
+        "id": "1234",
+        "type": "page",
+        "status": "current",
+        "ancestors": [],
+        "operations": [],
+        "children": {},
+        "descendants": {},
+        "body": {},
+        "metadata": {},
+        "restrictions": {},
+        "_links": {
+            "self": "http://myhost:8080/confluence/rest/api/content/1234"
+        }
+    },
+    "key": "example-property-key",
+    "value": {
+        "anything": "goes"
+    },
+    "version": {
+        "number": 2,
+        "minorEdit": false,
+        "hidden": false
+    },
+    "_links": {
+        "base": "http://myhost:8080/confluence",
+        "context": "/confluence",
+        "self": "http://myhost:8080/confluence/rest/api/content/1234/property/example-property-key"
+    }
+}
+	 * </PRE></blockquote>
+	 * <strong>STATUS 400</strong> -- возвращается, если заданное свойство имеет другой ContentId (a different ContentId to the one in the path), или если контент уже имеет значение с заданным ключом, или значение отсутствует, или значение имеет слишком большую длину.
+	 * <br>
+	 * <strong>STATUS 403</strong> -- возвращается, если пользователь выполняющий запрос не имеет достаточных прав доступа для редактирования контента с указанным ContentId.
+	 * <br>
+	 * <strong>STATUS 409</strong> -- возвращается, если свойство с таким ключом уже существует.
+	 * <br>
+	 * <strong>STATUS 413</strong> -- возвращается, если значение имеет слишком большую длину
+	 * <br>
+	 * @param contentId идентификатор элемента контента, к этому элементу контента мы добавляем новые свойства (properties)
+	 * @param propKey ключ, принадлежащий свойству (property) элемента контента
+	 * @return todo описать возвращаемое значение
+	 */
+	//@formatter:on
+	@POST("/wiki/rest/api/content/{contentId}/property/{propKey}")
+	Call<PropResponse> createContentPropertiesWithKey(final @Path("contentId") String contentId,
+	                                                  final @Path("propKey") String propKey,
+	                                                  final @Body PropertyOfContent body);
+	
+	
+	//@formatter:off
+	/**
+	 * Функция новое свойство для указанного элемента контента.
+	 * <br>
+	 * <h2><strong>Request:</strong></h2>
+	 * <strong>Пример</strong>
+	 * <blockquote><PRE>
+{
+    "key": "example-property-key",
+    "value": {
+        "anything": "goes"
+    }
+}
+	 * </PRE></blockquote>
+	 *
+	 * <h2><strong>Responses:</strong></h2>
+	 * <strong>STATUS 200</strong> -- application/json, возвращает полное JSON представление свойств контента
+	 * <br>
+	 * <blockquote><PRE>
+{
+    "content": {
+        "id": "1234",
+        "type": "page",
+        "status": "current",
+        "ancestors": [],
+        "operations": [],
+        "children": {},
+        "descendants": {},
+        "body": {},
+        "metadata": {},
+        "restrictions": {},
+        "_links": {
+            "self": "http://myhost:8080/confluence/rest/api/content/1234"
+        }
+    },
+    "key": "example-property-key",
+    "value": {
+        "anything": "goes"
+    },
+    "version": {
+        "number": 2,
+        "minorEdit": false,
+        "hidden": false
+    },
+    "_links": {
+        "base": "http://myhost:8080/confluence",
+        "context": "/confluence",
+        "self": "http://myhost:8080/confluence/rest/api/content/1234/property/example-property-key"
+    }
+}
+	 * </PRE></blockquote>
+	 * <strong>STATUS 400</strong> -- возвращается, если заданное свойство имеет другой ContentId (a different ContentId to the one in the path), или если контент уже имеет значение с заданным ключом, или значение отсутствует, или значение имеет слишком большую длину.
+	 * <br>
+	 * <strong>STATUS 403</strong> -- возвращается, если пользователь выполняющий запрос не имеет достаточных прав доступа для редактирования контента с указанным ContentId.
+	 * <br>
+	 * <strong>STATUS 413</strong> -- возвращается, если значение имеет слишком большую длину
+	 * <br>
+	 * @param contentId идентификатор элемента контента, к этому элементу контента мы добавляем новые свойства (properties)
+	 * @return todo описать возвращаемое значение
+	 */
+	//@formatter:on
+	@POST("/wiki/rest/api/content/{contentId}/property")
+	Call<PropResponse> createContentProperties(final @Path("contentId") String contentId,
+	                                           final @Body PropertyOfContent body);
+
+	
+	//----------- content/{id}/property Конец ---------------
 	//----------------------------------------------------------------------------------------
 	
 }

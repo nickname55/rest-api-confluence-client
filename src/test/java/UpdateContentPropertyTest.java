@@ -1,6 +1,7 @@
-package com.pampushko.confluence.rest;
-
+import com.pampushko.confluence.models.Version;
 import com.pampushko.confluence.models.content_property.PropResponse;
+import com.pampushko.confluence.models.content_property.PropertyOfContentWithVersion;
+import com.pampushko.confluence.rest.Confluence;
 import com.pampushko.confluence.settings.SettingsManager;
 import lombok.extern.slf4j.Slf4j;
 
@@ -8,18 +9,14 @@ import java.io.IOException;
 import java.util.Properties;
 
 /**
- * Базовый класс для запуска клиента
- * <br>
+ *
  */
 @Slf4j
-public class Main
+public class UpdateContentPropertyTest
 {
-	public static final String url = "";
-	private static final String username = "";
-	private static final String password = "";
-	
 	public static void main(String[] args) throws IOException
 	{
+		
 		//читаем настройки приложения
 		Properties settings = SettingsManager.getValues();
 		
@@ -31,8 +28,19 @@ public class Main
 		
 		final String propKey = "hello5";
 		
+		//создаём новое свойства для контента (указываем для свойства версию)
+		PropertyOfContentWithVersion propertyOfContent = new PropertyOfContentWithVersion();
+		
+		propertyOfContent.setKey(propKey);
+		propertyOfContent.setValue("i chto eta you");
+		Version version = new Version();
+		version.setNumber(6);
+		propertyOfContent.setVersion(version);
+		
+		System.out.println(propertyOfContent);
+		
 		//выполняем запрос и печатаем результат
-		PropResponse prop = confluence.findByKeyContentProperties(contentId, propKey);
+		PropResponse prop = confluence.updateContentProperties(contentId, propKey, propertyOfContent);
 		System.out.println(prop);
 	}
 }
