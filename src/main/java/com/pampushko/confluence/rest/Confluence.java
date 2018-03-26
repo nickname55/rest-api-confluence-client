@@ -19,6 +19,8 @@ import com.pampushko.confluence.models.content_property.PropListResponseContaine
 import com.pampushko.confluence.models.content_property.PropResponse;
 import com.pampushko.confluence.models.content_property.PropertyOfContent;
 import com.pampushko.confluence.models.content_property.PropertyOfContentWithVersion;
+import com.pampushko.confluence.models.content_restriction.RestrictionResponseContainer;
+import com.pampushko.confluence.models.content_restriction.restriction.Restriction;
 import com.pampushko.confluence.models.enums.ContentType;
 import com.pampushko.confluence.models.group.Group;
 import com.pampushko.confluence.models.group.GroupResultList;
@@ -2636,10 +2638,13 @@ public class Confluence
 	 * </PRE></blockquote>
 	 * @return
 	 */
-	@GET("/wiki/rest/api/content/{id}/restriction/byOperation")
-	Call<Object> getContentRestrictionByOperation()
+	@GET("/wiki/rest/api/content/{contentId}/restriction/byOperation")public
+	RestrictionResponseContainer getContentRestrictionByOperation(final String contentId)throws IOException
 	{
-		return null;
+		Call<RestrictionResponseContainer> contentRestrictionByOperationCall = confluenceApi.getContentRestrictionByOperation(contentId);
+		Response<RestrictionResponseContainer> response = contentRestrictionByOperationCall.execute();
+		RestrictionResponseContainer body = response.body();
+		return body;
 	}
 	//@formatter:on
 	
@@ -3244,10 +3249,14 @@ public class Confluence
 	 * </PRE></blockquote>
 	 * @return
 	 */
-	@GET("/wiki/rest/api/content/{id}/restriction/byOperation/{operationKey}")
-	Call<Object> getContentRestrictionForOperation()
+	@GET("/wiki/rest/api/content/{id}/restriction/byOperation/{operationKey}")public
+	Restriction getContentRestrictionForOperation(final String contendId,
+	                                               final String operationKey)throws IOException
 	{
-		return null;
+		Call<Restriction> contentRestrictionForOperationCall = confluenceApi.getContentRestrictionForOperation(contendId, operationKey);
+		Response<Restriction> response = contentRestrictionForOperationCall.execute();
+		Restriction body = response.body();
+		return body;
 	}
 	//@formatter:on
 	

@@ -1,23 +1,23 @@
-package com.pampushko.confluence.rest;
-
-import com.pampushko.confluence.models.content_restriction.restriction.Restriction;
+import com.pampushko.confluence.models.content_restriction.RestrictionResponseContainer;
+import com.pampushko.confluence.rest.Confluence;
 import com.pampushko.confluence.settings.SettingsManager;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.util.Properties;
 
 /**
- * Базовый класс для запуска клиента
- * <br>
+ *
  */
+@Getter
+@Setter
+@EqualsAndHashCode
 @Slf4j
-public class Main
+public class GetContentRestrictionByOperationTest
 {
-	public static final String url = "";
-	private static final String username = "";
-	private static final String password = "";
-	
 	public static void main(String[] args) throws IOException
 	{
 		//читаем настройки приложения
@@ -29,11 +29,9 @@ public class Main
 		//идентификатор страницы на которую добавляется новое свойство
 		final String contentId = "5210113";
 		
-		final String operationKey = "read"; //or update
-		
 		//выполняем запрос и печатаем результат
 		//ограничения контента сгруппированные по операциям
-		Restriction contentRestriction = confluence.getContentRestrictionForOperation(contentId, operationKey);
+		RestrictionResponseContainer contentRestriction = confluence.getContentRestrictionByOperation(contentId);
 		System.out.println(contentRestriction);
 	}
 }

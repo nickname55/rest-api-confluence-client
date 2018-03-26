@@ -4,6 +4,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.pampushko.confluence.custom_deserialazers.ExpandablePropDeserializer;
 import com.pampushko.confluence.models.*;
+import com.pampushko.confluence.models.content_restriction.restrictions.Restrictions;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;

@@ -19,6 +19,8 @@ import com.pampushko.confluence.models.content_property.PropListResponseContaine
 import com.pampushko.confluence.models.content_property.PropResponse;
 import com.pampushko.confluence.models.content_property.PropertyOfContent;
 import com.pampushko.confluence.models.content_property.PropertyOfContentWithVersion;
+import com.pampushko.confluence.models.content_restriction.RestrictionResponseContainer;
+import com.pampushko.confluence.models.content_restriction.restriction.Restriction;
 import com.pampushko.confluence.models.group.Group;
 import com.pampushko.confluence.models.group.GroupResultList;
 import com.pampushko.confluence.models.history.HistoryContainer;
@@ -3683,10 +3685,11 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
     "additionalProperties": false
 }
 	 * </PRE></blockquote>
+	 * @param contentId
 	 * @return
 	 */
-	@GET("/wiki/rest/api/content/{id}/restriction/byOperation")
-	Call<Object> getContentRestrictionByOperation();
+	@GET("/wiki/rest/api/content/{contentId}/restriction/byOperation")
+	Call<RestrictionResponseContainer> getContentRestrictionByOperation(final @Path("contentId") String contentId);
 	//@formatter:on
 	
 	//@formatter:off
@@ -4288,10 +4291,13 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
     "additionalProperties": false
 }
 	 * </PRE></blockquote>
+	 * @param contendId
+	 * @param operationKey
 	 * @return
 	 */
-	@GET("/wiki/rest/api/content/{id}/restriction/byOperation/{operationKey}")
-	Call<Object> getContentRestrictionForOperation();
+	@GET("/wiki/rest/api/content/{contentId}/restriction/byOperation/{operationKey}")
+	Call<Restriction> getContentRestrictionForOperation(final @Path("contentId") String contendId,
+	                                               final @Path("operationKey") String operationKey);
 	//@formatter:on
 	
 	//----------- content/{id}/restriction Конец ---------------
