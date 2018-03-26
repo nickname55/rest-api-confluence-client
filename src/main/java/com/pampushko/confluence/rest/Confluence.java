@@ -3262,4 +3262,35 @@ public class Confluence
 	
 	//----------- content/{id}/restriction Конец ---------------
 	//----------------------------------------------------------------------------------------
+	
+	//----------- content/blueprint Начало ---------------
+	//----------------------------------------------------------------------------------------
+	
+	
+	/**
+	 * Publish legacy draft
+	 * <br>
+	 */
+	Object publishLegacyDraftOfBlueprint(final String draftId) throws IOException
+	{
+		Call<Object> publishCall = confluenceApi.publishLegacyDraftOfBlueprint(draftId);
+		Response<Object> response = publishCall.execute();
+		Object body = response.body();
+		return body;
+	}
+	
+	/**
+	 * Publish shared draft
+	 * <br>
+	 */
+	Object publishSharedDraftOfBlueprint(final String draftId) throws IOException
+	{
+		Call<Object> publishCall = confluenceApi.publishSharedDraftOfBlueprint(draftId);
+		Response<Object> response = publishCall.execute();
+		Object body = response.body();
+		return body;
+	}
+	
+	//----------- content/blueprint Конец ---------------
+	//----------------------------------------------------------------------------------------
 }
