@@ -3094,4 +3094,28 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	//----------- content/{id}/property Конец ---------------
 	//----------------------------------------------------------------------------------------
 	
+	
+	//----------- content/{id}/restriction Начало ---------------
+	//----------------------------------------------------------------------------------------
+	
+	/**
+	 * <br>
+	 * Возвращает информацию обо всех ограничениях по операциям
+	 *
+	 * @return
+	 */
+	@GET("/wiki/rest/api/content/{id}/restriction/byOperation")
+	Call<Object> getContentRestrictionByOperation();
+	
+	/**
+	 * Возвращает информацию обо всех ограничениях для данной операции
+	 * <br>
+	 *
+	 * @return
+	 */
+	@GET("/wiki/rest/api/content/{id}/restriction/byOperation/{operationKey}")
+	Call<Object> getContentRestrictionForOperation();
+	
+	//----------- content/{id}/restriction Конец ---------------
+	//----------------------------------------------------------------------------------------
 }
