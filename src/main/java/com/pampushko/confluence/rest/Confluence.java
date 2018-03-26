@@ -2045,4 +2045,1212 @@ public class Confluence
 	//----------- content/{id}/property Конец ---------------
 	//----------------------------------------------------------------------------------------
 	
+	
+	//----------- content/{id}/restriction Начало ---------------
+	//----------------------------------------------------------------------------------------
+	
+	//@formatter:off
+	/**
+	 * Возвращает информацию обо всех ограничениях по операциям
+	 * <br>
+	 * Дополнительные параметры:
+	 * <ul>
+	 * <li>expand (String, default:<strong>update.restrictions.user,read.restrictions.group,read.restrictions.user,update.restrictions.group</strong>) - список свойств, с запятыми-разделителями, для развёртывания (expand) свойств содержимого. Значение по умолчанию: group (?)</li>
+	 *
+	 * <h2><strong>Responses:</strong></h2>
+	 * <strong>STATUS 200</strong> -- application/json, возвращает JSON представление restriction (ограничений) сгруппированных по операциям
+	 * <br>
+	 * <blockquote><PRE>
+{
+    "id": "https://docs.atlassian.com/jira/REST/schema/map-of-operation-key-and-content-restriction#",
+    "title": "Map of Operation Key-and-Content Restriction",
+    "type": "object",
+    "patternProperties": {
+        ".+": {
+            "$ref": "#/definitions/content-restriction"
+        }
+    },
+    "definitions": {
+        "anonymous": {
+            "title": "Anonymous",
+            "type": "object",
+            "properties": {
+                "profilePicture": {
+                    "$ref": "#/definitions/icon"
+                },
+                "displayName": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "content": {
+            "title": "Content",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "title": "Content Id",
+                    "type": "object"
+                },
+                "type": {
+                    "title": "Content Type",
+                    "type": "object"
+                },
+                "status": {
+                    "title": "Content Status",
+                    "type": "object"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "space": {
+                    "type": "array",
+                    "items": {
+                        "title": "Space",
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "integer"
+                            },
+                            "key": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "icon": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/definitions/icon"
+                                }
+                            },
+                            "description": {
+                                "type": "object",
+                                "patternProperties": {
+                                    ".+": {
+                                        "title": "Formatted Body",
+                                        "type": "object",
+                                        "properties": {
+                                            "value": {
+                                                "type": "string"
+                                            },
+                                            "webresource": {
+                                                "type": "array",
+                                                "items": {
+                                                    "$ref": "#/definitions/web-resource-dependencies"
+                                                }
+                                            },
+                                            "representation": {
+                                                "$ref": "#/definitions/content-representation"
+                                            }
+                                        },
+                                        "additionalProperties": false
+                                    }
+                                },
+                                "additionalProperties": false
+                            },
+                            "homepage": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/definitions/content"
+                                }
+                            },
+                            "type": {
+                                "title": "Space Type",
+                                "type": "object"
+                            },
+                            "metadata": {
+                                "type": "object",
+                                "patternProperties": {
+                                    ".+": {}
+                                },
+                                "additionalProperties": false
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                },
+                "history": {
+                    "type": "array",
+                    "items": {
+                        "title": "History",
+                        "type": "object",
+                        "properties": {
+                            "previousVersion": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/definitions/version"
+                                }
+                            },
+                            "nextVersion": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/definitions/version"
+                                }
+                            },
+                            "lastUpdated": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/definitions/version"
+                                }
+                            },
+                            "latest": {
+                                "type": "boolean"
+                            },
+                            "createdBy": {
+                                "$ref": "#/definitions/person"
+                            },
+                            "createdDate": {
+                                "type": "string"
+                            },
+                            "contributors": {
+                                "type": "array",
+                                "items": {
+                                    "title": "Contributors",
+                                    "type": "object",
+                                    "properties": {
+                                        "publishers": {
+                                            "type": "array",
+                                            "items": {
+                                                "title": "Contributor Users",
+                                                "type": "object",
+                                                "properties": {
+                                                    "users": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "$ref": "#/definitions/person"
+                                                        }
+                                                    },
+                                                    "userKeys": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "string"
+                                                        }
+                                                    }
+                                                },
+                                                "additionalProperties": false
+                                            }
+                                        }
+                                    },
+                                    "additionalProperties": false
+                                }
+                            }
+                        },
+                        "additionalProperties": false,
+                        "required": [
+                            "latest"
+                        ]
+                    }
+                },
+                "version": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/version"
+                    }
+                },
+                "ancestors": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/content"
+                    }
+                },
+                "operations": {
+                    "type": "array",
+                    "items": {
+                        "title": "Operation Check Result",
+                        "type": "object",
+                        "properties": {
+                            "operation": {
+                                "$ref": "#/definitions/operation-key"
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                },
+                "children": {
+                    "type": "object",
+                    "patternProperties": {
+                        ".+": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/content"
+                            }
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "descendants": {
+                    "type": "object",
+                    "patternProperties": {
+                        ".+": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/content"
+                            }
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "container": {
+                    "type": "array",
+                    "items": {
+                        "title": "Container",
+                        "type": "object"
+                    }
+                },
+                "body": {
+                    "type": "object",
+                    "patternProperties": {
+                        ".+": {
+                            "title": "Content Body",
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "string"
+                                },
+                                "webresource": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/web-resource-dependencies"
+                                    }
+                                },
+                                "representation": {
+                                    "$ref": "#/definitions/content-representation"
+                                },
+                                "content": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/content"
+                                    }
+                                }
+                            },
+                            "additionalProperties": false
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "metadata": {
+                    "type": "object",
+                    "patternProperties": {
+                        ".+": {}
+                    },
+                    "additionalProperties": false
+                },
+                "extensions": {
+                    "type": "object",
+                    "patternProperties": {
+                        ".+": {}
+                    },
+                    "additionalProperties": false
+                },
+                "restrictions": {
+                    "type": "object",
+                    "patternProperties": {
+                        ".+": {
+                            "$ref": "#/definitions/content-restriction"
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        },
+        "content-representation": {
+            "title": "Content Representation",
+            "type": "object"
+        },
+        "content-restriction": {
+            "title": "Content Restriction",
+            "type": "object",
+            "properties": {
+                "content": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/content"
+                    }
+                },
+                "operation": {
+                    "$ref": "#/definitions/operation-key"
+                },
+                "restrictions": {
+                    "type": "array",
+                    "items": {
+                        "title": "Subject Restrictions",
+                        "type": "object",
+                        "properties": {
+                            "user": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/definitions/user"
+                                }
+                            },
+                            "group": {
+                                "type": "array",
+                                "items": {
+                                    "title": "Group",
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "additionalProperties": false
+                                }
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                }
+            },
+            "additionalProperties": false
+        },
+        "html-string": {
+            "title": "Html String",
+            "type": "object"
+        },
+        "icon": {
+            "title": "Icon",
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "string"
+                },
+                "width": {
+                    "type": "integer"
+                },
+                "height": {
+                    "type": "integer"
+                },
+                "isDefault": {
+                    "type": "boolean"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "width",
+                "height",
+                "isDefault"
+            ]
+        },
+        "known-user": {
+            "title": "Known User",
+            "type": "object",
+            "properties": {
+                "profilePicture": {
+                    "$ref": "#/definitions/icon"
+                },
+                "displayName": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "array",
+                    "items": {
+                        "title": "User Status",
+                        "type": "object"
+                    }
+                }
+            },
+            "additionalProperties": false
+        },
+        "operation-key": {
+            "title": "Operation Key",
+            "type": "object"
+        },
+        "person": {
+            "title": "Person",
+            "type": "object",
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/anonymous"
+                },
+                {
+                    "$ref": "#/definitions/known-user"
+                },
+                {
+                    "$ref": "#/definitions/unknown-user"
+                },
+                {
+                    "$ref": "#/definitions/user"
+                }
+            ]
+        },
+        "unknown-user": {
+            "title": "Unknown User",
+            "type": "object",
+            "properties": {
+                "profilePicture": {
+                    "$ref": "#/definitions/icon"
+                },
+                "displayName": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "user": {
+            "title": "User",
+            "type": "object",
+            "properties": {
+                "profilePicture": {
+                    "$ref": "#/definitions/icon"
+                },
+                "displayName": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "version": {
+            "title": "Version",
+            "type": "object",
+            "properties": {
+                "by": {
+                    "$ref": "#/definitions/person"
+                },
+                "when": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "number": {
+                    "type": "integer"
+                },
+                "minorEdit": {
+                    "type": "boolean"
+                },
+                "hidden": {
+                    "type": "boolean"
+                },
+                "syncRev": {
+                    "type": "string"
+                },
+                "content": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/content"
+                    }
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "number",
+                "minorEdit",
+                "hidden"
+            ]
+        },
+        "web-resource-dependencies": {
+            "title": "Web Resource Dependencies",
+            "type": "object",
+            "properties": {
+                "keys": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "contexts": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "uris": {
+                    "type": "object",
+                    "patternProperties": {
+                        ".+": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "format": "uri"
+                            }
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "tags": {
+                    "type": "object",
+                    "patternProperties": {
+                        ".+": {
+                            "$ref": "#/definitions/html-string"
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "superbatch": {
+                    "type": "array",
+                    "items": {
+                        "title": "Super Batch Web Resources",
+                        "type": "object",
+                        "properties": {
+                            "uris": {
+                                "type": "object",
+                                "patternProperties": {
+                                    ".+": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "uri"
+                                        }
+                                    }
+                                },
+                                "additionalProperties": false
+                            },
+                            "tags": {
+                                "type": "object",
+                                "patternProperties": {
+                                    ".+": {
+                                        "$ref": "#/definitions/html-string"
+                                    }
+                                },
+                                "additionalProperties": false
+                            },
+                            "metatags": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/definitions/html-string"
+                                }
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false
+}
+	 * </PRE></blockquote>
+	 * @return
+	 */
+	@GET("/wiki/rest/api/content/{id}/restriction/byOperation")
+	Call<Object> getContentRestrictionByOperation()
+	{
+		return null;
+	}
+	//@formatter:on
+	
+	//@formatter:off
+	/**
+	 * Возвращает информацию обо всех ограничениях для данной операции
+	 * <br>
+	 * Дополнительные параметры:
+	 * <ul>
+	 * <li>expand (String, default:<strong>restrictions.user,restrictions.group</strong>) - список свойств (с разделитем-запятой между значениями) для развёртывания (expand) свойств содержимого. Значение по умолчанию: group (?)</li>
+	 * <li>start (int) - старт разбиения на страницы (pagination start)</li>
+	 * <li>limit (int, default:<strong>100</strong>) - ограничение (limit) для разбиения на страницы (pagination limit)</li>
+	 * <br>
+	 * <h2><strong>Responses:</strong></h2>
+	 * <strong>STATUS 200</strong> -- application/json, возвращает JSON представление restriction (ограничений) для данной операции
+	 * <br>
+	 * <blockquote><PRE>
+   {
+    "id": "https://docs.atlassian.com/jira/REST/schema/content-restriction#",
+    "title": "Content Restriction",
+    "type": "object",
+    "properties": {
+        "content": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/content"
+            }
+        },
+        "operation": {
+            "$ref": "#/definitions/operation-key"
+        },
+        "restrictions": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/subject-restrictions"
+            }
+        }
+    },
+    "definitions": {
+        "anonymous": {
+            "title": "Anonymous",
+            "type": "object",
+            "properties": {
+                "profilePicture": {
+                    "$ref": "#/definitions/icon"
+                },
+                "displayName": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "content": {
+            "title": "Content",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "title": "Content Id",
+                    "type": "object"
+                },
+                "type": {
+                    "title": "Content Type",
+                    "type": "object"
+                },
+                "status": {
+                    "title": "Content Status",
+                    "type": "object"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "space": {
+                    "type": "array",
+                    "items": {
+                        "title": "Space",
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "integer"
+                            },
+                            "key": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "icon": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/definitions/icon"
+                                }
+                            },
+                            "description": {
+                                "type": "object",
+                                "patternProperties": {
+                                    ".+": {
+                                        "title": "Formatted Body",
+                                        "type": "object",
+                                        "properties": {
+                                            "value": {
+                                                "type": "string"
+                                            },
+                                            "webresource": {
+                                                "type": "array",
+                                                "items": {
+                                                    "$ref": "#/definitions/web-resource-dependencies"
+                                                }
+                                            },
+                                            "representation": {
+                                                "$ref": "#/definitions/content-representation"
+                                            }
+                                        },
+                                        "additionalProperties": false
+                                    }
+                                },
+                                "additionalProperties": false
+                            },
+                            "homepage": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/definitions/content"
+                                }
+                            },
+                            "type": {
+                                "title": "Space Type",
+                                "type": "object"
+                            },
+                            "metadata": {
+                                "type": "object",
+                                "patternProperties": {
+                                    ".+": {}
+                                },
+                                "additionalProperties": false
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                },
+                "history": {
+                    "type": "array",
+                    "items": {
+                        "title": "History",
+                        "type": "object",
+                        "properties": {
+                            "previousVersion": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/definitions/version"
+                                }
+                            },
+                            "nextVersion": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/definitions/version"
+                                }
+                            },
+                            "lastUpdated": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/definitions/version"
+                                }
+                            },
+                            "latest": {
+                                "type": "boolean"
+                            },
+                            "createdBy": {
+                                "$ref": "#/definitions/person"
+                            },
+                            "createdDate": {
+                                "type": "string"
+                            },
+                            "contributors": {
+                                "type": "array",
+                                "items": {
+                                    "title": "Contributors",
+                                    "type": "object",
+                                    "properties": {
+                                        "publishers": {
+                                            "type": "array",
+                                            "items": {
+                                                "title": "Contributor Users",
+                                                "type": "object",
+                                                "properties": {
+                                                    "users": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "$ref": "#/definitions/person"
+                                                        }
+                                                    },
+                                                    "userKeys": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "string"
+                                                        }
+                                                    }
+                                                },
+                                                "additionalProperties": false
+                                            }
+                                        }
+                                    },
+                                    "additionalProperties": false
+                                }
+                            }
+                        },
+                        "additionalProperties": false,
+                        "required": [
+                            "latest"
+                        ]
+                    }
+                },
+                "version": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/version"
+                    }
+                },
+                "ancestors": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/content"
+                    }
+                },
+                "operations": {
+                    "type": "array",
+                    "items": {
+                        "title": "Operation Check Result",
+                        "type": "object",
+                        "properties": {
+                            "operation": {
+                                "$ref": "#/definitions/operation-key"
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                },
+                "children": {
+                    "type": "object",
+                    "patternProperties": {
+                        ".+": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/content"
+                            }
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "descendants": {
+                    "type": "object",
+                    "patternProperties": {
+                        ".+": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/content"
+                            }
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "container": {
+                    "type": "array",
+                    "items": {
+                        "title": "Container",
+                        "type": "object"
+                    }
+                },
+                "body": {
+                    "type": "object",
+                    "patternProperties": {
+                        ".+": {
+                            "title": "Content Body",
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "string"
+                                },
+                                "webresource": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/web-resource-dependencies"
+                                    }
+                                },
+                                "representation": {
+                                    "$ref": "#/definitions/content-representation"
+                                },
+                                "content": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/content"
+                                    }
+                                }
+                            },
+                            "additionalProperties": false
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "metadata": {
+                    "type": "object",
+                    "patternProperties": {
+                        ".+": {}
+                    },
+                    "additionalProperties": false
+                },
+                "extensions": {
+                    "type": "object",
+                    "patternProperties": {
+                        ".+": {}
+                    },
+                    "additionalProperties": false
+                },
+                "restrictions": {
+                    "type": "object",
+                    "patternProperties": {
+                        ".+": {
+                            "title": "Content Restriction",
+                            "type": "object",
+                            "properties": {
+                                "content": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/content"
+                                    }
+                                },
+                                "operation": {
+                                    "$ref": "#/definitions/operation-key"
+                                },
+                                "restrictions": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/subject-restrictions"
+                                    }
+                                }
+                            },
+                            "additionalProperties": false
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        },
+        "content-representation": {
+            "title": "Content Representation",
+            "type": "object"
+        },
+        "html-string": {
+            "title": "Html String",
+            "type": "object"
+        },
+        "icon": {
+            "title": "Icon",
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "string"
+                },
+                "width": {
+                    "type": "integer"
+                },
+                "height": {
+                    "type": "integer"
+                },
+                "isDefault": {
+                    "type": "boolean"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "width",
+                "height",
+                "isDefault"
+            ]
+        },
+        "known-user": {
+            "title": "Known User",
+            "type": "object",
+            "properties": {
+                "profilePicture": {
+                    "$ref": "#/definitions/icon"
+                },
+                "displayName": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "array",
+                    "items": {
+                        "title": "User Status",
+                        "type": "object"
+                    }
+                }
+            },
+            "additionalProperties": false
+        },
+        "operation-key": {
+            "title": "Operation Key",
+            "type": "object"
+        },
+        "person": {
+            "title": "Person",
+            "type": "object",
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/anonymous"
+                },
+                {
+                    "$ref": "#/definitions/known-user"
+                },
+                {
+                    "$ref": "#/definitions/unknown-user"
+                },
+                {
+                    "$ref": "#/definitions/user"
+                }
+            ]
+        },
+        "subject-restrictions": {
+            "title": "Subject Restrictions",
+            "type": "object",
+            "properties": {
+                "user": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/user"
+                    }
+                },
+                "group": {
+                    "type": "array",
+                    "items": {
+                        "title": "Group",
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string"
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                }
+            },
+            "additionalProperties": false
+        },
+        "unknown-user": {
+            "title": "Unknown User",
+            "type": "object",
+            "properties": {
+                "profilePicture": {
+                    "$ref": "#/definitions/icon"
+                },
+                "displayName": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "user": {
+            "title": "User",
+            "type": "object",
+            "properties": {
+                "profilePicture": {
+                    "$ref": "#/definitions/icon"
+                },
+                "displayName": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "version": {
+            "title": "Version",
+            "type": "object",
+            "properties": {
+                "by": {
+                    "$ref": "#/definitions/person"
+                },
+                "when": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "number": {
+                    "type": "integer"
+                },
+                "minorEdit": {
+                    "type": "boolean"
+                },
+                "hidden": {
+                    "type": "boolean"
+                },
+                "syncRev": {
+                    "type": "string"
+                },
+                "content": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/content"
+                    }
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "number",
+                "minorEdit",
+                "hidden"
+            ]
+        },
+        "web-resource-dependencies": {
+            "title": "Web Resource Dependencies",
+            "type": "object",
+            "properties": {
+                "keys": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "contexts": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "uris": {
+                    "type": "object",
+                    "patternProperties": {
+                        ".+": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "format": "uri"
+                            }
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "tags": {
+                    "type": "object",
+                    "patternProperties": {
+                        ".+": {
+                            "$ref": "#/definitions/html-string"
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "superbatch": {
+                    "type": "array",
+                    "items": {
+                        "title": "Super Batch Web Resources",
+                        "type": "object",
+                        "properties": {
+                            "uris": {
+                                "type": "object",
+                                "patternProperties": {
+                                    ".+": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "uri"
+                                        }
+                                    }
+                                },
+                                "additionalProperties": false
+                            },
+                            "tags": {
+                                "type": "object",
+                                "patternProperties": {
+                                    ".+": {
+                                        "$ref": "#/definitions/html-string"
+                                    }
+                                },
+                                "additionalProperties": false
+                            },
+                            "metatags": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/definitions/html-string"
+                                }
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false
+}
+	 * </PRE></blockquote>
+	 * @return
+	 */
+	@GET("/wiki/rest/api/content/{id}/restriction/byOperation/{operationKey}")
+	Call<Object> getContentRestrictionForOperation()
+	{
+		return null;
+	}
+	//@formatter:on
+	
+	//----------- content/{id}/restriction Конец ---------------
+	//----------------------------------------------------------------------------------------
 }
