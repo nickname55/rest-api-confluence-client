@@ -21,6 +21,7 @@ import com.pampushko.confluence.models.content_property.PropertyOfContent;
 import com.pampushko.confluence.models.content_property.PropertyOfContentWithVersion;
 import com.pampushko.confluence.models.content_restriction.RestrictionResponseContainer;
 import com.pampushko.confluence.models.content_restriction.restriction.Restriction;
+import com.pampushko.confluence.models.draft.Draft;
 import com.pampushko.confluence.models.enums.ContentType;
 import com.pampushko.confluence.models.group.Group;
 import com.pampushko.confluence.models.group.GroupResultList;
@@ -3271,9 +3272,9 @@ public class Confluence
 	 * Publish legacy draft
 	 * <br>
 	 */
-	Object publishLegacyDraftOfBlueprint(final String draftId) throws IOException
+	Object publishLegacyDraftOfBlueprint(final String draftId, final Draft draftBody) throws IOException
 	{
-		Call<Object> publishCall = confluenceApi.publishLegacyDraftOfBlueprint(draftId);
+		Call<Object> publishCall = confluenceApi.publishLegacyDraftOfBlueprint(draftId, draftBody);
 		Response<Object> response = publishCall.execute();
 		Object body = response.body();
 		return body;
@@ -3283,9 +3284,9 @@ public class Confluence
 	 * Publish shared draft
 	 * <br>
 	 */
-	Object publishSharedDraftOfBlueprint(final String draftId) throws IOException
+	Object publishSharedDraftOfBlueprint(final String draftId, final Draft draftBody) throws IOException
 	{
-		Call<Object> publishCall = confluenceApi.publishSharedDraftOfBlueprint(draftId);
+		Call<Object> publishCall = confluenceApi.publishSharedDraftOfBlueprint(draftId, draftBody);
 		Response<Object> response = publishCall.execute();
 		Object body = response.body();
 		return body;

@@ -1,6 +1,6 @@
 package com.pampushko.confluence.rest;
 
-import com.pampushko.confluence.models.content_restriction.restriction.Restriction;
+import com.pampushko.confluence.models.draft.Draft;
 import com.pampushko.confluence.settings.SettingsManager;
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,14 +26,13 @@ public class Main
 		//вызываем билдер и создаем клиент
 		Confluence confluence = Confluence.newBuilder().baseUrl(settings.getProperty("baseUrl")).username(settings.getProperty("username")).password(settings.getProperty("password")).build();
 		
-		//идентификатор страницы на которую добавляется новое свойство
-		final String contentId = "5210113";
+		//идентификатор черновика
+		final String draftId = "5210113";
 		
-		final String operationKey = "read"; //or update
+		Draft draftBody = new Draft();
 		
 		//выполняем запрос и печатаем результат
-		//ограничения контента сгруппированные по операциям
-		Restriction contentRestriction = confluence.getContentRestrictionForOperation(contentId, operationKey);
-		System.out.println(contentRestriction);
+		Object result = confluence.publishSharedDraftOfBlueprint(draftId, draftBody);
+		System.out.println(result);
 	}
 }

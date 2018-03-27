@@ -21,6 +21,7 @@ import com.pampushko.confluence.models.content_property.PropertyOfContent;
 import com.pampushko.confluence.models.content_property.PropertyOfContentWithVersion;
 import com.pampushko.confluence.models.content_restriction.RestrictionResponseContainer;
 import com.pampushko.confluence.models.content_restriction.restriction.Restriction;
+import com.pampushko.confluence.models.draft.Draft;
 import com.pampushko.confluence.models.group.Group;
 import com.pampushko.confluence.models.group.GroupResultList;
 import com.pampushko.confluence.models.history.HistoryContainer;
@@ -2857,7 +2858,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 * <br>
 	 * Попытка создать новое свойство, если заданный номер версии равен 1,
 	 * <br>
-	 * Выглядит как: {@link #create(com.atlassian.confluence.api.model.content.id.ContentId, String, com.atlassian.confluence.api.model.content.JsonContentProperty)}.
+	 * Выглядит как: {link #create(com.atlassian.confluence.api.model.content.id.ContentId, String, com.atlassian.confluence.api.model.content.JsonContentProperty)}.
 	 * <br>
 	 * <h2><strong>Request:</strong></h2>
 	 * <strong>Пример</strong>
@@ -5021,7 +5022,8 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 * application/json
 	 */
 	@POST("/wiki/rest/api/content/blueprint/instance/{draftId}")
-	Call<Object> publishLegacyDraftOfBlueprint(final @Path("draftId") String draftId);
+	Call<Object> publishLegacyDraftOfBlueprint(final @Path("draftId") String draftId,
+	                                           final @Body Draft draftBody);
 	//@formatter:on
 	
 	//@formatter:off
@@ -5739,7 +5741,8 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 * application/json
 	 */
 	@PUT("/wiki/rest/api/content/blueprint/instance/{draftId}")
-	Call<Object> publishSharedDraftOfBlueprint(final @Path("draftId") String draftId);
+	Call<Object> publishSharedDraftOfBlueprint(final @Path("draftId") String draftId,
+	                                           final @Body Draft draftBody);
 	//@formatter:on
 	
 	//----------- content/blueprint Конец ---------------
