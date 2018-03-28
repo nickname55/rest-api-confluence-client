@@ -3300,8 +3300,8 @@ public class Confluence
 	//----------- contentbody/convert/{to} Начало ---------------
 	//----------------------------------------------------------------------------------------
 	
-	ConvertationResponsBody convert(final ContentBody contentBody,
-	                                final String toFormat) throws IOException
+	public ConvertationResponsBody convert(final ContentBody contentBody,
+	                                       final String toFormat) throws IOException
 	{
 		Call<ConvertationResponsBody> conversationCall = confluenceApi.convert(contentBody, toFormat);
 		Response<ConvertationResponsBody> response = conversationCall.execute();
@@ -3311,4 +3311,72 @@ public class Confluence
 	
 	//----------- contentbody/convert/{to} Конец ---------------
 	//----------------------------------------------------------------------------------------
+	
+	
+	//----------------------------------------------------------------------------------------
+	//начало, Add content watcher
+	
+	//@formatter:off
+	/**
+	 * Функция добавляет пользователя, указанного вами, к списку наблюдателей элемента контента,
+	 * <br>
+	 * который вы указываете через contentId.
+	 * <br>
+	 * Пользователь не является обязательным параметром.
+	 * <br>
+	 * Если пользователь не указан, то будет использоваться текущий пользователь (отравитель запроса)
+	 * <br>
+	 * В противном случае, вы можете указать пользователя либо с помощью user key
+	 * <br>
+	 * или с помощью имени пользователя (username).
+	 * <br>
+	 * <br>
+	 * <em>Обратите внимание, что только администраторы Confluence могут добавлять в наблюдатели не только себя, но и других пользователей системы.
+	 * </em>
+	 * <br>
+	 * <p>
+	 * <strong>Примеры URI запросов:</strong>
+	 * <ul>
+	 * <li>POST http://example.com/rest/api/user/watch/content/131213</li>
+	 * <li>POST http://example.com/rest/api/user/watch/content/131213?username=jblogs</li>
+	 * <li>POST http://example.com/rest/api/user/watch/content/131213?key=ff8080815a58e24c015a58e263710000</li>
+	 * </ul>
+	 * <p>
+	 * <strong>Дополнительные параметры</strong>
+	 * <ul>
+	 * <li>key (String) -- Optional -- userkey по которому система найдёт пользователя, которого мы хотим добавить наблюдатели</li>
+	 * <li>username (String) -- Optional -- username по которому система найдёт пользователя, которого мы хотим добавить в наблюдатели</li>
+	 * <li>limit (int) -- Optional -- Default: <strong>25</strong> -- сколько элементов из результирующего возвращаемого набора вы хотите получить (после начального индекса, после start)</li>
+	 * </ul>
+	 * <br>
+	 * <h2><strong>Responses:</strong></h2>
+	 * <strong>STATUS 204</strong> -- application/json, такой ответ будет получен, если пользователь успешно добавлен в наблюдатели указанногов вами элементам контента
+	 * <br>
+	 * <strong>STATUS 404</strong> -- такой код будет возвращён, если для укзанного идентификатора контента соответствующий элемент контента не найден.
+	 * <br>
+	 * Или если пользователь выполняющий запрос не имеет достаточных прав доступа для выполнения операции.
+	 * <br>
+	 *
+	 * @return
+	 */
+	public boolean addCurrentUserToWatchers(final String contentId)throws IOException
+	{
+		Call<Void> addWatcherCall = confluenceApi.addWatcher(contentId);
+		Response<Void> response = addWatcherCall.execute();
+		int code = response.code();
+		if (code == 204) //успешно удалили контент
+		{
+			return true;
+		} else
+		{
+			//не удалось выполнить запрос или найти контент по указанному contentId
+			return false;
+		}
+	}
+	//@formatter:on
+	
+	
+	//конец, Add content watcher
+	//----------------------------------------------------------------------------------------
+
 }

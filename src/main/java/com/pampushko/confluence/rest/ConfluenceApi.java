@@ -32,6 +32,7 @@ import com.pampushko.confluence.models.label.LabelResultList;
 import com.pampushko.confluence.models.macros.Macros;
 import com.pampushko.confluence.models.search.SearchResultList;
 import com.pampushko.confluence.models.user.UserResultList;
+
 import com.pampushko.confluence.models.user_watch.WatchObject;
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
@@ -208,6 +209,60 @@ public interface ConfluenceApi
 	Call<SearchResultList> search(final @Query("cql") String cql,
 	                              final @QueryMap Map<String, String> params);
 	
+	
+	//----------------------------------------------------------------------------------------
+	//начало, Add content watcher
+	
+	//@formatter:off
+	/**
+	 * Функция добавляет пользователя, указанного вами, к списку наблюдателей элемента контента,
+	 * <br>
+	 * который вы указываете через contentId.
+	 * <br>
+	 * Пользователь не является обязательным параметром.
+	 * <br>
+	 * Если пользователь не указан, то будет использоваться текущий пользователь (отравитель запроса)
+	 * <br>
+	 * В противном случае, вы можете указать пользователя либо с помощью user key
+	 * <br>
+	 * или с помощью имени пользователя (username).
+	 * <br>
+	 * <br>
+	 * <em>Обратите внимание, что только администраторы Confluence могут добавлять в наблюдатели не только себя, но и других пользователей системы.
+	 * </em>
+	 * <br>
+	 * <p>
+	 * <strong>Примеры URI запросов:</strong>
+	 * <ul>
+	 * <li>POST http://example.com/rest/api/user/watch/content/131213</li>
+	 * <li>POST http://example.com/rest/api/user/watch/content/131213?username=jblogs</li>
+	 * <li>POST http://example.com/rest/api/user/watch/content/131213?key=ff8080815a58e24c015a58e263710000</li>
+	 * </ul>
+	 * <p>
+	 * <strong>Дополнительные параметры</strong>
+	 * <ul>
+	 * <li>key (String) -- Optional -- userkey по которому система найдёт пользователя, которого мы хотим добавить наблюдатели</li>
+	 * <li>username (String) -- Optional -- username по которому система найдёт пользователя, которого мы хотим добавить в наблюдатели</li>
+	 * <li>limit (int) -- Optional -- Default: <strong>25</strong> -- сколько элементов из результирующего возвращаемого набора вы хотите получить (после начального индекса, после start)</li>
+	 * </ul>
+	 * <br>
+	 * <h2><strong>Responses:</strong></h2>
+	 * <strong>STATUS 204</strong> -- application/json, такой ответ будет получен, если пользователь успешно добавлен в наблюдатели указанногов вами элементам контента
+	 * <br>
+	 * <strong>STATUS 404</strong> -- такой код будет возвращён, если для укзанного идентификатора контента соответствующий элемент контента не найден.
+	 * <br>
+	 * Или если пользователь выполняющий запрос не имеет достаточных прав доступа для выполнения операции.
+	 * <br>
+	 *
+	 * @return
+	 */
+	@POST("/wiki/rest/api/user/watch/content/{contentId}")
+	Call<Void> addWatcher(final @Path("contentId") String contentId);
+	//@formatter:on
+	
+	
+	//конец, Add content watcher
+	//----------------------------------------------------------------------------------------
 	
 	//----------------------------------------------------------------------------------------
 	//начало, Is watching content
