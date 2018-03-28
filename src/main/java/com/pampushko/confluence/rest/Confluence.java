@@ -3361,7 +3361,40 @@ public class Confluence
 	 */
 	public boolean addCurrentUserToWatchers(final String contentId)throws IOException
 	{
-		Call<Void> addWatcherCall = confluenceApi.addWatcher(contentId);
+		//пустой набор параметров - заглушка
+		Map<String, String> params = new HashMap<String, String>();
+		
+		return addUserToWatchers(contentId, params);
+	}
+	//@formatter:on
+	
+	public boolean addWatcherByUsername(final String contentId, final String username) throws IOException
+	{
+		Map<String, String> params = new HashMap<String, String>()
+		{
+			{
+				put("username", username);
+			}
+		};
+		
+		return addUserToWatchers(contentId, params);
+	}
+	
+	public boolean addWatcherByUserKey(final String contentId, final String userkey) throws IOException
+	{
+		Map<String, String> params = new HashMap<String, String>()
+		{
+			{
+				put("key", userkey);
+			}
+		};
+		
+		return addUserToWatchers(contentId, params);
+	}
+	
+	private boolean addUserToWatchers(final String contentId, Map<String, String> params) throws IOException
+	{
+		Call<Void> addWatcherCall = confluenceApi.addWatcher(contentId, params);
 		Response<Void> response = addWatcherCall.execute();
 		int code = response.code();
 		if (code == 204) //успешно удалили контент
@@ -3373,8 +3406,6 @@ public class Confluence
 			return false;
 		}
 	}
-	//@formatter:on
-	
 	
 	//конец, Add content watcher
 	//----------------------------------------------------------------------------------------

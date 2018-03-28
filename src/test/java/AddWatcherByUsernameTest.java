@@ -1,5 +1,4 @@
-package com.pampushko.confluence.rest;
-
+import com.pampushko.confluence.rest.Confluence;
 import com.pampushko.confluence.settings.SettingsManager;
 import lombok.extern.slf4j.Slf4j;
 
@@ -7,16 +6,11 @@ import java.io.IOException;
 import java.util.Properties;
 
 /**
- * Базовый класс для запуска клиента
- * <br>
+ *
  */
 @Slf4j
-public class Main
+public class AddWatcherByUsernameTest
 {
-	public static final String url = "";
-	private static final String username = "";
-	private static final String password = "";
-	
 	public static void main(String[] args) throws IOException
 	{
 		//читаем настройки приложения
@@ -27,10 +21,10 @@ public class Main
 		
 		//идентификатор страницы на которую добавляется новое свойство
 		final String contentId = "131563538";
-		final String userKey = "8a7f80836261842b016261ec1e130089";
+		final String username = "ivanov";
 		
 		//выполняем запрос и печатаем результат
-		boolean result = confluence.addWatcherByUserKey(contentId, userKey);
-		System.out.println("Статус добавления пользователя с userKey=" + userKey + " в наблюдатели контента с id=" + contentId + " равен " + result);
+		boolean result = confluence.addWatcherByUsername(contentId, username);
+		System.out.println("Статус добавления пользователя " + username + " в наблюдатели контента с id=" + contentId + " равен " + result);
 	}
 }

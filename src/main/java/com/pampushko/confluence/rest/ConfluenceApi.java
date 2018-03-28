@@ -243,7 +243,6 @@ public interface ConfluenceApi
 	 * <ul>
 	 * <li>key (String) -- Optional -- userkey по которому система найдёт пользователя, которого мы хотим добавить наблюдатели</li>
 	 * <li>username (String) -- Optional -- username по которому система найдёт пользователя, которого мы хотим добавить в наблюдатели</li>
-	 * <li>limit (int) -- Optional -- Default: <strong>25</strong> -- сколько элементов из результирующего возвращаемого набора вы хотите получить (после начального индекса, после start)</li>
 	 * </ul>
 	 * <br>
 	 * <h2><strong>Responses:</strong></h2>
@@ -257,7 +256,8 @@ public interface ConfluenceApi
 	 * @return
 	 */
 	@POST("/wiki/rest/api/user/watch/content/{contentId}")
-	Call<Void> addWatcher(final @Path("contentId") String contentId);
+	Call<Void> addWatcher(final @Path("contentId") String contentId,
+	                      final @QueryMap Map<String, String> param);
 	//@formatter:on
 	
 	
