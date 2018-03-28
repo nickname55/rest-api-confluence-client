@@ -21,6 +21,8 @@ import com.pampushko.confluence.models.content_property.PropertyOfContent;
 import com.pampushko.confluence.models.content_property.PropertyOfContentWithVersion;
 import com.pampushko.confluence.models.content_restriction.RestrictionResponseContainer;
 import com.pampushko.confluence.models.content_restriction.restriction.Restriction;
+import com.pampushko.confluence.models.convert.ConvertationResponsBody;
+import com.pampushko.confluence.models.convert.req.ContentBody;
 import com.pampushko.confluence.models.draft.Draft;
 import com.pampushko.confluence.models.enums.ContentType;
 import com.pampushko.confluence.models.group.Group;
@@ -3272,7 +3274,7 @@ public class Confluence
 	 * Publish legacy draft
 	 * <br>
 	 */
-	Object publishLegacyDraftOfBlueprint(final String draftId, final Draft draftBody) throws IOException
+	public Object publishLegacyDraftOfBlueprint(final String draftId, final Draft draftBody) throws IOException
 	{
 		Call<Object> publishCall = confluenceApi.publishLegacyDraftOfBlueprint(draftId, draftBody);
 		Response<Object> response = publishCall.execute();
@@ -3284,7 +3286,7 @@ public class Confluence
 	 * Publish shared draft
 	 * <br>
 	 */
-	Object publishSharedDraftOfBlueprint(final String draftId, final Draft draftBody) throws IOException
+	public Object publishSharedDraftOfBlueprint(final String draftId, final Draft draftBody) throws IOException
 	{
 		Call<Object> publishCall = confluenceApi.publishSharedDraftOfBlueprint(draftId, draftBody);
 		Response<Object> response = publishCall.execute();
@@ -3293,5 +3295,20 @@ public class Confluence
 	}
 	
 	//----------- content/blueprint Конец ---------------
+	//----------------------------------------------------------------------------------------
+	
+	//----------- contentbody/convert/{to} Начало ---------------
+	//----------------------------------------------------------------------------------------
+	
+	ConvertationResponsBody convert(final ContentBody contentBody,
+	                                final String toFormat) throws IOException
+	{
+		Call<ConvertationResponsBody> conversationCall = confluenceApi.convert(contentBody, toFormat);
+		Response<ConvertationResponsBody> response = conversationCall.execute();
+		ConvertationResponsBody body = response.body();
+		return body;
+	}
+	
+	//----------- contentbody/convert/{to} Конец ---------------
 	//----------------------------------------------------------------------------------------
 }

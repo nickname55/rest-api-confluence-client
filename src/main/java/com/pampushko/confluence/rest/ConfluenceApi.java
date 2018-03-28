@@ -21,6 +21,8 @@ import com.pampushko.confluence.models.content_property.PropertyOfContent;
 import com.pampushko.confluence.models.content_property.PropertyOfContentWithVersion;
 import com.pampushko.confluence.models.content_restriction.RestrictionResponseContainer;
 import com.pampushko.confluence.models.content_restriction.restriction.Restriction;
+import com.pampushko.confluence.models.convert.ConvertationResponsBody;
+import com.pampushko.confluence.models.convert.req.ContentBody;
 import com.pampushko.confluence.models.draft.Draft;
 import com.pampushko.confluence.models.group.Group;
 import com.pampushko.confluence.models.group.GroupResultList;
@@ -768,7 +770,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	//----------------------------------------------------------------------------------------
 	
 	/**
-	 * Fetch a paginated list of AuditRecord instances dating back to a certain time
+     * Fetch a paginated list of AuditRecord instances dating back to a certain time
      * <br>
      * <strong>Дополнительные параметры</strong>
      * <ul>
@@ -5746,6 +5748,90 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	//@formatter:on
 	
 	//----------- content/blueprint Конец ---------------
+	//----------------------------------------------------------------------------------------
+	
+	//----------- contentbody/convert/{to} Начало ---------------
+	//----------------------------------------------------------------------------------------
+	
+	//@formatter:off
+	/**
+	 * Функция выполняет преобразования между различными представления тела контента (Converts between content body representation).
+	 * <br>
+	 * Не все виды представлений могут быть выполнены в/из другие форматы.
+	 * <br>
+	 * Поддерживаемые преобразования:
+	 * <br>
+	 * <table border="1">
+	 *     <tr>
+	 *         <th>Source Representation</th>
+	 *         <th>Destination Representation Supported</th>
+	 *     </tr>
+	 *     <tr>
+	 *         <td>storage</td>
+	 *         <td>view, export_view, styled_view, editor</td>
+	 *     </tr>
+	 *     <tr>
+	 *         <td>editor</td>
+	 *         <td>storage</td>
+	 *     </tr>
+	 *     <tr>
+	 *         <td>view</td>
+	 *         <td>None</td>
+	 *     </tr>
+	 *     <tr>
+	 *         <td>export_view</td>
+	 *         <td>None</td>
+	 *     </tr>
+	 *     <tr>
+	 *         <td>styled_view</td>
+	 *         <td>None</td>
+	 *     </tr>
+	 * </table>
+	 * <br>
+	 *<br>
+	 *<em>Пример запроса на удаление черновика:</em>
+	 *<br>
+	 *<strong>POST: http://example.com/rest/api/contentbody/convert/view</strong>
+	 * <br>
+	 * <h2><strong>Request:</strong></h2>
+	 * Дополнительные параметры:
+	 * <ul>
+	 * <li>expand (String, default:<strong></strong>) - </li>
+	 * </ul>
+	 * <em>Тело запроса:</em>
+	 * <blockquote>
+	 * <PRE>
+{
+    "value": "&lt;p&gt;Some example body in storage format&lt;/p&gt;",
+    "representation": "storage"
+}
+	 * </PRE>
+	 * </blockquote>
+	 * <h2><strong>Responses</strong></h2>
+	 * <strong>STATUS 200</strong> --  application/json
+	 * <p>
+	 * <blockquote><PRE>
+{
+    "value": "&lt;p&gt;Some example body in storage format&lt;/p&gt;",
+    "representation": "storage",
+    "_links": {
+        "base": "http://myhost:8080/confluence",
+        "context": "/confluence"
+    },
+    "_expandable": {
+        "content": "/rest/api/content/3604482"
+    }
+}
+	 * </PRE></blockquote>
+	 * @param contentBody передаваемое для контвертации тело запроса
+	 * @param toFormat формат в который мы хотим конвертировать
+	 * @return результат конвертации
+	 */
+	@POST("/wiki/rest/api/contentbody/convert/{to}")
+	Call<ConvertationResponsBody> convert(final @Body ContentBody contentBody,
+	                                      final @Path("to") String toFormat);
+	//@formatter:on
+	//----------- contentbody/convert/{to} Конец ---------------
 	//----------------------------------------------------------------------------------------
 	
 }
