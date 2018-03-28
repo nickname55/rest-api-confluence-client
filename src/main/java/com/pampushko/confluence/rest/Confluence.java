@@ -3395,17 +3395,125 @@ public class Confluence
 		Call<Void> addWatcherCall = confluenceApi.addWatcher(contentId, params);
 		Response<Void> response = addWatcherCall.execute();
 		int code = response.code();
-		if (code == 204) //успешно удалили контент
+		if (code == 204) //успешно добавили наблюдателя
 		{
 			return true;
 		} else
 		{
-			//не удалось выполнить запрос или найти контент по указанному contentId
+			//не удалось добавить наблюдателя в список
 			return false;
 		}
 	}
 	
 	//конец, Add content watcher
 	//----------------------------------------------------------------------------------------
-
+	
+	//----------------------------------------------------------------------------------------
+	//начало, Remove content watcher
+	
+	
+	/**
+	 * Удалить пользователя, выполняющего запрос, из наблюдателей контента (контент определяется по contentId)
+	 * <br>
+	 * <strong>Более подробную документацию можно прочесть в методе : {@link ConfluenceApi#removeWatcher(String, Map)}</strong>
+	 *
+	 * @param contentId
+	 * 		идентификатор элемента контента
+	 *
+	 * @return если операция выполнена успешно то true, в противном случае - false
+	 *
+	 * @throws IOException
+	 */
+	public boolean removeCurrentUserFromWatchers(final String contentId) throws IOException
+	{
+		//пустой набор параметров - заглушка
+		Map<String, String> params = new HashMap<String, String>();
+		
+		return removeUserFromWatchers(contentId, params);
+	}
+	//@formatter:on
+	
+	/**
+	 * Удалить пользователя из наблюдателей контента. Пользователя найти по username.
+	 * <br>
+	 * <strong>Более подробную документацию можно прочесть в методе : {@link ConfluenceApi#removeWatcher(String, Map)}</strong>
+	 *
+	 * @param contentId
+	 * 		идентификатор элемента контента
+	 * @param username
+	 * 		имя пользователя (login)
+	 *
+	 * @return если операция выполнена успешно то true, в противном случае - false
+	 *
+	 * @throws IOException
+	 */
+	public boolean removeWatcherByUsername(final String contentId, final String username) throws IOException
+	{
+		Map<String, String> params = new HashMap<String, String>()
+		{
+			{
+				put("username", username);
+			}
+		};
+		
+		return removeUserFromWatchers(contentId, params);
+	}
+	
+	/**
+	 * Удалить пользователя из списка наблюдателей контента. Пользователя найти по userKey.
+	 * <br>
+	 * <strong>Более подробную документацию можно прочесть в методе : {@link ConfluenceApi#removeWatcher(String, Map)}</strong>
+	 *
+	 * @param contentId
+	 * 		идентификатор элемента контента
+	 * @param userkey
+	 * 		ключ пользователя
+	 *
+	 * @return если операция выполнена успешно то true, в противном случае - false
+	 *
+	 * @throws IOException
+	 */
+	public boolean removeWatcherByUserKey(final String contentId, final String userkey) throws IOException
+	{
+		Map<String, String> params = new HashMap<String, String>()
+		{
+			{
+				put("key", userkey);
+			}
+		};
+		
+		return removeUserFromWatchers(contentId, params);
+	}
+	
+	/**
+	 * Удаляет пользователя из списка наблюдателей данного элемента контента (по contentId)
+	 * <br>
+	 * <strong>Более подробную документацию можно прочесть в методе : {@link ConfluenceApi#removeWatcher(String, Map)}</strong>
+	 *
+	 * @param contentId
+	 * 		идентификатор элемента контента
+	 * @param params
+	 * 		отображение на основе которого генерируют параметры запроса
+	 *
+	 * @return если операция выполнена успешно - то true, в противном случае - false
+	 *
+	 * @throws IOException
+	 */
+	private boolean removeUserFromWatchers(final String contentId, Map<String, String> params) throws IOException
+	{
+		Call<Void> removeWatcherCall = confluenceApi.removeWatcher(contentId, params);
+		Response<Void> response = removeWatcherCall.execute();
+		int code = response.code();
+		if (code == 204) //успешно удалили наблюдателя
+		{
+			return true;
+		} else
+		{
+			//не удалось удалить наблюдателя из списка
+			return false;
+		}
+	}
+	
+	//конец, Remove content watcher
+	//----------------------------------------------------------------------------------------
 }

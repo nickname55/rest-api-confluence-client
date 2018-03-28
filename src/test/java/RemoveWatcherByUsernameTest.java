@@ -1,5 +1,4 @@
-package com.pampushko.confluence.rest;
-
+import com.pampushko.confluence.rest.Confluence;
 import com.pampushko.confluence.settings.SettingsManager;
 import lombok.extern.slf4j.Slf4j;
 
@@ -7,16 +6,12 @@ import java.io.IOException;
 import java.util.Properties;
 
 /**
- * Базовый класс для запуска клиента
- * <br>
+ *
+ *
  */
 @Slf4j
-public class Main
+public class RemoveWatcherByUsernameTest
 {
-	public static final String url = "";
-	private static final String username = "";
-	private static final String password = "";
-	
 	public static void main(String[] args) throws IOException
 	{
 		//читаем настройки приложения
@@ -27,9 +22,11 @@ public class Main
 		
 		//идентификатор страницы
 		final String contentId = "131563538";
+		//ключ, по которому мы найдем пользователя
+		final String username = "pampushko+78978945";
 		
 		//выполняем запрос и печатаем результат
-		boolean result = confluence.removeCurrentUserFromWatchers(contentId);
-		System.out.println("Статус удаления текущего пользователя из списка наблюдателей контента с id=" + contentId + " равен " + result);
+		boolean result = confluence.removeWatcherByUsername(contentId, username);
+		System.out.println("Статус удаления пользователя с username=" + username + " из списка наблюдателей контента с id=" + contentId + " равен " + result);
 	}
 }
