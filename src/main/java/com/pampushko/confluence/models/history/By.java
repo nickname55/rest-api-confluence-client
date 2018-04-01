@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Setter
 @Getter
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @Slf4j
 public class By extends BaseModel
 {

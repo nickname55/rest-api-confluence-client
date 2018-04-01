@@ -17,14 +17,14 @@ public class AddWatcherByUsernameTest
 		Properties settings = SettingsManager.getValues();
 		
 		//вызываем билдер и создаем клиент
-		Confluence confluence = Confluence.newBuilder().baseUrl(settings.getProperty("baseUrl")).username(settings.getProperty("username")).password(settings.getProperty("password")).build();
+		Confluence confluence = Confluence.newBuilder().baseUrl(settings.getProperty("baseUrl")).userName(settings.getProperty("username")).password(settings.getProperty("password")).build();
 		
 		//идентификатор страницы на которую добавляется новое свойство
 		final String contentId = "131563538";
 		final String username = "ivanov";
 		
 		//выполняем запрос и печатаем результат
-		boolean result = confluence.addWatcherByUsername(contentId, username);
+		boolean result = confluence.addWatcherByUserName(contentId, username);
 		System.out.println("Статус добавления пользователя " + username + " в наблюдатели контента с id=" + contentId + " равен " + result);
 	}
 }

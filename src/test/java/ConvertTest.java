@@ -25,7 +25,7 @@ public class ConvertTest extends BaseModel
 		Properties settings = SettingsManager.getValues();
 		
 		//вызываем билдер и создаем клиент
-		Confluence confluence = Confluence.newBuilder().baseUrl(settings.getProperty("baseUrl")).username(settings.getProperty("username")).password(settings.getProperty("password")).build();
+		Confluence confluence = Confluence.newBuilder().baseUrl(settings.getProperty("baseUrl")).userName(settings.getProperty("username")).password(settings.getProperty("password")).build();
 		
 		//создаём объект с контентом, который мы хотим конвертировать в другой формат
 		final ContentBody contentBody = new ContentBody();

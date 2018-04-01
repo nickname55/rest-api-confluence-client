@@ -18,7 +18,7 @@ public class RemoveWatcherByUsernameTest
 		Properties settings = SettingsManager.getValues();
 		
 		//вызываем билдер и создаем клиент
-		Confluence confluence = Confluence.newBuilder().baseUrl(settings.getProperty("baseUrl")).username(settings.getProperty("username")).password(settings.getProperty("password")).build();
+		Confluence confluence = Confluence.newBuilder().baseUrl(settings.getProperty("baseUrl")).userName(settings.getProperty("username")).password(settings.getProperty("password")).build();
 		
 		//идентификатор страницы
 		final String contentId = "131563538";
@@ -26,7 +26,7 @@ public class RemoveWatcherByUsernameTest
 		final String username = "pampushko+78978945";
 		
 		//выполняем запрос и печатаем результат
-		boolean result = confluence.removeWatcherByUsername(contentId, username);
+		boolean result = confluence.removeWatcherByUserName(contentId, username);
 		System.out.println("Статус удаления пользователя с username=" + username + " из списка наблюдателей контента с id=" + contentId + " равен " + result);
 	}
 }

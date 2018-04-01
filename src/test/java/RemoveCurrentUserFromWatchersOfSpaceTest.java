@@ -9,7 +9,7 @@ import java.util.Properties;
  *
  */
 @Slf4j
-public class RemoveWatcherByUserKeyTest
+public class RemoveCurrentUserFromWatchersOfSpaceTest
 {
 	public static void main(String[] args) throws IOException
 	{
@@ -19,13 +19,11 @@ public class RemoveWatcherByUserKeyTest
 		//вызываем билдер и создаем клиент
 		Confluence confluence = Confluence.newBuilder().baseUrl(settings.getProperty("baseUrl")).userName(settings.getProperty("username")).password(settings.getProperty("password")).build();
 		
-		//идентификатор страницы
-		final String contentId = "131563538";
-		//ключ, по которому мы найдем пользователя
-		final String userKey = "8a7f80836261842b016261ec1e130089";
+		//ключ области
+		final String spaceKey = "GAT";
 		
 		//выполняем запрос и печатаем результат
-		boolean result = confluence.removeWatcherByUserKey(contentId, userKey);
-		System.out.println("Статус удаления пользователя с userKey=" + userKey + " из списка наблюдателей контента с id=" + contentId + " равен " + result);
+		boolean result = confluence.removeCurrentUserFromWatchersOfSpace(spaceKey);
+		System.out.println("Статус удаления пользователя из списка наблюдателей области имеющей spaceKey=" + spaceKey + " равен " + result);
 	}
 }

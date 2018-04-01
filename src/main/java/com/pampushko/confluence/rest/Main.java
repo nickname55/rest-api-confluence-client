@@ -23,13 +23,13 @@ public class Main
 		Properties settings = SettingsManager.getValues();
 		
 		//вызываем билдер и создаем клиент
-		Confluence confluence = Confluence.newBuilder().baseUrl(settings.getProperty("baseUrl")).username(settings.getProperty("username")).password(settings.getProperty("password")).build();
+		Confluence confluence = Confluence.newBuilder().baseUrl(settings.getProperty("baseUrl")).userName(settings.getProperty("username")).password(settings.getProperty("password")).build();
 		
-		//идентификатор страницы
-		final String contentId = "131563538";
+		//ключ области
+		final String spaceKey = "GAT";
 		
 		//выполняем запрос и печатаем результат
-		boolean result = confluence.removeCurrentUserFromWatchers(contentId);
-		System.out.println("Статус удаления текущего пользователя из списка наблюдателей контента с id=" + contentId + " равен " + result);
+		boolean result = confluence.isCurrentUserWatchSpace(spaceKey);
+		System.out.println("Статус наблюдателя для области " + spaceKey + " равен " + result);
 	}
 }

@@ -18,7 +18,7 @@ public class PublishLegacyDraftOfBlueprintTest
 		Properties settings = SettingsManager.getValues();
 		
 		//вызываем билдер и создаем клиент
-		Confluence confluence = Confluence.newBuilder().baseUrl(settings.getProperty("baseUrl")).username(settings.getProperty("username")).password(settings.getProperty("password")).build();
+		Confluence confluence = Confluence.newBuilder().baseUrl(settings.getProperty("baseUrl")).userName(settings.getProperty("username")).password(settings.getProperty("password")).build();
 		
 		//идентификатор черновика
 		final String draftId = "5210113";

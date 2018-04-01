@@ -24,11 +24,11 @@ public class RetrofitCreator
 {
 	Retrofit getRetrofitRestAdapter(Confluence confluence)
 	{
-		final String username = confluence.username;
-		final String password = confluence.password;
+		final String userName = confluence.clientUserName;
+		final String password = confluence.clientPassword;
 		
 		//HTTP Basic authentication для REST API Confluence
-		final String credentials = username + ":" + password;
+		final String credentials = userName + ":" + password;
 		//кодируем в base64.
 		final String encodedCredentials = "Basic " + Base64.getEncoder().encodeToString(credentials.getBytes());
 		
@@ -53,7 +53,7 @@ public class RetrofitCreator
 		//создаем экземпляр Ретрофита - добавляем к ретрофиту созданный нами ранее Http-клиент
 		Retrofit retrofit = new Retrofit.Builder()
 				
-				.baseUrl(confluence.baseUrl).addConverterFactory(GsonConverterFactory.create(gson)).addCallAdapterFactory(RxJava2CallAdapterFactory.create()).client(httpClient).build();
+				.baseUrl(confluence.clientBaseUrl).addConverterFactory(GsonConverterFactory.create(gson)).addCallAdapterFactory(RxJava2CallAdapterFactory.create()).client(httpClient).build();
 		
 		return retrofit;
 	}

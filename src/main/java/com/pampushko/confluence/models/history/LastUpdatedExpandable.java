@@ -12,7 +12,7 @@ import lombok.Setter;
  */
 @Setter
 @Getter
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 public class LastUpdatedExpandable extends BaseModel
 {
 	/**

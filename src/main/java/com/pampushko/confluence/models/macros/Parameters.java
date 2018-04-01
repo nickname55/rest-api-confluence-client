@@ -12,10 +12,10 @@ import java.util.Map;
  * объект содержащий параметры макроса
  * <br>
  */
-@Slf4j
 @Setter
 @Getter
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
+@Slf4j
 public class Parameters extends BaseModel
 {
 	

@@ -42,7 +42,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.http.GET;
 import retrofit2.http.Path;
 
 import java.io.IOException;
@@ -61,17 +60,17 @@ public class Confluence
 	 * Имя пользователя
 	 * <br>
 	 */
-	String username;
+	String clientUserName;
 	/**
 	 * Пароль
 	 * <br>
 	 */
-	String password;
+	String clientPassword;
 	/**
 	 * базовый URL вашего инстанса Confluence
 	 * <br>
 	 */
-	String baseUrl;
+	String clientBaseUrl;
 	
 	private ConfluenceApi confluenceApi;
 	
@@ -93,21 +92,21 @@ public class Confluence
 		
 		}
 		
-		public Builder username(String username)
+		public Builder userName(String confluenceUserName)
 		{
-			Confluence.this.username = username;
+			Confluence.this.clientUserName = confluenceUserName;
 			return this;
 		}
 		
 		public Builder password(String password)
 		{
-			Confluence.this.password = password;
+			Confluence.this.clientPassword = password;
 			return this;
 		}
 		
 		public Builder baseUrl(String baseUrl)
 		{
-			Confluence.this.baseUrl = baseUrl;
+			Confluence.this.clientBaseUrl = baseUrl;
 			return this;
 		}
 		
@@ -119,7 +118,7 @@ public class Confluence
 		 * И создаем реализацию API, которая соответствует описанию в интерфейсе {@link com.pampushko.confluence.rest.ConfluenceApi}
 		 * <br>
 		 *
-		 * @return
+		 * @return клиент для взаимодействия с Confluence
 		 */
 		public Confluence build()
 		{
@@ -158,9 +157,7 @@ public class Confluence
 	public Space getSpaceByKey(final String spaceKey) throws IOException
 	{
 		//заглушка
-		Map<String, String> params = new HashMap<String, String>()
-		{{
-		}};
+		Map<String, String> params = new HashMap<String, String>();
 		
 		Call<Space> spaceCall = confluenceApi.getSpaceByKey(spaceKey, params);
 		Response<Space> response = spaceCall.execute();
@@ -516,15 +513,15 @@ public class Confluence
 	 * за контентом имеющим идентификатор contentId
 	 * <br>
 	 *
-	 * @param userkey
+	 * @param userKey
 	 *
 	 * @return
 	 *
 	 * @throws IOException
 	 */
-	WatchObject watchByKey(final String contentId, final String userkey) throws IOException
+	WatchObject watchByKey(final String contentId, final String userKey) throws IOException
 	{
-		Call<WatchObject> watchObjectCall = confluenceApi.isWatchByKey(contentId, userkey);
+		Call<WatchObject> watchObjectCall = confluenceApi.isWatchByKey(contentId, userKey);
 		Response<WatchObject> response = watchObjectCall.execute();
 		WatchObject body = response.body();
 		return body;
@@ -544,9 +541,9 @@ public class Confluence
 	 *
 	 * @throws IOException
 	 */
-	WatchObject watchByUsername(final String contentId, final String username) throws IOException
+	WatchObject watchByUserName(final String contentId, final String userName) throws IOException
 	{
-		Call<WatchObject> watchObjectCall = confluenceApi.isWatchByUsername(contentId, username);
+		Call<WatchObject> watchObjectCall = confluenceApi.isWatchByUsername(contentId, userName);
 		Response<WatchObject> response = watchObjectCall.execute();
 		WatchObject body = response.body();
 		return body;
@@ -619,12 +616,7 @@ public class Confluence
 	public Content updateContent(final Content content,
 	                             final String contentId) throws IOException
 	{
-		Map<String, String> params = new HashMap<String, String>()
-		{
-			{
-			
-			}
-		};
+		Map<String, String> params = new HashMap<String, String>();
 		Call<Content> contentCall = confluenceApi.updateContent(content, contentId, params);
 		Response<Content> response = contentCall.execute();
 		Content body = response.body();
@@ -646,17 +638,11 @@ public class Confluence
 	//готово
 	boolean deleteContentById(final String contentId) throws IOException
 	{
-		Call<Response<Void>> responseCall = confluenceApi.deleteContentById(contentId);
-		Response<Response<Void>> response = responseCall.execute();
+		Call<Void> responseCall = confluenceApi.deleteContentById(contentId);
+		Response<Void> response = responseCall.execute();
 		int code = response.code();
-		if (code == 204) //успешно удалили контент
-		{
-			return true;
-		} else
-		{
-			//не удалось выполнить запрос или найти контент по указанному contentId
-			return false;
-		}
+		//успешно удалили контент или не удалось выполнить запрос или найти контент по указанному contentId
+		return Utils.codeIs204(code);
 	}
 	
 	/**
@@ -676,8 +662,6 @@ public class Confluence
 	 *
 	 * @throws IOException
 	 */
-	//готово
-	@GET("/wiki/rest/api/content/{contentId}/history")
 	HistoryContainer getContentHistory(final String contendId) throws IOException
 	{
 		Call<HistoryContainer> contentContainterCall = confluenceApi.getContentHistory(contendId);
@@ -1232,9 +1216,12 @@ public class Confluence
 	
 	/**
 	 * todo добавить документацию к методу
+	 *
 	 * @param contentId
 	 * @param params
+	 *
 	 * @return
+	 *
 	 * @throws IOException
 	 */
 	public ChildPage getChildPage(final String contentId,
@@ -1249,13 +1236,16 @@ public class Confluence
 	
 	/**
 	 * todo добавить документацию к методу
+	 *
 	 * @param contentId
 	 * @param params
+	 *
 	 * @return
+	 *
 	 * @throws IOException
 	 */
 	public ChildAttachment getChildAttachment(final String contentId,
-	                                final Map<String, String> params) throws IOException
+	                                          final Map<String, String> params) throws IOException
 	{
 		Call<ChildAttachment> childAttachmentCall = confluenceApi.getChildAttachment(contentId, params);
 		Response<ChildAttachment> response = childAttachmentCall.execute();
@@ -1423,12 +1413,16 @@ public class Confluence
 	 * <br>
 	 * <strong>
 	 * Для того чтобы получить более подробные данные о данной функции Confluence API смотрите документацию {@link ConfluenceApi#createAttachment(String, MultipartBody.Part, String, Map)} (String, String, UpdAttRequest, Map)}
-	 *</strong>	 *
+	 * </strong>	 *
 	 *
-	 * @param parentContentId идентификатор страницы к которой мы добавляем вложение
-	 * @param fileBodyAndFileName обернутые в специальный объект тело файла и имя файла - для создания вложения
-	 * @param comment комментарий (или, возможно, набор комментариев <strong>в том же количестве и том же порядке, что и вложения</strong>), которые мы добавляем к нашим вложениям
-	 * @param params другие параметры, передаваемые в запросе
+	 * @param parentContentId
+	 * 		идентификатор страницы к которой мы добавляем вложение
+	 * @param fileBodyAndFileName
+	 * 		обернутые в специальный объект тело файла и имя файла - для создания вложения
+	 * @param comment
+	 * 		комментарий (или, возможно, набор комментариев <strong>в том же количестве и том же порядке, что и вложения</strong>), которые мы добавляем к нашим вложениям
+	 * @param params
+	 * 		другие параметры, передаваемые в запросе
 	 *
 	 * @return
 	 */
@@ -1447,10 +1441,10 @@ public class Confluence
 	/**
 	 * При помощи этой фунции мы можем обновить различные сопровождающие вложение данные:
 	 * <ul>
-	 *     <li>имени файла-вложения</li>
-	 *     <li>media-type</li>
-	 *     <li>комментария</li>
-	 *     <li>родительского контейнера вложения</li>
+	 * <li>имени файла-вложения</li>
+	 * <li>media-type</li>
+	 * <li>комментария</li>
+	 * <li>родительского контейнера вложения</li>
 	 * </ul>
 	 * <strong>
 	 * Само вложение мы обновить не можем!
@@ -1458,16 +1452,20 @@ public class Confluence
 	 * Если вы хотите обновить тело файла-вложения, то следует использовать метод {@link #updateAttachmentFileBody(String, String, MultipartBody.Part, String, Map)}
 	 * </strong>
 	 * <br>
-	 *
+	 * <p>
 	 * <br>
 	 * <strong>
 	 * Для того чтобы получить более подробные данные о данной функции Confluence API смотрите документацию {@link ConfluenceApi#updateAttachment(String, String, UpdAttRequest, Map)}
-	 *</strong>
+	 * </strong>
 	 *
-	 * @param parentContentId идентификатор страницы к которой мы добавляем вложение
-	 * @param attachmentId идентификатор вложения, над этим вложением мы хотим выполнить действие
-	 * @param requestBody тело запроса, содержит JSON с некоторыми обязательными полями с обновляемыми данными вложения
-	 * @param params другие параметры, передаваемые в запросе
+	 * @param parentContentId
+	 * 		идентификатор страницы к которой мы добавляем вложение
+	 * @param attachmentId
+	 * 		идентификатор вложения, над этим вложением мы хотим выполнить действие
+	 * @param requestBody
+	 * 		тело запроса, содержит JSON с некоторыми обязательными полями с обновляемыми данными вложения
+	 * @param params
+	 * 		другие параметры, передаваемые в запросе
 	 *
 	 * @return JSON объект
 	 *
@@ -1493,12 +1491,20 @@ public class Confluence
 	 * Для того чтобы получить более подробные данные о данной функции Confluence API смотрите документацию {@link ConfluenceApi#updateAttachmentFileBody(String, String, MultipartBody.Part, String, Map)} (String, String, UpdAttRequest, Map)}
 	 * </strong>
 	 * <br>
-	 * @param parentContentId идентификатор страницы к которой мы добавляем вложение
-	 * @param attachmentId идентфикатор вложения, над этим вложением мы хотим выполнить действие
-	 * @param fileBody тело файла обернутое в {@link MultipartBody.Part}
-	 * @param comment комментарий к новой версии файла-вложения
-	 * @param params дополнительные параметры, передаваемые в запросе
+	 *
+	 * @param parentContentId
+	 * 		идентификатор страницы к которой мы добавляем вложение
+	 * @param attachmentId
+	 * 		идентфикатор вложения, над этим вложением мы хотим выполнить действие
+	 * @param fileBody
+	 * 		тело файла обернутое в {@link MultipartBody.Part}
+	 * @param comment
+	 * 		комментарий к новой версии файла-вложения
+	 * @param params
+	 * 		дополнительные параметры, передаваемые в запросе
+	 *
 	 * @return JSON-объект
+	 *
 	 * @throws IOException
 	 */
 	public UpdAttResponse updateAttachmentFileBody(final String parentContentId,
@@ -1513,7 +1519,7 @@ public class Confluence
 		return responseBody;
 	}
 	
-
+	
 	//----------- content/{id}/child/attachment Конец ---------------
 	//----------------------------------------------------------------------------------------
 	
@@ -1523,17 +1529,17 @@ public class Confluence
 	
 	/**
 	 * Получить дочерние элементы для заданного элемента контента
-     * <br>
-     *
-     * @param parentContentId
-     * @param expand
-     *
-     * @return
-     *
-     * @throws IOException
-     */
+	 * <br>
+	 *
+	 * @param parentContentId
+	 * @param expand
+	 *
+	 * @return
+	 *
+	 * @throws IOException
+	 */
 	public DescendantsResult getContentDescendants(final String parentContentId,
-	                                        final String expand) throws IOException
+	                                               final String expand) throws IOException
 	{
 		Call<DescendantsResult> contentDescendantCall = confluenceApi.getContentDescendants(parentContentId, expand);
 		Response<DescendantsResult> response = contentDescendantCall.execute();
@@ -1542,22 +1548,22 @@ public class Confluence
 	}
 	
 	/**
-     * Получить дочерние элементы (отобранные по типу)
-     * <br>
-     *
-     * @param parentContentId
-     * @param type
-     * @param expand
-     * @param params
-     *
-     * @return
-     *
-     * @throws IOException
-     */
+	 * Получить дочерние элементы (отобранные по типу)
+	 * <br>
+	 *
+	 * @param parentContentId
+	 * @param type
+	 * @param expand
+	 * @param params
+	 *
+	 * @return
+	 *
+	 * @throws IOException
+	 */
 	public ContentResultList getContentDescendantsByType(final String parentContentId,
-	                                              final String type,
-	                                              final String expand,
-	                                              final Map<String, String> params) throws IOException
+	                                                     final String type,
+	                                                     final String expand,
+	                                                     final Map<String, String> params) throws IOException
 	{
 		Call<ContentResultList> contentDescendantCall = confluenceApi.getContentDescendantsByType(parentContentId, type, expand, params);
 		Response<ContentResultList> response = contentDescendantCall.execute();
@@ -1573,10 +1579,10 @@ public class Confluence
 	
 	/**
 	 * @param contentId
-     *
-     * @return
-     */
-	public LabelResultList getLabels(final @Path("contentId") String contentId)throws IOException
+	 *
+	 * @return
+	 */
+	public LabelResultList getLabels(final @Path("contentId") String contentId) throws IOException
 	{
 		Call<LabelResultList> labelsCall = confluenceApi.getLabels(contentId);
 		Response<LabelResultList> response = labelsCall.execute();
@@ -1585,18 +1591,18 @@ public class Confluence
 	}
 	
 	/**
-     * Добавляет метку к заданному контенту
-     * <br>
-     * Если метка уже присутствует, то ничего не происходит, но она возращается в списке добавленных.
-     * <br>
-     *
-     * @param contentId
-     * @param labels
-     *
-     * @return
-     */
+	 * Добавляет метку к заданному контенту
+	 * <br>
+	 * Если метка уже присутствует, то ничего не происходит, но она возращается в списке добавленных.
+	 * <br>
+	 *
+	 * @param contentId
+	 * @param labels
+	 *
+	 * @return
+	 */
 	public LabelResultList addLabels(final String contentId,
-	                                 final List<Label> labels)throws IOException
+	                                 final List<Label> labels) throws IOException
 	{
 		Call<LabelResultList> responseCall = confluenceApi.addLabels(contentId, labels);
 		Response<LabelResultList> response = responseCall.execute();
@@ -1605,15 +1611,15 @@ public class Confluence
 	}
 	
 	/**
-     * удаляем метку
-     *
-     * @param contentId
-     * @param labelName
-     *
-     * @return
-     */
+	 * удаляем метку
+	 *
+	 * @param contentId
+	 * @param labelName
+	 *
+	 * @return
+	 */
 	public Object deleteLabels(final String contentId,
-	                    final String labelName)throws IOException
+	                           final String labelName) throws IOException
 	{
 		Call<Object> responseCall = confluenceApi.deleteLabels(contentId, labelName);
 		Response<Object> objectResponse = responseCall.execute();
@@ -1624,8 +1630,8 @@ public class Confluence
 	//----------- content/{id}/label Конец ---------------
 	//----------------------------------------------------------------------------------------
 	
-
-		//----------- content/{id}/property Начало ---------------
+	
+	//----------- content/{id}/property Начало ---------------
 	//----------------------------------------------------------------------------------------
 	
 	
@@ -1891,14 +1897,8 @@ public class Confluence
 		Call<Void> deleteContentPropertiesCall = confluenceApi.deleteContentProperties(contentId, propKey);
 		Response<Void> response = deleteContentPropertiesCall.execute();
 		int code = response.code();
-		if (code == 204) //успешно удалили контент
-		{
-			return true;
-		} else
-		{
-			//не удалось выполнить запрос или найти контент по указанному contentId
-			return false;
-		}
+		//успешно удалили контент или не удалось выполнить запрос или найти контент по указанному contentId
+		return Utils.codeIs204(code);
 	}
 	
 	
@@ -2641,8 +2641,7 @@ public class Confluence
 	 * </PRE></blockquote>
 	 * @return
 	 */
-	@GET("/wiki/rest/api/content/{contentId}/restriction/byOperation")public
-	RestrictionResponseContainer getContentRestrictionByOperation(final String contentId)throws IOException
+	public RestrictionResponseContainer getContentRestrictionByOperation(final String contentId) throws IOException
 	{
 		Call<RestrictionResponseContainer> contentRestrictionByOperationCall = confluenceApi.getContentRestrictionByOperation(contentId);
 		Response<RestrictionResponseContainer> response = contentRestrictionByOperationCall.execute();
@@ -3252,9 +3251,8 @@ public class Confluence
 	 * </PRE></blockquote>
 	 * @return
 	 */
-	@GET("/wiki/rest/api/content/{id}/restriction/byOperation/{operationKey}")public
-	Restriction getContentRestrictionForOperation(final String contendId,
-	                                               final String operationKey)throws IOException
+	public Restriction getContentRestrictionForOperation(final String contendId,
+	                                                     final String operationKey)throws IOException
 	{
 		Call<Restriction> contentRestrictionForOperationCall = confluenceApi.getContentRestrictionForOperation(contendId, operationKey);
 		Response<Restriction> response = contentRestrictionForOperationCall.execute();
@@ -3321,15 +3319,18 @@ public class Confluence
 	 * Добавить пользователя, выполняющего запрос, в наблюдатели контента (контент определяется по contentId)
 	 * <br>
 	 * <strong>Более подробную документацию можно прочесть в методе : {@link ConfluenceApi#addWatcher(String, Map)}</strong>
-	 * @param contentId идентификатор элемента контента
+	 *
+	 * @param contentId
+	 * 		идентификатор элемента контента
+	 *
 	 * @return если операция выполнена успешно то true, в противном случае - false
+	 *
 	 * @throws IOException
 	 */
-	public boolean addCurrentUserToWatchers(final String contentId)throws IOException
+	public boolean addCurrentUserToWatchers(final String contentId) throws IOException
 	{
 		//пустой набор параметров - заглушка
 		Map<String, String> params = new HashMap<String, String>();
-		
 		return addUserToWatchers(contentId, params);
 	}
 	//@formatter:on
@@ -3348,15 +3349,9 @@ public class Confluence
 	 *
 	 * @throws IOException
 	 */
-	public boolean addWatcherByUsername(final String contentId, final String username) throws IOException
+	public boolean addWatcherByUserName(final String contentId, final String username) throws IOException
 	{
-		Map<String, String> params = new HashMap<String, String>()
-		{
-			{
-				put("username", username);
-			}
-		};
-		
+		Map<String, String> params = Utils.createParamsUserName(username);
 		return addUserToWatchers(contentId, params);
 	}
 	
@@ -3364,20 +3359,19 @@ public class Confluence
 	 * Добавить пользователя в наблюдатели контента. Пользователя найти по userKey.
 	 * <br>
 	 * <strong>Более подробную документацию можно прочесть в методе : {@link ConfluenceApi#addWatcher(String, Map)}</strong>
-	 * @param contentId идентификатор элемента контента
-	 * @param userkey ключ пользователя
+	 *
+	 * @param contentId
+	 * 		идентификатор элемента контента
+	 * @param userKey
+	 * 		ключ пользователя
+	 *
 	 * @return если операция выполнена успешно то true, в противном случае - false
+	 *
 	 * @throws IOException
 	 */
-	public boolean addWatcherByUserKey(final String contentId, final String userkey) throws IOException
+	public boolean addWatcherByUserKey(final String contentId, final String userKey) throws IOException
 	{
-		Map<String, String> params = new HashMap<String, String>()
-		{
-			{
-				put("key", userkey);
-			}
-		};
-		
+		Map<String, String> params = Utils.createParamsUserKey(userKey);
 		return addUserToWatchers(contentId, params);
 	}
 	
@@ -3385,9 +3379,14 @@ public class Confluence
 	 * Добавляет пользователя к наблюдателям данного контента (по contentId)
 	 * <br>
 	 * <strong>Более подробную документацию можно прочесть в методе : {@link ConfluenceApi#addWatcher(String, Map)}</strong>
-	 * @param contentId идентификатор элемента контента
-	 * @param params отображаение на основе которого генерируют параметры запроса
+	 *
+	 * @param contentId
+	 * 		идентификатор элемента контента
+	 * @param params
+	 * 		отображаение на основе которого генерируют параметры запроса
+	 *
 	 * @return если операция выполнена успешно то true, в противном случае - false
+	 *
 	 * @throws IOException
 	 */
 	private boolean addUserToWatchers(final String contentId, Map<String, String> params) throws IOException
@@ -3395,14 +3394,8 @@ public class Confluence
 		Call<Void> addWatcherCall = confluenceApi.addWatcher(contentId, params);
 		Response<Void> response = addWatcherCall.execute();
 		int code = response.code();
-		if (code == 204) //успешно добавили наблюдателя
-		{
-			return true;
-		} else
-		{
-			//не удалось добавить наблюдателя в список
-			return false;
-		}
+		//успешно добавили наблюдателя или не удалось добавить наблюдателя в список
+		return Utils.codeIs204(code);
 	}
 	
 	//конец, Add content watcher
@@ -3440,22 +3433,16 @@ public class Confluence
 	 *
 	 * @param contentId
 	 * 		идентификатор элемента контента
-	 * @param username
+	 * @param userName
 	 * 		имя пользователя (login)
 	 *
 	 * @return если операция выполнена успешно то true, в противном случае - false
 	 *
 	 * @throws IOException
 	 */
-	public boolean removeWatcherByUsername(final String contentId, final String username) throws IOException
+	public boolean removeWatcherByUserName(final String contentId, final String userName) throws IOException
 	{
-		Map<String, String> params = new HashMap<String, String>()
-		{
-			{
-				put("username", username);
-			}
-		};
-		
+		Map<String, String> params = Utils.createParamsUserName(userName);
 		return removeUserFromWatchers(contentId, params);
 	}
 	
@@ -3466,22 +3453,16 @@ public class Confluence
 	 *
 	 * @param contentId
 	 * 		идентификатор элемента контента
-	 * @param userkey
+	 * @param userKey
 	 * 		ключ пользователя
 	 *
 	 * @return если операция выполнена успешно то true, в противном случае - false
 	 *
 	 * @throws IOException
 	 */
-	public boolean removeWatcherByUserKey(final String contentId, final String userkey) throws IOException
+	public boolean removeWatcherByUserKey(final String contentId, final String userKey) throws IOException
 	{
-		Map<String, String> params = new HashMap<String, String>()
-		{
-			{
-				put("key", userkey);
-			}
-		};
-		
+		Map<String, String> params = Utils.createParamsUserKey(userKey);
 		return removeUserFromWatchers(contentId, params);
 	}
 	
@@ -3504,16 +3485,243 @@ public class Confluence
 		Call<Void> removeWatcherCall = confluenceApi.removeWatcher(contentId, params);
 		Response<Void> response = removeWatcherCall.execute();
 		int code = response.code();
-		if (code == 204) //успешно удалили наблюдателя
-		{
-			return true;
-		} else
-		{
-			//не удалось удалить наблюдателя из списка
-			return false;
-		}
+		//успешно удалили наблюдателя или это сделать не удалось
+		return Utils.codeIs204(code);
 	}
 	
 	//конец, Remove content watcher
+	//----------------------------------------------------------------------------------------
+	
+	//----------------------------------------------------------------------------------------
+	//начало, Add space watcher
+	
+	/**
+	 * Добавить пользователя к списку наблюдателей области
+	 * <br>
+	 *
+	 * @param spaceKey
+	 * @param params
+	 *
+	 * @return
+	 *
+	 * @throws IOException
+	 */
+	private boolean addWatcherToSpace(final String spaceKey,
+	                                  final Map<String, String> params) throws IOException
+	{
+		
+		Call<Void> addWatcherCall = confluenceApi.addWatcherToSpace(spaceKey, params);
+		Response<Void> response = addWatcherCall.execute();
+		int code = response.code();
+		//успешно добавили пользователя в список наблюдателей области или этого сделать не удалось
+		return Utils.codeIs204(code);
+	}
+	
+	/**
+	 * Добавить пользователя в список наблюдателей области.
+	 * <br>
+	 * <strong>При это указать пользователя по userKey</strong>
+	 * <br>
+	 *
+	 * @param spaceKey
+	 * @param watcherUserKey
+	 *
+	 * @return
+	 *
+	 * @throws IOException
+	 */
+	public boolean addWatcherToSpaceByUserKey(final String spaceKey,
+	                                          final String watcherUserKey) throws IOException
+	{
+		Map<String, String> params = Utils.createParamsUserKey(watcherUserKey);
+		return addWatcherToSpace(spaceKey, params);
+	}
+	
+	/**
+	 * Добавить пользователя к список наблюдатей области.
+	 * <br>
+	 * <strong>При этом указать пользователя по userName.</strong>
+	 * <br>
+	 *
+	 * @param spaceKey
+	 * @param watcherUserName
+	 *
+	 * @return
+	 *
+	 * @throws IOException
+	 */
+	public boolean addWatcherToSpaceByUserName(final String spaceKey,
+	                                           final String watcherUserName) throws IOException
+	{
+		Map<String, String> params = Utils.createParamsUserName(watcherUserName);
+		return addWatcherToSpace(spaceKey, params);
+	}
+	
+	/**
+	 * Добавить текущего (отправляющего запрос) пользователя в список наблюдателей области.
+	 * <br>
+	 *
+	 * @param spaceKey
+	 *
+	 * @return
+	 *
+	 * @throws IOException
+	 */
+	public boolean addCurrentUserToWatchersOfSpace(final String spaceKey) throws IOException
+	{
+		//объект-заглушка без параметров
+		Map<String, String> params = new HashMap<String, String>();
+		
+		return addWatcherToSpace(spaceKey, params);
+	}
+	
+	
+	//конец, Add space watcher
+	//----------------------------------------------------------------------------------------
+	
+	
+	//----------------------------------------------------------------------------------------
+	//начало, Remove space watcher
+	
+	/**
+	 * Удалить пользователя из списка наблюдателей области
+	 * <br>
+	 * Пользователя следует указать при помощи ключей key или username в отображении params
+	 * <br>
+	 * или можно не указывать, тогда будет взят текущий (отправляющий запрос) пользователь
+	 *
+	 * @param spaceKey
+	 * @param params
+	 *
+	 * @return
+	 *
+	 * @throws IOException
+	 */
+	private boolean removeWatcherFromSpace(final String spaceKey, final Map<String, String> params) throws IOException
+	{
+		Call<Void> removeWatcherCall = confluenceApi.removeWatcherFromSpace(spaceKey, params);
+		Response<Void> response = removeWatcherCall.execute();
+		int code = response.code();
+		return Utils.codeIs204(code);
+	}
+	
+	/**
+	 * Удалить пользователя (указанного по userKey) из списка наблюдателей области
+	 *
+	 * @param spaceKey
+	 * @param userKey
+	 *
+	 * @return
+	 *
+	 * @throws IOException
+	 */
+	public boolean removeWatcherFromSpaceByUserKey(final String spaceKey, final String userKey) throws IOException
+	{
+		Map<String, String> params = Utils.createParamsUserKey(userKey);
+		return removeWatcherFromSpace(spaceKey, params);
+	}
+	
+	/**
+	 * Удалить пользователя (указанного по userName) из списка наблюдателей области
+	 *
+	 * @param spaceKey
+	 * @param userName
+	 *
+	 * @return
+	 *
+	 * @throws IOException
+	 */
+	public boolean removeWatcherFromSpaceByUserName(final String spaceKey, final String userName) throws IOException
+	{
+		Map<String, String> params = Utils.createParamsUserName(userName);
+		return removeWatcherFromSpace(spaceKey, params);
+	}
+	
+	/**
+	 * Удалить текущего (отправляющего запрос) пользователя из списка наблюдателей области.
+	 * <br>
+	 *
+	 * @param spaceKey
+	 *
+	 * @return
+	 *
+	 * @throws IOException
+	 */
+	public boolean removeCurrentUserFromWatchersOfSpace(final String spaceKey) throws IOException
+	{
+		Map<String, String> params = new HashMap<String, String>();
+		return removeWatcherFromSpace(spaceKey, params);
+	}
+	//конец, Remove space watcher
+	//----------------------------------------------------------------------------------------
+	
+	
+	//----------------------------------------------------------------------------------------
+	//начало, Is watching space
+	
+	/**
+	 * Узнать находится ли текущий пользователь в списке наблюдателей области
+	 * <br>
+	 *
+	 * @param spaceKey
+	 * 		ключ области
+	 * @param params
+	 * 		параметры запроса
+	 *
+	 * @return
+	 *
+	 * @throws IOException
+	 */
+	private boolean isWatchSpace(final String spaceKey, Map<String, String> params) throws IOException
+	{
+		Call<WatchObject> watchCall = confluenceApi.isWatchSpace(spaceKey, params);
+		Response<WatchObject> response = watchCall.execute();
+		WatchObject body = response.body();
+		return body.isWatching();
+	}
+	//@formatter:on
+	
+	/**
+	 * Определить является ли текущий (отправляющий запрос) пользователь, наблюдателем области
+	 * @param spaceKey ключ области
+	 * @return булево значение статуса (является или не является наблюдателем)
+	 * @throws IOException
+	 */
+	public boolean isCurrentUserWatchSpace(final String spaceKey) throws IOException
+	{
+		Map<String, String> params = new HashMap<String, String>();
+		boolean watchSpace = isWatchSpace(spaceKey, params);
+		return watchSpace;
+	}
+	
+	/**
+	 * Определить статус нахождения в списке наблюдателей области, пользователя заданного при помощи userName
+	 * @param spaceKey ключ области
+	 * @param userName имя пользователя (login)
+	 * @return булево значение статуса (является или не является наблюдателем)
+	 * @throws IOException
+	 */
+	public boolean isWatchSpaceByUserName(final String spaceKey, final String userName) throws IOException
+	{
+		Map<String, String> params = Utils.createParamsUserName(userName);
+		boolean watchSpace = isWatchSpace(spaceKey, params);
+		return watchSpace;
+	}
+	
+	/**
+	 * Определить статус нахождения в списке наблюдателей области, пользователя заданного при помощи userKey
+	 * <br>
+	 * @param spaceKey ключ области
+	 * @param userKey ключ пользователя
+	 * @return булево значение статуса (является или не является наблюдателем)
+	 * @throws IOException
+	 */
+	public boolean isWatchSpaceByUserKey(final String spaceKey, final String userKey) throws IOException
+	{
+		Map<String, String> params = Utils.createParamsUserKey(userKey);
+		boolean watchSpace = isWatchSpace(spaceKey, params);
+		return watchSpace;
+	}
+	//конец, Is watching space
 	//----------------------------------------------------------------------------------------
 }
