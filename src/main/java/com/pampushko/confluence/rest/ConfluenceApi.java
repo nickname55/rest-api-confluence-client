@@ -51,7 +51,6 @@ import java.util.Map;
  */
 public interface ConfluenceApi
 {
-	
 	/**
 	 * Возвращает список областей Confluence - {@code Space}
 	 * <br>
@@ -107,7 +106,6 @@ public interface ConfluenceApi
 	@DELETE("/wiki/rest/api/space/{key}")
 	Call<NoContentResponse> deleteSpace(final @Path("key") String spaceKey);
 	
-	
 	/**
 	 * Создание приватной области, которая будет видна только пользователю создавшему её
 	 * <br>
@@ -133,7 +131,6 @@ public interface ConfluenceApi
 	@PUT("/wiki/rest/api/space/{key}")
 	Call<Space> updateSpace(final @Body Space space,
 	                        final @Path("key") String key);
-	
 	
 	/**
 	 * Получить список элементов контента из данной области
@@ -206,7 +203,6 @@ public interface ConfluenceApi
 	@GET("/wiki/rest/api/search")
 	Call<SearchResultList> search(final @Query("cql") String cql,
 	                              final @QueryMap Map<String, String> params);
-	
 	
 	//----------------------------------------------------------------------------------------
 	//начало, Add content watcher
@@ -310,6 +306,7 @@ public interface ConfluenceApi
 	@DELETE("/wiki/rest/api/user/watch/content/{contentId}")
 	Call<Void> removeWatcher(final @Path("contentId") String contentId,
 	                         final @QueryMap Map<String, String> param);
+	
 	//@formatter:on
 	
 	//конец, Remove content watcher
@@ -367,7 +364,6 @@ public interface ConfluenceApi
 	@POST("/wiki/rest/api/user/watch/space/{spaceKey}")
 	Call<Void> addWatcherToSpace(final @Path("spaceKey") String spaceKey,
 	                             final @QueryMap Map<String, String> params);
-	
 	//конец, Add space watcher
 	//----------------------------------------------------------------------------------------
 	
@@ -418,6 +414,7 @@ public interface ConfluenceApi
 	@DELETE("/wiki/rest/api/user/watch/space/{spaceKey}")
 	Call<Void> removeWatcherFromSpace(final @Path("spaceKey") String spaceKey,
 	                                  final @QueryMap Map<String, String> params);
+	
 	//конец, Remove space watcher
 	//----------------------------------------------------------------------------------------
 	
@@ -470,10 +467,11 @@ public interface ConfluenceApi
 	 *
 	 * @return пустой ответ
 	 */
+	//@formatter:on
 	@GET("/wiki/rest/api/user/watch/space/{spaceKey}")
 	Call<WatchObject> isWatchSpace(final @Path("spaceKey") String spaceKey,
 	                               final @QueryMap Map<String, String> params);
-	//@formatter:on
+	
 	//конец, Is watching space
 	//----------------------------------------------------------------------------------------
 	
@@ -520,7 +518,6 @@ public interface ConfluenceApi
 	@GET("/wiki/rest/api/user/watch/content/{contentId}")
 	Call<WatchObject> isWatchByUsername(final @Path("contentId") String contentId,
 	                                    final @Query("username") String username);
-	
 	//конец, Is watching content
 	//----------------------------------------------------------------------------------------
 	
@@ -547,7 +544,6 @@ public interface ConfluenceApi
 	//готово
 	Call<Content> createContent(final @Body Content content, final @QueryMap Map<String, String> param);
 	
-	
 	/**
 	 * Получить элемент контента по идентификатору этого элемента
 	 *
@@ -561,7 +557,6 @@ public interface ConfluenceApi
 	@GET("/wiki/rest/api/content/{contentId}")
 	Call<PageResultItem> getContentById(@Path("contentId")    final String contentId,
 	                                    @QueryMap    final Map<String, String> params);
-	
 	
 	/**
 	 * Получить версию контента по заданному индентификатору контента и номеру версии
@@ -611,7 +606,6 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 * @return
 	 */
 	@GET("/wiki/rest/api/content")
-	//не готово
 	Call<ContentResultList> getContent(@QueryMap Map<String, String> params);
 	//@formatter:on
 	
@@ -899,7 +893,6 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 *
 	 * @return
 	 */
-	//готово
 	@DELETE("/wiki/rest/api/content/{contentId}")
 	Call<Void> deleteContentById(final @Path(value = "contentId") String contentId);
 	
@@ -912,7 +905,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 *
 	 * @return коллекция истории контента
 	 */
-	//готово todo дописать документацию к методу
+	//todo дописать документацию к методу
 	@GET("/wiki/rest/api/content/{contentId}/history")
 	Call<HistoryContainer> getContentHistory(final @Path("contentId") String contendId);
 	
@@ -1029,10 +1022,8 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	//не готово
 	Call<ContentContainter> getContentSearch(final @Query("cql") String cql,
 	                                         final @QueryMap Map<String, String> params);
-	
 	//-----------Content Конец ---------------
 	//----------------------------------------------------------------------------------------
-	
 	
 	//-----------Audit Начало ---------------
 	//----------------------------------------------------------------------------------------
@@ -1137,10 +1128,8 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	//-----------Audit Конец ---------------
 	//----------------------------------------------------------------------------------------
 	
-	
 	//----------- content/{id}/child Начало ---------------
 	//----------------------------------------------------------------------------------------
-	
 	//@formatter:off
 	/**
 	 * Возвращает map прямых (непосредственных) дочерних элементов (child) для некоторого элемента контента.
@@ -1445,7 +1434,6 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	Call<ChildContentContainer> getChildByType(final @Path("contentId") String contentId,
 	                                           final @Path("type") String type,
 	                                           final @QueryMap Map<String, String> params);
-	
 	//@formatter:off
 	/**
 	 * Метод возвращает непосредственные дочерние элементы для данного элемента контента.
@@ -1591,8 +1579,6 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	@GET("/wiki/rest/api/content/{contentId}/child/page")
 	Call<ChildPage> getChildPage(final @Path("contentId") String contentId,
 	                             final @QueryMap Map<String, String> params);
-	
-	
 	//@formatter:off
 	/**
 	 * Метод возвращает непосредственные дочерние элементы для данного элемента контента.
@@ -1738,8 +1724,6 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	@GET("/wiki/rest/api/content/{contentId}/child/attachment")
 	Call<ChildAttachment> getChildAttachment(final @Path("contentId") String contentId,
 	                                         final @QueryMap Map<String, String> params);
-	
-	
 	//@formatter:off
 	/**
 	 * Возвращает комментарии для заданного элемента контента.
@@ -1881,11 +1865,8 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	@GET("/wiki/rest/api/content/{contentId}/child/comment")
 	Call<ChildComment> getChildComment(final @Path("contentId") String contentId,
 	                                   final @QueryMap Map<String, String> params);
-	
-	
 	//----------- content/{id}/child Конец ---------------
 	//----------------------------------------------------------------------------------------
-	
 	
 	//----------- content/{id}/child/attachment Начало ---------------
 	//----------------------------------------------------------------------------------------
@@ -2320,7 +2301,6 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	                                      final @Body UpdAttRequest body,
 	                                      final @QueryMap Map<String, String> params);
 	
-	
 	//@formatter:off
 	/**
 	 * <strong>
@@ -2552,10 +2532,8 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	                                              final @Part MultipartBody.Part fileBody,
 	                                              final @Part("comment") String comment,
 	                                              final @QueryMap Map<String, String> params);
-	
 	//----------- content/{id}/child/attachment Конец ---------------
 	//----------------------------------------------------------------------------------------
-	
 	
 	//----------- content/{id}/descendant Начало ---------------
 	//----------------------------------------------------------------------------------------
@@ -2708,7 +2686,6 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	@GET("/wiki/rest/api/content/{contentId}/descendant")
 	Call<DescendantsResult> getContentDescendants(final @Path("contentId") String parentContentId,
 	                                              final @Query("expand") String expand);
-	
 	
 	//@formatter:off
 	/**
@@ -2978,8 +2955,6 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	
 	//----------- content/{id}/property Начало ---------------
 	//----------------------------------------------------------------------------------------
-	
-	
 	//@formatter:off
 	/**
 	 * Функция возвращает свойства для указанного элемента контента
@@ -3117,7 +3092,6 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	Call<PropResponse> findByKeyContentProperties(final @Path("contentId") String contentId,
 	                                              final @Path("propKey") String propKey);
 	
-	
 	//@formatter:off
 	/**
 	 * Функция обновляет свойство элемента контента.
@@ -3202,7 +3176,6 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	                                           final @Path("propKey") String propKey,
 	                                           final @Body PropertyOfContentWithVersion body);
 	
-	
 	//@formatter:off
 	/**
 	 * Функция удаляет свойство заданного элемента контента
@@ -3226,7 +3199,6 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	@DELETE("/wiki/rest/api/content/{contentId}/property/{propKey}")
 	Call<Void> deleteContentProperties(final @Path("contentId") String contentId,
 	                                   final @Path("propKey") String propKey);
-	
 	
 	//@formatter:off
 	/**
@@ -3297,7 +3269,6 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	                                                  final @Path("propKey") String propKey,
 	                                                  final @Body PropertyOfContent body);
 	
-	
 	//@formatter:off
 	/**
 	 * Функция новое свойство для указанного элемента контента.
@@ -3363,14 +3334,11 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	Call<PropResponse> createContentProperties(final @Path("contentId") String contentId,
 	                                           final @Body PropertyOfContent body);
 	
-	
 	//----------- content/{id}/property Конец ---------------
 	//----------------------------------------------------------------------------------------
 	
-	
 	//----------- content/{id}/restriction Начало ---------------
 	//----------------------------------------------------------------------------------------
-	
 	//@formatter:off
 	/**
 	 * Возвращает информацию обо всех ограничениях по операциям
@@ -3959,9 +3927,10 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 * @param contentId
 	 * @return
 	 */
+	//@formatter:on
 	@GET("/wiki/rest/api/content/{contentId}/restriction/byOperation")
 	Call<RestrictionResponseContainer> getContentRestrictionByOperation(final @Path("contentId") String contentId);
-	//@formatter:on
+	
 	
 	//@formatter:off
 	/**
@@ -4566,17 +4535,15 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 * @param operationKey
 	 * @return
 	 */
+	//@formatter:on
 	@GET("/wiki/rest/api/content/{contentId}/restriction/byOperation/{operationKey}")
 	Call<Restriction> getContentRestrictionForOperation(final @Path("contentId") String contendId,
-	                                               final @Path("operationKey") String operationKey);
-	//@formatter:on
-	
+	                                                    final @Path("operationKey") String operationKey);
 	//----------- content/{id}/restriction Конец ---------------
 	//----------------------------------------------------------------------------------------
 	
 	//----------- content/blueprint Начало ---------------
 	//----------------------------------------------------------------------------------------
-	
 	//@formatter:off
 	/**
 	 * Publish устаревшего черновика элемента контента, созданного из ConfluenceBlueprint
@@ -5291,10 +5258,11 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 * <h2><strong>Responses:</strong></h2>
 	 * application/json
 	 */
+	//@formatter:on
 	@POST("/wiki/rest/api/content/blueprint/instance/{draftId}")
 	Call<Object> publishLegacyDraftOfBlueprint(final @Path("draftId") String draftId,
 	                                           final @Body Draft draftBody);
-	//@formatter:on
+	
 	
 	//@formatter:off
 	/**
@@ -6010,17 +5978,15 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 * <h2><strong>Responses:</strong></h2>
 	 * application/json
 	 */
+	//@formatter:on
 	@PUT("/wiki/rest/api/content/blueprint/instance/{draftId}")
 	Call<Object> publishSharedDraftOfBlueprint(final @Path("draftId") String draftId,
 	                                           final @Body Draft draftBody);
-	//@formatter:on
-	
 	//----------- content/blueprint Конец ---------------
 	//----------------------------------------------------------------------------------------
 	
 	//----------- contentbody/convert/{to} Начало ---------------
 	//----------------------------------------------------------------------------------------
-	
 	//@formatter:off
 	/**
 	 * Функция выполняет преобразования между различными представления тела контента (Converts between content body representation).
@@ -6095,11 +6061,388 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 * @param toFormat формат в который мы хотим конвертировать
 	 * @return результат конвертации
 	 */
+	//@formatter:on
 	@POST("/wiki/rest/api/contentbody/convert/{to}")
 	Call<ConvertationResponsBody> convert(final @Body ContentBody contentBody,
 	                                      final @Path("to") String toFormat);
-	//@formatter:on
 	//----------- contentbody/convert/{to} Конец ---------------
+	//----------------------------------------------------------------------------------------
+	
+	//----------- user (Non-admin user operations), Начало ---------------
+	//----------------------------------------------------------------------------------------
+	//@formatter:off
+	/**
+	 * Функция позволяет получить информацию о пользователе
+	 * <br>
+	 * Пользователь идентифицируется либо с помощью ключа пользователя (userKey),
+	 * <br>
+	 * либо при помощи имени пользователя (login, userName)
+	 * <br>
+	 * <strong>Примеры URI запросов:</strong>
+	 * <ul>
+	 * <li>http://example.com/confluence/rest/api/user?username=jblogs</li>
+	 * <li>http://example.com/confluence/rest/api/user?key=402880824ff933a4014ff9345d7c0002</li>
+	 * </ul>
+	 * <p>
+	 * <strong>Дополнительные параметры</strong>
+	 * <ul>
+	 * <li>key (String) -- userkey по которому система найдёт пользователя, о котором мы хотим получить информацию</li>
+	 * <li>username (String) -- username по которому система найдёт пользователя, о котором мы хотим получить информацию</li>
+	 * <li>expand (String) -- свойства, которые мы можем дополнительно "развернуть" и они вернутся нам в ответе на запрос в виде дополнительной информации(expand)
+	 * </li>
+	 * </ul>
+	 * <br>
+	 * <h2><strong>Responses:</strong></h2>
+	 * <strong>STATUS 200</strong> -- application/json, возвращает полное JSON представление пользователя
+	 * <br>
+	 * <blockquote><PRE>
+{
+    "type": "known",
+    "username": "jsmith",
+    "userKey": "402880824ff933a4014ff9345d7c0002",
+    "profilePicture": {
+        "path": "/wiki/relative/avatar.png",
+        "width": 48,
+        "height": 48,
+        "isDefault": true
+    },
+    "displayName": "Joe Smith",
+    "_links": {
+        "base": "http://example.com/confluence/",
+        "context": "/confluence",
+        "self": "http://example.com/confluence/rest/api/user?key=402880824ff933a4014ff9345d7c0002"
+    },
+    "_expandable": {
+        "status": ""
+    }
+}
+	 * </PRE></blockquote>
+	 * <br>
+	 * <strong>SCHEMA</strong>
+	 * <br>
+	 * <blockquote><PRE>
+{
+    "id": "https://docs.atlassian.com/jira/REST/schema/person#",
+    "title": "Person",
+    "type": "object",
+    "anyOf": [
+        {
+            "$ref": "#/definitions/anonymous"
+        },
+        {
+            "$ref": "#/definitions/known-user"
+        },
+        {
+            "$ref": "#/definitions/unknown-user"
+        },
+        {
+            "$ref": "#/definitions/user"
+        }
+    ],
+    "definitions": {
+        "anonymous": {
+            "title": "Anonymous",
+            "type": "object",
+            "properties": {
+                "profilePicture": {
+                    "title": "Icon",
+                    "type": "object",
+                    "properties": {
+                        "path": {
+                            "type": "string"
+                        },
+                        "width": {
+                            "type": "integer"
+                        },
+                        "height": {
+                            "type": "integer"
+                        },
+                        "isDefault": {
+                            "type": "boolean"
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                        "width",
+                        "height",
+                        "isDefault"
+                    ]
+                },
+                "displayName": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "known-user": {
+            "title": "Known User",
+            "type": "object",
+            "properties": {
+                "profilePicture": {
+                    "title": "Icon",
+                    "type": "object",
+                    "properties": {
+                        "path": {
+                            "type": "string"
+                        },
+                        "width": {
+                            "type": "integer"
+                        },
+                        "height": {
+                            "type": "integer"
+                        },
+                        "isDefault": {
+                            "type": "boolean"
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                        "width",
+                        "height",
+                        "isDefault"
+                    ]
+                },
+                "displayName": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "array",
+                    "items": {
+                        "title": "User Status",
+                        "type": "object"
+                    }
+                }
+            },
+            "additionalProperties": false
+        },
+        "unknown-user": {
+            "title": "Unknown User",
+            "type": "object",
+            "properties": {
+                "profilePicture": {
+                    "title": "Icon",
+                    "type": "object",
+                    "properties": {
+                        "path": {
+                            "type": "string"
+                        },
+                        "width": {
+                            "type": "integer"
+                        },
+                        "height": {
+                            "type": "integer"
+                        },
+                        "isDefault": {
+                            "type": "boolean"
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                        "width",
+                        "height",
+                        "isDefault"
+                    ]
+                },
+                "displayName": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "user": {
+            "title": "User",
+            "type": "object",
+            "properties": {
+                "profilePicture": {
+                    "title": "Icon",
+                    "type": "object",
+                    "properties": {
+                        "path": {
+                            "type": "string"
+                        },
+                        "width": {
+                            "type": "integer"
+                        },
+                        "height": {
+                            "type": "integer"
+                        },
+                        "isDefault": {
+                            "type": "boolean"
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                        "width",
+                        "height",
+                        "isDefault"
+                    ]
+                },
+                "displayName": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        }
+    }
+}
+	 * </PRE></blockquote>
+	 * <strong>STATUS 403</strong> -- такой код будет возвращён, если выполняющий запрос user не имеет достаточных прав доступа для просмотра информации о пользователях (view users)
+	 * <br>
+	 * <strong>STATUS 404</strong> -- такой код будет возвращён, если пользователь с указанным userName или userKey не существует
+	 * <br>
+	 * @return
+	 */
+	//@formatter:on
+	@GET("/wiki/rest/api/user")
+	Call<Object> getUser();
+	
+	//@formatter:off
+	/**
+	 * Функция позволяет получить информацию о том, как anonymous представлен в Confluence
+	 * <br>
+	 * <p>
+	 * <strong>Примеры URI запросов:</strong>
+	 * <ul>
+	 * <li>http://example.com/confluence/rest/api/user/anonymous</li>
+	 * </ul>
+	 * <br>
+	 * <h2><strong>Responses:</strong></h2>
+	 * <strong>STATUS 200</strong> -- application/json, возвращает полное JSON предствление анонимуса (anonymous)
+	 * <br>
+	 * <blockquote><PRE>
+{
+    "type": "anonymous",
+    "profilePicture": {
+        "path": "/wiki/relative/avatar.png",
+        "width": 48,
+        "height": 48,
+        "isDefault": true
+    },
+    "displayName": "Anonymous"
+}
+	 * </PRE></blockquote>
+	 * <strong>STATUS 403</strong> -- такой код будет возвращён, если пользователь, выполняющий запрос,
+	 * <br>
+	 * не имеет достаточных прав доступа <em>для использования Confluence</em>
+	 * <br>
+	 *
+	 * @return
+	 */
+	//@formatter:on
+	@GET("/wiki/rest/api/user/anonymous")
+	Call<Object> GetAnonymous();
+	
+	//@formatter:off
+	/**
+	 * Функция позволяет получить информацию о текущем залогиненном пользователе
+	 * <br>
+	 * <strong>Примеры URI запросов:</strong>
+	 * <ul>
+	 * <li>http://example.com/rest/api/user/current</li>
+	 * </ul>
+	 * <p>
+	 * <strong>Дополнительные параметры</strong>
+	 * <ul>
+	 * <li>expand (String) -- можно указать дополнительную связанную информацию о пользователе, которую вы хотите видеть в ответе на запрос.
+	 * </li>
+	 * </ul>
+	 * <br>
+	 * <h2><strong>Responses:</strong></h2>
+	 * <strong>STATUS 200</strong> -- application/json, возвращает полное JSON представление, содержащее информацию о пользователе
+	 * <br>
+	 * <blockquote><PRE>
+{
+    "type": "known",
+    "username": "jsmith",
+    "userKey": "402880824ff933a4014ff9345d7c0002",
+    "profilePicture": {
+        "path": "/wiki/relative/avatar.png",
+        "width": 48,
+        "height": 48,
+        "isDefault": true
+    },
+    "displayName": "Joe Smith",
+    "_links": {
+        "base": "http://myhost:8080/confluence",
+        "context": "/confluence",
+        "self": "http://myhost:8080/confluence/rest/experimental/user?key=402880824ff933a4014ff9345d7c0002"
+    },
+    "_expandable": {
+        "status": ""
+    }
+}
+	 * </PRE></blockquote>
+	 * <strong>STATUS 403</strong> -- такой код будет возвращён, если пользователь, выполняющий запрос,
+	 * <br>
+	 * не имеет достаточных прав доступа <em>для использования Confluence</em>
+	 * <br>
+	 *
+	 * @return
+	 */
+	//@formatter:on
+	@GET("/wiki/rest/api/user/current")
+	Call<Object> GetCurrent();
+	
+	//@formatter:off
+	/**
+	 * Получить разбитую на страницы (paginated) коллекцию групп, членом которых является указанный пользователь
+	 * <p>
+	 * <strong>Примеры URI запросов:</strong>
+	 * <ul>
+	 * <li>http://example.com/rest/api/user/memberof?username=jblogs</li>
+	 * <li>http://example.com/rest/api/user/memberof?key=402880824ff933a4014ff9345d7c0002</li>
+	 * </ul>
+	 * <p>
+	 * <strong>Дополнительные параметры</strong>
+	 * <ul>
+	 * <li>key (String) -- Optional -- userkey по которому система найдёт пользователя</li>
+	 * <li>username (String) -- Optional -- username по которому система найдёт пользователя</li>
+	 * <li>expand (String) -- Optional -- </li>
+	 * <li>start (int) -- Optional -- Default: <strong>0</strong> -- индекс первого элемента в результирующем возвращаемом наборе элементов</li>
+	 * <li>limit (int) -- Optional -- Default: <strong>200</strong> -- сколько элементов из результирующего возвращаемого набора вы хотите получить (после начального индекса, после start)</li>
+	 * </ul>
+	 * <br>
+	 * <h2><strong>Responses:</strong></h2>
+	 * <strong>STATUS 200</strong> -- application/json, возвращает полное JSON представление, содержащее представление коллекции групп
+	 * <br>
+	 * <blockquote><PRE>
+{
+    "results": [
+        {
+            "type": "group",
+            "name": "somegroup"
+        },
+        {
+            "type": "group",
+            "name": "anothergroup"
+        }
+    ],
+    "size": 2
+}
+	 * </PRE></blockquote>
+	 * <strong>STATUS 403</strong> -- такой код будет возвращён, если пользователь, выполняющий запрос,
+	 * <br>
+	 * не имеет достаточных прав доступа <em>для использования Confluence</em>
+	 * <br>
+	 *
+	 * @return пустой ответ
+	 */
+	//@formatter:on
+	@GET("/wiki/rest/api/user/memberof")
+	Call<Object> GetGroups();
+	//----------- user (Non-admin user operations), Конец ---------------
 	//----------------------------------------------------------------------------------------
 	
 }
