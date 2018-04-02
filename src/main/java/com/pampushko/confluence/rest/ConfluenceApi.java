@@ -42,7 +42,6 @@ import retrofit2.http.*;
 import java.util.List;
 import java.util.Map;
 
-
 /**
  * Класс описывающий Confluence REST API
  * <br>
@@ -182,7 +181,6 @@ public interface ConfluenceApi
 	Call<UserResultList> getUsersFromGroupByGroupName(final @Path("groupName") String groupName,
 	                                                  final @Query("start") int start,
 	                                                  final @Query("limit") int limit);
-	
 	//----------------------------------------------------------------------------------------
 	
 	/**
@@ -206,7 +204,6 @@ public interface ConfluenceApi
 	
 	//----------------------------------------------------------------------------------------
 	//начало, Add content watcher
-	
 	//@formatter:off
 	/**
 	 * Функция добавляет пользователя, указанного вами, к списку наблюдателей элемента контента,
@@ -249,18 +246,15 @@ public interface ConfluenceApi
 	 *
 	 * @return
 	 */
+	//@formatter:on
 	@POST("/wiki/rest/api/user/watch/content/{contentId}")
 	Call<Void> addWatcher(final @Path("contentId") String contentId,
 	                      final @QueryMap Map<String, String> param);
-	//@formatter:on
-	
 	
 	//конец, Add content watcher
 	//----------------------------------------------------------------------------------------
-	
 	//----------------------------------------------------------------------------------------
 	//начало, Remove content watcher
-	
 	//@formatter:off
 	/**
 	 * Функция удаляет пользователя, указанного вами, из списка наблюдателей элемента контента,
@@ -303,15 +297,13 @@ public interface ConfluenceApi
 	 *
 	 * @return пустой ответ
 	 */
+	//@formatter:on
 	@DELETE("/wiki/rest/api/user/watch/content/{contentId}")
 	Call<Void> removeWatcher(final @Path("contentId") String contentId,
 	                         final @QueryMap Map<String, String> param);
 	
-	//@formatter:on
-	
 	//конец, Remove content watcher
 	//----------------------------------------------------------------------------------------
-	
 	//----------------------------------------------------------------------------------------
 	//начало, Add space watcher
 	
@@ -369,7 +361,6 @@ public interface ConfluenceApi
 	
 	//----------------------------------------------------------------------------------------
 	//начало, Remove space watcher
-	
 	/**
 	 * Функция удаляет пользователя из списка наблюдателей Пространства (Space)
 	 * <br>
@@ -414,7 +405,6 @@ public interface ConfluenceApi
 	@DELETE("/wiki/rest/api/user/watch/space/{spaceKey}")
 	Call<Void> removeWatcherFromSpace(final @Path("spaceKey") String spaceKey,
 	                                  final @QueryMap Map<String, String> params);
-	
 	//конец, Remove space watcher
 	//----------------------------------------------------------------------------------------
 	
@@ -471,13 +461,11 @@ public interface ConfluenceApi
 	@GET("/wiki/rest/api/user/watch/space/{spaceKey}")
 	Call<WatchObject> isWatchSpace(final @Path("spaceKey") String spaceKey,
 	                               final @QueryMap Map<String, String> params);
-	
 	//конец, Is watching space
 	//----------------------------------------------------------------------------------------
 	
 	//----------------------------------------------------------------------------------------
 	//начало, Is watching content
-	
 	/**
 	 * Текущий пользователь является наблюдателем контента с указанным contentId
 	 * <br>
@@ -523,7 +511,6 @@ public interface ConfluenceApi
 	
 	//----------------------------------------------------------------------------------------
 	//-----------Content Начало ---------------
-	
 	/**
 	 * Создаёт новый элемент контента
 	 * <br>
@@ -541,7 +528,6 @@ public interface ConfluenceApi
 	 * @return
 	 */
 	@POST("wiki/rest/api/content")
-	//готово
 	Call<Content> createContent(final @Body Content content, final @QueryMap Map<String, String> param);
 	
 	/**
@@ -576,7 +562,6 @@ public interface ConfluenceApi
 	Call<Version> getVersionOfContent(final @Path("contentId") String contentId,
 	                                  final @Path("versionId") int versionId,
 	                                  final @QueryMap Map<String, String> params);
-	
 	//@formatter:off
 	/**
 	 * Returns a paginated list of Content.
@@ -605,9 +590,9 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 * @param params
 	 * @return
 	 */
+	//@formatter:on
 	@GET("/wiki/rest/api/content")
 	Call<ContentResultList> getContent(@QueryMap Map<String, String> params);
-	//@formatter:on
 	
 	//@formatter:off
 	/**
@@ -949,7 +934,6 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 *
 	 * @return
 	 */
-	//готово
 	@GET("/wiki/rest/api/content/{contentId}/history/{version}/macro/hash/{hash}")
 	Call<Macros> getContentMacroBodyByHash(final @Path("contentId") String contentId,
 	                                       final @Path("version") String version,
@@ -988,7 +972,6 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 *
 	 * @return контейнер, содержащий список элементов контента
 	 */
-	//готово
 	@GET("/wiki/rest/api/content/{contentId}/history/{version}/macro/id/{macroId}")
 	Call<Macros> getContentMacroBodyByMacroId(final @Path("contentId") String contentId,
 	                                          final @Path("version") String version,
@@ -1019,7 +1002,6 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 * </ul>
 	 */
 	@GET("/wiki/rest/api/content/search")
-	//не готово
 	Call<ContentContainter> getContentSearch(final @Query("cql") String cql,
 	                                         final @QueryMap Map<String, String> params);
 	//-----------Content Конец ---------------
@@ -1027,7 +1009,6 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	
 	//-----------Audit Начало ---------------
 	//----------------------------------------------------------------------------------------
-	
 	/**
 	 * Fetch a paginated list of AuditRecord instances dating back to a certain time
 	 * <br>
@@ -1286,7 +1267,6 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	@GET("/wiki/rest/api/content/{contentId}/child")
 	Call<ChildContentContainer> getChild(final @Path("contentId") String contentId,
 	                                     final @QueryMap Map<String, String> params);
-	
 	//@formatter:off
 	/**
 	 * Метод возвращает непосредственные дочерние элементы для данного элемента контента.
@@ -1870,7 +1850,6 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	
 	//----------- content/{id}/child/attachment Начало ---------------
 	//----------------------------------------------------------------------------------------
-	
 	//@formatter:off
 	/**
 	 * <strong>
@@ -2103,7 +2082,6 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	                                                  @Part MultipartBody.Part fileBodyAndFileName,
 	                                                  @Part("comment") String comment,
 	                                                  final @QueryMap Map<String, String> params);
-	
 	//@formatter:off
 	/**
 	 * Функция обновляет не-двоичные данные вложения
@@ -2300,7 +2278,6 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	                                      final @Path("attachmentId") String attachmentId,
 	                                      final @Body UpdAttRequest body,
 	                                      final @QueryMap Map<String, String> params);
-	
 	//@formatter:off
 	/**
 	 * <strong>
@@ -2686,7 +2663,6 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	@GET("/wiki/rest/api/content/{contentId}/descendant")
 	Call<DescendantsResult> getContentDescendants(final @Path("contentId") String parentContentId,
 	                                              final @Query("expand") String expand);
-	
 	//@formatter:off
 	/**
 	 * Возвращает direct descendants (непосредственных потомков) для указанного вами элемента контента,
@@ -2831,7 +2807,6 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	
 	//----------- content/{id}/label Начало ---------------
 	//----------------------------------------------------------------------------------------
-	
 	/**
 	 * Возвращает список меток, для указанного элемента контента.
 	 * <p>
@@ -2951,7 +2926,6 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	                                           final @Path("labelName") String labelName);
 	//----------- content/{id}/label Конец ---------------
 	//----------------------------------------------------------------------------------------
-	
 	
 	//----------- content/{id}/property Начало ---------------
 	//----------------------------------------------------------------------------------------
@@ -3091,7 +3065,6 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	@GET("/wiki/rest/api/content/{contentId}/property/{propKey}")
 	Call<PropResponse> findByKeyContentProperties(final @Path("contentId") String contentId,
 	                                              final @Path("propKey") String propKey);
-	
 	//@formatter:off
 	/**
 	 * Функция обновляет свойство элемента контента.
@@ -3175,7 +3148,6 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	Call<PropResponse> updateContentProperties(final @Path("contentId") String contentId,
 	                                           final @Path("propKey") String propKey,
 	                                           final @Body PropertyOfContentWithVersion body);
-	
 	//@formatter:off
 	/**
 	 * Функция удаляет свойство заданного элемента контента
@@ -3199,7 +3171,6 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	@DELETE("/wiki/rest/api/content/{contentId}/property/{propKey}")
 	Call<Void> deleteContentProperties(final @Path("contentId") String contentId,
 	                                   final @Path("propKey") String propKey);
-	
 	//@formatter:off
 	/**
 	 * Функция создаёт новое свойство для указанного элемента контента.
@@ -3268,7 +3239,6 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	Call<PropResponse> createContentPropertiesWithKey(final @Path("contentId") String contentId,
 	                                                  final @Path("propKey") String propKey,
 	                                                  final @Body PropertyOfContent body);
-	
 	//@formatter:off
 	/**
 	 * Функция новое свойство для указанного элемента контента.
@@ -3333,7 +3303,6 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	@POST("/wiki/rest/api/content/{contentId}/property")
 	Call<PropResponse> createContentProperties(final @Path("contentId") String contentId,
 	                                           final @Body PropertyOfContent body);
-	
 	//----------- content/{id}/property Конец ---------------
 	//----------------------------------------------------------------------------------------
 	
@@ -3930,7 +3899,6 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	//@formatter:on
 	@GET("/wiki/rest/api/content/{contentId}/restriction/byOperation")
 	Call<RestrictionResponseContainer> getContentRestrictionByOperation(final @Path("contentId") String contentId);
-	
 	
 	//@formatter:off
 	/**
@@ -5262,8 +5230,6 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	@POST("/wiki/rest/api/content/blueprint/instance/{draftId}")
 	Call<Object> publishLegacyDraftOfBlueprint(final @Path("draftId") String draftId,
 	                                           final @Body Draft draftBody);
-	
-	
 	//@formatter:off
 	/**
 	 * Publish shared черновик элемента контента, созданного из ConfluenceBlueprint
