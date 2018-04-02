@@ -3724,4 +3724,40 @@ public class Confluence
 	}
 	//конец, Is watching space
 	//----------------------------------------------------------------------------------------
+	
+	//----------- user (Non-admin user operations), Начало ---------------
+	//----------------------------------------------------------------------------------------
+	Object getUser() throws IOException
+	{
+		Call<Object> getUserCall = confluenceApi.getUser();
+		Response<Object> response = getUserCall.execute();
+		Object body = response.body();
+		return body;
+	}
+	
+	Object getAnonymous() throws IOException
+	{
+		Call<Object> getAnonymousCall = confluenceApi.getAnonymous();
+		Response<Object> response = getAnonymousCall.execute();
+		Object body = response.body();
+		return body;
+	}
+	
+	Object getCurrent() throws IOException
+	{
+		Call<Object> getCurrentCall = confluenceApi.getCurrent();
+		Response<Object> response = getCurrentCall.execute();
+		Object body = response.body();
+		return body;
+	}
+	
+	Object getGroups() throws IOException
+	{
+		Call<Object> getGroupsCall = confluenceApi.getGroups();
+		Response<Object> response = getGroupsCall.execute();
+		Object body = response.body();
+		return body;
+	}
+	//----------- user (Non-admin user operations), Конец ---------------
+	//----------------------------------------------------------------------------------------
 }

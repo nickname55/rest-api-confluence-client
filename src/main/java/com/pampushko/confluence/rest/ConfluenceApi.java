@@ -6313,7 +6313,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 */
 	//@formatter:on
 	@GET("/wiki/rest/api/user/anonymous")
-	Call<Object> GetAnonymous();
+	Call<Object> getAnonymous();
 	
 	//@formatter:off
 	/**
@@ -6364,7 +6364,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 */
 	//@formatter:on
 	@GET("/wiki/rest/api/user/current")
-	Call<Object> GetCurrent();
+	Call<Object> getCurrent();
 	
 	//@formatter:off
 	/**
@@ -6431,7 +6431,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 */
 	//@formatter:on
 	@GET("/wiki/rest/api/user/memberof")
-	Call<Object> GetGroups();
+	Call<Object> getGroups();
 	//----------- user (Non-admin user operations), Конец ---------------
 	//----------------------------------------------------------------------------------------
 	
