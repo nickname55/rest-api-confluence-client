@@ -361,47 +361,48 @@ public interface ConfluenceApi
 	
 	//----------------------------------------------------------------------------------------
 	//начало, Remove space watcher
+	
 	/**
 	 * Функция удаляет пользователя из списка наблюдателей Пространства (Space)
-	 * <br>
-	 * пространство указывается при помощи spaceKey
-	 * <br>
-	 * Пользователь не является обязательным параметром.
-	 * <br>
-	 * Если пользователь не указан, то будет использоваться текущий пользователь (отравитель запроса)
-	 * <br>
-	 * В противном случае, вы можете указать пользователя либо с помощью user key
-	 * <br>
-	 * или с помощью имени пользователя (username).
-	 * <br>
-	 * <br>
-	 * <em>Обратите внимание, что только администраторы Confluence могут добавлять в наблюдатели не только себя, но и других пользователей системы.
-	 * </em>
-	 * <br>
-	 * <p>
-	 * <strong>Примеры URI запросов:</strong>
-	 * <ul>
-	 * <li>DELETE http://example.com/rest/api/user/watch/space/SPACEKEY</li>
-	 * <li>DELETE http://example.com/rest/api/user/watch/space/SPACEKEY?username=jblogs</li>
-	 * <li>DELETE http://example.com/rest/api/user/watch/space/SPACEKEY?key=ff8080815a58e24c015a58e263710000</li>
-	 * </ul>
-	 * <p>
-	 * <strong>Дополнительные параметры</strong>
-	 * <ul>
-	 * <li>key (String) -- Optional -- userkey по которому система найдёт пользователя, которого мы хотим удалить из списка наблюдателей</li>
-	 * <li>username (String) -- Optional -- username по которому система найдёт пользователя, которого мы хотим удалить из списка наблюдателей</li>
-	 * <li>contentType (String) -- Optional -- тип контента для которого мы хотим удалить наблюдателя? todo протестировать как работает этот параметр, уточнить
-	 * </li>
-	 * </ul>
-	 * <br>
-	 * <h2><strong>Responses:</strong></h2>
-	 * <strong>STATUS 204</strong> -- application/json, такой ответ будет получен, если пользователь успешно удален из списка наблюдателей указанной вами области (Space)
-	 * <br>
-	 * <strong>STATUS 404</strong> -- такой код будет возвращён, если для указанного ключа области (space key) не найдена область или если выполняющий запрос пользователь не имеет достаточных прав доступа для выполнения данной операции
-	 * <br>
-	 *
-	 * @return пустой ответ
-	 */
+     * <br>
+     * пространство указывается при помощи spaceKey
+     * <br>
+     * Пользователь не является обязательным параметром.
+     * <br>
+     * Если пользователь не указан, то будет использоваться текущий пользователь (отравитель запроса)
+     * <br>
+     * В противном случае, вы можете указать пользователя либо с помощью user key
+     * <br>
+     * или с помощью имени пользователя (username).
+     * <br>
+     * <br>
+     * <em>Обратите внимание, что только администраторы Confluence могут добавлять в наблюдатели не только себя, но и других пользователей системы.
+     * </em>
+     * <br>
+     * <p>
+     * <strong>Примеры URI запросов:</strong>
+     * <ul>
+     * <li>DELETE http://example.com/rest/api/user/watch/space/SPACEKEY</li>
+     * <li>DELETE http://example.com/rest/api/user/watch/space/SPACEKEY?username=jblogs</li>
+     * <li>DELETE http://example.com/rest/api/user/watch/space/SPACEKEY?key=ff8080815a58e24c015a58e263710000</li>
+     * </ul>
+     * <p>
+     * <strong>Дополнительные параметры</strong>
+     * <ul>
+     * <li>key (String) -- Optional -- userkey по которому система найдёт пользователя, которого мы хотим удалить из списка наблюдателей</li>
+     * <li>username (String) -- Optional -- username по которому система найдёт пользователя, которого мы хотим удалить из списка наблюдателей</li>
+     * <li>contentType (String) -- Optional -- тип контента для которого мы хотим удалить наблюдателя? todo протестировать как работает этот параметр, уточнить
+     * </li>
+     * </ul>
+     * <br>
+     * <h2><strong>Responses:</strong></h2>
+     * <strong>STATUS 204</strong> -- application/json, такой ответ будет получен, если пользователь успешно удален из списка наблюдателей указанной вами области (Space)
+     * <br>
+     * <strong>STATUS 404</strong> -- такой код будет возвращён, если для указанного ключа области (space key) не найдена область или если выполняющий запрос пользователь не имеет достаточных прав доступа для выполнения данной операции
+     * <br>
+     *
+     * @return пустой ответ
+     */
 	@DELETE("/wiki/rest/api/user/watch/space/{spaceKey}")
 	Call<Void> removeWatcherFromSpace(final @Path("spaceKey") String spaceKey,
 	                                  final @QueryMap Map<String, String> params);
@@ -466,6 +467,7 @@ public interface ConfluenceApi
 	
 	//----------------------------------------------------------------------------------------
 	//начало, Is watching content
+	
 	/**
 	 * Текущий пользователь является наблюдателем контента с указанным contentId
 	 * <br>
@@ -511,6 +513,7 @@ public interface ConfluenceApi
 	
 	//----------------------------------------------------------------------------------------
 	//-----------Content Начало ---------------
+	
 	/**
 	 * Создаёт новый элемент контента
 	 * <br>
@@ -1009,101 +1012,102 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	
 	//-----------Audit Начало ---------------
 	//----------------------------------------------------------------------------------------
+	
 	/**
 	 * Fetch a paginated list of AuditRecord instances dating back to a certain time
-	 * <br>
-	 * <strong>Дополнительные параметры</strong>
-	 * <ul>
-	 * <li>startDate (String) -- </li>
-	 * <li>endDate (String) -- </li>
-	 * <li>start (int) -- where to start within results set</li>
-	 * <li>limit (int) -- Default : <strong>1000</strong> -- the maximum results to fetch</li>
-	 * <li>searchString (String) -- </li>
-	 * </ul>
-	 * <br>
-	 * <strong>Пример</strong>	 * @return
-	 */
+     * <br>
+     * <strong>Дополнительные параметры</strong>
+     * <ul>
+     * <li>startDate (String) -- </li>
+     * <li>endDate (String) -- </li>
+     * <li>start (int) -- where to start within results set</li>
+     * <li>limit (int) -- Default : <strong>1000</strong> -- the maximum results to fetch</li>
+     * <li>searchString (String) -- </li>
+     * </ul>
+     * <br>
+     * <strong>Пример</strong>	 * @return
+     */
 	@GET("/wiki/rest/api/audit")
 	Call<AuditResultList> getAudit(final @QueryMap Map<String, String> params);
 	
 	/**
-	 * Store record
-	 * <br>
-	 *
-	 * @param audit
-	 *
-	 * @return
-	 */
+     * Store record
+     * <br>
+     *
+     * @param audit
+     *
+     * @return
+     */
 	@POST("/wiki/rest/api/audit")
 	Call<Audit> createAudit(final @Body Audit audit);
 	
 	/**
-	 * <br>
-	 * <strong>Дополнительные параметры</strong>
-	 * <ul>
-	 * <li>startDate (String) -- </li>
-	 * <li>endDate (String) -- </li>
-	 * <li>searchString (String) -- </li>
-	 * <li>format (String) -- Default: <strong>csv</strong> -- </li>
-	 * </ul>
-	 * <br>
-	 * <strong>Responses</strong>
-	 * <ul>
-	 * <li>application/zip</li>
-	 * <li>text/csv</li>
-	 * </ul>
-	 *
-	 * @param params
-	 *
-	 * @return
-	 */
+     * <br>
+     * <strong>Дополнительные параметры</strong>
+     * <ul>
+     * <li>startDate (String) -- </li>
+     * <li>endDate (String) -- </li>
+     * <li>searchString (String) -- </li>
+     * <li>format (String) -- Default: <strong>csv</strong> -- </li>
+     * </ul>
+     * <br>
+     * <strong>Responses</strong>
+     * <ul>
+     * <li>application/zip</li>
+     * <li>text/csv</li>
+     * </ul>
+     *
+     * @param params
+     *
+     * @return
+     */
 	@Streaming
 	@GET("/wiki/rest/api/audit/export")
 	Call<ResponseBody> exportAudit(@Header("Accept") String acceptHeader, final @QueryMap Map<String, String> params);
 	
 	/**
-	 * Получаем текущий период хранения (Fetches the current retention period)
-	 * <p>
-	 * <strong>Responses</strong>
-	 * application/json
-	 *
-	 * @return
-	 */
+     * Получаем текущий период хранения (Fetches the current retention period)
+     * <p>
+     * <strong>Responses</strong>
+     * application/json
+     *
+     * @return
+     */
 	@GET("/wiki/rest/api/audit/retention")
 	Call<RetentionPeriod> getRetentionPeriodOfAudit();
 	
 	/**
-	 * Устанавливаем текущий период хранения (Set the retention period to a new value.)
-	 * <p>
-	 * Can throw ServiceException if the retention period is too long
-	 *
-	 * @param newRetentionPeriod
-	 *
-	 * @return
-	 */
+     * Устанавливаем текущий период хранения (Set the retention period to a new value.)
+     * <p>
+     * Can throw ServiceException if the retention period is too long
+     *
+     * @param newRetentionPeriod
+     *
+     * @return
+     */
 	@PUT("/wiki/rest/api/audit/retention")
 	Call<RetentionPeriod> setRetentionPeriodOfAudit(final @Body RetentionPeriod newRetentionPeriod);
 	
 	/**
-	 * Fetch a paginated list of AuditRecord instances dating back to a certain time
-	 * <br>
-	 * <strong>Дополнительные параметры</strong>
-	 * <ul>
-	 * <li>number (long) -- Default: <strong>3</strong> -- the amount of time periods</li>
-	 * <li>units (String) -- the units to use for the time periods eg. 'days', 'months' etc</li>
-	 * <li>start (int) -- where to start within results set</li>
-	 * <li>limit (int) -- Default: <strong>1000</strong> -- the maximum results to fetch</li>
-	 * <li>searchString (String) -- </li>
-	 * </ul>
-	 * <br>
-	 * <p>
-	 * <strong>Responses</strong>
-	 * application/json
-	 *
-	 * @param params
-	 *
-	 * @return
-	 */
+     * Fetch a paginated list of AuditRecord instances dating back to a certain time
+     * <br>
+     * <strong>Дополнительные параметры</strong>
+     * <ul>
+     * <li>number (long) -- Default: <strong>3</strong> -- the amount of time periods</li>
+     * <li>units (String) -- the units to use for the time periods eg. 'days', 'months' etc</li>
+     * <li>start (int) -- where to start within results set</li>
+     * <li>limit (int) -- Default: <strong>1000</strong> -- the maximum results to fetch</li>
+     * <li>searchString (String) -- </li>
+     * </ul>
+     * <br>
+     * <p>
+     * <strong>Responses</strong>
+     * application/json
+     *
+     * @param params
+     *
+     * @return
+     */
 	@GET("/wiki/rest/api/audit/since")
 	Call<AuditResultList> getAuditSince(final @QueryMap Map<String, String> params);
 	//-----------Audit Конец ---------------
@@ -2807,6 +2811,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	
 	//----------- content/{id}/label Начало ---------------
 	//----------------------------------------------------------------------------------------
+	
 	/**
 	 * Возвращает список меток, для указанного элемента контента.
 	 * <p>
@@ -6398,12 +6403,31 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
     "size": 2
 }
 	 * </PRE></blockquote>
+	 * <strong>SCHEMA</strong>
+	 * <br>
+	 * <blockquote><PRE>
+{
+    "id": "https://docs.atlassian.com/jira/REST/schema/page-response-of-group#",
+    "title": "Page Response of Group",
+    "type": "array",
+    "items": {
+        "title": "Group",
+        "type": "object",
+        "properties": {
+            "name": {
+                "type": "string"
+            }
+        },
+        "additionalProperties": false
+    }
+}
+	 * </PRE></blockquote>
 	 * <strong>STATUS 403</strong> -- такой код будет возвращён, если пользователь, выполняющий запрос,
 	 * <br>
 	 * не имеет достаточных прав доступа <em>для использования Confluence</em>
 	 * <br>
 	 *
-	 * @return пустой ответ
+	 * @return
 	 */
 	//@formatter:on
 	@GET("/wiki/rest/api/user/memberof")
