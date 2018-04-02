@@ -6436,4 +6436,26 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	//----------- user (Non-admin user operations), Конец ---------------
 	//----------------------------------------------------------------------------------------
 	
+	//----------- space/{spaceKey}/property (Manipulating space properties). Начало ----------
+	//----------------------------------------------------------------------------------------
+	@GET("/wiki/rest/api/space/{spaceKey}/property")
+	Call<Object> getProperty(final @Path("spaceKey") String spaceKey);
+	
+	@POST("/wiki/rest/api/space/{spaceKey}/property")
+	Call<Object> createProperty(final @Path("spaceKey") String spaceKey);
+	
+	@GET("/wiki/rest/api/space/{spaceKey}/property/{key}")
+	Call<Object> getPropertyByKey(final @Path("spaceKey") String spaceKey, final @Path("key") String key);
+	
+	@PUT("/wiki/rest/api/space/{spaceKey}/property/{key}")
+	Call<Object> updatePropertyByKey(final @Path("spaceKey") String spaceKey, final @Path("key") String key);
+	
+	@DELETE("/wiki/rest/api/space/{spaceKey}/property/{key}")
+	Call<Object> deletePropertyByKey(final @Path("spaceKey") String spaceKey, final @Path("key") String key);
+	
+	@POST("/wiki/rest/api/space/{spaceKey}/property/{key}")
+	Call<Object> createPropertyByKey();
+	//----------- space/{spaceKey}/property (Manipulating space properties). Конец -----------
+	//----------------------------------------------------------------------------------------
+
 }
