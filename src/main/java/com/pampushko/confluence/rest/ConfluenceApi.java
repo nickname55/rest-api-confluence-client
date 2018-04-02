@@ -6278,7 +6278,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 */
 	//@formatter:on
 	@GET("/wiki/rest/api/user")
-	Call<Object> getUser(final @QueryMap Map<String, String> params);
+	Call<User> getUser(final @QueryMap Map<String, String> params);
 	
 	//@formatter:off
 	/**
@@ -6365,7 +6365,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 */
 	//@formatter:on
 	@GET("/wiki/rest/api/user/current")
-	Call<Object> getCurrent();
+	Call<User> getCurrentUser();
 	
 	//@formatter:off
 	/**
@@ -6432,7 +6432,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 */
 	//@formatter:on
 	@GET("/wiki/rest/api/user/memberof")
-	Call<Object> getGroups(@QueryMap Map<String, String> params);
+	Call<GroupResultList> getUserGroups(@QueryMap Map<String, String> params);
 	//----------- user (Non-admin user operations), Конец ---------------
 	//----------------------------------------------------------------------------------------
 	

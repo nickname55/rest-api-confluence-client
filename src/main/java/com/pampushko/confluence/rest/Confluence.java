@@ -334,7 +334,7 @@ public class Confluence
 	 *
 	 * @return
 	 */
-	GroupResultList getGetGroups(final int start, final int limit) throws IOException
+	GroupResultList getGroups(final int start, final int limit) throws IOException
 	{
 		Call<GroupResultList> groupResultListCall = confluenceApi.getGroups(start, limit);
 		Response<GroupResultList> response = groupResultListCall.execute();
@@ -364,7 +364,7 @@ public class Confluence
 	 *
 	 * @return
 	 */
-	GroupResultList getGetGroups(final String groupName, final int start, final int limit) throws IOException
+	GroupResultList getGroups(final String groupName, final int start, final int limit) throws IOException
 	{
 		Call<GroupResultList> groupResultListCall = confluenceApi.getGroups(start, limit);
 		Response<GroupResultList> response = groupResultListCall.execute();
@@ -3728,14 +3728,20 @@ public class Confluence
 	
 	//----------- user (Non-admin user operations), Начало ---------------
 	//----------------------------------------------------------------------------------------
-	Object getUser(final Map<String, String> params) throws IOException
+	public User getUser(final Map<String, String> params) throws IOException
 	{
-		Call<Object> getUserCall = confluenceApi.getUser(params);
-		Response<Object> response = getUserCall.execute();
-		Object body = response.body();
+		Call<User> getUserCall = confluenceApi.getUser(params);
+		Response<User> response = getUserCall.execute();
+		User body = response.body();
 		return body;
 	}
 	
+	/**
+	 * получить информацию о юзере-анонимусе
+	 * <br>
+	 * @return
+	 * @throws IOException
+	 */
 	public User getAnonymous() throws IOException
 	{
 		Call<User> getAnonymousCall = confluenceApi.getAnonymous();
@@ -3744,19 +3750,19 @@ public class Confluence
 		return body;
 	}
 	
-	Object getCurrent() throws IOException
+	public User getCurrentUser() throws IOException
 	{
-		Call<Object> getCurrentCall = confluenceApi.getCurrent();
-		Response<Object> response = getCurrentCall.execute();
-		Object body = response.body();
+		Call<User> getCurrentCall = confluenceApi.getCurrentUser();
+		Response<User> response = getCurrentCall.execute();
+		User body = response.body();
 		return body;
 	}
 	
-	Object getGroups(final Map<String, String> params) throws IOException
+	public GroupResultList getUserGroups(final Map<String, String> params) throws IOException
 	{
-		Call<Object> getGroupsCall = confluenceApi.getGroups(params);
-		Response<Object> response = getGroupsCall.execute();
-		Object body = response.body();
+		Call<GroupResultList> getGroupsCall = confluenceApi.getUserGroups(params);
+		Response<GroupResultList> response = getGroupsCall.execute();
+		GroupResultList body = response.body();
 		return body;
 	}
 	//----------- user (Non-admin user operations), Конец ---------------

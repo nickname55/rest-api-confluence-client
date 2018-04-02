@@ -1,3 +1,4 @@
+import com.pampushko.confluence.models.user.User;
 import com.pampushko.confluence.rest.Confluence;
 import com.pampushko.confluence.settings.SettingsManager;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +21,7 @@ public class GetAnonymousTest
 		Confluence confluence = Confluence.newBuilder().baseUrl(settings.getProperty("baseUrl")).userName(settings.getProperty("username")).password(settings.getProperty("password")).build();
 		
 		//выполняем запрос и печатаем результат
-		Object result = confluence.getAnonymous();
+		User result = confluence.getAnonymous();
 		System.out.println(result);
 	}
 }

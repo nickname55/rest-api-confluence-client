@@ -1,5 +1,5 @@
-package com.pampushko.confluence.rest;
-
+import com.pampushko.confluence.models.user.User;
+import com.pampushko.confluence.rest.Confluence;
 import com.pampushko.confluence.settings.SettingsManager;
 import lombok.extern.slf4j.Slf4j;
 
@@ -9,16 +9,11 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * Базовый класс для запуска клиента
- * <br>
+ *
  */
 @Slf4j
-public class Main
+public class GetUserTest
 {
-	public static final String url = "";
-	private static final String username = "";
-	private static final String password = "";
-	
 	public static void main(String[] args) throws IOException
 	{
 		//читаем настройки приложения
@@ -35,7 +30,7 @@ public class Main
 		};
 		
 		//выполняем запрос и печатаем результат
-		Object result = confluence.getUserGroups(params);
+		User result = confluence.getUser(params);
 		System.out.println(result);
 	}
 }
