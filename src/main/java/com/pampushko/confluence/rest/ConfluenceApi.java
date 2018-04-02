@@ -31,6 +31,7 @@ import com.pampushko.confluence.models.label.Label;
 import com.pampushko.confluence.models.label.LabelResultList;
 import com.pampushko.confluence.models.macros.Macros;
 import com.pampushko.confluence.models.search.SearchResultList;
+import com.pampushko.confluence.models.user.User;
 import com.pampushko.confluence.models.user.UserResultList;
 import com.pampushko.confluence.models.user_watch.WatchObject;
 import okhttp3.MultipartBody;
@@ -6277,7 +6278,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 */
 	//@formatter:on
 	@GET("/wiki/rest/api/user")
-	Call<Object> getUser();
+	Call<Object> getUser(final @QueryMap Map<String, String> params);
 	
 	//@formatter:off
 	/**
@@ -6313,7 +6314,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 */
 	//@formatter:on
 	@GET("/wiki/rest/api/user/anonymous")
-	Call<Object> getAnonymous();
+	Call<User> getAnonymous();
 	
 	//@formatter:off
 	/**
@@ -6431,7 +6432,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 */
 	//@formatter:on
 	@GET("/wiki/rest/api/user/memberof")
-	Call<Object> getGroups();
+	Call<Object> getGroups(@QueryMap Map<String, String> params);
 	//----------- user (Non-admin user operations), Конец ---------------
 	//----------------------------------------------------------------------------------------
 	

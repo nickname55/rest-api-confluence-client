@@ -32,6 +32,7 @@ import com.pampushko.confluence.models.label.Label;
 import com.pampushko.confluence.models.label.LabelResultList;
 import com.pampushko.confluence.models.macros.Macros;
 import com.pampushko.confluence.models.search.SearchResultList;
+import com.pampushko.confluence.models.user.User;
 import com.pampushko.confluence.models.user.UserResultList;
 import com.pampushko.confluence.models.user_watch.WatchObject;
 import com.pampushko.confluence.utils.FilesUtils;
@@ -3727,19 +3728,19 @@ public class Confluence
 	
 	//----------- user (Non-admin user operations), Начало ---------------
 	//----------------------------------------------------------------------------------------
-	Object getUser() throws IOException
+	Object getUser(final Map<String, String> params) throws IOException
 	{
-		Call<Object> getUserCall = confluenceApi.getUser();
+		Call<Object> getUserCall = confluenceApi.getUser(params);
 		Response<Object> response = getUserCall.execute();
 		Object body = response.body();
 		return body;
 	}
 	
-	Object getAnonymous() throws IOException
+	public User getAnonymous() throws IOException
 	{
-		Call<Object> getAnonymousCall = confluenceApi.getAnonymous();
-		Response<Object> response = getAnonymousCall.execute();
-		Object body = response.body();
+		Call<User> getAnonymousCall = confluenceApi.getAnonymous();
+		Response<User> response = getAnonymousCall.execute();
+		User body = response.body();
 		return body;
 	}
 	
@@ -3751,9 +3752,9 @@ public class Confluence
 		return body;
 	}
 	
-	Object getGroups() throws IOException
+	Object getGroups(final Map<String, String> params) throws IOException
 	{
-		Call<Object> getGroupsCall = confluenceApi.getGroups();
+		Call<Object> getGroupsCall = confluenceApi.getGroups(params);
 		Response<Object> response = getGroupsCall.execute();
 		Object body = response.body();
 		return body;
