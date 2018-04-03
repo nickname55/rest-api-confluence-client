@@ -6438,23 +6438,1585 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	
 	//----------- space/{spaceKey}/property (Manipulating space properties). Начало ----------
 	//----------------------------------------------------------------------------------------
+	
+	//@formatter:off
+	/**
+	 * Функция позволяет получить разбитый на страницы (paginated) список свойств области (space properties)
+	 * <br>
+	 * <strong>Примеры URI запросов:</strong>
+	 * <ul>
+	 * <li>http://example.com/rest/experimental/space/TST/property?expand=space,version</li>
+	 * </ul>
+	 * <p>
+	 * <strong>Дополнительные параметры</strong>
+	 * <ul>
+	 * <li>expand (String) -- Optional -- Default: <strong>version</strong> можно указать дополнительную связанную информацию об области, которую вы хотите видеть в ответе на запрос.
+	 * </li>
+	 * <li>start (int) -- Optional -- Default: <strong>0</strong> -- индекс первого элемента в результирующем возвращаемом наборе элементов</li>
+	 * <li>limit (int) -- Optional -- Default: <strong>10</strong> -- сколько элементов из результирующего возвращаемого набора вы хотите получить (после начального индекса, после start)
+	 * <br>
+	 * Может быть ограничено фиксированным, заданным в системе, лимитом.
+	 * </li>
+	 * </ul>
+	 * <br>
+	 * <h2><strong>Responses:</strong></h2>
+	 * <strong>STATUS 200</strong> -- application/json, возвращает полное JSON представление, содержащее информацию о свойствах области
+	 * <br>
+	 * <blockquote><PRE>
+{
+    "results": [
+        {
+            "space": {
+                "key": "TST",
+                "name": "Example space",
+                "description": {
+                    "plain": {
+                        "value": "This is an example space",
+                        "representation": "plain"
+                    }
+                },
+                "metadata": {},
+                "_links": {
+                    "self": "http://myhost:8080/confluence/rest/api/space/TST"
+                }
+            },
+            "key": "example-property-key",
+            "value": {
+                "anything": "goes"
+            },
+            "version": {
+                "number": 2,
+                "minorEdit": false,
+                "hidden": false
+            }
+        }
+    ],
+    "size": 1,
+    "_links": {
+        "base": "http://myhost:8080/confluence",
+        "context": "/confluence"
+    }
+}
+	 * </PRE></blockquote>
+	 * <strong>STATUS 404</strong> -- такой код будет возвращён, если не удалость найти область по заданному ключу (spaceKey)
+	 * <br>
+	 * или пользователь, выполняющий запрос, не имеет прав доступа на просмотр области.
+	 * <br>
+	 * @see <a href="https://docs.atlassian.com/atlassian-confluence/REST/6.6.0/#space/%7BspaceKey%7D/property-get">Оригинальная документация к API</a>
+	 * @param spaceKey ключ области, свойства которой мы хотим получить
+	 * @return объект содержащий список свойств области (space property list), объект создается на основе возвращаемого JSON
+	 */
+	//@formatter:on
 	@GET("/wiki/rest/api/space/{spaceKey}/property")
-	Call<Object> getProperty(final @Path("spaceKey") String spaceKey);
+	Call<Object> getSpaceProperty(final @Path("spaceKey") String spaceKey,
+	                              final @QueryMap Map<String, String> param);
 	
+	//@formatter:off
+	/**
+	 * Функция позволяет создать новое свойство для области Confluence (new space property)
+	 * <br>
+	 * <h2><strong>Request:</strong></h2>
+	 * <br>
+	 * <blockquote><PRE>
+{
+    "key": "example-property-key",
+    "value": {
+        "anything": "goes"
+    }
+}
+	 * </PRE></blockquote>
+	 *
+	 * <h2><strong>Responses:</strong></h2>
+	 * <strong>STATUS 200</strong> -- application/json, возвращает полное JSON представление, содержащее свойство области (space property)
+	 * <br>
+	 * <blockquote><PRE>
+{
+    "space": {
+        "key": "TST",
+        "name": "Example space",
+        "description": {
+            "plain": {
+                "value": "This is an example space",
+                "representation": "plain"
+            }
+        },
+        "metadata": {},
+        "_links": {
+            "self": "http://myhost:8080/confluence/rest/api/space/TST"
+        }
+    },
+    "key": "example-property-key",
+    "value": {
+        "anything": "goes"
+    },
+    "version": {
+        "number": 2,
+        "minorEdit": false,
+        "hidden": false
+    },
+    "_links": {
+        "base": "http://myhost:8080/confluence",
+        "context": "/confluence"
+    }
+}
+	 * </PRE></blockquote>
+	 * <strong>STATUS 400</strong> -- такой код будет возвращён, если область (space) уже имеет значение с заданным ключом, или не было предоставлено значение свойства, или это значение слишком велико.
+	 * <br>
+	 * <strong>STATUS 403</strong> -- такой код будет возвращён, если пользователь, выполняющий запрос, не имеет достаточных прав доступа для редактирования области, указанной в запросе
+	 * <br>
+	 * <strong>STATUS 413</strong> -- такой код будет возвращён, если значение слишком велико.
+	 * <br>
+	 * @see <a href="https://docs.atlassian.com/atlassian-confluence/REST/6.6.0/#space/%7BspaceKey%7D/property-create">Оригинальная документация к API</a>
+	 * @param spaceKey ключ области, значение которой мы хотим изменить
+	 * @return todo описать возвращаемое значение
+	 */
+	//@formatter:on
 	@POST("/wiki/rest/api/space/{spaceKey}/property")
-	Call<Object> createProperty(final @Path("spaceKey") String spaceKey);
+	Call<Object> createSpaceProperty(final @Path("spaceKey") String spaceKey);
 	
+	//@formatter:off
+	/**
+	 * Функция позволяет получить paginated (разбитый на страницы) список свойств области (space properties)
+	 * <br>
+	 *
+	 * <strong>Примеры URI запросов:</strong>
+	 * <ul>
+	 * <li>http://example.com/confluence/rest/api/space/TST/property?expand=space,version</li>
+	 * </ul>
+	 * <p>
+	 * <strong>Дополнительные параметры</strong>
+	 * <ul>
+	 * <li>expand (String, Default: <strogn>version</strogn>) -- можно указать дополнительную связанную информацию о свойстве области, которую вы хотите видеть в ответе на запрос
+	 * <br>
+	 * <em>Указывать несколько параметров следует в виде списка с разделителями - запятыми</em>.
+	 * </li>
+	 * </ul>
+	 * <br>
+	 * <h2><strong>Responses:</strong></h2>
+	 * <strong>STATUS 200</strong> -- application/json, возвращает полное JSON представление, содержащее список свойств области
+	 * <br>
+	 * <strong>EXAMPLE</strong>
+	 * <blockquote><PRE>
+{
+    "results": [
+        {
+            "space": {
+                "key": "TST",
+                "name": "Example space",
+                "description": {
+                    "plain": {
+                        "value": "This is an example space",
+                        "representation": "plain"
+                    }
+                },
+                "metadata": {},
+                "_links": {
+                    "self": "http://example.com/confluence/rest/api/space/TST"
+                }
+            },
+            "key": "example-property-key",
+            "value": {
+                "anything": "goes"
+            },
+            "version": {
+                "number": 2,
+                "minorEdit": false,
+                "hidden": false
+            }
+        }
+    ],
+    "size": 1,
+    "_links": {
+        "base": "http://example.com/confluence/",
+        "context": "/confluence"
+    }
+}
+	 * </PRE></blockquote>
+	 * <strong>STATUS 404</strong> -- такой код будет возвращён, если нет обаласти с указанным ключом
+	 * <br>
+	 * или если пользователь, выполняющий запрос, не имеет достаточных прав доступа <em>для просмотра области</em>
+	 * <br>
+	 * @see <a href="https://docs.atlassian.com/atlassian-confluence/REST/6.6.0/#space/%7BspaceKey%7D/property-get">Оригинальная документация к API</a>
+	 * @param spaceKey ключ области
+	 * @param key ключ свойства
+	 * @return Объект полученный из JSON-представления (Объект содержит список свойств области).
+	 */
+	//@formatter:on
 	@GET("/wiki/rest/api/space/{spaceKey}/property/{key}")
-	Call<Object> getPropertyByKey(final @Path("spaceKey") String spaceKey, final @Path("key") String key);
+	Call<Object> getSpacePropertyByKey(final @Path("spaceKey") String spaceKey, final @Path("key") String key);
 	
+	//@formatter:off
+	/**
+	 * Функция позволяет обновить свойство области Confluence
+	 * <br>
+	 * Тело запроса содержит представление свойства области (representation of the space property)
+	 * <br>
+	 * <em>Тело запроса должно содержать новый номер версии</em>
+	 * <br>
+	 * Если указанный номер версии равен 1, то произвойдет попытка создать новое свойство области (new space property) как в {@link #createSpaceProperty(String)}
+	 * <br>
+	 * <h2><strong>Request:</strong></h2>
+	 * <br>
+	 * <strong>EXAMPLE</strong>
+	 * <br>
+	 * <blockquote><PRE>
+{
+    "key": "example-property-key",
+    "value": {
+        "anything": "goes"
+    },
+    "version": {
+        "number": 2,
+        "minorEdit": false,
+        "hidden": false
+    }
+}
+	 * </PRE></blockquote>
+	 *
+	 * <br>
+	 * <strong>SCHEMA</strong>
+	 * <br>
+	 *
+	 * <blockquote><PRE>
+{
+    "id": "https://docs.atlassian.com/jira/REST/schema/json-space-property#",
+    "title": "Json Space Property",
+    "type": "object",
+    "properties": {
+        "key": {
+            "type": "string"
+        },
+        "value": {
+            "title": "Json String",
+            "type": "object"
+        },
+        "version": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/version"
+            }
+        },
+        "space": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/space"
+            }
+        }
+    },
+    "definitions": {
+        "anonymous": {
+            "title": "Anonymous",
+            "type": "object",
+            "properties": {
+                "profilePicture": {
+                    "$ref": "#/definitions/icon"
+                },
+                "displayName": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "content": {
+            "title": "Content",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "title": "Content Id",
+                    "type": "object"
+                },
+                "type": {
+                    "title": "Content Type",
+                    "type": "object"
+                },
+                "status": {
+                    "title": "Content Status",
+                    "type": "object"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "space": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/space"
+                    }
+                },
+                "history": {
+                    "type": "array",
+                    "items": {
+                        "title": "History",
+                        "type": "object",
+                        "properties": {
+                            "previousVersion": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/definitions/version"
+                                }
+                            },
+                            "nextVersion": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/definitions/version"
+                                }
+                            },
+                            "lastUpdated": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/definitions/version"
+                                }
+                            },
+                            "latest": {
+                                "type": "boolean"
+                            },
+                            "createdBy": {
+                                "$ref": "#/definitions/person"
+                            },
+                            "createdDate": {
+                                "type": "string"
+                            },
+                            "contributors": {
+                                "type": "array",
+                                "items": {
+                                    "title": "Contributors",
+                                    "type": "object",
+                                    "properties": {
+                                        "publishers": {
+                                            "type": "array",
+                                            "items": {
+                                                "title": "Contributor Users",
+                                                "type": "object",
+                                                "properties": {
+                                                    "users": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "$ref": "#/definitions/person"
+                                                        }
+                                                    },
+                                                    "userKeys": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "string"
+                                                        }
+                                                    }
+                                                },
+                                                "additionalProperties": false
+                                            }
+                                        }
+                                    },
+                                    "additionalProperties": false
+                                }
+                            }
+                        },
+                        "additionalProperties": false,
+                        "required": [
+                            "latest"
+                        ]
+                    }
+                },
+                "version": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/version"
+                    }
+                },
+                "ancestors": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/content"
+                    }
+                },
+                "operations": {
+                    "type": "array",
+                    "items": {
+                        "title": "Operation Check Result",
+                        "type": "object",
+                        "properties": {
+                            "operation": {
+                                "$ref": "#/definitions/operation-key"
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                },
+                "children": {
+                    "type": "object",
+                    "patternProperties": {
+                        ".+": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/content"
+                            }
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "descendants": {
+                    "type": "object",
+                    "patternProperties": {
+                        ".+": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/content"
+                            }
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "container": {
+                    "type": "array",
+                    "items": {
+                        "title": "Container",
+                        "type": "object"
+                    }
+                },
+                "body": {
+                    "type": "object",
+                    "patternProperties": {
+                        ".+": {
+                            "title": "Content Body",
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "string"
+                                },
+                                "webresource": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/web-resource-dependencies"
+                                    }
+                                },
+                                "representation": {
+                                    "$ref": "#/definitions/content-representation"
+                                },
+                                "content": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/content"
+                                    }
+                                }
+                            },
+                            "additionalProperties": false
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "metadata": {
+                    "type": "object",
+                    "patternProperties": {
+                        ".+": {}
+                    },
+                    "additionalProperties": false
+                },
+                "extensions": {
+                    "type": "object",
+                    "patternProperties": {
+                        ".+": {}
+                    },
+                    "additionalProperties": false
+                },
+                "restrictions": {
+                    "type": "object",
+                    "patternProperties": {
+                        ".+": {
+                            "title": "Content Restriction",
+                            "type": "object",
+                            "properties": {
+                                "content": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/content"
+                                    }
+                                },
+                                "operation": {
+                                    "$ref": "#/definitions/operation-key"
+                                },
+                                "restrictions": {
+                                    "type": "array",
+                                    "items": {
+                                        "title": "Subject Restrictions",
+                                        "type": "object",
+                                        "properties": {
+                                            "user": {
+                                                "type": "array",
+                                                "items": {
+                                                    "$ref": "#/definitions/user"
+                                                }
+                                            },
+                                            "group": {
+                                                "type": "array",
+                                                "items": {
+                                                    "title": "Group",
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "name": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "additionalProperties": false
+                                                }
+                                            }
+                                        },
+                                        "additionalProperties": false
+                                    }
+                                }
+                            },
+                            "additionalProperties": false
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        },
+        "content-representation": {
+            "title": "Content Representation",
+            "type": "object"
+        },
+        "html-string": {
+            "title": "Html String",
+            "type": "object"
+        },
+        "icon": {
+            "title": "Icon",
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "string"
+                },
+                "width": {
+                    "type": "integer"
+                },
+                "height": {
+                    "type": "integer"
+                },
+                "isDefault": {
+                    "type": "boolean"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "width",
+                "height",
+                "isDefault"
+            ]
+        },
+        "known-user": {
+            "title": "Known User",
+            "type": "object",
+            "properties": {
+                "profilePicture": {
+                    "$ref": "#/definitions/icon"
+                },
+                "displayName": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "array",
+                    "items": {
+                        "title": "User Status",
+                        "type": "object"
+                    }
+                }
+            },
+            "additionalProperties": false
+        },
+        "operation-key": {
+            "title": "Operation Key",
+            "type": "object"
+        },
+        "person": {
+            "title": "Person",
+            "type": "object",
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/anonymous"
+                },
+                {
+                    "$ref": "#/definitions/known-user"
+                },
+                {
+                    "$ref": "#/definitions/unknown-user"
+                },
+                {
+                    "$ref": "#/definitions/user"
+                }
+            ]
+        },
+        "space": {
+            "title": "Space",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "key": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "icon": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/icon"
+                    }
+                },
+                "description": {
+                    "type": "object",
+                    "patternProperties": {
+                        ".+": {
+                            "title": "Formatted Body",
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "string"
+                                },
+                                "webresource": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/web-resource-dependencies"
+                                    }
+                                },
+                                "representation": {
+                                    "$ref": "#/definitions/content-representation"
+                                }
+                            },
+                            "additionalProperties": false
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "homepage": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/content"
+                    }
+                },
+                "type": {
+                    "title": "Space Type",
+                    "type": "object"
+                },
+                "metadata": {
+                    "type": "object",
+                    "patternProperties": {
+                        ".+": {}
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        },
+        "unknown-user": {
+            "title": "Unknown User",
+            "type": "object",
+            "properties": {
+                "profilePicture": {
+                    "$ref": "#/definitions/icon"
+                },
+                "displayName": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "user": {
+            "title": "User",
+            "type": "object",
+            "properties": {
+                "profilePicture": {
+                    "$ref": "#/definitions/icon"
+                },
+                "displayName": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "version": {
+            "title": "Version",
+            "type": "object",
+            "properties": {
+                "by": {
+                    "$ref": "#/definitions/person"
+                },
+                "when": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "number": {
+                    "type": "integer"
+                },
+                "minorEdit": {
+                    "type": "boolean"
+                },
+                "hidden": {
+                    "type": "boolean"
+                },
+                "syncRev": {
+                    "type": "string"
+                },
+                "content": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/content"
+                    }
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "number",
+                "minorEdit",
+                "hidden"
+            ]
+        },
+        "web-resource-dependencies": {
+            "title": "Web Resource Dependencies",
+            "type": "object",
+            "properties": {
+                "keys": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "contexts": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "uris": {
+                    "type": "object",
+                    "patternProperties": {
+                        ".+": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "format": "uri"
+                            }
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "tags": {
+                    "type": "object",
+                    "patternProperties": {
+                        ".+": {
+                            "$ref": "#/definitions/html-string"
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "superbatch": {
+                    "type": "array",
+                    "items": {
+                        "title": "Super Batch Web Resources",
+                        "type": "object",
+                        "properties": {
+                            "uris": {
+                                "type": "object",
+                                "patternProperties": {
+                                    ".+": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "uri"
+                                        }
+                                    }
+                                },
+                                "additionalProperties": false
+                            },
+                            "tags": {
+                                "type": "object",
+                                "patternProperties": {
+                                    ".+": {
+                                        "$ref": "#/definitions/html-string"
+                                    }
+                                },
+                                "additionalProperties": false
+                            },
+                            "metatags": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/definitions/html-string"
+                                }
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false
+}
+	 * </PRE></blockquote>
+	 * <br>
+	 * <h2><strong>Responses:</strong></h2>
+	 * <blockquote><PRE>
+{
+    "space": {
+        "key": "TST",
+        "name": "Example space",
+        "description": {
+            "plain": {
+                "value": "This is an example space",
+                "representation": "plain"
+            }
+        },
+        "metadata": {},
+        "_links": {
+            "self": "http://example.com/confluence/rest/api/space/TST"
+        }
+    },
+    "key": "example-property-key",
+    "value": {
+        "anything": "goes"
+    },
+    "version": {
+        "number": 2,
+        "minorEdit": false,
+        "hidden": false
+    },
+    "_links": {
+        "base": "http://example.com/confluence/",
+        "context": "/confluence"
+    }
+}
+	 * </PRE></blockquote>
+	 * <br>
+	 * <br>
+	 * <strong>SCHEMA</strong>
+	 * <br>
+	 * <blockquote><PRE>
+{
+    "id": "https://docs.atlassian.com/jira/REST/schema/json-space-property#",
+    "title": "Json Space Property",
+    "type": "object",
+    "properties": {
+        "key": {
+            "type": "string"
+        },
+        "value": {
+            "title": "Json String",
+            "type": "object"
+        },
+        "version": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/version"
+            }
+        },
+        "space": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/space"
+            }
+        }
+    },
+    "definitions": {
+        "anonymous": {
+            "title": "Anonymous",
+            "type": "object",
+            "properties": {
+                "profilePicture": {
+                    "$ref": "#/definitions/icon"
+                },
+                "displayName": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "content": {
+            "title": "Content",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "title": "Content Id",
+                    "type": "object"
+                },
+                "type": {
+                    "title": "Content Type",
+                    "type": "object"
+                },
+                "status": {
+                    "title": "Content Status",
+                    "type": "object"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "space": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/space"
+                    }
+                },
+                "history": {
+                    "type": "array",
+                    "items": {
+                        "title": "History",
+                        "type": "object",
+                        "properties": {
+                            "previousVersion": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/definitions/version"
+                                }
+                            },
+                            "nextVersion": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/definitions/version"
+                                }
+                            },
+                            "lastUpdated": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/definitions/version"
+                                }
+                            },
+                            "latest": {
+                                "type": "boolean"
+                            },
+                            "createdBy": {
+                                "$ref": "#/definitions/person"
+                            },
+                            "createdDate": {
+                                "type": "string"
+                            },
+                            "contributors": {
+                                "type": "array",
+                                "items": {
+                                    "title": "Contributors",
+                                    "type": "object",
+                                    "properties": {
+                                        "publishers": {
+                                            "type": "array",
+                                            "items": {
+                                                "title": "Contributor Users",
+                                                "type": "object",
+                                                "properties": {
+                                                    "users": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "$ref": "#/definitions/person"
+                                                        }
+                                                    },
+                                                    "userKeys": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "string"
+                                                        }
+                                                    }
+                                                },
+                                                "additionalProperties": false
+                                            }
+                                        }
+                                    },
+                                    "additionalProperties": false
+                                }
+                            }
+                        },
+                        "additionalProperties": false,
+                        "required": [
+                            "latest"
+                        ]
+                    }
+                },
+                "version": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/version"
+                    }
+                },
+                "ancestors": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/content"
+                    }
+                },
+                "operations": {
+                    "type": "array",
+                    "items": {
+                        "title": "Operation Check Result",
+                        "type": "object",
+                        "properties": {
+                            "operation": {
+                                "$ref": "#/definitions/operation-key"
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                },
+                "children": {
+                    "type": "object",
+                    "patternProperties": {
+                        ".+": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/content"
+                            }
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "descendants": {
+                    "type": "object",
+                    "patternProperties": {
+                        ".+": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/content"
+                            }
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "container": {
+                    "type": "array",
+                    "items": {
+                        "title": "Container",
+                        "type": "object"
+                    }
+                },
+                "body": {
+                    "type": "object",
+                    "patternProperties": {
+                        ".+": {
+                            "title": "Content Body",
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "string"
+                                },
+                                "webresource": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/web-resource-dependencies"
+                                    }
+                                },
+                                "representation": {
+                                    "$ref": "#/definitions/content-representation"
+                                },
+                                "content": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/content"
+                                    }
+                                }
+                            },
+                            "additionalProperties": false
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "metadata": {
+                    "type": "object",
+                    "patternProperties": {
+                        ".+": {}
+                    },
+                    "additionalProperties": false
+                },
+                "extensions": {
+                    "type": "object",
+                    "patternProperties": {
+                        ".+": {}
+                    },
+                    "additionalProperties": false
+                },
+                "restrictions": {
+                    "type": "object",
+                    "patternProperties": {
+                        ".+": {
+                            "title": "Content Restriction",
+                            "type": "object",
+                            "properties": {
+                                "content": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/content"
+                                    }
+                                },
+                                "operation": {
+                                    "$ref": "#/definitions/operation-key"
+                                },
+                                "restrictions": {
+                                    "type": "array",
+                                    "items": {
+                                        "title": "Subject Restrictions",
+                                        "type": "object",
+                                        "properties": {
+                                            "user": {
+                                                "type": "array",
+                                                "items": {
+                                                    "$ref": "#/definitions/user"
+                                                }
+                                            },
+                                            "group": {
+                                                "type": "array",
+                                                "items": {
+                                                    "title": "Group",
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "name": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "additionalProperties": false
+                                                }
+                                            }
+                                        },
+                                        "additionalProperties": false
+                                    }
+                                }
+                            },
+                            "additionalProperties": false
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        },
+        "content-representation": {
+            "title": "Content Representation",
+            "type": "object"
+        },
+        "html-string": {
+            "title": "Html String",
+            "type": "object"
+        },
+        "icon": {
+            "title": "Icon",
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "string"
+                },
+                "width": {
+                    "type": "integer"
+                },
+                "height": {
+                    "type": "integer"
+                },
+                "isDefault": {
+                    "type": "boolean"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "width",
+                "height",
+                "isDefault"
+            ]
+        },
+        "known-user": {
+            "title": "Known User",
+            "type": "object",
+            "properties": {
+                "profilePicture": {
+                    "$ref": "#/definitions/icon"
+                },
+                "displayName": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "array",
+                    "items": {
+                        "title": "User Status",
+                        "type": "object"
+                    }
+                }
+            },
+            "additionalProperties": false
+        },
+        "operation-key": {
+            "title": "Operation Key",
+            "type": "object"
+        },
+        "person": {
+            "title": "Person",
+            "type": "object",
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/anonymous"
+                },
+                {
+                    "$ref": "#/definitions/known-user"
+                },
+                {
+                    "$ref": "#/definitions/unknown-user"
+                },
+                {
+                    "$ref": "#/definitions/user"
+                }
+            ]
+        },
+        "space": {
+            "title": "Space",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "key": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "icon": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/icon"
+                    }
+                },
+                "description": {
+                    "type": "object",
+                    "patternProperties": {
+                        ".+": {
+                            "title": "Formatted Body",
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "string"
+                                },
+                                "webresource": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/web-resource-dependencies"
+                                    }
+                                },
+                                "representation": {
+                                    "$ref": "#/definitions/content-representation"
+                                }
+                            },
+                            "additionalProperties": false
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "homepage": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/content"
+                    }
+                },
+                "type": {
+                    "title": "Space Type",
+                    "type": "object"
+                },
+                "metadata": {
+                    "type": "object",
+                    "patternProperties": {
+                        ".+": {}
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        },
+        "unknown-user": {
+            "title": "Unknown User",
+            "type": "object",
+            "properties": {
+                "profilePicture": {
+                    "$ref": "#/definitions/icon"
+                },
+                "displayName": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "user": {
+            "title": "User",
+            "type": "object",
+            "properties": {
+                "profilePicture": {
+                    "$ref": "#/definitions/icon"
+                },
+                "displayName": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "version": {
+            "title": "Version",
+            "type": "object",
+            "properties": {
+                "by": {
+                    "$ref": "#/definitions/person"
+                },
+                "when": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "number": {
+                    "type": "integer"
+                },
+                "minorEdit": {
+                    "type": "boolean"
+                },
+                "hidden": {
+                    "type": "boolean"
+                },
+                "syncRev": {
+                    "type": "string"
+                },
+                "content": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/content"
+                    }
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "number",
+                "minorEdit",
+                "hidden"
+            ]
+        },
+        "web-resource-dependencies": {
+            "title": "Web Resource Dependencies",
+            "type": "object",
+            "properties": {
+                "keys": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "contexts": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "uris": {
+                    "type": "object",
+                    "patternProperties": {
+                        ".+": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "format": "uri"
+                            }
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "tags": {
+                    "type": "object",
+                    "patternProperties": {
+                        ".+": {
+                            "$ref": "#/definitions/html-string"
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "superbatch": {
+                    "type": "array",
+                    "items": {
+                        "title": "Super Batch Web Resources",
+                        "type": "object",
+                        "properties": {
+                            "uris": {
+                                "type": "object",
+                                "patternProperties": {
+                                    ".+": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "uri"
+                                        }
+                                    }
+                                },
+                                "additionalProperties": false
+                            },
+                            "tags": {
+                                "type": "object",
+                                "patternProperties": {
+                                    ".+": {
+                                        "$ref": "#/definitions/html-string"
+                                    }
+                                },
+                                "additionalProperties": false
+                            },
+                            "metatags": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/definitions/html-string"
+                                }
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false
+}
+	 * </PRE></blockquote>
+	 * <br>
+	 * <strong>STATUS 200</strong> -- такой код будет возвращён, если операция прошла успешно, при это в ответе возвращается полное JSON-представление свойства области
+	 * <br>
+	 * <strong>STATUS 400</strong> -- возвращается, если заданное свойство имеет другой spaseKey, чем то, что указано в path запроса,
+	 * <br>
+	 * или если ключу имеет ключ отличающийся от того что указан в пути запроса
+	 * <br>
+	 * или не было предоставлено значение свойства
+	 * <br>
+	 * или это значение слишком велико.
+	 * <br>
+	 * <strong>STATUS 403</strong> -- такой код будет возвращён, если пользователь, выполняющий запрос,
+	 * <br>
+	 * не имеет достаточных разрашений на редактирование пространства с заданным spaceKey
+	 * <br>
+	 * <strong>STATUS 404</strong> -- такой код будет возвращён, если не существует пространства с заданным spaceKey,
+	 * <br>
+	 * или нет свойства с заданным ключом, или пользователь, выполняющий запрос, не имеет разрешения на просмотр пространства.
+	 * <br>
+	 * <strong>STATUS 409</strong> -- такой код будет возвращён, если указанная версия свойства (передаваемая в теле запроса) не соответствует ожидаемой целевой версии обновленного свойства.
+	 * <br>
+	 * <strong>STATUS 413</strong> -- такой код будет возвращён, если значение слишком велико.
+	 * <br>
+	 * @see <a href="https://docs.atlassian.com/atlassian-confluence/REST/6.6.0/#space/%7BspaceKey%7D/property-update">Оригинальная документация к API</a>
+	 * @param spaceKey ключ области
+	 * @param key ключ свойства
+	 * @return todo описать возвращаемый объект
+	 */
+	//@formatter:on
 	@PUT("/wiki/rest/api/space/{spaceKey}/property/{key}")
-	Call<Object> updatePropertyByKey(final @Path("spaceKey") String spaceKey, final @Path("key") String key);
+	Call<Object> updateSpacePropertyByKey(final @Path("spaceKey") String spaceKey, final @Path("key") String key);
 	
+	//@formatter:off
+	/**
+	 * Функция позволяет удалить свойство области Confluence (space property)
+	 * <br>
+	 * <h2><strong>Responses:</strong></h2>
+	 * <strong>STATUS 204</strong> -- такой код будет возвращен, если свойство области было успешно удалено.
+	 * <br>
+	 * <strong>STATUS 404</strong> -- такой код будет возвращён, если не существует области с указанным вами
+	 * <br>
+	 * ключом области, или же не существует свойства области с указаннным вами ключом (property key),
+	 * <br>
+	 * или если посылающий запрос пользователь не имеет достаточного уровня прав для просмотра области Confluence.
+	 * <br>
+	 * @see <a href="https://docs.atlassian.com/atlassian-confluence/REST/6.6.0/#space/%7BspaceKey%7D/property-delete">Оригинальная документация к API</a>
+	 * @param spaceKey ключ области Confluence
+	 * @param key ключ, свойства области (space property)
+	 * @return todo описать возвращаёмое значение
+	 */
+	//@formatter:on
 	@DELETE("/wiki/rest/api/space/{spaceKey}/property/{key}")
-	Call<Object> deletePropertyByKey(final @Path("spaceKey") String spaceKey, final @Path("key") String key);
+	Call<Object> deleteSpacePropertyByKey(final @Path("spaceKey") String spaceKey, final @Path("key") String key);
 	
+	//@formatter:off
+	/**
+	 * Функция позволяет создать новое свойство для области
+	 * <h2><strong>Request:</strong></h2>
+	 * <blockquote><PRE>
+{
+    "key": "example-property-key",
+    "value": {
+        "anything": "goes"
+    }
+}
+	 * </PRE></blockquote>
+	 * <br>
+	 * <h2><strong>Responses:</strong></h2>
+	 * <strong>STATUS 200</strong> -- application/json, возвращает полное JSON представление, содержащее информацию свойстве области (space property)
+	 * <br>
+	 * <blockquote><PRE>
+{
+    "space": {
+        "key": "TST",
+        "name": "Example space",
+        "description": {
+            "plain": {
+                "value": "This is an example space",
+                "representation": "plain"
+            }
+        },
+        "metadata": {},
+        "_links": {
+            "self": "http://myhost:8080/confluence/rest/api/space/TST"
+        }
+    },
+    "key": "example-property-key",
+    "value": {
+        "anything": "goes"
+    },
+    "version": {
+        "number": 2,
+        "minorEdit": false,
+        "hidden": false
+    },
+    "_links": {
+        "base": "http://myhost:8080/confluence",
+        "context": "/confluence"
+    }
+}
+	 * </PRE></blockquote>
+	 * <strong>STATUS 400</strong> -- такой код будет возвращён, если область (пространство, space) уже имеет значение
+	 * <br>
+	 * для заданного ключа,
+	 * <br>
+	 * или не было предоставлено значение свойства
+	 * <br>
+	 * или значение слишком велико.
+	 * <br>
+	 * <strong>STATUS 403</strong> -- такой код будет возвращён, если пользователь, выполняющий запрос,
+	 * <br>
+	 * не имеет прав доступа для редактирования той области, ключ которой он указал в запросе.
+	 * <br>
+	 * <strong>STATUS 413</strong> -- такой код будет возвращён, если значение слишком велико.
+	 * <br>
+	 * @see <a href="https://docs.atlassian.com/atlassian-confluence/REST/6.6.0/#space/%7BspaceKey%7D/property-create">Оригинальная документация к API</a>
+	 * @param spaceKey ключ области
+	 * @param key ключ свойства (space property)
+	 * @return todo добавить описание возвращаемого значения
+	 */
+	//@formatter:on
 	@POST("/wiki/rest/api/space/{spaceKey}/property/{key}")
-	Call<Object> createPropertyByKey();
+	Call<Object> createSpacePropertyByKey(final @Path("spaceKey") String spaceKey, final @Path("key") String key);
 	//----------- space/{spaceKey}/property (Manipulating space properties). Конец -----------
 	//----------------------------------------------------------------------------------------
 
