@@ -1,5 +1,5 @@
 import com.pampushko.confluence.models.Version;
-import com.pampushko.confluence.models.content_property.PropResponse;
+import com.pampushko.confluence.models.content_property.PropertyResponse;
 import com.pampushko.confluence.models.content_property.PropertyOfContentWithVersion;
 import com.pampushko.confluence.rest.Confluence;
 import com.pampushko.confluence.settings.SettingsManager;
@@ -40,7 +40,7 @@ public class UpdateContentPropertyTest
 		System.out.println(propertyOfContent);
 		
 		//выполняем запрос и печатаем результат
-		PropResponse prop = confluence.updateContentProperties(contentId, propKey, propertyOfContent);
+		PropertyResponse prop = confluence.updateContentProperties(contentId, propKey, propertyOfContent);
 		System.out.println(prop);
 	}
 }

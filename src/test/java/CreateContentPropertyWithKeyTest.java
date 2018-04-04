@@ -1,4 +1,4 @@
-import com.pampushko.confluence.models.content_property.PropResponse;
+import com.pampushko.confluence.models.content_property.PropertyResponse;
 import com.pampushko.confluence.models.content_property.PropertyOfContent;
 import com.pampushko.confluence.rest.Confluence;
 import com.pampushko.confluence.settings.SettingsManager;
@@ -36,7 +36,7 @@ public class CreateContentPropertyWithKeyTest
 		System.out.println(propertyOfContent);
 		
 		//выполняем запрос и печатаем результат
-		PropResponse response = confluence.createContentPropertiesWithKey(contentId, propKey, propertyOfContent);
+		PropertyResponse response = confluence.createContentPropertiesWithKey(contentId, propKey, propertyOfContent);
 		System.out.println(response);
 	}
 	

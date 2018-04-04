@@ -1,4 +1,4 @@
-import com.pampushko.confluence.models.content_property.PropResponse;
+import com.pampushko.confluence.models.content_property.PropertyResponse;
 import com.pampushko.confluence.rest.Confluence;
 import com.pampushko.confluence.settings.SettingsManager;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +26,7 @@ public class FindByKeyContentPropertiesTest
 		final String propKey = "hello5";
 		
 		//выполняем запрос и печатаем результат
-		PropResponse prop = confluence.findByKeyContentProperties(contentId, propKey);
+		PropertyResponse prop = confluence.findByKeyContentProperties(contentId, propKey);
 		System.out.println(prop);
 	}
 }

@@ -15,8 +15,8 @@ import com.pampushko.confluence.models.content.Content;
 import com.pampushko.confluence.models.content.ContentContainter;
 import com.pampushko.confluence.models.content.ContentResultList;
 import com.pampushko.confluence.models.content_descendant.DescendantsResult;
-import com.pampushko.confluence.models.content_property.PropListResponseContainer;
-import com.pampushko.confluence.models.content_property.PropResponse;
+import com.pampushko.confluence.models.content_property.PropertyListResponseContainer;
+import com.pampushko.confluence.models.content_property.PropertyResponse;
 import com.pampushko.confluence.models.content_property.PropertyOfContent;
 import com.pampushko.confluence.models.content_property.PropertyOfContentWithVersion;
 import com.pampushko.confluence.models.content_restriction.RestrictionResponseContainer;
@@ -1691,11 +1691,11 @@ public class Confluence
 	 * @return todo описать возвращаемое значение
 	 */
 	//@formatter:on
-	public PropListResponseContainer getContentProperties(final String contentId) throws IOException
+	public PropertyListResponseContainer getContentProperties(final String contentId) throws IOException
 	{
-		Call<PropListResponseContainer> contentPropertiesCall = confluenceApi.getContentProperties(contentId);
-		Response<PropListResponseContainer> response = contentPropertiesCall.execute();
-		PropListResponseContainer body = response.body();
+		Call<PropertyListResponseContainer> contentPropertiesCall = confluenceApi.getContentProperties(contentId);
+		Response<PropertyListResponseContainer> response = contentPropertiesCall.execute();
+		PropertyListResponseContainer body = response.body();
 		return body;
 	}
 	
@@ -1760,11 +1760,11 @@ public class Confluence
 	 * @return todo описать возвращаемое значение
 	 */
 	//@formatter:on
-	public PropResponse findByKeyContentProperties(final String contentId, final String propKey) throws IOException
+	public PropertyResponse findByKeyContentProperties(final String contentId, final String propKey) throws IOException
 	{
-		Call<PropResponse> findContentPropertiesCall = confluenceApi.findByKeyContentProperties(contentId, propKey);
-		Response<PropResponse> response = findContentPropertiesCall.execute();
-		PropResponse body = response.body();
+		Call<PropertyResponse> findContentPropertiesCall = confluenceApi.findByKeyContentProperties(contentId, propKey);
+		Response<PropertyResponse> response = findContentPropertiesCall.execute();
+		PropertyResponse body = response.body();
 		return body;
 	}
 	
@@ -1847,13 +1847,13 @@ public class Confluence
 	 * @return todo описать возвращаемое значение
 	 */
 	//@formatter:on
-	public PropResponse updateContentProperties(final String contentId,
-	                                            final String propKey,
-	                                            final PropertyOfContentWithVersion propertyOfContentWithVersion) throws IOException
+	public PropertyResponse updateContentProperties(final String contentId,
+	                                                final String propKey,
+	                                                final PropertyOfContentWithVersion propertyOfContentWithVersion) throws IOException
 	{
-		Call<PropResponse> call = confluenceApi.updateContentProperties(contentId, propKey, propertyOfContentWithVersion);
-		Response<PropResponse> response = call.execute();
-		PropResponse body = response.body();
+		Call<PropertyResponse> call = confluenceApi.updateContentProperties(contentId, propKey, propertyOfContentWithVersion);
+		Response<PropertyResponse> response = call.execute();
+		PropertyResponse body = response.body();
 		return body;
 	}
 	
@@ -1948,13 +1948,13 @@ public class Confluence
 	 * @return todo описать возвращаемое значение
 	 */
 	//@formatter:on
-	public PropResponse createContentPropertiesWithKey(final String contentId,
-	                                                   final String propKey,
-	                                                   final PropertyOfContent propertyOfContent) throws IOException
+	public PropertyResponse createContentPropertiesWithKey(final String contentId,
+	                                                       final String propKey,
+	                                                       final PropertyOfContent propertyOfContent) throws IOException
 	{
-		Call<PropResponse> contentPropertiesCall = confluenceApi.createContentPropertiesWithKey(contentId, propKey, propertyOfContent);
-		Response<PropResponse> response = contentPropertiesCall.execute();
-		PropResponse body = response.body();
+		Call<PropertyResponse> contentPropertiesCall = confluenceApi.createContentPropertiesWithKey(contentId, propKey, propertyOfContent);
+		Response<PropertyResponse> response = contentPropertiesCall.execute();
+		PropertyResponse body = response.body();
 		return body;
 	}
 	
@@ -2021,12 +2021,12 @@ public class Confluence
 	 * @return todo описать возвращаемое значение
 	 */
 	//@formatter:on
-	public PropResponse createContentProperties(final String contentId,
-	                                            final PropertyOfContent propertyOfContent) throws IOException
+	public PropertyResponse createContentProperties(final String contentId,
+	                                                final PropertyOfContent propertyOfContent) throws IOException
 	{
-		Call<PropResponse> contentPropertiesCall = confluenceApi.createContentProperties(contentId, propertyOfContent);
-		Response<PropResponse> response = contentPropertiesCall.execute();
-		PropResponse body = response.body();
+		Call<PropertyResponse> contentPropertiesCall = confluenceApi.createContentProperties(contentId, propertyOfContent);
+		Response<PropertyResponse> response = contentPropertiesCall.execute();
+		PropertyResponse body = response.body();
 		return body;
 	}
 	
@@ -3798,10 +3798,13 @@ public class Confluence
 	 *
 	 * @return
 	 */
-	Object getSpaceProperty(final String spaceKey,
-	                        final Map<String, String> param)
+	public PropertyListResponseContainer getSpaceProperties(final String spaceKey,
+	                                                        final Map<String, String> param) throws IOException
 	{
-		return null;
+		Call<PropertyListResponseContainer> spacePropertyCall = confluenceApi.getSpaceProperties(spaceKey, param);
+		Response<PropertyListResponseContainer> response = spacePropertyCall.execute();
+		PropertyListResponseContainer body = response.body();
+		return body;
 	}
 	
 	/**
@@ -3812,9 +3815,12 @@ public class Confluence
 	 *
 	 * @return
 	 */
-	Object createSpaceProperty(final String spaceKey)
+	public PropertyResponse createSpaceProperty(final String spaceKey, final PropertyOfContent property) throws IOException
 	{
-		return null;
+		Call<PropertyResponse> spacePropertyCall = confluenceApi.createSpaceProperty(spaceKey, property);
+		Response<PropertyResponse> response = spacePropertyCall.execute();
+		PropertyResponse body = response.body();
+		return body;
 	}
 	
 	/**
@@ -3826,9 +3832,12 @@ public class Confluence
 	 *
 	 * @return
 	 */
-	Object getSpacePropertyByKey(final String spaceKey, final String key)
+	public PropertyResponse getSpacePropertyByKey(final String spaceKey, final String key) throws IOException
 	{
-		return null;
+		Call<PropertyResponse> spacePropertyByKeyCall = confluenceApi.getSpacePropertyByKey(spaceKey, key);
+		Response<PropertyResponse> response = spacePropertyByKeyCall.execute();
+		PropertyResponse body = response.body();
+		return body;
 	}
 	
 	/**
@@ -3840,9 +3849,12 @@ public class Confluence
 	 *
 	 * @return
 	 */
-	Object updateSpacePropertyByKey(final String spaceKey, final String key)
+	public PropertyResponse updateSpacePropertyByKey(final String spaceKey, final String key, final PropertyOfContentWithVersion property) throws IOException
 	{
-		return null;
+		Call<PropertyResponse> updateSpacePropertyCall = confluenceApi.updateSpacePropertyByKey(spaceKey, key, property);
+		Response<PropertyResponse> response = updateSpacePropertyCall.execute();
+		PropertyResponse body = response.body();
+		return body;
 	}
 	
 	/**
@@ -3854,9 +3866,13 @@ public class Confluence
 	 *
 	 * @return
 	 */
-	Object deleteSpacePropertyByKey(final String spaceKey, final String key)
+	public boolean deleteSpacePropertyByKey(final String spaceKey, final String key) throws IOException
 	{
-		return null;
+		Call<Void> deletespacepropertycall = confluenceApi.deleteSpacePropertyByKey(spaceKey, key);
+		Response<Void> response = deletespacepropertycall.execute();
+		int code = response.code();
+		boolean result = Utils.codeIs204(code);
+		return result;
 	}
 	
 	/**
@@ -3868,9 +3884,12 @@ public class Confluence
 	 *
 	 * @return
 	 */
-	Object createSpacePropertyByKey(final String spaceKey, final String key)
+	PropertyResponse createSpacePropertyByKey(final String spaceKey, final String key, final PropertyOfContent property) throws IOException
 	{
-		return null;
+		Call<PropertyResponse> createSpacePropertyCall = confluenceApi.createSpacePropertyByKey(spaceKey, key, property);
+		Response<PropertyResponse> response = createSpacePropertyCall.execute();
+		PropertyResponse body = response.body();
+		return body;
 	}
 	//----------- space/{spaceKey}/property (Manipulating space properties). Конец -----------
 	//----------------------------------------------------------------------------------------

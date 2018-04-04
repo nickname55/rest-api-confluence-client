@@ -1,6 +1,7 @@
-package com.pampushko.confluence.rest;
-
-import com.pampushko.confluence.models.content_property.PropertyOfContent;
+import com.pampushko.confluence.models.Version;
+import com.pampushko.confluence.models.content_property.PropertyOfContentWithVersion;
+import com.pampushko.confluence.models.content_property.PropertyResponse;
+import com.pampushko.confluence.rest.Confluence;
 import com.pampushko.confluence.settings.SettingsManager;
 import lombok.extern.slf4j.Slf4j;
 
@@ -10,16 +11,11 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * Базовый класс для запуска клиента
- * <br>
+ *
  */
 @Slf4j
-public class Main
+public class UpdateSpacePropertyByKeyTest
 {
-	public static final String url = "";
-	private static final String username = "";
-	private static final String password = "";
-	
 	public static void main(String[] args) throws IOException
 	{
 		//читаем настройки приложения
@@ -35,15 +31,18 @@ public class Main
 		final String spaceKey = "GAT";
 		
 		//ключ свойства области, значение этого ключа мы хотим получить
-		final String propertyKey = "ura555";
+		final String propertyKey = "ura5";
 		
 		//создаём новый объект свойства
-		PropertyOfContent property = new PropertyOfContent();
-		property.setKey("ura555");
-		property.setValue("ulala555");
+		PropertyOfContentWithVersion property = new PropertyOfContentWithVersion();
+		Version version = new Version();
+		version.setNumber(5);
+		property.setKey("ura5");
+		property.setValue("ulala666666666777777777777777999999");
+		property.setVersion(version);
 		
 		//выполняем запрос и печатаем результат
-		Object result = confluence.createSpacePropertyByKey(spaceKey, propertyKey, property);
+		PropertyResponse result = confluence.updateSpacePropertyByKey(spaceKey, propertyKey, property);
 		System.out.println(result);
 	}
 }

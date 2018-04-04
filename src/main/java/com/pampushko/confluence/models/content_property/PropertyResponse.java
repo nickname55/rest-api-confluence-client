@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 @Slf4j
-public class PropResponse extends BaseModel
+public class PropertyResponse extends BaseModel
 {
 	/**
 	 * Пример: "221184001"
@@ -57,5 +57,5 @@ public class PropResponse extends BaseModel
 	 * <br>
 	 */
 	@SerializedName("_links")
-	PropResponseContainerLinks links;
+	PropertyResponseContainerLinks links;
 }

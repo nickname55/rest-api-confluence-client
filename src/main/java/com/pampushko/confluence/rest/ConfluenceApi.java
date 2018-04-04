@@ -15,8 +15,8 @@ import com.pampushko.confluence.models.content.Content;
 import com.pampushko.confluence.models.content.ContentContainter;
 import com.pampushko.confluence.models.content.ContentResultList;
 import com.pampushko.confluence.models.content_descendant.DescendantsResult;
-import com.pampushko.confluence.models.content_property.PropListResponseContainer;
-import com.pampushko.confluence.models.content_property.PropResponse;
+import com.pampushko.confluence.models.content_property.PropertyListResponseContainer;
+import com.pampushko.confluence.models.content_property.PropertyResponse;
 import com.pampushko.confluence.models.content_property.PropertyOfContent;
 import com.pampushko.confluence.models.content_property.PropertyOfContentWithVersion;
 import com.pampushko.confluence.models.content_restriction.RestrictionResponseContainer;
@@ -3005,7 +3005,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 */
 	//@formatter:on
 	@GET("/wiki/rest/api/content/{contentId}/property")
-	Call<PropListResponseContainer> getContentProperties(final @Path("contentId") String contentId);
+	Call<PropertyListResponseContainer> getContentProperties(final @Path("contentId") String contentId);
 	
 	//@formatter:off
 	/**
@@ -3069,8 +3069,8 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 */
 	//@formatter:on
 	@GET("/wiki/rest/api/content/{contentId}/property/{propKey}")
-	Call<PropResponse> findByKeyContentProperties(final @Path("contentId") String contentId,
-	                                              final @Path("propKey") String propKey);
+	Call<PropertyResponse> findByKeyContentProperties(final @Path("contentId") String contentId,
+	                                                  final @Path("propKey") String propKey);
 	//@formatter:off
 	/**
 	 * Функция обновляет свойство элемента контента.
@@ -3151,9 +3151,9 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 */
 	//@formatter:on
 	@PUT("/wiki/rest/api/content/{contentId}/property/{propKey}")
-	Call<PropResponse> updateContentProperties(final @Path("contentId") String contentId,
-	                                           final @Path("propKey") String propKey,
-	                                           final @Body PropertyOfContentWithVersion body);
+	Call<PropertyResponse> updateContentProperties(final @Path("contentId") String contentId,
+	                                               final @Path("propKey") String propKey,
+	                                               final @Body PropertyOfContentWithVersion body);
 	//@formatter:off
 	/**
 	 * Функция удаляет свойство заданного элемента контента
@@ -3242,9 +3242,9 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 */
 	//@formatter:on
 	@POST("/wiki/rest/api/content/{contentId}/property/{propKey}")
-	Call<PropResponse> createContentPropertiesWithKey(final @Path("contentId") String contentId,
-	                                                  final @Path("propKey") String propKey,
-	                                                  final @Body PropertyOfContent body);
+	Call<PropertyResponse> createContentPropertiesWithKey(final @Path("contentId") String contentId,
+	                                                      final @Path("propKey") String propKey,
+	                                                      final @Body PropertyOfContent body);
 	//@formatter:off
 	/**
 	 * Функция новое свойство для указанного элемента контента.
@@ -3307,8 +3307,8 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 */
 	//@formatter:on
 	@POST("/wiki/rest/api/content/{contentId}/property")
-	Call<PropResponse> createContentProperties(final @Path("contentId") String contentId,
-	                                           final @Body PropertyOfContent body);
+	Call<PropertyResponse> createContentProperties(final @Path("contentId") String contentId,
+	                                               final @Body PropertyOfContent body);
 	//----------- content/{id}/property Конец ---------------
 	//----------------------------------------------------------------------------------------
 	
@@ -6508,8 +6508,8 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 */
 	//@formatter:on
 	@GET("/wiki/rest/api/space/{spaceKey}/property")
-	Call<Object> getSpaceProperty(final @Path("spaceKey") String spaceKey,
-	                              final @QueryMap Map<String, String> param);
+	Call<PropertyListResponseContainer> getSpaceProperties(final @Path("spaceKey") String spaceKey,
+	                                                       final @QueryMap Map<String, String> param);
 	
 	//@formatter:off
 	/**
@@ -6572,7 +6572,8 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 */
 	//@formatter:on
 	@POST("/wiki/rest/api/space/{spaceKey}/property")
-	Call<Object> createSpaceProperty(final @Path("spaceKey") String spaceKey);
+	Call<PropertyResponse> createSpaceProperty(final @Path("spaceKey") String spaceKey,
+	                                           final @Body PropertyOfContent property);
 	
 	//@formatter:off
 	/**
@@ -6643,7 +6644,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 */
 	//@formatter:on
 	@GET("/wiki/rest/api/space/{spaceKey}/property/{key}")
-	Call<Object> getSpacePropertyByKey(final @Path("spaceKey") String spaceKey, final @Path("key") String key);
+	Call<PropertyResponse> getSpacePropertyByKey(final @Path("spaceKey") String spaceKey, final @Path("key") String key);
 	
 	//@formatter:off
 	/**
@@ -6653,7 +6654,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 * <br>
 	 * <em>Тело запроса должно содержать новый номер версии</em>
 	 * <br>
-	 * Если указанный номер версии равен 1, то произвойдет попытка создать новое свойство области (new space property) как в {@link #createSpaceProperty(String)}
+	 * Если указанный номер версии равен 1, то произвойдет попытка создать новое свойство области (new space property) как в {@link #createSpaceProperty(String, PropertyOfContent)} (String)}
 	 * <br>
 	 * <h2><strong>Request:</strong></h2>
 	 * <br>
@@ -7924,7 +7925,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 */
 	//@formatter:on
 	@PUT("/wiki/rest/api/space/{spaceKey}/property/{key}")
-	Call<Object> updateSpacePropertyByKey(final @Path("spaceKey") String spaceKey, final @Path("key") String key);
+	Call<PropertyResponse> updateSpacePropertyByKey(final @Path("spaceKey") String spaceKey, final @Path("key") String key, final @Body PropertyOfContentWithVersion property);
 	
 	//@formatter:off
 	/**
@@ -7946,7 +7947,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 */
 	//@formatter:on
 	@DELETE("/wiki/rest/api/space/{spaceKey}/property/{key}")
-	Call<Object> deleteSpacePropertyByKey(final @Path("spaceKey") String spaceKey, final @Path("key") String key);
+	Call<Void> deleteSpacePropertyByKey(final @Path("spaceKey") String spaceKey, final @Path("key") String key);
 	
 	//@formatter:off
 	/**
@@ -8016,7 +8017,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 */
 	//@formatter:on
 	@POST("/wiki/rest/api/space/{spaceKey}/property/{key}")
-	Call<Object> createSpacePropertyByKey(final @Path("spaceKey") String spaceKey, final @Path("key") String key);
+	Call<PropertyResponse> createSpacePropertyByKey(final @Path("spaceKey") String spaceKey, final @Path("key") String key, final @Body PropertyOfContent propertyOfContent);
 	//----------- space/{spaceKey}/property (Manipulating space properties). Конец -----------
 	//----------------------------------------------------------------------------------------
 

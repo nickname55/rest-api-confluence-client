@@ -1,4 +1,4 @@
-import com.pampushko.confluence.models.content_property.PropListResponseContainer;
+import com.pampushko.confluence.models.content_property.PropertyListResponseContainer;
 import com.pampushko.confluence.rest.Confluence;
 import com.pampushko.confluence.settings.SettingsManager;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +24,7 @@ public class GetContentPropertiesTest
 		final String contentId = "5210113";
 		
 		//выполняем запрос и печатаем результат
-		PropListResponseContainer prop = confluence.getContentProperties(contentId);
+		PropertyListResponseContainer prop = confluence.getContentProperties(contentId);
 		System.out.println(prop);
 	}
 }

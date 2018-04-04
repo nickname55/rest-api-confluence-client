@@ -14,39 +14,26 @@ import lombok.extern.slf4j.Slf4j;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 @Slf4j
-public class PropListResponseContainer extends BaseModel
+public class PropertyResponseContainerLinks extends BaseModel
 {
 	/**
+	 * Пример: "https://java-java.atlassian.net/wiki"
 	 * <br>
 	 */
-	@SerializedName("results")
-	PropResponse[] results;
+	@SerializedName("base")
+	String base;
 	
 	/**
-	 * Пример: 0
+	 * Пример: "/wiki"
 	 * <br>
 	 */
-	@SerializedName("start")
-	long start;
+	@SerializedName("context")
+	String context;
 	
 	/**
-	 * Пример: 10
+	 * Пример: "https://java-java.atlassian.net/wiki/rest/api/content/5210113/property/hello"
 	 * <br>
 	 */
-	@SerializedName("limit")
-	long limit;
-	
-	/**
-	 * Пример: 5
-	 * <br>
-	 */
-	@SerializedName("size")
-	long size;
-	
-	/**
-	 * Пример:
-	 * <br>
-	 */
-	@SerializedName("_links")
-	PropResponseContainerLinks links;
+	@SerializedName("self")
+	String self;
 }
