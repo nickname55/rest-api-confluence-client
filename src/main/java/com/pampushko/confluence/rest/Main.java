@@ -1,12 +1,9 @@
 package com.pampushko.confluence.rest;
 
-import com.pampushko.confluence.models.content_property.PropertyOfContent;
 import com.pampushko.confluence.settings.SettingsManager;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -28,22 +25,8 @@ public class Main
 		//вызываем билдер и создаем клиент
 		Confluence confluence = Confluence.newBuilder().baseUrl(settings.getProperty("baseUrl")).userName(settings.getProperty("username")).password(settings.getProperty("password")).build();
 		
-		//пустой набор параметров
-		Map<String, String> params = new HashMap<String, String>();
-		
-		//ключ области
-		final String spaceKey = "GAT";
-		
-		//ключ свойства области, значение этого ключа мы хотим получить
-		final String propertyKey = "ura555";
-		
-		//создаём новый объект свойства
-		PropertyOfContent property = new PropertyOfContent();
-		property.setKey("ura555");
-		property.setValue("ulala555");
-		
 		//выполняем запрос и печатаем результат
-		Object result = confluence.createSpacePropertyByKey(spaceKey, propertyKey, property);
+		Object result = confluence.getAccessModeStatus();
 		System.out.println(result);
 	}
 }

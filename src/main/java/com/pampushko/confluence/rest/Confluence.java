@@ -3894,4 +3894,16 @@ public class Confluence
 	//----------- space/{spaceKey}/property (Manipulating space properties). Конец -----------
 	//----------------------------------------------------------------------------------------
 	
+	//-----------  /rest/accessmode Начало ---------------------------------------------------
+	//----------------------------------------------------------------------------------------
+	Object getAccessModeStatus() throws IOException
+	{
+		Call<Object> accessModeStatusCall = confluenceApi.getAccessModeStatus();
+		Response<Object> response = accessModeStatusCall.execute();
+		Object body = response.body();
+		return body;
+	}
+	//----------- /rest/accessmode Конец -----------------------------------------------------
+	//----------------------------------------------------------------------------------------
+	
 }
