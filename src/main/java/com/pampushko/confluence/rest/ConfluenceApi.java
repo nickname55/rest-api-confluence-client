@@ -8023,8 +8023,9 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	
 	//-----------  /rest/accessmode Начало ---------------------------------------------------
 	//----------------------------------------------------------------------------------------
-	
 	/**
+	 * todo ФУНКЦИЯ НЕ РАБОТАЕТ! ХОТЯ СОГЛАСНО ДОКУМЕНТАЦИИ - РАБОТАТЬ ДОЛЖНА
+	 * <br>
 	 * Resource for plugins to check the access mode set on Confluence
 	 * <br>
 	 * Возвращает статус режима доступа для Confluence (Returns the access mode status for Confluence)
@@ -8043,8 +8044,182 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 */
 	@GET("/wiki/rest/api/accessmode")
 	Call<Object> getAccessModeStatus();
-	
 	//----------- /rest/accessmode Конец -----------------------------------------------------
+	//----------------------------------------------------------------------------------------
+	
+	//-----------  longtask: REST wrapper for the LongTaskService. Начало --------------------
+	//----------------------------------------------------------------------------------------
+	
+	//@formatter:off
+	/**
+	 * Возвращает информацию обо всех отслеживаемых (tracked) длительных (long-running) задачах (task)
+	 * <p>
+	 * <strong>Дополнительные параметры</strong>
+	 * <ul>
+	 * <li>expand (String) -- Optional -- можно указать дополнительную связанную информацию о задачах, которые вы хотите видеть в ответе на запрос.
+	 * <br>
+	 * Список, с разделителями - запятыми.
+	 * </li>
+	 * <li>start (int) -- Optional -- Default: <strong>0</strong> -- индекс первого элемента в результирующем возвращаемом наборе элементов</li>
+	 * <li>limit (int) -- Optional -- Default: <strong>100</strong> -- сколько элементов из результирующего возвращаемого набора вы хотите получить (после начального индекса, после start)
+	 * </li>
+	 * </ul>
+	 * <br>
+	 * <h2><strong>Responses:</strong></h2>
+	 * <strong>STATUS 200</strong> -- application/json, возвращает полное JSON представление, списка длительно длящихся задач (list of long tasks)
+	 * <br>
+	 * <h2><strong>SCHEMA</strong></h2>
+	 * <blockquote><PRE>
+{
+    "id": "https://docs.atlassian.com/jira/REST/schema/rest-list-of-long-task-status#",
+    "title": "Rest List of Long Task Status",
+    "type": "array",
+    "items": {
+        "title": "Long Task Status",
+        "type": "object",
+        "properties": {
+            "id": {
+                "title": "Long Task Id",
+                "type": "object"
+            },
+            "name": {
+                "$ref": "#/definitions/message"
+            },
+            "elapsedTime": {
+                "type": "integer"
+            },
+            "percentageComplete": {
+                "type": "integer"
+            },
+            "successful": {
+                "type": "boolean"
+            },
+            "messages": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/definitions/message"
+                }
+            }
+        },
+        "additionalProperties": false,
+        "required": [
+            "elapsedTime",
+            "percentageComplete",
+            "successful"
+        ]
+    },
+    "definitions": {
+        "message": {
+            "title": "Message",
+            "type": "object",
+            "properties": {
+                "args": {
+                    "type": "array",
+                    "items": {}
+                },
+                "key": {
+                    "type": "string"
+                },
+                "translation": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        }
+    }
+}
+	 * </PRE></blockquote>
+	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/#longtask-getTasks">Оригинальная документация к API</a>
+	 * @return объект содержащий список long задач, объект создается на основе возвращаемого JSON
+	 */
+	//@formatter:on
+	@GET("/wiki/rest/api/longtask")
+	Call<Object> getTasksList();
+	
+	//@formatter:off
+	/**
+	 * Возвращает информацию об одной отслеживаемой (tracked) длительной (long-running) задаче (task)
+	 * <p>
+	 * <strong>Дополнительные параметры</strong>
+	 * <ul>
+	 * <li>expand (String) -- Optional -- можно указать дополнительную связанную информацию о задачах, которые вы хотите видеть в ответе на запрос.
+	 * <br>
+	 * Список, с разделителями - запятыми.
+	 * </li>
+	 * </ul>
+	 * <br>
+	 * <h2><strong>Responses:</strong></h2>
+	 * <strong>STATUS 200</strong> -- application/json, возвращает полное JSON представление длительно длящейся задачи (long task)
+	 * <br>
+	 * <h2><strong>SCHEMA</strong></h2>
+	 * <blockquote><PRE>
+{
+    "id": "https://docs.atlassian.com/jira/REST/schema/long-task-status#",
+    "title": "Long Task Status",
+    "type": "object",
+    "properties": {
+        "id": {
+            "title": "Long Task Id",
+            "type": "object"
+        },
+        "name": {
+            "$ref": "#/definitions/message"
+        },
+        "elapsedTime": {
+            "type": "integer"
+        },
+        "percentageComplete": {
+            "type": "integer"
+        },
+        "successful": {
+            "type": "boolean"
+        },
+        "messages": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/message"
+            }
+        }
+    },
+    "definitions": {
+        "message": {
+            "title": "Message",
+            "type": "object",
+            "properties": {
+                "args": {
+                    "type": "array",
+                    "items": {}
+                },
+                "key": {
+                    "type": "string"
+                },
+                "translation": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false,
+    "required": [
+        "elapsedTime",
+        "percentageComplete",
+        "successful"
+    ]
+}
+	 * </PRE></blockquote>
+	 * <strong>STATUS 404</strong> -- такой код будет возвращён, если не существует задач с заданным ключом (taskId)
+	 * <br>
+	 * или если пользователь, выполняющий запрос, не имеет разрешения на просмотр этой задачи.
+	 * <br>
+	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/#longtask-getTask">Оригинальная документация к API</a>
+	 * @return объект содержащий список long задач, объект создается на основе возвращаемого JSON
+	 */
+	//@formatter:on
+	@GET("/wiki/rest/api/longtask/{taskId}")
+	Call<Object> getTask();
+	
+	//-----------   longtask: REST wrapper for the LongTaskService. Конец --------------------
 	//----------------------------------------------------------------------------------------
 
 }
