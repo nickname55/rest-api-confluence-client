@@ -29,6 +29,8 @@ import com.pampushko.confluence.models.group.GroupResultList;
 import com.pampushko.confluence.models.history.HistoryContainer;
 import com.pampushko.confluence.models.label.Label;
 import com.pampushko.confluence.models.label.LabelResultList;
+import com.pampushko.confluence.models.longtask.LongTask;
+import com.pampushko.confluence.models.longtask.LongTaskListResultContainer;
 import com.pampushko.confluence.models.macros.Macros;
 import com.pampushko.confluence.models.search.SearchResultList;
 import com.pampushko.confluence.models.user.User;
@@ -8134,7 +8136,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 */
 	//@formatter:on
 	@GET("/wiki/rest/api/longtask")
-	Call<Object> getTasksList();
+	Call<LongTaskListResultContainer> getTasksList();
 	
 	//@formatter:off
 	/**
@@ -8217,7 +8219,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 */
 	//@formatter:on
 	@GET("/wiki/rest/api/longtask/{taskId}")
-	Call<Object> getTask();
+	Call<LongTask> getTask(final @Path("taskId") String taskId);
 	
 	//-----------   longtask: REST wrapper for the LongTaskService. Конец --------------------
 	//----------------------------------------------------------------------------------------

@@ -30,6 +30,8 @@ import com.pampushko.confluence.models.group.GroupResultList;
 import com.pampushko.confluence.models.history.HistoryContainer;
 import com.pampushko.confluence.models.label.Label;
 import com.pampushko.confluence.models.label.LabelResultList;
+import com.pampushko.confluence.models.longtask.LongTask;
+import com.pampushko.confluence.models.longtask.LongTaskListResultContainer;
 import com.pampushko.confluence.models.macros.Macros;
 import com.pampushko.confluence.models.search.SearchResultList;
 import com.pampushko.confluence.models.user.User;
@@ -3896,7 +3898,7 @@ public class Confluence
 	
 	//-----------  /rest/accessmode Начало ---------------------------------------------------
 	//----------------------------------------------------------------------------------------
-	Object getAccessModeStatus() throws IOException
+	public Object getAccessModeStatus() throws IOException
 	{
 		Call<Object> accessModeStatusCall = confluenceApi.getAccessModeStatus();
 		Response<Object> response = accessModeStatusCall.execute();
@@ -3906,4 +3908,31 @@ public class Confluence
 	//----------- /rest/accessmode Конец -----------------------------------------------------
 	//----------------------------------------------------------------------------------------
 	
+	//-----------  longtask: REST wrapper for the LongTaskService. Начало --------------------
+	//----------------------------------------------------------------------------------------
+	/**
+	 * Возвращает информацию обо всех отслеживаемых (tracked) длительных (long-running) задачах (task)
+	 * <br>
+	 */
+	public LongTaskListResultContainer getTasksList() throws IOException
+	{
+		Call<LongTaskListResultContainer> tasksListCall = confluenceApi.getTasksList();
+		Response<LongTaskListResultContainer> response = tasksListCall.execute();
+		LongTaskListResultContainer body = response.body();
+		return body;
+	}
+	
+	/**
+	 * Возвращает информацию об одной отслеживаемой (tracked) длительной (long-running) задаче (task)
+	 * <br>
+	 */
+	public LongTask getTask(final String taskId) throws IOException
+	{
+		Call<LongTask> getTaskCall = confluenceApi.getTask(taskId);
+		Response<LongTask> response = getTaskCall.execute();
+		LongTask body = response.body();
+		return body;
+	}
+	//-----------   longtask: REST wrapper for the LongTaskService. Конец --------------------
+	//----------------------------------------------------------------------------------------
 }
