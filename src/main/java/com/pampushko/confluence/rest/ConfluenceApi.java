@@ -8020,5 +8020,31 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	Call<PropertyResponse> createSpacePropertyByKey(final @Path("spaceKey") String spaceKey, final @Path("key") String key, final @Body PropertyOfContent propertyOfContent);
 	//----------- space/{spaceKey}/property (Manipulating space properties). Конец -----------
 	//----------------------------------------------------------------------------------------
+	
+	//-----------  /rest/accessmode Начало ---------------------------------------------------
+	//----------------------------------------------------------------------------------------
+	
+	/**
+	 * Resource for plugins to check the access mode set on Confluence
+	 * <br>
+	 * Возвращает статус режима доступа для Confluence (Returns the access mode status for Confluence)
+	 * <br>
+	 * <strong>Примеры URI запросов:</strong>
+	 * <ul>
+	 * <li>http://example.com/confluence/rest/api/accessmode</li>
+	 * </ul>
+	 * <p>
+	 * <br>
+	 * <h2><strong>Responses:</strong></h2>
+	 * <strong>STATUS 200</strong> -- application/json
+	 * <br>
+	 *
+	 * @return
+	 */
+	@GET("/wiki/rest/api/accessmode")
+	Call<Object> getAccessModeStatus();
+	
+	//----------- /rest/accessmode Конец -----------------------------------------------------
+	//----------------------------------------------------------------------------------------
 
 }
