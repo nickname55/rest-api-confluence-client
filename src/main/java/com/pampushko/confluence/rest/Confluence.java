@@ -324,7 +324,6 @@ public class Confluence
 		return body;
 	}
 	
-	
 	/**
 	 * Получить список групп (разбитый на страницы)
 	 * <br>
@@ -372,7 +371,6 @@ public class Confluence
 		return body;
 	}
 	
-	
 	/**
 	 * Получить коллекцию пользователей состоящих в группе с заданным именем
 	 * <br>
@@ -390,7 +388,6 @@ public class Confluence
 		UserResultList body = response.body();
 		return body;
 	}
-	
 	
 	@lombok.Builder
 	public static class SearchParams
@@ -814,7 +811,6 @@ public class Confluence
 					//записываем содержимое тела ответа в директорию с именем directoryName, в файл fileName
 					boolean writtenToDisk = FilesUtils.writeResponseBodyToDisk(response.body(), directoryName, fileName);
 					
-					
 					log.debug("file download was a success? " + writtenToDisk);
 				}
 				else
@@ -895,7 +891,6 @@ public class Confluence
 	////////////////////////////////////////////////////
 	// Audit - STOP
 	////////////////////////////////////////////////////
-	
 	
 	//----------- content/{id}/child Начало ---------------
 	//----------------------------------------------------------------------------------------
@@ -1234,7 +1229,6 @@ public class Confluence
 		return body;
 	}
 	
-	
 	/**
 	 * todo добавить документацию к методу
 	 *
@@ -1405,7 +1399,6 @@ public class Confluence
 	//----------- content/{id}/child Конец ---------------
 	//----------------------------------------------------------------------------------------
 	
-	
 	//----------- content/{id}/child/attachment Начало ---------------
 	//----------------------------------------------------------------------------------------
 	
@@ -1437,7 +1430,6 @@ public class Confluence
 		CreateAttResponseContainer body = response.body();
 		return body;
 	}
-	
 	
 	/**
 	 * При помощи этой фунции мы можем обновить различные сопровождающие вложение данные:
@@ -1483,7 +1475,6 @@ public class Confluence
 		return responseBody;
 	}
 	
-	
 	/**
 	 * При помощи этой функции мы можем обновить (загрузить <strong>новую</strong> версию вложения).
 	 * <br>
@@ -1520,10 +1511,8 @@ public class Confluence
 		return responseBody;
 	}
 	
-	
 	//----------- content/{id}/child/attachment Конец ---------------
 	//----------------------------------------------------------------------------------------
-	
 	
 	//----------- content/{id}/descendant Начало ---------------
 	//----------------------------------------------------------------------------------------
@@ -1573,7 +1562,6 @@ public class Confluence
 	}
 	//----------- content/{id}/descendant Конец ---------------
 	//----------------------------------------------------------------------------------------
-	
 	
 	//----------- content/{id}/label Начало ---------------
 	//----------------------------------------------------------------------------------------
@@ -1631,10 +1619,8 @@ public class Confluence
 	//----------- content/{id}/label Конец ---------------
 	//----------------------------------------------------------------------------------------
 	
-	
 	//----------- content/{id}/property Начало ---------------
 	//----------------------------------------------------------------------------------------
-	
 	
 	//@formatter:off
 	/**
@@ -1782,7 +1768,6 @@ public class Confluence
 		return body;
 	}
 	
-	
 	//@formatter:off
 	/**
 	 * Функция обновляет свойство элемента контента.
@@ -1872,7 +1857,6 @@ public class Confluence
 		return body;
 	}
 	
-	
 	//@formatter:off
 	/**
 	 * Функция удаляет свойство заданного элемента контента
@@ -1901,7 +1885,6 @@ public class Confluence
 		//успешно удалили контент или не удалось выполнить запрос или найти контент по указанному contentId
 		return Utils.codeIs204(code);
 	}
-	
 	
 	//@formatter:off
 	/**
@@ -1974,7 +1957,6 @@ public class Confluence
 		PropResponse body = response.body();
 		return body;
 	}
-	
 	
 	//@formatter:off
 	/**
@@ -2050,7 +2032,6 @@ public class Confluence
 	
 	//----------- content/{id}/property Конец ---------------
 	//----------------------------------------------------------------------------------------
-	
 	
 	//----------- content/{id}/restriction Начало ---------------
 	//----------------------------------------------------------------------------------------
@@ -3268,7 +3249,6 @@ public class Confluence
 	//----------- content/blueprint Начало ---------------
 	//----------------------------------------------------------------------------------------
 	
-	
 	/**
 	 * Publish legacy draft
 	 * <br>
@@ -3311,10 +3291,8 @@ public class Confluence
 	//----------- contentbody/convert/{to} Конец ---------------
 	//----------------------------------------------------------------------------------------
 	
-	
 	//----------------------------------------------------------------------------------------
 	//начало, Add content watcher
-	
 	
 	/**
 	 * Добавить пользователя, выполняющего запрос, в наблюдатели контента (контент определяется по contentId)
@@ -3404,7 +3382,6 @@ public class Confluence
 	
 	//----------------------------------------------------------------------------------------
 	//начало, Remove content watcher
-	
 	
 	/**
 	 * Удалить пользователя, выполняющего запрос, из наблюдателей контента (контент определяется по contentId)
@@ -3576,10 +3553,8 @@ public class Confluence
 		return addWatcherToSpace(spaceKey, params);
 	}
 	
-	
 	//конец, Add space watcher
 	//----------------------------------------------------------------------------------------
-	
 	
 	//----------------------------------------------------------------------------------------
 	//начало, Remove space watcher
@@ -3656,7 +3631,6 @@ public class Confluence
 	//конец, Remove space watcher
 	//----------------------------------------------------------------------------------------
 	
-	
 	//----------------------------------------------------------------------------------------
 	//начало, Is watching space
 	
@@ -3684,8 +3658,12 @@ public class Confluence
 	
 	/**
 	 * Определить является ли текущий (отправляющий запрос) пользователь, наблюдателем области
-	 * @param spaceKey ключ области
+	 *
+	 * @param spaceKey
+	 * 		ключ области
+	 *
 	 * @return булево значение статуса (является или не является наблюдателем)
+	 *
 	 * @throws IOException
 	 */
 	public boolean isCurrentUserWatchSpace(final String spaceKey) throws IOException
@@ -3697,9 +3675,14 @@ public class Confluence
 	
 	/**
 	 * Определить статус нахождения в списке наблюдателей области, пользователя заданного при помощи userName
-	 * @param spaceKey ключ области
-	 * @param userName имя пользователя (login)
+	 *
+	 * @param spaceKey
+	 * 		ключ области
+	 * @param userName
+	 * 		имя пользователя (login)
+	 *
 	 * @return булево значение статуса (является или не является наблюдателем)
+	 *
 	 * @throws IOException
 	 */
 	public boolean isWatchSpaceByUserName(final String spaceKey, final String userName) throws IOException
@@ -3712,9 +3695,14 @@ public class Confluence
 	/**
 	 * Определить статус нахождения в списке наблюдателей области, пользователя заданного при помощи userKey
 	 * <br>
-	 * @param spaceKey ключ области
-	 * @param userKey ключ пользователя
+	 *
+	 * @param spaceKey
+	 * 		ключ области
+	 * @param userKey
+	 * 		ключ пользователя
+	 *
 	 * @return булево значение статуса (является или не является наблюдателем)
+	 *
 	 * @throws IOException
 	 */
 	public boolean isWatchSpaceByUserKey(final String spaceKey, final String userKey) throws IOException
@@ -3750,7 +3738,9 @@ public class Confluence
 	/**
 	 * получить информацию о юзере-анонимусе
 	 * <br>
+	 *
 	 * @return
+	 *
 	 * @throws IOException
 	 */
 	public User getAnonymous() throws IOException
@@ -3763,7 +3753,9 @@ public class Confluence
 	
 	/**
 	 * Получаем информацию о пользователе, отправляющем запрос (текущем пользователе)
+	 *
 	 * @return
+	 *
 	 * @throws IOException
 	 */
 	public User getCurrentUser() throws IOException
@@ -3777,8 +3769,11 @@ public class Confluence
 	/**
 	 * Получаем список групп, в которые входит пользователь
 	 * <br>
+	 *
 	 * @param params
+	 *
 	 * @return
+	 *
 	 * @throws IOException
 	 */
 	public GroupResultList getUserGroups(final Map<String, String> params) throws IOException
@@ -3790,4 +3785,94 @@ public class Confluence
 	}
 	//----------- user (Non-admin user operations), Конец ---------------
 	//----------------------------------------------------------------------------------------
+	
+	//----------- space/{spaceKey}/property (Manipulating space properties). Начало ----------
+	//----------------------------------------------------------------------------------------
+	
+	/**
+	 * Получить свойство области
+	 * <br>
+	 *
+	 * @param spaceKey
+	 * @param param
+	 *
+	 * @return
+	 */
+	Object getSpaceProperty(final String spaceKey,
+	                        final Map<String, String> param)
+	{
+		return null;
+	}
+	
+	/**
+	 * Создать свойство области
+	 * <br>
+	 *
+	 * @param spaceKey
+	 *
+	 * @return
+	 */
+	Object createSpaceProperty(final String spaceKey)
+	{
+		return null;
+	}
+	
+	/**
+	 * Получить свойство области по указанному ключу
+	 * <br>
+	 *
+	 * @param spaceKey
+	 * @param key
+	 *
+	 * @return
+	 */
+	Object getSpacePropertyByKey(final String spaceKey, final String key)
+	{
+		return null;
+	}
+	
+	/**
+	 * Обновить свойство области по указанному ключу
+	 * <br>
+	 *
+	 * @param spaceKey
+	 * @param key
+	 *
+	 * @return
+	 */
+	Object updateSpacePropertyByKey(final String spaceKey, final String key)
+	{
+		return null;
+	}
+	
+	/**
+	 * Удалить свойство области по указанному ключу
+	 * <br>
+	 *
+	 * @param spaceKey
+	 * @param key
+	 *
+	 * @return
+	 */
+	Object deleteSpacePropertyByKey(final String spaceKey, final String key)
+	{
+		return null;
+	}
+	
+	/**
+	 * Создать свойство области по указанному ключу
+	 * <br>
+	 *
+	 * @param spaceKey
+	 * @param key
+	 *
+	 * @return
+	 */
+	Object createSpacePropertyByKey(final String spaceKey, final String key)
+	{
+		return null;
+	}
+	//----------- space/{spaceKey}/property (Manipulating space properties). Конец -----------
+	//----------------------------------------------------------------------------------------
+	
 }
