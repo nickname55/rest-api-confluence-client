@@ -3728,6 +3728,17 @@ public class Confluence
 	
 	//----------- user (Non-admin user operations), Начало ---------------
 	//----------------------------------------------------------------------------------------
+	
+	/**
+	 * Получаем информацию о пользователе
+	 * <br>
+	 *
+	 * @param params
+	 *
+	 * @return
+	 *
+	 * @throws IOException
+	 */
 	public User getUser(final Map<String, String> params) throws IOException
 	{
 		Call<User> getUserCall = confluenceApi.getUser(params);
@@ -3750,6 +3761,11 @@ public class Confluence
 		return body;
 	}
 	
+	/**
+	 * Получаем информацию о пользователе, отправляющем запрос (текущем пользователе)
+	 * @return
+	 * @throws IOException
+	 */
 	public User getCurrentUser() throws IOException
 	{
 		Call<User> getCurrentCall = confluenceApi.getCurrentUser();
@@ -3758,6 +3774,13 @@ public class Confluence
 		return body;
 	}
 	
+	/**
+	 * Получаем список групп, в которые входит пользователь
+	 * <br>
+	 * @param params
+	 * @return
+	 * @throws IOException
+	 */
 	public GroupResultList getUserGroups(final Map<String, String> params) throws IOException
 	{
 		Call<GroupResultList> getGroupsCall = confluenceApi.getUserGroups(params);
