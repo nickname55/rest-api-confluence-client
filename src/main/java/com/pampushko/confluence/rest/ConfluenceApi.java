@@ -21,7 +21,7 @@ import com.pampushko.confluence.models.content_property.PropertyOfContent;
 import com.pampushko.confluence.models.content_property.PropertyOfContentWithVersion;
 import com.pampushko.confluence.models.content_restriction.RestrictionResponseContainer;
 import com.pampushko.confluence.models.content_restriction.restriction.Restriction;
-import com.pampushko.confluence.models.convert.ConvertationResponsBody;
+import com.pampushko.confluence.models.convert.resp.ConvertationResponsBody;
 import com.pampushko.confluence.models.convert.req.ContentBody;
 import com.pampushko.confluence.models.draft.Draft;
 import com.pampushko.confluence.models.group.Group;

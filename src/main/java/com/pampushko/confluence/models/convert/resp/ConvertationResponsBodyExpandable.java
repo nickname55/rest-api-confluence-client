@@ -1,4 +1,4 @@
-package com.pampushko.confluence.models.convert;
+package com.pampushko.confluence.models.convert.resp;
 
 import com.google.gson.annotations.SerializedName;
 import com.pampushko.confluence.models.BaseModel;
