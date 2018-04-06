@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 //@formatter:off
 /**
  * Метка, которую добавляют к стараницам или вложениям
- * <p>
+ * <br>
  * <strong>Пример:</strong>
  * <blockquote><PRE>
 {
@@ -47,28 +47,28 @@ public class Label extends BaseModel
 	
 	/**
 	 * Пример: "global"
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("prefix")
 	private String prefix;
 	
 	/**
 	 * Пример: "test1" (обычно значение совпадает со значением свойства label)
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("name")
 	private String name;
 	
 	/**
 	 * Пример: "208666625"
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("id")
 	private String id;
 	
 	/**
 	 * имя метки
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("label")
 	private String label;

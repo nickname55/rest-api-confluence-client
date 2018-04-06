@@ -11,31 +11,31 @@ import lombok.extern.slf4j.Slf4j;
 public class ChildAttachment extends BaseModel
 {
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("results")
 	ChildAttachmentContainer[] results;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("start")
 	long start;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("limit")
 	long limit;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("size")
 	long size;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("_links")
 	ChildAttachmentContainerLinks links;

@@ -1,5 +1,5 @@
 /**
  * Дочерние объекты классов-моделей, используемых при создании вложений в Confluence
- * <p>
+ * <br>
  */
 package com.pampushko.confluence.models.attachment.create.child_objects;

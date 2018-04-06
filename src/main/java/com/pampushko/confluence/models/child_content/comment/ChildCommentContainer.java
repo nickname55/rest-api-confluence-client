@@ -20,25 +20,25 @@ public class ChildCommentContainer extends BaseModel
 {
 	/**
 	 * "171671553"
-	 * <p>
+	 * <br>
 	 */
 	private String id;
 	
 	/**
 	 * "comment"
-	 * <p>
+	 * <br>
 	 */
 	private String type;
 	
 	/**
 	 * "current"
-	 * <p>
+	 * <br>
 	 */
 	private String status;
 	
 	/**
 	 * "Re: Change Item"
-	 * <p>
+	 * <br>
 	 */
 	private String title;
 	
@@ -51,21 +51,21 @@ public class ChildCommentContainer extends BaseModel
 	ChildCommentMacroRenderedOutput macroRenderedOutput;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	private ChildCommentExtensions extensions;
 	
 	
 	//---------------------------------------------------------------------------
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("_expandable")
 	private ChildCommentExpandable expandable;
 	
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("_links")
 	private ChildCommentLinks links;

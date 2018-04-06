@@ -12,21 +12,21 @@ public class ChildCommentContainerLinks extends BaseModel
 {
 	/**
 	 * Пример: "https://java-java.atlassian.net/wiki"
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("base")
 	String base;
 	
 	/**
 	 * Пример: "/wiki"
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("context")
 	String context;
 	
 	/**
 	 * Пример: "https://java-java.atlassian.net/wiki/rest/api/content/5210113/child/comment?expand=page,attachment,comment"
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("self")
 	String self;

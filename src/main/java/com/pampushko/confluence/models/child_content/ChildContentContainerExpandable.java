@@ -17,19 +17,19 @@ import lombok.extern.slf4j.Slf4j;
 public class ChildContentContainerExpandable extends BaseModel
 {
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("attachment")
 	String attachment;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("comment")
 	String comment;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("page")
 	String page;

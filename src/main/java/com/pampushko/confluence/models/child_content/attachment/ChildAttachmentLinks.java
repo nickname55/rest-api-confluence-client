@@ -18,21 +18,21 @@ public class ChildAttachmentLinks extends BaseModel
 {
 	/**
 	 * Пример: "/spaces/4654313/pages/5210113/Change+Item?preview=%2F5210113%2F172261377%2FIdeaProject.png"
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("webui")
 	String webui;
 	
 	/**
 	 * Пример: "https://java-java.atlassian.net/wiki/rest/api/content/att172261377"
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("self")
 	String self;
 	
 	/**
-	 * Пример: "/download/attachments/5210113/IdeaProject.png?version=1&modificationDate=1520279647763&cacheVersion=1&api=v2"
-	 * <p>
+	 * Пример: "/download/attachments/5210113/IdeaProject.png?version=1&amp;modificationDate=1520279647763&amp;cacheVersion=1&amp;api=v2"
+	 * <br>
 	 */
 	@SerializedName("download")
 	String download;

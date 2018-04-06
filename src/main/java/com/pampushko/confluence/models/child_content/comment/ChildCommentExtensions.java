@@ -17,13 +17,13 @@ import lombok.extern.slf4j.Slf4j;
 public class ChildCommentExtensions extends BaseModel
 {
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("location")
 	String location;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("_expandable")
 	ChildCommentExtensionsExpandable expandable;

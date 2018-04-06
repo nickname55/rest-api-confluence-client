@@ -12,20 +12,20 @@ public class ChildAttachmentContainerLinks extends BaseModel
 {
 	/**
 	 *
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("base")
 	String base;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("context")
 	String context;
 	
 	/**
 	 *
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("self")
 	String self;

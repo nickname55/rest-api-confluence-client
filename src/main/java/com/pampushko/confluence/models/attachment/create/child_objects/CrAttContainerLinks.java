@@ -17,28 +17,28 @@ public class CrAttContainerLinks
 {
 	/**
 	 * Пример: "https://java-java.atlassian.net/wiki/rest/api/content/5210113"
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("self")
 	String self;
 	
 	/**
 	 * Пример: "/x/AYBP"
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("tinyui")
 	String tinyui;
 	
 	/**
 	 * Пример: "/pages/resumedraft.action?draftId=5210113"
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("editui")
 	String editui;
 	
 	/**
 	 * Пример: "/spaces/4654313/pages/5210113/Change+Item"
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("webui")
 	String webui;

@@ -30,7 +30,7 @@ public class UpdAttLinksResp
 	String self;
 	
 	/**
-	 * Пример: "/download/attachments/5210113/1.json?version=1&modificationDate=1520866571978&cacheVersion=1&api=v2"
+	 * Пример: "/download/attachments/5210113/1.json?version=1&amp;modificationDate=1520866571978&amp;cacheVersion=1&amp;api=v2"
 	 * <br>
 	 */
 	@SerializedName("download")

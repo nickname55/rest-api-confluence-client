@@ -20,14 +20,14 @@ public class RetentionPeriod extends BaseModel
 {
 	/**
 	 *
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("number")
 	long number;
 	
 	/**
 	 *
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("units")
 	String units;

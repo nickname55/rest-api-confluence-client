@@ -73,10 +73,9 @@ public interface ConfluenceApi
 	 * <br>
 	 * с кодом {@code key}
 	 * <br>
-	 *
+	 * @param spaceKey ключ области
+	 * @param params дополнительные параметры запроса
 	 * @return возвращаёмое значение {@code SpaceResultList} - массив из областей {@code Space}
-	 * <br>
-	 *
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
 	@GET("/wiki/rest/api/space/{key}")
@@ -91,11 +90,9 @@ public interface ConfluenceApi
 	 * <br>
 	 *
 	 * @param space
-	 * 		- область {@code Space} для создания.
-	 * 		<br>
+	 * 		область {@code Space} для создания.
 	 *
 	 * @return возвращаёмое значение {@code Call<Space>}, как подтверждение, что область действительно создана
-	 * <br>
 	 *
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
@@ -108,8 +105,10 @@ public interface ConfluenceApi
 	 * имеющую ключ {@code key}
 	 * <br>
 	 *
+	 * @param spaceKey
+	 * 		ключ области
+	 *
 	 * @return возвращаёмое значение {@code Space}, как подтверждение, что область действительно удалена
-	 * <br>
 	 *
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
@@ -121,7 +120,7 @@ public interface ConfluenceApi
 	 * <br>
 	 *
 	 * @param space
-	 * 		- область {@code Space} для создания
+	 * 		область {@code Space} для создания
 	 *
 	 * @return - {@code Space} подтверждение, возвращаемое Confluence в ответе на запрос
 	 *
@@ -135,8 +134,9 @@ public interface ConfluenceApi
 	 * <br>
 	 *
 	 * @param space
-	 * 		- область {@code Space} для создания
-	 * @param key
+	 * 		область {@code Space} для создания
+	 * @param spaceKey
+	 * 		ключ области
 	 *
 	 * @return - {@code Space} подтверждение, возвращаемое Confluence в ответе на запрос (полное представлеине области)
 	 *
@@ -144,16 +144,18 @@ public interface ConfluenceApi
 	 */
 	@PUT("/wiki/rest/api/space/{key}")
 	Call<Space> updateSpace(final @Body Space space,
-	                        final @Path("key") String key);
+	                        final @Path("key") String spaceKey);
 	
 	/**
 	 * Получить список элементов контента из данной области
 	 * <br>
 	 *
 	 * @param spaceKey
+	 * 		ключ области
 	 * @param params
+	 * 		дополнительные параметры запроса
 	 *
-	 * @return todo дописать
+	 * @return запрос для получение объекта-контейнера с контентом
 	 *
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
@@ -165,7 +167,9 @@ public interface ConfluenceApi
 	 * Получить список групп (разбитый на страницы)
 	 *
 	 * @param start
+	 * 		индекс с которого мы хотим начать получать элементы
 	 * @param limit
+	 * 		максимальное количество элементов, которое мы хотим получить в ответе на запрос
 	 *
 	 * @return todo дописать
 	 *
@@ -180,6 +184,7 @@ public interface ConfluenceApi
 	 * <br>
 	 *
 	 * @param groupName
+	 * 		имя группы
 	 *
 	 * @return todo дописать
 	 *
@@ -193,10 +198,13 @@ public interface ConfluenceApi
 	 * <br>
 	 *
 	 * @param groupName
+	 * 		имя группы
 	 * @param start
+	 * 		индекс с которого мы хотим начать получать элементы
 	 * @param limit
+	 * 		максимальное количество элементов, которое мы хотим получить в ответе на запрос
 	 *
-	 * @return
+	 * @return todo дописать
 	 */
 	@GET("/wiki/rest/api/group/{groupName}/member")
 	Call<UserResultList> getUsersFromGroupByGroupName(final @Path("groupName") String groupName,
@@ -216,6 +224,8 @@ public interface ConfluenceApi
 	 * 		start - the start point of the collection to return
 	 * 		limit - the limit of the number of items to return, this may be restricted by fixed system limits
 	 * 		includeArchivedSpaces - whether to include content in archived spaces in the result, this defaults to false
+	 * @param params
+	 * 		дополнительные параметры запроса
 	 *
 	 * @return Returns a full JSON representation of a list of search results
 	 *
@@ -245,14 +255,14 @@ public interface ConfluenceApi
 	 * <em>Обратите внимание, что только администраторы Confluence могут добавлять в наблюдатели не только себя, но и других пользователей системы.
 	 * </em>
 	 * <br>
-	 * <p>
+	 * <br>
 	 * <strong>Примеры URI запросов:</strong>
 	 * <ul>
 	 * <li>POST http://example.com/rest/api/user/watch/content/131213</li>
 	 * <li>POST http://example.com/rest/api/user/watch/content/131213?username=jblogs</li>
 	 * <li>POST http://example.com/rest/api/user/watch/content/131213?key=ff8080815a58e24c015a58e263710000</li>
 	 * </ul>
-	 * <p>
+	 * <br>
 	 * <strong>Дополнительные параметры</strong>
 	 * <ul>
 	 * <li>key (String) -- Optional -- userkey по которому система найдёт пользователя, которого мы хотим добавить наблюдатели</li>
@@ -266,7 +276,8 @@ public interface ConfluenceApi
 	 * <br>
 	 * Или если пользователь выполняющий запрос не имеет достаточных прав доступа для выполнения операции.
 	 * <br>
-	 *
+	 * @param contentId идентификатор контента
+	 * @param param дополнительные параметры запроса
 	 * @return todo дописать
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
@@ -297,14 +308,14 @@ public interface ConfluenceApi
 	 * <em>Обратите внимание, что только администраторы Confluence могут добавлять в наблюдатели не только себя, но и других пользователей системы.
 	 * </em>
 	 * <br>
-	 * <p>
+	 * <br>
 	 * <strong>Примеры URI запросов:</strong>
 	 * <ul>
 	 * <li>DELETE http://example.com/rest/api/user/watch/content/131213</li>
 	 * <li>DELETE http://example.com/rest/api/user/watch/content/131213?username=jblogs</li>
 	 * <li>DELETE http://example.com/rest/api/user/watch/content/131213?key=ff8080815a58e24c015a58e263710000</li>
 	 * </ul>
-	 * <p>
+	 * <br>
 	 * <strong>Дополнительные параметры</strong>
 	 * <ul>
 	 * <li>key (String) -- Optional -- userkey по которому система найдёт пользователя, которого мы хотим удалить из наблюдателей</li>
@@ -318,7 +329,8 @@ public interface ConfluenceApi
 	 * <br>
 	 * Или если пользователь выполняющий запрос не имеет достаточных прав доступа для выполнения операции.
 	 * <br>
-	 *
+	 * @param contentId идентификатор контента
+	 * @param param дополнительные параметры запроса
 	 * @return пустой ответ
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
@@ -349,7 +361,7 @@ public interface ConfluenceApi
 	 * <em>Обратите внимание, что только администраторы Confluence могут добавлять в наблюдатели не только себя, но и других пользователей системы.
 	 * </em>
 	 * <br>
-	 * <p>
+	 * <br>
 	 * <strong>Примеры URI запросов:</strong>
 	 * <ul>
 	 * <li>POST http://example.com/rest/api/user/watch/space/SPACEKEY</li>
@@ -357,7 +369,7 @@ public interface ConfluenceApi
 	 * <li>POST http://example.com/rest/api/user/watch/space/SPACEKEY?key=ff8080815a58e24c015a58e263710000</li>
 	 * <li>POST http://example.com/confluence/rest/api/user/watch/space/SPACEKEY?contentType=blogpost</li>
 	 * </ul>
-	 * <p>
+	 * <br>
 	 * <strong>Дополнительные параметры</strong>
 	 * <ul>
 	 * <li>key (String) -- Optional -- userkey по которому система найдёт пользователя, которого мы хотим добавить в наблюдатели</li>
@@ -376,6 +388,8 @@ public interface ConfluenceApi
 	 * <strong>Здесь несоответствие с документацией Atlassian: в документации Atlassian указан код 404, а не 403</strong>
 	 * <br>
 	 *
+	 * @param spaceKey ключ области
+	 * @param params дополнительные параметры запроса
 	 * @return пустой ответ
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
@@ -390,8 +404,8 @@ public interface ConfluenceApi
 	
 	/**
 	 * Функция удаляет пользователя из списка наблюдателей Пространства (Space)
-     * <br>
-     * пространство указывается при помощи spaceKey
+	 * <br>
+	 * пространство указывается при помощи spaceKey
      * <br>
      * Пользователь не является обязательным параметром.
      * <br>
@@ -405,27 +419,32 @@ public interface ConfluenceApi
      * <em>Обратите внимание, что только администраторы Confluence могут добавлять в наблюдатели не только себя, но и других пользователей системы.
      * </em>
      * <br>
-     * <p>
+     * <br>
      * <strong>Примеры URI запросов:</strong>
      * <ul>
      * <li>DELETE http://example.com/rest/api/user/watch/space/SPACEKEY</li>
      * <li>DELETE http://example.com/rest/api/user/watch/space/SPACEKEY?username=jblogs</li>
      * <li>DELETE http://example.com/rest/api/user/watch/space/SPACEKEY?key=ff8080815a58e24c015a58e263710000</li>
      * </ul>
-     * <p>
+     * <br>
      * <strong>Дополнительные параметры</strong>
      * <ul>
      * <li>key (String) -- Optional -- userkey по которому система найдёт пользователя, которого мы хотим удалить из списка наблюдателей</li>
      * <li>username (String) -- Optional -- username по которому система найдёт пользователя, которого мы хотим удалить из списка наблюдателей</li>
      * <li>contentType (String) -- Optional -- тип контента для которого мы хотим удалить наблюдателя? todo протестировать как работает этот параметр, уточнить
      * </li>
-     * </ul>
-     * <br>
-     * <h2><strong>Responses:</strong></h2>
-     * <strong>STATUS 204</strong> -- application/json, такой ответ будет получен, если пользователь успешно удален из списка наблюдателей указанной вами области (Space)
+	 * </ul>
 	 * <br>
-	 * <strong>STATUS 404</strong> -- такой код будет возвращён, если для указанного ключа области (space key) не найдена область или если выполняющий запрос пользователь не имеет достаточных прав доступа для выполнения данной операции
+	 * <h2><strong>Responses:</strong></h2>
+	 * <strong>STATUS 204</strong> -- application/json, такой ответ будет получен, если пользователь успешно удален из списка наблюдателей указанной вами области (Space)
      * <br>
+     * <strong>STATUS 404</strong> -- такой код будет возвращён, если для указанного ключа области (space key) не найдена область или если выполняющий запрос пользователь не имеет достаточных прав доступа для выполнения данной операции
+     * <br>
+     *
+     * @param spaceKey
+     * 		ключ области
+     * @param params
+     * 		дополнительные парамеры запроса
      *
      * @return пустой ответ
      *
@@ -457,14 +476,14 @@ public interface ConfluenceApi
 	 * <em>Обратите внимание, что только администраторы Confluence могут добавлять в наблюдатели не только себя, но и <strong>других</strong> пользователей системы.
 	 * </em>
 	 * <br>
-	 * <p>
+	 * <br>
 	 * <strong>Примеры URI запросов:</strong>
 	 * <ul>
 	 * <li>http://example.com/rest/api/user/watch/space/SPACEKEY</li>
 	 * <li>http://example.com/rest/api/user/watch/space/SPACEKEY?username=jblogs</li>
 	 * <li>http://example.com/rest/api/user/watch/space/SPACEKEY?key=ff8080815a58e24c015a58e263710000</li>
 	 * </ul>
-	 * <p>
+	 * <br>
 	 * <strong>Дополнительные параметры</strong>
 	 * <ul>
 	 * <li>key (String) -- Optional -- userkey по которому система найдёт пользователя, для которого мы хотим узнать статус наблюдателя (true или false - является наблюдателем или нет)</li>
@@ -483,7 +502,8 @@ public interface ConfluenceApi
 	 * </PRE></blockquote>
 	 * <strong>STATUS 404</strong> -- такой код будет возвращён, если для указанного ключа области (space key) не найдена область или если выполняющий запрос пользователь не имеет достаточных прав доступа для выполнения данной операции
 	 * <br>
-	 *
+	 * @param spaceKey ключ области
+	 * @param params дополнительные параметры запроса
 	 * @return пустой ответ
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
@@ -502,6 +522,7 @@ public interface ConfluenceApi
 	 * <br>
 	 *
 	 * @param contentId
+	 * 		идентификатор конента
 	 *
 	 * @return todo дописать
 	 *
@@ -517,7 +538,9 @@ public interface ConfluenceApi
 	 * <br>
 	 *
 	 * @param contentId
+	 * 		идентификатор контента
 	 * @param userKey
+	 * 		ключ, по которому мы можем идентфицировать пользователя
 	 *
 	 * @return todo дописать
 	 *
@@ -534,7 +557,9 @@ public interface ConfluenceApi
 	 * <br>
 	 *
 	 * @param contentId
+	 * 		идентификатор контента
 	 * @param username
+	 * 		имя пользователя
 	 *
 	 * @return todo дописать
 	 *
@@ -562,6 +587,9 @@ public interface ConfluenceApi
 	 * <br>
 	 *
 	 * @param content
+	 * 		объект, содержащий данные элемента контента
+	 * @param param
+	 * 		дополнительные параметры запроса
 	 *
 	 * @return todo дописать
 	 *
@@ -613,9 +641,9 @@ public interface ConfluenceApi
 	 * Example request URI(s):
 	 * <br>
 	 * <strong>
-http://example.com/rest/api/content?spaceKey=TST&title=Cheese&expand=space,body.view,version,container
+http://example.com/rest/api/content?spaceKey=TST&amp;title=Cheese&amp;expand=space,body.view,version,container
 	 <br>
-http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&postingDay=2014-02-13&expand=space,body.view,version,container
+http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bacon&amp;postingDay=2014-02-13&amp;expand=space,body.view,version,container
 	 * </strong>
 	 *
 	 * <br>
@@ -631,7 +659,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 * </li>
 	 * <li>start (int) - the start point of the collection to return</li>
 	 * <li>limit (int, default:<strong>25</strong>) - the limit of the number of items to return, this may be restricted by fixed system limits</li>
-	 * @param params
+	 * @param params дополнительные параметры запроса
 	 * @return todo дописать
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
@@ -642,19 +670,19 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	//@formatter:off
 	/**
 	 * Updates a piece of Content, including changes to content status
-	 * <p>
+	 * <br>
 	 * Чтобы обновить элемент контента, вы должны увеличить номер версии,
-	 * <p>
+	 * <br>
 	 * задавая номер версии, которую сейчас создаёте.
-	 * <p>
+	 * <br>
 	 * Свойство title может быть обновлено для всего контента.
-	 * <p>
+	 * <br>
 	 * Тело может быть обновлено для всего контента, у которого есть тело (не вложения!).
-	 * <p>
+	 * <br>
 	 * Например, чтобы обновить содержимое blogpost,
-	 * <p>
+	 * <br>
 	 * имеющего в настоящее время версию 1:
-	 * <p>
+	 * <br>
 	 * PUT /rest/api/content/456
 	 * todo доделать вставку примеров кода в документацию! (сейчас код не форматирован а склеивается в одну строку)
 
@@ -688,7 +716,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 * и сделаете ее дочерней страницей от страницы с идентфикатором 789,
 	 * как на примере ниже:
 	 * <strong>PUT /rest/api/content/456</strong>
-	 * <p><blockquote>
+	 * <br><blockquote>
 	 * <PRE>
 	 *
 {
@@ -703,7 +731,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
     "type": "page",
     "body": {
         "storage": {
-            "value": "<p>New page data.</p>",
+            "value": "&lt;p&gt;New page data.&lt;/p&gt;",
             "representation": "storage"
         }
     }
@@ -729,7 +757,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 * Пример запроса на удаление черновика:
 	 *<br>
 	 *<strong>PUT: http://localhost:9096/confluence/rest/api/content/2149384202?status=draft</strong>
-	 *<p><blockquote>
+	 *<br><blockquote>
 	 *<PRE>
 {
     "id": "2149384202",
@@ -744,7 +772,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
     "title": "page title",
     "body": {
         "storage": {
-            "value": "<p>New page data.</p>",
+            "value": "&lt;p&gt;New page data.&lt;/p&gt;",
             "representation": "storage"
         }
     }
@@ -763,7 +791,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 *<br>
 	 * <strong>Пример</strong>
 	 *
-	 * <p><blockquote>
+	 * <br><blockquote>
 	 * <PRE>
 {
     "id": "3604482",
@@ -785,7 +813,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
     "descendants": {},
     "body": {
         "storage": {
-            "value": "<p>This is the updated text for the new page</p>",
+            "value": "&lt;p&gt;This is the updated text for the new page&lt;/p&gt;",
             "representation": "storage"
         }
     },
@@ -796,12 +824,12 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 </PRE>
 	 </blockquote>
 	 
-	 <p>
+	 <br>
 	 *
 	 * <strong>Ответы</strong>
 	 * 200 - application/json Returns a full JSON representation of a piece of content
 	 
-	 <p>
+	 <br>
 	 
 	 
 	 <blockquote>
@@ -906,7 +934,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 *
 	 * @param contentId идентификатор контента
 	 * @param params параметры
-	 * @return обновлённый контент ??
+	 * @return объект содержащий данные обновленного контента
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
 	//@formatter:on
@@ -919,11 +947,8 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 * Удаляет контент имеющий указанный идентификатор
 	 * <br>
 	 *
-	 * @param contentId
-	 * 		идентификатор контента
-	 *
+	 * @param contentId идентификатор контента
 	 * @return todo дописать
-	 *
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
 	@DELETE("/wiki/rest/api/content/{contentId}")
@@ -933,11 +958,8 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 * Возвращает историю от выбранного элемента контента
 	 * <br>
 	 *
-	 * @param contendId
-	 * 		идентификатор контента
-	 *
+	 * @param contendId идентификатор контента
 	 * @return коллекция истории контента
-	 *
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
 	//todo дописать документацию к методу
@@ -975,15 +997,10 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 * Это позволит работать плагинам во время периода миграции.
 	 * <br>
 	 *
-	 * @param contentId
-	 * 		идентификатор контента
-	 * @param version
-	 * 		версия контента
-	 * @param hash
-	 * 		хеш макроса
-	 *
+	 * @param contentId идентификатор контента
+	 * @param version версия контента
+	 * @param hash хеш макроса
 	 * @return todo дописать
-	 *
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
 	@GET("/wiki/rest/api/content/{contentId}/history/{version}/macro/hash/{hash}")
@@ -996,66 +1013,66 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 * <br>
 	 * Этот функция в основном используется connect-приложениями
 	 * <br>
-	 * которым необходимо тело макроса для того чтобы выполнить свою работу
-	 * <br>
-	 * Когда контент создан, если macroId не указан,
-	 * <br>
-	 * то Confluence будет генерировать случайный id.
-	 * <br>
-	 * Идентификатор (id) сохраняется, когда сохраняется контент
-	 * <br>
-	 * и может быть изменен Confluence, если имеются конфликтующие идентификаторы
-	 * <br>
-	 * Чтобы сохранить обратную совместимость, этот ресурс также будет матчить hash of the macro body,
-	 * <br>
-	 * даже если присутствует macroId.
+     * которым необходимо тело макроса для того чтобы выполнить свою работу
+     * <br>
+     * Когда контент создан, если macroId не указан,
+     * <br>
+     * то Confluence будет генерировать случайный id.
+     * <br>
+     * Идентификатор (id) сохраняется, когда сохраняется контент
+     * <br>
+     * и может быть изменен Confluence, если имеются конфликтующие идентификаторы
+     * <br>
+     * Чтобы сохранить обратную совместимость, этот ресурс также будет матчить hash of the macro body,
+     * <br>
+     * даже если присутствует macroId.
 	 * <br>
 	 * Эта проверка станет излишней так как страницы получают macroId сгенерированный для них
-	 * <br>
-	 * и прозрачно распространяемый на все экземпляры (all instances).
-	 * <br>
-	 *
-	 * @param contentId
-	 * 		идентификатор контента
-	 * @param version
-	 * 		версия контента
-	 * @param macroId
-	 * 		идентификатор макроса
-	 *
-	 * @return контейнер, содержащий список элементов контента
-	 *
-	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
-	 */
+     * <br>
+     * и прозрачно распространяемый на все экземпляры (all instances).
+     * <br>
+     *
+     * @param contentId
+     * 		идентификатор контента
+     * @param version
+     * 		версия контента
+     * @param macroId
+     * 		идентификатор макроса
+     *
+     * @return контейнер, содержащий список элементов контента
+     *
+     * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
+     */
 	@GET("/wiki/rest/api/content/{contentId}/history/{version}/macro/id/{macroId}")
 	Call<Macros> getContentMacroBodyByMacroId(final @Path("contentId") String contentId,
 	                                          final @Path("version") String version,
 	                                          final @Path("macroId") String macroId);
 	
 	/**
-	 * Получить список элементов контента,
-	 * используя для запроса Confluence Query Language (CQL)
-	 *
-	 * @param cql
-	 * 		текст запроса на Confluence Quiery Language
-	 * @param params
-	 * 		дополнительные параметры для поиска
-	 *
-	 * @return объект-контейнер, внутри которого находится коллекция найденных элементов контента
-	 *
-	 * @see <a href="https://developer.atlassian.com/display/CONFDEV/Advanced+Searching+using+CQL">
-	 * Advanced searching using CQL
-	 * </a>
-	 * <br>
-	 * Дополнительные параметры:
-	 * <ul>
-	 * <li>cql (String) - задаётся отдельным параметром метода</li>
-	 * <li>cqlcontext (String) - the context to execute a cql search in, this is the json serialized form of SearchContext</li>
-	 * <li>expand (String) - a comma separated list of properties to expand on the content.</li>
-	 * <li>start (int) - the start point of the collection to return</li>
-	 * <li>limit (int, default:<strong>25</strong>) - the limit of the number of items to return, this may be restricted by fixed system limits </li>
-	 * </ul>
-	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
-	 */
+     * Получить список элементов контента,
+     * используя для запроса Confluence Query Language (CQL)
+     *
+     * @param cql
+     * 		текст запроса на Confluence Quiery Language
+     * @param params
+     * 		дополнительные параметры для поиска
+     *
+     * @return объект-контейнер, внутри которого находится коллекция найденных элементов контента
+     *
+     * @see <a href="https://developer.atlassian.com/display/CONFDEV/Advanced+Searching+using+CQL">
+     * Advanced searching using CQL
+     * </a>
+     * <br>
+     * Дополнительные параметры:
+     * <ul>
+     * <li>cql (String) - задаётся отдельным параметром метода</li>
+     * <li>cqlcontext (String) - the context to execute a cql search in, this is the json serialized form of SearchContext</li>
+     * <li>expand (String) - a comma separated list of properties to expand on the content.</li>
+     * <li>start (int) - the start point of the collection to return</li>
+     * <li>limit (int, default:<strong>25</strong>) - the limit of the number of items to return, this may be restricted by fixed system limits </li>
+     * </ul>
+     * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
+     */
 	@GET("/wiki/rest/api/content/search")
 	Call<ContentContainter> getContentSearch(final @Query("cql") String cql,
 	                                         final @QueryMap Map<String, String> params);
@@ -1066,113 +1083,122 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	//----------------------------------------------------------------------------------------
 	
 	/**
-	 * Fetch a paginated list of AuditRecord instances dating back to a certain time
-	 * <br>
-	 * <strong>Дополнительные параметры</strong>
-	 * <ul>
-	 * <li>startDate (String) -- </li>
-	 * <li>endDate (String) -- </li>
-	 * <li>start (int) -- where to start within results set</li>
-	 * <li>limit (int) -- Default : <strong>1000</strong> -- the maximum results to fetch</li>
+     * Fetch a paginated list of AuditRecord instances dating back to a certain time
+     * <br>
+     * <strong>Дополнительные параметры</strong>
+     * <ul>
+     * <li>startDate (String) -- </li>
+     * <li>endDate (String) -- </li>
+     * <li>start (int) -- where to start within results set</li>
+     * <li>limit (int) -- Default : <strong>1000</strong> -- the maximum results to fetch</li>
 	 * <li>searchString (String) -- </li>
 	 * </ul>
 	 * <br>
 	 * <strong>Пример</strong>
-	 *
-	 * @return todo дописать
-	 *
-	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
-	 */
+     *
+     * @param params
+     * 		дополнительные параметры запроса
+     *
+     * @return todo дописать
+     *
+     * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
+     */
 	@GET("/wiki/rest/api/audit")
 	Call<AuditResultList> getAudit(final @QueryMap Map<String, String> params);
 	
 	/**
-	 * Store record
-	 * <br>
+     * Store record
+     * <br>
 	 *
 	 * @param audit
-	 *
-	 * @return todo дописать
-	 *
-	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
-	 */
+     * 		объект-представление записи аудита Confluence
+     *
+     * @return todo дописать
+     *
+     * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
+     */
 	@POST("/wiki/rest/api/audit")
 	Call<Audit> createAudit(final @Body Audit audit);
 	
 	/**
-	 * <br>
-	 * <strong>Дополнительные параметры</strong>
+     * <br>
+     * <strong>Дополнительные параметры</strong>
 	 * <ul>
-	 * <li>startDate (String) -- </li>
-	 * <li>endDate (String) -- </li>
+     * <li>startDate (String) -- </li>
+     * <li>endDate (String) -- </li>
 	 * <li>searchString (String) -- </li>
 	 * <li>format (String) -- Default: <strong>csv</strong> -- </li>
-	 * </ul>
-	 * <br>
-	 * <strong>Responses</strong>
-	 * <ul>
-	 * <li>application/zip</li>
-	 * <li>text/csv</li>
-	 * </ul>
-	 *
-	 * @param params
-	 *
-	 * @return todo дописать
-	 *
-	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
-	 */
+     * </ul>
+     * <br>
+     * <strong>Responses</strong>
+     * <ul>
+     * <li>application/zip</li>
+     * <li>text/csv</li>
+     * </ul>
+     *
+     * @param acceptHeader
+     * 		в этом параметре мы передаем содеражимое заголовка Accept - отправляемого на сервер запроса
+     * @param params
+     * 		список дополнительных параметров
+     *
+     * @return todo дописать
+     *
+     * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
+     */
 	@Streaming
 	@GET("/wiki/rest/api/audit/export")
 	Call<ResponseBody> exportAudit(@Header("Accept") String acceptHeader, final @QueryMap Map<String, String> params);
 	
 	/**
-	 * Получаем текущий период хранения (Fetches the current retention period)
-	 * <p>
-	 * <strong>Responses</strong>
-	 * application/json
-	 *
-	 * @return todo дописать
-	 *
+     * Получаем текущий период хранения (Fetches the current retention period)
+     * <br>
+     * <strong>Responses</strong>
+     * application/json
+     *
+     * @return todo дописать
+     *
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
-	 */
+     */
 	@GET("/wiki/rest/api/audit/retention")
 	Call<RetentionPeriod> getRetentionPeriodOfAudit();
 	
 	/**
-	 * Устанавливаем текущий период хранения (Set the retention period to a new value.)
-	 * <p>
-	 * Can throw ServiceException if the retention period is too long
-	 *
-	 * @param newRetentionPeriod
-	 *
-	 * @return todo дописать
-	 *
-	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
-	 */
+     * Устанавливаем текущий период хранения (Set the retention period to a new value.)
+     * <br>
+     * Can throw ServiceException if the retention period is too long
+     *
+     * @param newRetentionPeriod
+     * 		объект-представление содержащий данные для установки текущего периода хранения
+     *
+     * @return todo дописать
+     *
+     * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
+     */
 	@PUT("/wiki/rest/api/audit/retention")
 	Call<RetentionPeriod> setRetentionPeriodOfAudit(final @Body RetentionPeriod newRetentionPeriod);
 	
 	/**
-	 * Fetch a paginated list of AuditRecord instances dating back to a certain time
+     * Fetch a paginated list of AuditRecord instances dating back to a certain time
 	 * <br>
 	 * <strong>Дополнительные параметры</strong>
-	 * <ul>
-	 * <li>number (long) -- Default: <strong>3</strong> -- the amount of time periods</li>
-	 * <li>units (String) -- the units to use for the time periods eg. 'days', 'months' etc</li>
-	 * <li>start (int) -- where to start within results set</li>
-	 * <li>limit (int) -- Default: <strong>1000</strong> -- the maximum results to fetch</li>
-	 * <li>searchString (String) -- </li>
-	 * </ul>
-	 * <br>
-	 * <p>
-	 * <strong>Responses</strong>
-	 * application/json
-	 *
-	 * @param params
-	 *
-	 * @return todo дописать
-	 *
-	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
+     * <ul>
+     * <li>number (long) -- Default: <strong>3</strong> -- the amount of time periods</li>
+     * <li>units (String) -- the units to use for the time periods eg. 'days', 'months' etc</li>
+     * <li>start (int) -- where to start within results set</li>
+     * <li>limit (int) -- Default: <strong>1000</strong> -- the maximum results to fetch</li>
+     * <li>searchString (String) -- </li>
+     * </ul>
+     * <br>
+     * <br>
+     * <strong>Responses</strong>
+     * application/json
+     *
+     * @param params
+     * 		дополнительные параметры запроса
+     *
+     * @return todo дописать
+     *
+     * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
 	@GET("/wiki/rest/api/audit/since")
 	Call<AuditResultList> getAuditSince(final @QueryMap Map<String, String> params);
@@ -1184,34 +1210,34 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	//@formatter:off
 	/**
 	 * Возвращает map прямых (непосредственных) дочерних элементов (child) для некоторого элемента контента.
-	 * <p>
+	 * <br>
 	 * Контент может иметь несколько типов дочерних элементов,
-	 * <p>
+	 * <br>
 	 * которые могут также являться страницами, но кроме того это могут быть комментарии
-	 * <p>
+	 * <br>
 	 * и вложения.
-	 * <p>
+	 * <br>
 	 * ContentType дочерних элементов, которые будут возвращены запросом,
-	 * <p>
+	 * <br>
 	 * описывается в query параметре запроса - expand
-	 * <p>
+	 * <br>
 	 * Этот параметр может включать развёртывание множества дочерних типов.
-	 * <p>
+	 * <br>
 	 * Если в параметр expand не включены никакие типы,
-	 * <p>
+	 * <br>
 	 * возвращаемая map будет просто перечислять дочерние типы,
-	 * <p>
+	 * <br>
 	 * доступные для развёртывания для элемента контента Content,
-	 * <p>
+	 * <br>
 	 * на который (элемент контента) указывает параметр @Path - contentId.
-	 * <p>
+	 * <br>
 	 * <strong>Примеры URI запросов:</strong>
 	 * <ul>
 	 *     <li>http://example.com/rest/api/content/1234/child</li>
 	 *     <li>http://example.com/rest/api/content/1234/child?expand=page.body.VIEW</li>
-	 *     <li>http://example.com/rest/api/content/1234/child?expand=page&start=20&limit=10</li>
+	 *     <li>http://example.com/rest/api/content/1234/child?expand=page&amp;start=20&amp;limit=10</li>
 	 * </ul>
-	 * <p>
+	 * <br>
 	 * <strong>Дополнительные параметры</strong>
 	 * <ul>
 	 *     <li>expand (String) -- разделённый запятыми список свойств, для разворачивания (expand) дочерних элементов</li>
@@ -1223,7 +1249,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 *<h2><strong>Responses</strong></h2>
 	 * <strong>STATUS 200</strong> -- возвращает JSON-map,
 	 * представляющую собой несколько упорядоченных наборов дочерних элементов контента
-	 * <p>
+	 * <br>
 	 * с ключами по типу содержимого
 	 * <blockquote><PRE>
 {
@@ -1324,7 +1350,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 }
 	 * </PRE></blockquote>
 	 *
-	 * <p>
+	 * <br>
 	 * <strong>STATUS 404</strong> -- такой статус вы получите, если не существует элемента контента
 	 * с указанным вами идентификатором
 	 * <br>
@@ -1341,22 +1367,22 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	//@formatter:off
 	/**
 	 * Метод возвращает непосредственные дочерние элементы для данного элемента контента.
-	 * <p>
+	 * <br>
 	 * Отобранные дочерние элементы будут ограничены одним типом.
-	 * <p>
+	 * <br>
 	 * Тип контента (или типы) - ContentType - возвращаемых дочерних элементов,
-	 * <p>
+	 * <br>
 	 * задаётся параметром "type" заданным в пути (path) запроса.
-	 * <p>
+	 * <br>
 	 * <strong>Примеры URI запросов:</strong>
 	 * <ul>
 	 *     <li>http://example.com/rest/api/content/1234/child/page</li>
 	 *     <li>http://example.com/rest/api/content/1234/child/comment</li>
 	 *     <li>http://example.com/rest/api/content/1234/child/page?expand=body.view</li>
-	 *     <li>http://example.com/rest/api/content/1234/child/comment?start=20&limit=10</li>
+	 *     <li>http://example.com/rest/api/content/1234/child/comment?start=20&amp;limit=10</li>
 	 * </ul>
 	 *
-	 * <p>
+	 * <br>
 	 * <strong>Дополнительные параметры</strong>
 	 * <ul>
 	 *     <li>expand (String) -- разделённый запятыми список свойств, для разворачивания (expand) дочерних элементов</li>
@@ -1368,7 +1394,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 *<h2><strong>Responses</strong></h2>
 	 * <strong>STATUS 200</strong> -- возвращает JSON-map,
 	 * представляющую собой несколько упорядоченных наборов дочерних элементов контента
-	 * <p>
+	 * <br>
 	 * с ключами по типу содержимого
 	 *
 	 * <blockquote><PRE>
@@ -1470,7 +1496,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 }
 	 </PRE></blockquote>
 	 *
-	 * <p>
+	 * <br>
 	 * <strong>STATUS 404</strong> -- такой статус вы получите, если не существует элемента контента
 	 * с указанным вами идентификатором
 	 * <br>
@@ -1489,13 +1515,13 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	//@formatter:off
 	/**
 	 * Метод возвращает непосредственные дочерние элементы для данного элемента контента.
-	 * <p>
+	 * <br>
 	 * Отобранные дочерние элементы будут ограничены одним типом.
-	 * <p>
+	 * <br>
 	 * Тип контента (или типы) - ContentType - возвращаемых дочерних элементов,
-	 * <p>
+	 * <br>
 	 * задаётся параметром "type" заданным в пути (path) запроса.
-	 * <p>
+	 * <br>
 	 * <strong>Примеры URI запросов:</strong>
 	 * <ul>
 	 *     <li>http://example.com/rest/api/content/1234/child/page</li>
@@ -1504,7 +1530,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 *     <li>http://example.com/rest/api/content/1234/child/comment?start=20&limit=10</li>
 	 * </ul>
 	 *
-	 * <p>
+	 * <br>
 	 * <strong>Дополнительные параметры</strong>
 	 * <ul>
 	 *     <li>expand (String) -- разделённый запятыми список свойств, для разворачивания (expand) дочерних элементов</li>
@@ -1516,7 +1542,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 *<h2><strong>Responses</strong></h2>
 	 * <strong>STATUS 200</strong> -- возвращает JSON-map,
 	 * представляющую собой несколько упорядоченных наборов дочерних элементов контента
-	 * <p>
+	 * <br>
 	 * с ключами по типу содержимого
 	 *
 	 * <blockquote><PRE>
@@ -1618,7 +1644,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 }
 	 </PRE></blockquote>
 	 *
-	 * <p>
+	 * <br>
 	 * <strong>STATUS 404</strong> -- такой статус вы получите, если не существует элемента контента
 	 * с указанным вами идентификатором
 	 * <br>
@@ -1635,13 +1661,13 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	//@formatter:off
 	/**
 	 * Метод возвращает непосредственные дочерние элементы для данного элемента контента.
-	 * <p>
+	 * <br>
 	 * Отобранные дочерние элементы будут ограничены одним типом.
-	 * <p>
+	 * <br>
 	 * Тип контента (или типы) - ContentType - возвращаемых дочерних элементов,
-	 * <p>
+	 * <br>
 	 * задаётся параметром "type" заданным в пути (path) запроса.
-	 * <p>
+	 * <br>
 	 * <strong>Примеры URI запросов:</strong>
 	 * <ul>
 	 *     <li>http://example.com/rest/api/content/1234/child/page</li>
@@ -1650,7 +1676,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 *     <li>http://example.com/rest/api/content/1234/child/comment?start=20&limit=10</li>
 	 * </ul>
 	 *
-	 * <p>
+	 * <br>
 	 * <strong>Дополнительные параметры</strong>
 	 * <ul>
 	 *     <li>expand (String) -- разделённый запятыми список свойств, для разворачивания (expand) дочерних элементов</li>
@@ -1662,7 +1688,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 *<h2><strong>Responses</strong></h2>
 	 * <strong>STATUS 200</strong> -- возвращает JSON-map,
 	 * представляющую собой несколько упорядоченных наборов дочерних элементов контента
-	 * <p>
+	 * <br>
 	 * с ключами по типу содержимого
 	 *
 	 * <blockquote><PRE>
@@ -1764,7 +1790,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 }
 	 </PRE></blockquote>
 	 *
-	 * <p>
+	 * <br>
 	 * <strong>STATUS 404</strong> -- такой статус вы получите, если не существует элемента контента
 	 * с указанным вами идентификатором
 	 * <br>
@@ -1781,17 +1807,17 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	//@formatter:off
 	/**
 	 * Возвращает комментарии для заданного элемента контента.
-	 * <p>
+	 * <br>
 	 * <strong>Примеры URI запросов:</strong>
 	 * <ul>
 	 *     <li>http://example.com/rest/api/content/1234/child/comment</li>
 	 *     <li>http://example.com/rest/api/content/1234/child/comment?expand=body.view</li>
 	 *     <li>http://example.com/rest/api/content/1234/child/comment?start=20&limit=10</li>
-	 *     <li>http://example.com/rest/api/content/1234/child/comment?location=footer&location=inline&location=resolved</li>
+	 *     <li>http://example.com/rest/api/content/1234/child/comment?location=footer&amp;location=inline&amp;location=resolved</li>
 	 *     <li>http://example.com/rest/api/content/1234/child/comment?expand=extensions.inlineProperties,extensions.resolution</li>
 	 * </ul>
-	 * <p>
-	 * <p>
+	 * <br>
+	 * <br>
 	 * <strong>Дополнительные параметры</strong>
 	 * <ul>
 	 *     <li>expand (String) -- разделённый запятыми список свойств, для разворачивания (expand) дочерних элементов. Мы также можем указать некоторые расширения (extensions) такие как extensions.inlineProperties (для получения inline-свойств специфичных для комментариев) или можем указать extensions.resolution для получения resolution status для каждого комментария в результатах</li>
@@ -1805,7 +1831,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 *<h2><strong>Responses</strong></h2>
 	 * <strong>STATUS 200</strong> -- возвращает JSON-map,
 	 * представляющую собой несколько упорядоченных наборов дочерних элементов контента
-	 * <p>
+	 * <br>
 	 * с ключами по типу содержимого
 	 *
 	 *<blockquote><PRE>
@@ -1907,7 +1933,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 }
 	 *</PRE></blockquote>
 	 *
-	 * <p>
+	 * <br>
 	 * <strong>STATUS 404</strong> -- такой статус вы получите, если не существует элемента контента
 	 * с указанным вами идентификатором
 	 * <br>
@@ -1970,36 +1996,36 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 * <strong>
 	 * Примеры:
 	 * </strong>
-	 * <p>
+	 * <br>
 	 * Простой пример для добавления вложения с именем "myfile.txt" к контейнеру с идентификатором
 	 * "123" и включенным комментарием:
 	 * <PRE>
 	 * curl -D- -u admin:admin -X POST -H "X-Atlassian-Token: nocheck" -F "file=@myfile.txt" -F "comment=This is my File" http://myhost/rest/api/content/123/child/attachment
 	 * </PRE>
-	 * <p>
+	 * <br>
 	 * Пример добавления вложения с именем "myfile.txt" к контейнеру с идентификатором "123",
 	 * с добавлением комментария,
 	 * и с установкой флага minorEdits в значение true:
 	 * <PRE>
 	 * curl -D- -u admin:admin -X POST -H "X-Atlassian-Token: nocheck" -F "file=@myfile.txt" -F "minorEdit=true" -F "comment=This is my File" http://myhost/rest/api/content/123/child/attachment
 	 * </PRE>
-	 * <p>
+	 * <br>
 	 * Пример присоединения только файла - без комментария:
 	 * <PRE>
 	 * curl -D- -u admin:admin -X POST -H "X-Atlassian-Token: nocheck" -F "file=@myfile.txt" http://myhost/rest/api/content/123/child/attachment
 	 * </PRE>
-	 * <p>
+	 * <br>
 	 * Пример запрашиваемого URI:
 	 * <PRE>
 	 * http://example.com/rest/api/content/1234/child/attachment
 	 * </PRE>
-	 * <p>
+	 * <br>
 	 * <strong>Дополнительные параметры</strong>
 	 * <ul>
 	 *     <li>status (String) -- Default: <strong>current</strong> -- строка, содержащая статус контейнера к которому мы хотим добавить вложение, поддерживаются 2-ва значения: current или draft</li>
 	 * </ul>
 	 *
-	 * <p>
+	 * <br>
 	 *
 	 *<h2><strong>Responses</strong></h2>
 	 * <strong>STATUS 200</strong> -- application/json
@@ -2137,9 +2163,9 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 }
 	 *</PRE></blockquote>
 	 *
-	 * <p>
+	 * <br>
 	 * <strong>STATUS 403</strong> -- такой статус вы получите, если вложения отключены или вы не имеете разрешения на добавление вложения к указанному вами контенту
-	 * <p>
+	 * <br>
 	 * <strong>STATUS 404</strong> -- такой статус вы получите, запрашиваемый контент не найден,
 	 * у пользователя нет разрешения на просмотр, или если размер вложения превышает максимально допустимый (установленный в настройках Confluence)
 	 * <br>
@@ -2171,7 +2197,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 *     <li>комментария</li>
 	 *     <li>родительского контейнера вложения</li>
 	 * </ul>
-	 * <p>
+	 * <br>
 	 * <strong>Примеры URI запроса:</strong>
 	 * <ul>
 	 *     <li>http://example.com/rest/api/content/1234/child/attachment/5678</li>
@@ -2331,16 +2357,16 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 }
 	 </PRE></blockquote>
 	 *
-	 * <p>
+	 * <br>
 	 * <strong>STATUS 400</strong> -- такой статус вы получите, если id вложения (attachment id) или версия вложения - не валидны
 	 * <br>
-	 * <p>
+	 * <br>
 	 * <strong>STATUS 403</strong> -- такой статус вы получите, если вам не разрешено обновлять вложение или помещать это вложение в другой контейнер
 	 * <br>
-	 * <p>
+	 * <br>
 	 * <strong>STATUS 404</strong> -- такой статус вы получите, если не существует вложения с таким идентификатором, который вы указали (attachment id)
 	 * <br>
-	 * <p>
+	 * <br>
 	 * <strong>STATUS 409</strong> -- такой статус вы получите, если версия прилагаемого вложения, не совпадает с точной версией вложения (с номером версии вложения который хранится в базе данных Confluence)
 	 * <br>
 	 * @param parentContentId идентификатор контейнера в котором находится вложение (это может быть страница, например)
@@ -2364,7 +2390,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 * </strong>
 	 * <br>
 	 * Функция обновляет двоичные данные вложения (тело вложенного файла)
-	 * <p>
+	 * <br>
 	 * <br>
 	 * И также, возможно, комментарий и поле minor edit todo уточнить, зачем нужно поле minor edit
 	 * Комментарий будет потом отображаться при просмотре вложения, например в истории
@@ -2373,10 +2399,10 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 * новое имя файла и новый тип содержимого.
 	 * При обновлении двоичных данных, комментарий связанный с файлом
 	 * with the field that specifies if it's a minor edit can be updated as well, but are not required.
-	 * <p>
+	 * <br>
 	 * Если обновление считается незначительным <strong>(minor edit)</strong>,
 	 * то уведомления не будут отправляться наблюдателям подписанным на этот контент.
-	 * <p>
+	 * <br>
 	 * Этот ресурс в API Confluence ожидает multipart post.
 	 * <br>
 	 * Media-type multipart/form-data определён в RFC 1867.
@@ -2404,28 +2430,28 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 * <strong>
 	 * Примеры:
 	 * </strong>
-	 * <p>
+	 * <br>
 	 * Простой пример для добавления файла с именем "myfile.txt" к вложению с идентификатором
 	 * "456", находящемуся в контейнере с идентификатором "123", с обновляемым комментарием,
 	 * с ключом minorEdit установленным в true:
 	 * <PRE>
 	 * curl -D- -u admin:admin -X POST -H "X-Atlassian-Token: nocheck" -F "file=@myfile.txt" -F "minorEdit=true" -F "comment=This is my updated File" http://myhost/rest/api/content/123/child/attachment/456/data
 	 * </PRE>
-	 * <p>
+	 * <br>
 	 * Пример добавления загрузки того же файла, но без комментария
 	 * <PRE>
 	 * curl -D- -u admin:admin -X POST -H "X-Atlassian-Token: nocheck" -F "file=@myfile.txt" http://myhost/rest/api/content/123/child/attachment/456/data
 	 * </PRE>
-	 * <p>
-	 * <p>
+	 * <br>
+	 * <br>
 	 * Пример запрашиваемого URI:
 	 * <PRE>
 	 * http://example.com/rest/api/content/1234/child/attachment/5678/data
 	 * </PRE>
-	 * <p>
+	 * <br>
 	 * <h2><strong>Responses</strong></h2>
 	 * <strong>STATUS 200</strong> -- application/json
-	 * <p>
+	 * <br>
 	 * <blockquote><PRE>
 {
     "results": [
@@ -2558,10 +2584,10 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
     }
 }
 	 * </PRE></blockquote>
-	 * <p>
-	 * <p>
+	 * <br>
+	 * <br>
 	 * <strong>STATUS 400</strong> -- такой статус вы получите, если идентификатор вложения не валиден <strong>следует обратить внимание что id вложения должен иметь префикс att, например att1353453</strong>
-	 * <p>
+	 * <br>
 	 * <strong>STATUS 404</strong> -- такой статус вы получите, если по указанному идентификатору не удалось найти вложение
 	 * <br>
 	 *
@@ -2614,14 +2640,14 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 * которые могут быть expanded для элемента на контента, на который мы указываем path-параметром "contentId"
 	 * <br>
 	 * В настоящее время поддерживаемыми descendants являются comment descendants относящиеся к non-comment Content.
-	 * <p>
+	 * <br>
 	 * <strong>Примеры URI запросов:</strong>
 	 * <ul>
 	 * <li>http://example.com/rest/api/content/1234/descendant</li>
 	 * <li>http://example.com/rest/api/content/1234/descendant?expand=comment.body.VIEW</li>
 	 * <li>http://example.com/rest/api/content/1234/descendant?expand=comment</li>
 	 * </ul>
-	 * <p>
+	 * <br>
 	 * <strong>Дополнительные параметры</strong>
 	 * <ul>
 	 *     <li>expand (String) -- разделённый запятыми список свойств, для разворачивания (expand) дочерних элементов <br>
@@ -2729,7 +2755,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
     }
 }
 	 * </PRE></blockquote>
-	 * <p>
+	 * <br>
 	 * <strong>STATUS 404</strong> -- такой статус вы получите, если по указанному идентификатору элемент контента не найден, или же, если пользователь не имеет разрешения на просмотр содержимого
 	 * <br>
 	 *
@@ -2750,14 +2776,14 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 * <br>
 	 * Currently the only supported descendants are comment descendants of non-comment Content.
 	 * <br>
-	 * <p>
+	 * <br>
 	 * <strong>Примеры URI запросов:</strong>
 	 * <ul>
 	 * <li>http://example.com/rest/api/content/1234/descendant/comment</li>
 	 * <li>http://example.com/rest/api/content/1234/descendant/comment?expand=body.VIEW</li>
-	 * <li>http://example.com/rest/api/content/1234/descendant/comment?start=20&limit=10</li>
+	 * <li>http://example.com/rest/api/content/1234/descendant/comment?start=20&amp;limit=10</li>
 	 * </ul>
-	 * <p>
+	 * <br>
 	 * <strong>Дополнительные параметры</strong>
 	 * <ul>
 	 *     <li>expand (String) -- разделённый запятыми список свойств, для разворачивания (expand) дочерних элементов <br>
@@ -2867,7 +2893,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
     }
 }
 	 * </PRE></blockquote>
-	 * <p>
+	 * <br>
 	 * <strong>STATUS 404</strong> -- такой статус вы получите, если по указанному идентификатору элемент контента не найден, или же, если пользователь не имеет разрешения на просмотр содержимого
 	 * <br>
 	 *
@@ -2890,13 +2916,13 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	
 	/**
 	 * Возвращает список меток, для указанного элемента контента.
-	 * <p>
+	 * <br>
 	 * <strong>Примеры URI запросов:</strong>
 	 * <ul>
 	 * <li>http://example.com/rest/api/content/1234/label</li>
-	 * <li>http://example.com/rest/api/content/1234/label?prefix=global&start=0&limit=200</li>
+	 * <li>http://example.com/rest/api/content/1234/label?prefix=global&amp;start=0&amp;limit=200</li>
 	 * </ul>
-	 * <p>
+	 * <br>
 	 * <strong>Дополнительные параметры</strong>
 	 * <ul>
 	 * <li>prefix (String) -- префиксы для фильтрации меток с помощью Label.Prefix (смотрите дополнительно)</li>
@@ -3019,7 +3045,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	//@formatter:off
 	/**
 	 * Функция возвращает свойства для указанного элемента контента
-	 * <p>
+	 * <br>
 	 * <strong>Примеры URI запросов:</strong>
 	 * <ul>
 	 * <li>http://example.com/rest/api/content/1234/property/example-property-key?expand=content,version</li>
@@ -3092,7 +3118,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	//@formatter:off
 	/**
 	 * Функция возвращает свойства для указанного элемента контента
-	 * <p>
+	 * <br>
 	 * <strong>Примеры URI запросов:</strong>
 	 * <ul>
 	 * <li>http://example.com/rest/api/content/1234/property/example-property-key?expand=content,version</li>
@@ -3242,8 +3268,6 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	/**
 	 * Функция удаляет свойство заданного элемента контента
 	 * <br>
-	 * </PRE></blockquote>
-	 *
 	 * <h2><strong>Responses:</strong></h2>
 	 * <strong>STATUS 204</strong> -- возвращается, если данное свойство успешно удалено
 	 * <br>
@@ -4616,6 +4640,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 * <ul>
 	 * <li>status (String, default:<strong>draft</strong>) - </li>
 	 * <li>expand (String, default: <strong>body.storage,history,space,version,ancestors</strong>) - </li>
+	 * </ul>
 	 * <br>
 	 *
 	 * <blockquote><PRE>
@@ -5335,6 +5360,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 * <ul>
 	 * <li>status (String, default:<strong>draft</strong>) - </li>
 	 * <li>expand (String, default: <strong>body.storage,history,space,version,ancestors</strong>) - </li>
+	 * </ul>
 	 * <br>
 	 *
 	 * <blockquote><PRE>
@@ -6056,9 +6082,8 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 * <br>
 	 * Не все виды представлений могут быть выполнены в/из другие форматы.
 	 * <br>
-	 * Поддерживаемые преобразования:
-	 * <br>
 	 * <table border="1">
+	 *     <caption><strong>Поддерживаемые преобразования:</strong></caption>
 	 *     <tr>
 	 *         <th>Source Representation</th>
 	 *         <th>Destination Representation Supported</th>
@@ -6093,7 +6118,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 * <h2><strong>Request:</strong></h2>
 	 * Дополнительные параметры:
 	 * <ul>
-	 * <li>expand (String, default:<strong></strong>) - </li>
+	 * <li>expand (String, default:<strong>-</strong>) - </li>
 	 * </ul>
 	 * <em>Тело запроса:</em>
 	 * <blockquote>
@@ -6106,7 +6131,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 * </blockquote>
 	 * <h2><strong>Responses</strong></h2>
 	 * <strong>STATUS 200</strong> --  application/json
-	 * <p>
+	 * <br>
 	 * <blockquote><PRE>
 {
     "value": "&lt;p&gt;Some example body in storage format&lt;/p&gt;",
@@ -6147,7 +6172,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 * <li>http://example.com/confluence/rest/api/user?username=jblogs</li>
 	 * <li>http://example.com/confluence/rest/api/user?key=402880824ff933a4014ff9345d7c0002</li>
 	 * </ul>
-	 * <p>
+	 * <br>
 	 * <strong>Дополнительные параметры</strong>
 	 * <ul>
 	 * <li>key (String) -- userkey по которому система найдёт пользователя, о котором мы хотим получить информацию</li>
@@ -6377,7 +6402,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	/**
 	 * Функция позволяет получить информацию о том, как anonymous представлен в Confluence
 	 * <br>
-	 * <p>
+	 * <br>
 	 * <strong>Примеры URI запросов:</strong>
 	 * <ul>
 	 * <li>http://example.com/confluence/rest/api/user/anonymous</li>
@@ -6418,7 +6443,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 * <ul>
 	 * <li>http://example.com/rest/api/user/current</li>
 	 * </ul>
-	 * <p>
+	 * <br>
 	 * <strong>Дополнительные параметры</strong>
 	 * <ul>
 	 * <li>expand (String) -- можно указать дополнительную связанную информацию о пользователе, которую вы хотите видеть в ответе на запрос.
@@ -6465,13 +6490,13 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	//@formatter:off
 	/**
 	 * Получить разбитую на страницы (paginated) коллекцию групп, членом которых является указанный пользователь
-	 * <p>
+	 * <br>
 	 * <strong>Примеры URI запросов:</strong>
 	 * <ul>
 	 * <li>http://example.com/rest/api/user/memberof?username=jblogs</li>
 	 * <li>http://example.com/rest/api/user/memberof?key=402880824ff933a4014ff9345d7c0002</li>
 	 * </ul>
-	 * <p>
+	 * <br>
 	 * <strong>Дополнительные параметры</strong>
 	 * <ul>
 	 * <li>key (String) -- Optional -- userkey по которому система найдёт пользователя</li>
@@ -6543,7 +6568,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 * <ul>
 	 * <li>http://example.com/rest/experimental/space/TST/property?expand=space,version</li>
 	 * </ul>
-	 * <p>
+	 * <br>
 	 * <strong>Дополнительные параметры</strong>
 	 * <ul>
 	 * <li>expand (String) -- Optional -- Default: <strong>version</strong> можно указать дополнительную связанную информацию об области, которую вы хотите видеть в ответе на запрос.
@@ -6680,10 +6705,10 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 * <ul>
 	 * <li>http://example.com/confluence/rest/api/space/TST/property?expand=space,version</li>
 	 * </ul>
-	 * <p>
+	 * <br>
 	 * <strong>Дополнительные параметры</strong>
 	 * <ul>
-	 * <li>expand (String, Default: <strogn>version</strogn>) -- можно указать дополнительную связанную информацию о свойстве области, которую вы хотите видеть в ответе на запрос
+	 * <li>expand (String, Default: <strong>version</strong>) -- можно указать дополнительную связанную информацию о свойстве области, которую вы хотите видеть в ответе на запрос
 	 * <br>
 	 * <em>Указывать несколько параметров следует в виде списка с разделителями - запятыми</em>.
 	 * </li>
@@ -8130,7 +8155,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	 * <ul>
 	 * <li>http://example.com/confluence/rest/api/accessmode</li>
 	 * </ul>
-	 * <p>
+	 * <br>
 	 * <br>
 	 * <h2><strong>Responses:</strong></h2>
 	 * <strong>STATUS 200</strong> -- application/json
@@ -8151,7 +8176,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	//@formatter:off
 	/**
 	 * Возвращает информацию обо всех отслеживаемых (tracked) длительных (long-running) задачах (task)
-	 * <p>
+	 * <br>
 	 * <strong>Дополнительные параметры</strong>
 	 * <ul>
 	 * <li>expand (String) -- Optional -- можно указать дополнительную связанную информацию о задачах, которые вы хотите видеть в ответе на запрос.
@@ -8237,7 +8262,7 @@ http://example.com/rest/api/content?type=blogpost&spaceKey=TST&title=Bacon&posti
 	//@formatter:off
 	/**
 	 * Возвращает информацию об одной отслеживаемой (tracked) длительной (long-running) задаче (task)
-	 * <p>
+	 * <br>
 	 * <strong>Дополнительные параметры</strong>
 	 * <ul>
 	 * <li>expand (String) -- Optional -- можно указать дополнительную связанную информацию о задачах, которые вы хотите видеть в ответе на запрос.

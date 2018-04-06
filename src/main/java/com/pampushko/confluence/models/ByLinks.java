@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ByLinks extends BaseModel
 {
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("self")
 	String self;

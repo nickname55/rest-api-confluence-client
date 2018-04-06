@@ -13,31 +13,31 @@ public class ChildPage extends BaseModel
 {
 	/**
 	 * todo дописать
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("results")
 	ChildPageContainer[] results;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("start")
 	long start;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("limit")
 	long limit;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("size")
 	long size;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("_links")
 	ChildPageContainerLinks links;

@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * Различные типы контента, доступные при работе с Confluence
- * <p>
+ * <br>
  */
 @Slf4j
 public enum ContentType

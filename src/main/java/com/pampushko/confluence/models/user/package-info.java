@@ -1,5 +1,5 @@
 /**
  * Пакет содержит функции-модели для работы клиента с пользователями Confluence
- * <p>
+ * <br>
  */
 package com.pampushko.confluence.models.user;

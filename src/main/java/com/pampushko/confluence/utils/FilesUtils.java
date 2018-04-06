@@ -24,7 +24,7 @@ public class FilesUtils
 	 * @param body - тело ответа
 	 * @param directoryName - имя каталога в который мы хотим записать файл результата (<strong>без разделителя в конце</strong>)
 	 * @param fileName - имя в который мы хотим поместить результат
-	 * @return
+	 * @return булево значение, если метод завершился успешно, то равно true
 	 */
 	public static boolean writeResponseBodyToDisk(ResponseBody body, final String directoryName, final String fileName)
 	{
@@ -95,7 +95,7 @@ public class FilesUtils
 	 * <br>
 	 * и возвращает имя это директории (<strong>без разделителя в конце</strong>)
 	 * <br>
-	 * @return
+	 * @return имя созданной директории
 	 */
 	public static String getExternalFilesDir()
 	{
@@ -113,7 +113,7 @@ public class FilesUtils
 	 * и возвращает это имя файла
 	 * <br>
 	 * @param contentDispositionHeader
-	 * @return
+	 * @return строка- имя файла
 	 */
 	public static String getFileNameFromContentDispositionHeader(final String contentDispositionHeader)
 	{

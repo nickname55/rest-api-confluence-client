@@ -6,6 +6,6 @@
  * и класс выполняющий настройки Retrofit-та.
  * <br>
  * Также здесь находятся вспомогательные для работы клиента классы Utils, etc.
- * <p>
+ * <br>
  */
 package com.pampushko.confluence.rest;

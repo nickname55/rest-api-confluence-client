@@ -17,25 +17,25 @@ import lombok.extern.slf4j.Slf4j;
 public class ChildAttachmentExtensions extends BaseModel
 {
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("mediaType")
 	String mediaType;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("fileSize")
 	long fileSize;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("comment")
 	String comment;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("mediaTypeDescription")
 	String mediaTypeDescription;

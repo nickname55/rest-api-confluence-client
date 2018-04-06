@@ -20,106 +20,106 @@ public class UpdAttContainer extends BaseModel
 {
 	/**
 	 * Пример: "5210113"
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("id")
 	String id;
 	
 	/**
 	 * Пример: "page"
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("type")
 	String type;
 	
 	/**
 	 * Пример: "current"
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("status")
 	String status;
 	
 	/**
 	 * Пример: "Change Item"
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("title")
 	String title;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("space")
 	String space;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("version")
 	Version version;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("ancestors")
 	String[] ancestors;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("operations")
 	String[] operations;
 	
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("children")
 	String children;
 	
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("descendants")
 	UpdAttDescendants descendants;
 	
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("container")
 	UpdAttContainer container;
 	
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("body")
 	UpdAttBody body;
 	
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("metadata")
 	UpdAttMetadata metadata;
 	
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("restrictions")
 	UpdAttRestrictions restrictions;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("macroRenderedOutput")
 	UpdAttMacroRenderedOutput macroRenderedOutput;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("extensions")
 	Extensions extensions;
@@ -128,7 +128,7 @@ public class UpdAttContainer extends BaseModel
 	UpdAttExpandableReq expandable;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("_links")
 	UpdAttLinksReq links;

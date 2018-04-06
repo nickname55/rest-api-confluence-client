@@ -17,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ChildCommentExtensionsExpandable extends BaseModel
 {
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("resolution")
 	String resolution;

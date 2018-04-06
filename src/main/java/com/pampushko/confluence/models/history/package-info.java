@@ -1,5 +1,5 @@
 /**
  * Пакет содержит классы-модели для работы с историей контента
- * <p>
+ * <br>
  */
 package com.pampushko.confluence.models.history;

@@ -45,43 +45,43 @@ public class CrAttItem extends BaseModel
 	String title;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("version")
 	Version version;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("container")
 	CrAttContainer container;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("macroRenderedOutput")
 	CrAttMacroRenderedOutput macroRenderedOutput;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("metadata")
 	ChildAttachmentMetadata metadata;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("extensions")
 	ChildAttachmentExtensions extensions;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("_expandable")
 	ChildAttachmentExpandable expandable;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("_links")
 	ChildAttachmentLinks links;

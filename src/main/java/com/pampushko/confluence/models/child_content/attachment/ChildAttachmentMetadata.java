@@ -20,7 +20,7 @@ public class ChildAttachmentMetadata extends BaseModel
 {
 	/**
 	 * Пример: "image/png" или "application/json"
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("mediaType")
 	String mediaType;

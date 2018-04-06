@@ -16,29 +16,29 @@ import lombok.extern.slf4j.Slf4j;
 public class LabelsLinks
 {
 	/**
-	 * Пример: "/rest/api/content/att184680449/label?limit=200&start=200"
-	 * <p>
+	 * Пример: "/rest/api/content/att184680449/label?limit=200&amp;start=200"
+	 * <br>
 	 */
 	@SerializedName("next")
 	String next;
 	
 	/**
 	 * Пример: "https://java-java.atlassian.net/wiki/rest/api/content/att184680449/label"
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("self")
 	String self;
 	
 	/**
 	 * Пример: "https://java-java.atlassian.net/wiki"
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("base")
 	String base;
 	
 	/**
 	 * Пример: "/wiki"
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("context")
 	String context;

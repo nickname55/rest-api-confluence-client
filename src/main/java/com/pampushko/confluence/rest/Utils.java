@@ -11,6 +11,14 @@ import java.util.Map;
 @Slf4j
 public class Utils
 {
+	/**
+	 * Проверка на то что код равен 204
+	 *
+	 * @param code
+	 * 		значение кода
+	 *
+	 * @return булево значение, если код равен 204, то true
+	 */
 	public static boolean codeIs204(final int code)
 	{
 		if (code == 204)
@@ -23,6 +31,11 @@ public class Utils
 		}
 	}
 	
+	/**
+	 * Проверка на то что код равен 200
+	 * @param code значение кода
+	 * @return булево значение, если код равен 200, то true
+	 */
 	public static boolean codeIs200(final int code)
 	{
 		if (code == 200)
@@ -36,9 +49,8 @@ public class Utils
 	}
 	
 	/**
-	 * @param userName
-	 *
-	 * @return
+	 * @param userName значение имени пользователя
+	 * @return отображаение с ключом username и значение переданным методу в качестве параметра userName
 	 */
 	public static Map<String, String> createParamsUserName(final String userName)
 	{
@@ -52,9 +64,8 @@ public class Utils
 	}
 	
 	/**
-	 * @param userKey
-	 *
-	 * @return
+	 * @param userKey значение ключа пользователя
+	 * @return отображаение с ключом key и значение переданным методу в качестве параметра userKey
 	 */
 	public static Map<String, String> createParamsUserKey(final String userKey)
 	{

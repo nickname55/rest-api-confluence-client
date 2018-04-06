@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * Объект-результат возвращаемый при создании нового вложения в Confluence
- * <p>
+ * <br>
  * todo рассмотреть возможность объединения с пакетом models.child_content.attachment
  */
 @Getter
@@ -21,19 +21,19 @@ import lombok.extern.slf4j.Slf4j;
 public class CreateAttResponseContainer extends BaseModel
 {
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("results")
 	CrAttItem[] results;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("size")
 	long size;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("_links")
 	ChildAttachmentContainerLinks links;

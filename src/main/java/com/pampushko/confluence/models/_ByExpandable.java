@@ -22,7 +22,7 @@ public class _ByExpandable extends BaseModel
 	String details;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("personalSpace")
 	String personalSpace;

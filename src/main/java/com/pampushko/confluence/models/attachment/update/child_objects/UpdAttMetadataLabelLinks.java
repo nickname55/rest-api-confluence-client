@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 public class UpdAttMetadataLabelLinks
 {
 	/**
-	 * Пример: "/rest/api/content/att184451088/label?limit=200&start=200"
+	 * Пример: "/rest/api/content/att184451088/label?limit=200&amp;start=200"
 	 * <br>
 	 */
 	@SerializedName("next")

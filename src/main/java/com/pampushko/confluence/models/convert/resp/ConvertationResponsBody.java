@@ -17,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ConvertationResponsBody extends BaseModel
 {
 	/**
-	 * Пример: "<p>Some example body in storage format</p>"
+	 * Пример: "&lt;p&gt;Some example body in storage format&lt;/p&gt;"
 	 * <br>
 	 */
 	@SerializedName("value")

@@ -1,5 +1,5 @@
 /**
  * Пакет содержит перечисления используемые в коде клиента
- * <p>
+ * <br>
  */
 package com.pampushko.confluence.models.enums;

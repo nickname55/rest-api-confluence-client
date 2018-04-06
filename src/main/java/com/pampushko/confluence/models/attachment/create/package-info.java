@@ -1,5 +1,5 @@
 /**
  * Пакет содержит классы-модели для создания вложений в Confluence
- * <p>
+ * <br>
  */
 package com.pampushko.confluence.models.attachment.create;

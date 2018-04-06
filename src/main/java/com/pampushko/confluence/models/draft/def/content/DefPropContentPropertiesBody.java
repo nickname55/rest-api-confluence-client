@@ -18,7 +18,7 @@ public class DefPropContentPropertiesBody extends BaseModel
 {
 	/**
 	 * Пример: "object"
-	 * <p>
+	 * <br>
 	 * <br>
 	 */
 	@SerializedName("type")

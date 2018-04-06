@@ -12,38 +12,38 @@ public class ChildPageContainerLinks extends BaseModel
 {
 	/**
 	 * Пример: "https://java-java.atlassian.net/wiki"
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("base")
 	String base;
 	
 	/**
 	 * Пример: "/wiki"
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("context")
 	String context;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("self")
 	String self;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("tinyui")
 	String tinyui;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("editui")
 	String editui;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("webui")
 	String webui;

@@ -17,13 +17,13 @@ import lombok.extern.slf4j.Slf4j;
 public class ChildCommentLinks extends BaseModel
 {
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("webui")
 	String webui;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("self")
 	String self;

@@ -16,25 +16,25 @@ import lombok.extern.slf4j.Slf4j;
 public class CrAttMetadataExpandable
 {
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("currentuser")
 	String currentuser;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("properties")
 	String properties;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("frontend")
 	String frontend;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("likes")
 	String likes;

@@ -1,5 +1,5 @@
 /**
  * Корневой пакет
- * <p>
+ * <br>
  */
 package com.pampushko.confluence;

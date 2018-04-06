@@ -20,58 +20,58 @@ public class ChildAttachmentContainer extends BaseModel
 {
 	/**
 	 * "att172261377"
-	 * <p>
+	 * <br>
 	 */
 	private String id;
 	
 	/**
 	 * "attachment"
-	 * <p>
+	 * <br>
 	 */
 	private String type;
 	
 	/**
 	 * "current"
-	 * <p>
+	 * <br>
 	 */
 	private String status;
 	
 	/**
 	 * "IdeaProject.png"
-	 * <p>
+	 * <br>
 	 */
 	private String title;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	private ChildAttachmentMetadata metadata;
 	
 	
 	/**
 	 * todo проверить необходимость наличия этого свойства
-	 * <p>
+	 * <br>
 	 */
 	@JsonAdapter(value = ExpandablePropDeserializer.class)
 	@SerializedName("macroRenderedOutput")
 	private ChildAttachmentMacroRenderedOutput macroRenderedOutput;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	private ChildAttachmentExtensions extensions;
 	
 	
 	//---------------------------------------------------------------------------
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("_expandable")
 	private ChildAttachmentExpandable expandable;
 	
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("_links")
 	private ChildAttachmentLinks links;

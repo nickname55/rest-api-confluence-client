@@ -18,84 +18,84 @@ public class ChildCommentExpandable extends BaseModel
 {
 	/**
 	 * Пример: ""
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("childTypes")
 	String childTypes;
 	
 	/**
 	 * Пример: "/rest/api/content/5210113"
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("container")
 	String container;
 	
 	/**
 	 * Пример: ""
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("metadata")
 	String metadata;
 	
 	/**
 	 * Пример: ""
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("operations")
 	String operations;
 	
 	/**
 	 * Пример: "/rest/api/content/171671553/child"
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("children")
 	String children;
 	
 	/**
 	 * Пример: "/rest/api/content/171671553/restriction/byOperation"
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("restrictions")
 	String restrictions;
 	
 	/**
 	 * Пример: "/rest/api/content/171671553/history"
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("history")
 	String history;
 	
 	/**
 	 * Пример: ""
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("ancestors")
 	String ancestors;
 	
 	/**
 	 * Пример: ""
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("body")
 	String body;
 	
 	/**
 	 * Пример: ""
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("version")
 	String version;
 	
 	/**
 	 * Пример: "/rest/api/content/171671553/descendant"
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("descendants")
 	String descendants;
 	
 	/**
 	 * Пример: "/rest/api/space/4654313"
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("space")
 	String space;

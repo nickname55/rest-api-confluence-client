@@ -17,19 +17,19 @@ import lombok.extern.slf4j.Slf4j;
 public class ChildContentContainerLinks extends BaseModel
 {
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("self")
 	String self;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("base")
 	String base;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("context")
 	String context;

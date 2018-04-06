@@ -137,7 +137,10 @@ public class Confluence
 	 * с кодом {@code key}
 	 * <br>
 	 *
+	 * @param spaceKey ключ области
+	 * @param params дополнительные параметры
 	 * @return возвращаёмое значение {@code SpaceResultList} - массив из областей {@code Space}
+	 * @throws IOException ошибки сети
 	 * <br>
 	 */
 	public Space getSpaceByKey(final String spaceKey, final Map<String, String> params) throws IOException
@@ -154,13 +157,19 @@ public class Confluence
 	 * с кодом {@code key}
 	 * <br>
 	 *
+	 * @param spaceKey
+	 * 		ключ области
+	 *
 	 * @return возвращаёмое значение {@code SpaceResultList} - массив из областей {@code Space}
 	 * <br>
+	 *
+	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	public Space getSpaceByKey(final String spaceKey) throws IOException
 	{
 		//заглушка
-		Map<String, String> params = new HashMap<String, String>();
+		Map<String, String> params = new HashMap<>();
 		
 		Call<Space> spaceCall = confluenceApi.getSpaceByKey(spaceKey, params);
 		Response<Space> response = spaceCall.execute();
@@ -177,6 +186,9 @@ public class Confluence
 	 *
 	 * @return возвращаёмое значение {@code SpaceResultList} - массив из областей {@code Space}
 	 * <br>
+	 *
+	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	public SpaceResultList getSpaces() throws IOException
 	{
@@ -194,11 +206,12 @@ public class Confluence
 	 * <br>
 	 *
 	 * @param space
-	 * 		- область {@code Space} для создания.
-	 * 		<br>
+	 * 		область {@code Space} для создания.
 	 *
 	 * @return возвращаёмое значение {@code Space}, как подтверждение, что область действительно создана
-	 * <br>
+	 *
+	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	public Space createSpace(final Space space) throws IOException
 	{
@@ -227,6 +240,9 @@ public class Confluence
 	 *
 	 * @return возвращаёмое значение {@code Space}, как подтверждение, что область действительно создана
 	 * <br>
+	 *
+	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	public Space createPrivateSpace(final Space space) throws IOException
 	{
@@ -241,9 +257,12 @@ public class Confluence
 	 * <br>
 	 *
 	 * @param space
-	 * 		- область {@code Space} для создания
+	 * 		область {@code Space} для создания
 	 *
 	 * @return - {@code Space} подтверждение, возвращаемое Confluence в ответе на запрос (полное представлеине области)
+	 *
+	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	public Space updateSpace(final Space space, final String key) throws IOException
 	{
@@ -259,8 +278,13 @@ public class Confluence
 	 * имеющую ключ {@code key}
 	 * <br>
 	 *
+	 * @param key
+	 * 		ключ области
+	 *
 	 * @return возвращаёмое значение {@code Space}, как подтверждение, что область действительно удалена
-	 * <br>
+	 *
+	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	public NoContentResponse deleteSpace(final String key) throws IOException
 	{
@@ -274,16 +298,19 @@ public class Confluence
 	 * Получить список элементов контента из данной области
 	 * <br>
 	 *
-	 * @param key
+	 * @param spaceKey
+	 * 		ключ области
 	 * @param params
+	 * 		дополнительные параметры запроса
 	 *
-	 * @return
+	 * @return объект-контейнер, содержащий список элементов контента
 	 *
 	 * @throws IOException
+	 * 		ошибки сети
 	 */
-	public ContentContainter getSpaceContent(final String key, final Map<String, String> params) throws IOException
+	public ContentContainter getSpaceContent(final String spaceKey, final Map<String, String> params) throws IOException
 	{
-		Call<ContentContainter> spaceContentCall = confluenceApi.getSpaceContent(key, params);
+		Call<ContentContainter> spaceContentCall = confluenceApi.getSpaceContent(spaceKey, params);
 		Response<ContentContainter> response = spaceContentCall.execute();
 		ContentContainter body = response.body();
 		return body;
@@ -294,11 +321,14 @@ public class Confluence
 	 * <br>
 	 *
 	 * @param contentId
+	 * 		идентификатор контента
 	 * @param params
+	 * 		дополнительные параметры запроса
 	 *
-	 * @return
+	 * @return объект содержащий данные указанного элемента контента
 	 *
 	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	public PageResultItem getContentById(final String contentId, final Map<String, String> params) throws IOException
 	{
@@ -313,10 +343,16 @@ public class Confluence
 	 * <br>
 	 *
 	 * @param contentId
+	 * 		идентификатор элемента контента
 	 * @param versionNumber
+	 * 		номер версии элемента контента, которую мы хотим получить
 	 * @param params
+	 * 		дополнительные параметры
 	 *
-	 * @return
+	 * @return объект содержащий данные указанной нами версии элемента контента
+	 *
+	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	Version getVersionOfContent(final String contentId, final int versionNumber, final Map<String, String> params) throws IOException
 	{
@@ -331,9 +367,14 @@ public class Confluence
 	 * <br>
 	 *
 	 * @param start
+	 * 		индекс с которого мы начинаем получать элементы
 	 * @param limit
+	 * 		максимальное количество элементов в получаемом списке
 	 *
-	 * @return
+	 * @return объект контейнер, содержащий список групп
+	 *
+	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	GroupResultList getGroups(final int start, final int limit) throws IOException
 	{
@@ -347,7 +388,13 @@ public class Confluence
 	 * Получить группу по имени
 	 * <br>
 	 *
-	 * @return
+	 * @param groupName
+	 * 		имя группы
+	 *
+	 * @return объект, содержащий данные группы
+	 *
+	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	Group getGroupsByName(final String groupName) throws IOException
 	{
@@ -361,9 +408,11 @@ public class Confluence
 	 * Получить список групп (разбитый на страницы)
 	 *
 	 * @param start
+	 * 		индекс, с которого мы начинаем получать элементы
 	 * @param limit
+	 * 		количество элементов, которое мы хотим получить
 	 *
-	 * @return
+	 * @return объект-контейнер, содержащий список групп
 	 */
 	GroupResultList getGroups(final String groupName, final int start, final int limit) throws IOException
 	{
@@ -378,10 +427,16 @@ public class Confluence
 	 * <br>
 	 *
 	 * @param groupName
+	 * 		имя группы
 	 * @param start
+	 * 		индекс, начиная с корого мы хотим получать элементы
 	 * @param limit
+	 * 		максимальное количество элементов, которые мы хотим получить в ответе
 	 *
-	 * @return
+	 * @return объект-контейнер, содержащий список объект представляющих пользователей
+	 *
+	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	UserResultList getUsersFromGroupByGroupName(String groupName, int start, int limit) throws IOException
 	{
@@ -447,7 +502,9 @@ public class Confluence
 	 * <br>
 	 *
 	 * @return Returns a full JSON representation of a list of search results
-	 * <br>
+	 *
+	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	SearchResultList search(final String cql) throws IOException
 	{
@@ -492,10 +549,12 @@ public class Confluence
 	 * <br>
 	 *
 	 * @param contentId
+	 * 		идентификатор контента
 	 *
-	 * @return
+	 * @return объект, содержащий свойство с информацией является ли пользователь наблюдателем (true - является)
 	 *
 	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	WatchObject watch(final String contentId) throws IOException
 	{
@@ -514,10 +573,12 @@ public class Confluence
 	 * <br>
 	 *
 	 * @param userKey
+	 * 		ключ идентифицирующий пользователя
 	 *
-	 * @return
+	 * @return объект, содержащий свойство, указывающее на то является ли пользователь наблюдателем (true = является)
 	 *
 	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	WatchObject watchByKey(final String contentId, final String userKey) throws IOException
 	{
@@ -536,10 +597,14 @@ public class Confluence
 	 * <br>
 	 *
 	 * @param contentId
+	 * 		идентификатор контента
+	 * @param userName
+	 * 		имя пользователя
 	 *
-	 * @return
+	 * @return объект, содержащий свойство, показывающее, является ли пользователь наблюдателем (true = является)
 	 *
 	 * @throws IOException
+	 * 		ошибка сети
 	 */
 	WatchObject watchByUserName(final String contentId, final String userName) throws IOException
 	{
@@ -557,11 +622,14 @@ public class Confluence
 	 * </ol>
 	 *
 	 * @param content
+	 * 		объект содержащий данные для создания элемента контента в Confluence
 	 * @param params
+	 * 		дополнительные параметры запроса
 	 *
-	 * @return
+	 * @return объект содержащий данные уже созданного элемента контента в Confluence
 	 *
 	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	public Content createContent(final Content content, final Map<String, String> params) throws IOException
 	{
@@ -583,11 +651,14 @@ public class Confluence
 	 * </ol>
 	 *
 	 * @param content
+	 * 		объект содержащий данные для создания элемента контента в Confluence
 	 * @param params
+	 * 		дополнительные параметры запроса
 	 *
-	 * @return
+	 * @return объект содержащий данные уже созданного элемента контента в Confluence
 	 *
 	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	Content updateContent(final Content content,
 	                      final String contentId,
@@ -612,6 +683,7 @@ public class Confluence
 	 * @return обновленный экземпляр контента
 	 *
 	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	public Content updateContent(final Content content,
 	                             final String contentId) throws IOException
@@ -633,9 +705,11 @@ public class Confluence
 	 * @param contentId
 	 * 		идентификатор контента
 	 *
-	 * @return
+	 * @return булево значение, указывающее на то что контент удален (true = удален, false - нет)
+	 *
+	 * @throws IOException
+	 * 		ошибки сети
 	 */
-	//готово
 	boolean deleteContentById(final String contentId) throws IOException
 	{
 		Call<Void> responseCall = confluenceApi.deleteContentById(contentId);
@@ -661,6 +735,7 @@ public class Confluence
 	 * @return коллекция истории контента
 	 *
 	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	HistoryContainer getContentHistory(final String contendId) throws IOException
 	{
@@ -688,6 +763,7 @@ public class Confluence
 	 * @return макрос
 	 *
 	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	Macros getContentMacroBodyByMacroId(final String contentId,
 	                                    final String version,
@@ -717,6 +793,7 @@ public class Confluence
 	 * @return макрос
 	 *
 	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	@Deprecated
 	Macros getContentMacroBodyByHash(final String contentId,
@@ -734,10 +811,12 @@ public class Confluence
 	 * <br>
 	 *
 	 * @param params
+	 * 		коллекция дополнительных параметров
 	 *
-	 * @return
+	 * @return объект-контейнер, содержащий коллекцию элементов контента
 	 *
 	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	public ContentResultList getContent(final Map<String, String> params) throws IOException
 	{
@@ -756,10 +835,12 @@ public class Confluence
 	 * <br>
 	 *
 	 * @param params
+	 * 		коллекция дополнительных параметров передаваемых в запросе
 	 *
-	 * @return
+	 * @return объект-контейнер содержащий список объектов-представлений для записей аудита
 	 *
 	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	public AuditResultList getAudit(final Map<String, String> params) throws IOException
 	{
@@ -774,8 +855,9 @@ public class Confluence
 	 * <br>
 	 *
 	 * @param audit
+	 * 		объект с данными записи аудита
 	 *
-	 * @return
+	 * @return объект с данными созданной записи аудита
 	 */
 	public Audit createAudit(final Audit audit) throws IOException
 	{
@@ -789,8 +871,7 @@ public class Confluence
 	 * <br>
 	 *
 	 * @param params
-	 *
-	 * @return
+	 * 		дополнительные параметры
 	 */
 	public void exportAudit(final String directoryName,
 	                        final Map<String, String> params) throws IOException
@@ -831,11 +912,14 @@ public class Confluence
 	
 	/**
 	 * Получаем текущий период хранения (Fetches the current retention period)
-	 * <p>
+	 * <br>
 	 * <strong>Responses</strong>
 	 * application/json
 	 *
-	 * @return
+	 * @return объект содержащий данные о retention period
+	 *
+	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	public RetentionPeriod getRetentionPeriodOfAudit() throws IOException
 	{
@@ -847,12 +931,15 @@ public class Confluence
 	
 	/**
 	 * Устанавливаем текущий период хранения (Set the retention period to a new value.)
-	 * <p>
+	 * <br>
 	 * Can throw ServiceException if the retention period is too long (Retention period cannot be longer than 20 Years)
 	 *
 	 * @param newRetentionPeriod
 	 *
-	 * @return
+	 * @return объект содержащий информацию о retention perion
+	 *
+	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	public RetentionPeriod setRetentionPeriodOfAudit(final RetentionPeriod newRetentionPeriod) throws IOException
 	{
@@ -874,13 +961,17 @@ public class Confluence
 	 * <li>searchString (String) -- </li>
 	 * </ul>
 	 * <br>
-	 * <p>
+	 * <br>
 	 * <strong>Responses</strong>
 	 * application/json
 	 *
 	 * @param params
+	 * 		список дополнительных параметров запроса
 	 *
-	 * @return
+	 * @return объект-контейнер, содержащий список записей аудита
+	 *
+	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	public AuditResultList getAuditSince(final Map<String, String> params) throws IOException
 	{
@@ -900,34 +991,34 @@ public class Confluence
 	//@formatter:off
 	/**
 	 * Возвращает map прямых (непосредственных) дочерних элементов (child) для некоторого элемента контента.
-	 * <p>
+	 * <br>
 	 * Контент может иметь несколько типов дочерних элементов,
-	 * <p>
+	 * <br>
 	 * которые могут также являться страницами, но кроме того это могут быть комментарии
-	 * <p>
+	 * <br>
 	 * и вложения.
-	 * <p>
+	 * <br>
 	 * ContentType дочерних элементов, которые будут возвращены запросом,
-	 * <p>
+	 * <br>
 	 * описывается в query параметре запроса - expand
-	 * <p>
+	 * <br>
 	 * Этот параметр может включать развёртывание множества дочерних типов.
-	 * <p>
+	 * <br>
 	 * Если в параметр expand не включены никакие типы,
-	 * <p>
+	 * <br>
 	 * возвращаемая map будет просто перечислять дочерние типы,
-	 * <p>
+	 * <br>
 	 * доступные для развёртывания для элемента контента Content,
-	 * <p>
+	 * <br>
 	 * на который (элемент контента) указывает параметр @Path - contentId.
-	 * <p>
+	 * <br>
 	 * <strong>Примеры URI запросов:</strong>
 	 * <ul>
 	 *     <li>http://example.com/rest/api/content/1234/child</li>
 	 *     <li>http://example.com/rest/api/content/1234/child?expand=page.body.VIEW</li>
-	 *     <li>http://example.com/rest/api/content/1234/child?expand=page&start=20&limit=10</li>
+	 *     <li>http://example.com/rest/api/content/1234/child?expand=page&amp;start=20&amp;limit=10</li>
 	 * </ul>
-	 * <p>
+	 * <br>
 	 * <strong>Дополнительные параметры</strong>
 	 * <ul>
 	 *     <li>expand (String) -- разделённый запятыми список свойств, для разворачивания (expand) дочерних элементов</li>
@@ -939,7 +1030,7 @@ public class Confluence
 	 *<h2><strong>Responses</strong></h2>
 	 * <strong>STATUS 200</strong> -- возвращает JSON-map,
 	 * представляющую собой несколько упорядоченных наборов дочерних элементов контента
-	 * <p>
+	 * <br>
 	 * с ключами по типу содержимого
 	 * <blockquote><PRE>
 {
@@ -1040,14 +1131,15 @@ public class Confluence
 }
 	 * </PRE></blockquote>
 	 *
-	 * <p>
+	 * <br>
 	 * <strong>STATUS 404</strong> -- такой статус вы получите, если не существует элемента контента
 	 * с указанным вами идентификатором
 	 * <br>
 	 * или если пользователь выполняющий запрос, не имеет разрешения на просмотр содержимого.
 	 * @param contentId идентификатор элемента контента (для этого элемента контента мы получаем дочерние элементы)
 	 * @param params дополнительные параметры запроса
-	 * @return набор дочерних элементов
+	 * @return набор дочерних элементо
+	 * @throws IOException ошибки сети
 	 */
 	//@formatter:on
 	public ChildContentContainer getChild(final String contentId,
@@ -1062,22 +1154,22 @@ public class Confluence
 	//@formatter:off
 	/**
 	 * Метод возвращает непосредственные дочерние элементы для данного элемента контента.
-	 * <p>
+	 * <br>
 	 * Отобранные дочерние элементы будут ограничены одним типом.
-	 * <p>
+	 * <br>
 	 * Тип контента (или типы) - ContentType - возвращаемых дочерних элементов,
-	 * <p>
+	 * <br>
 	 * задаётся параметром "type" заданным в пути (path) запроса.
-	 * <p>
+	 * <br>
 	 * <strong>Примеры URI запросов:</strong>
 	 * <ul>
 	 *     <li>http://example.com/rest/api/content/1234/child/page</li>
 	 *     <li>http://example.com/rest/api/content/1234/child/comment</li>
 	 *     <li>http://example.com/rest/api/content/1234/child/page?expand=body.view</li>
-	 *     <li>http://example.com/rest/api/content/1234/child/comment?start=20&limit=10</li>
+	 *     <li>http://example.com/rest/api/content/1234/child/comment?start=20&amp;limit=10</li>
 	 * </ul>
 	 *
-	 * <p>
+	 * <br>
 	 * <strong>Дополнительные параметры</strong>
 	 * <ul>
 	 *     <li>expand (String) -- разделённый запятыми список свойств, для разворачивания (expand) дочерних элементов</li>
@@ -1089,7 +1181,7 @@ public class Confluence
 	 *<h2><strong>Responses</strong></h2>
 	 * <strong>STATUS 200</strong> -- возвращает JSON-map,
 	 * представляющую собой несколько упорядоченных наборов дочерних элементов контента
-	 * <p>
+	 * <br>
 	 * с ключами по типу содержимого
 	 *
 	 * <blockquote><PRE>
@@ -1191,7 +1283,7 @@ public class Confluence
 }
 	 </PRE></blockquote>
 	 *
-	 * <p>
+	 * <br>
 	 * <strong>STATUS 404</strong> -- такой статус вы получите, если не существует элемента контента
 	 * с указанным вами идентификатором
 	 * <br>
@@ -1200,6 +1292,7 @@ public class Confluence
 	 * @param type тип дочерних элементов (мы отберем дочерние элементы для элемента контента и отфильтруем по нужному нам типу, элементов других типов в ответе не будет)
 	 * @param params дополнительные параметры
 	 * @return набор дочерних элементов
+	 * @throws IOException ошибки сети
 	 */
 	//@formatter:on
 	ChildContentContainer getChildByType(final String contentId,
@@ -1216,11 +1309,14 @@ public class Confluence
 	 * todo добавить документацию к методу
 	 *
 	 * @param contentId
+	 * 		идентификатор контента
 	 * @param params
+	 * 		дополнительные парамеры запроса
 	 *
-	 * @return
+	 * @return объект представляющий дочернюю страницу
 	 *
 	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	public ChildPage getChildPage(final String contentId,
 	                              final Map<String, String> params) throws IOException
@@ -1235,11 +1331,14 @@ public class Confluence
 	 * todo добавить документацию к методу
 	 *
 	 * @param contentId
+	 * 		идентификатор контента
 	 * @param params
+	 * 		дополнительные параметры запроса
 	 *
-	 * @return
+	 * @return объект представляющий собой дочернее вложение
 	 *
 	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	public ChildAttachment getChildAttachment(final String contentId,
 	                                          final Map<String, String> params) throws IOException
@@ -1253,17 +1352,17 @@ public class Confluence
 	//@formatter:off
 	/**
 	 * Возвращает комментарии для заданного элемента контента.
-	 * <p>
+	 * <br>
 	 * <strong>Примеры URI запросов:</strong>
 	 * <ul>
 	 *     <li>http://example.com/rest/api/content/1234/child/comment</li>
 	 *     <li>http://example.com/rest/api/content/1234/child/comment?expand=body.view</li>
 	 *     <li>http://example.com/rest/api/content/1234/child/comment?start=20&limit=10</li>
-	 *     <li>http://example.com/rest/api/content/1234/child/comment?location=footer&location=inline&location=resolved</li>
+	 *     <li>http://example.com/rest/api/content/1234/child/comment?location=footer&amp;location=inline&amp;location=resolved</li>
 	 *     <li>http://example.com/rest/api/content/1234/child/comment?expand=extensions.inlineProperties,extensions.resolution</li>
 	 * </ul>
-	 * <p>
-	 * <p>
+	 * <br>
+	 * <br>
 	 * <strong>Дополнительные параметры</strong>
 	 * <ul>
 	 *     <li>expand (String) -- разделённый запятыми список свойств, для разворачивания (expand) дочерних элементов. Мы также можем указать некоторые расширения (extensions) такие как extensions.inlineProperties (для получения inline-свойств специфичных для комментариев) или можем указать extensions.resolution для получения resolution status для каждого комментария в результатах</li>
@@ -1277,7 +1376,7 @@ public class Confluence
 	 *<h2><strong>Responses</strong></h2>
 	 * <strong>STATUS 200</strong> -- возвращает JSON-map,
 	 * представляющую собой несколько упорядоченных наборов дочерних элементов контента
-	 * <p>
+	 * <br>
 	 * с ключами по типу содержимого
 	 *
 	 *<blockquote><PRE>
@@ -1379,14 +1478,14 @@ public class Confluence
 }
 	 *</PRE></blockquote>
 	 *
-	 * <p>
+	 * <br>
 	 * <strong>STATUS 404</strong> -- такой статус вы получите, если не существует элемента контента
 	 * с указанным вами идентификатором
 	 * <br>
 	 * @param contentId идентификатор элемента контента (для этого элемента контента мы получаем дочерние элементы)
 	 * @param params дополнительные параметры
 	 * @return набор дочерних элементов
-	 * @throws IOException
+	 * @throws IOException ошибки сети
 	 */
 	//@formatter:on
 	public ChildComment getChildComment(final String contentId,
@@ -1420,7 +1519,8 @@ public class Confluence
 	 * @param params
 	 * 		другие параметры, передаваемые в запросе
 	 *
-	 * @return
+	 * @return todo дописать
+	 * @throws IOException ошибки сети
 	 */
 	public CreateAttResponseContainer createAttachment(final String parentContentId,
 	                                                   final MultipartBody.Part fileBodyAndFileName,
@@ -1447,7 +1547,7 @@ public class Confluence
 	 * Если вы хотите обновить тело файла-вложения, то следует использовать метод {@link #updateAttachmentFileBody(String, String, MultipartBody.Part, String, Map)}
 	 * </strong>
 	 * <br>
-	 * <p>
+	 * <br>
 	 * <br>
 	 * <strong>
 	 * Для того чтобы получить более подробные данные о данной функции Confluence API смотрите документацию {@link ConfluenceApi#updateAttachment(String, String, UpdAttRequest, Map)}
@@ -1491,15 +1591,16 @@ public class Confluence
 	 * @param attachmentId
 	 * 		идентфикатор вложения, над этим вложением мы хотим выполнить действие
 	 * @param fileBody
-	 * 		тело файла обернутое в {@link MultipartBody.Part}
+	 * 		тело файла обернутое в {@link okhttp3.MultipartBody.Part}
 	 * @param comment
 	 * 		комментарий к новой версии файла-вложения
 	 * @param params
 	 * 		дополнительные параметры, передаваемые в запросе
 	 *
-	 * @return JSON-объект
+	 * @return объект с данныи обновленного вложения
 	 *
 	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	public UpdAttResponse updateAttachmentFileBody(final String parentContentId,
 	                                               final String attachmentId,
@@ -1524,11 +1625,14 @@ public class Confluence
 	 * <br>
 	 *
 	 * @param parentContentId
+	 * 		идентификатор родительского элемента контента
 	 * @param expand
+	 * 		дополнительные свойства, которые мы хотим "развернуть" в ответе на запрос
 	 *
-	 * @return
+	 * @return todo дописать
 	 *
 	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	public DescendantsResult getContentDescendants(final String parentContentId,
 	                                               final String expand) throws IOException
@@ -1544,13 +1648,18 @@ public class Confluence
 	 * <br>
 	 *
 	 * @param parentContentId
+	 * 		идентификатор контента для которого мы хотим получить дочерние элементы
 	 * @param type
+	 * 		тип дочерних элементов, которые нас интересуют
 	 * @param expand
+	 * 		дополнительные свойства дочерних элементов, которые мы хотим видеть "развёрнутыми" в ответе
 	 * @param params
+	 * 		дополнительные параметры
 	 *
-	 * @return
+	 * @return объект-контейнер содержащий список элементов контента
 	 *
 	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	public ContentResultList getContentDescendantsByType(final String parentContentId,
 	                                                     final String type,
@@ -1570,8 +1679,12 @@ public class Confluence
 	
 	/**
 	 * @param contentId
+	 * 		идентификатор контента
 	 *
-	 * @return
+	 * @return объект-контейнер, содержащий список меток
+	 *
+	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	public LabelResultList getLabels(final @Path("contentId") String contentId) throws IOException
 	{
@@ -1588,9 +1701,14 @@ public class Confluence
 	 * <br>
 	 *
 	 * @param contentId
+	 * 		идентификатор элемента контента
 	 * @param labels
+	 * 		список меток, которые мы хотим добавить к элементу контента
 	 *
-	 * @return
+	 * @return объект-контейнер, содержащий список меток
+	 *
+	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	public LabelResultList addLabels(final String contentId,
 	                                 final List<Label> labels) throws IOException
@@ -1605,9 +1723,14 @@ public class Confluence
 	 * удаляем метку
 	 *
 	 * @param contentId
+	 * 		идентификатор контента, для которого мы хотим удалить метку
 	 * @param labelName
+	 * 		имя метки, которую мы хотим удалить
 	 *
-	 * @return
+	 * @return todo дописать/проверить
+	 *
+	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	public Object deleteLabels(final String contentId,
 	                           final String labelName) throws IOException
@@ -1627,7 +1750,7 @@ public class Confluence
 	//@formatter:off
 	/**
 	 * Функция возвращает свойства для указанного элемента контента
-	 * <p>
+	 * <br>
 	 * <strong>Примеры URI запросов:</strong>
 	 * <ul>
 	 * <li>http://example.com/rest/api/content/1234/property/example-property-key?expand=content,version</li>
@@ -1691,6 +1814,7 @@ public class Confluence
 	 * <br>
 	 * @param contentId идентификатор элемента контента, к этому элементу контента относятся свойства (properties)
 	 * @return todo описать возвращаемое значение
+	 * @throws IOException ошибка сети
 	 */
 	//@formatter:on
 	public PropertyListResponseContainer getContentProperties(final String contentId) throws IOException
@@ -1704,7 +1828,7 @@ public class Confluence
 	//@formatter:off
 	/**
 	 * Функция возвращает свойства для указанного элемента контента
-	 * <p>
+	 * <br>
 	 * <strong>Примеры URI запросов:</strong>
 	 * <ul>
 	 * <li>http://example.com/rest/api/content/1234/property/example-property-key?expand=content,version</li>
@@ -1760,6 +1884,7 @@ public class Confluence
 	 * @param contentId идентификатор элемента контента, к этому элементу контента относятся свойства (properties)
 	 * @param propKey ключ, принадлежащий свойству (property) элемента контента
 	 * @return todo описать возвращаемое значение
+	 * @throws IOException ошибка сети
 	 */
 	//@formatter:on
 	public PropertyResponse findByKeyContentProperties(final String contentId, final String propKey) throws IOException
@@ -1847,6 +1972,7 @@ public class Confluence
 	 * @param contentId идентификатор элемента контента, к этому элементу контента мы добавляем новые свойства (properties)
 	 * @param propKey ключ, принадлежащий свойству (property) элемента контента
 	 * @return todo описать возвращаемое значение
+	 * @throws IOException ошибка сети
 	 */
 	//@formatter:on
 	public PropertyResponse updateContentProperties(final String contentId,
@@ -1877,6 +2003,7 @@ public class Confluence
 	 * @param contentId идентификатор элемента контента, к этому элементу контента мы добавляем новые свойства (properties)
 	 * @param propKey ключ, принадлежащий свойству (property) элемента контента
 	 * @return todo описать возвращаемое значение
+	 * @throws IOException ошибка сети
 	 */
 	//@formatter:on
 	public boolean deleteContentProperties(final String contentId, final String propKey) throws IOException
@@ -1948,6 +2075,7 @@ public class Confluence
 	 * @param contentId идентификатор элемента контента, к этому элементу контента мы добавляем новые свойства (properties)
 	 * @param propKey ключ, принадлежащий свойству (property) элемента контента
 	 * @return todo описать возвращаемое значение
+	 * @throws IOException ошибка сети
 	 */
 	//@formatter:on
 	public PropertyResponse createContentPropertiesWithKey(final String contentId,
@@ -2021,6 +2149,7 @@ public class Confluence
 	 * <br>
 	 * @param contentId идентификатор элемента контента, к этому элементу контента мы добавляем новые свойства (properties)
 	 * @return todo описать возвращаемое значение
+	 * @throws IOException ошибка сети
 	 */
 	//@formatter:on
 	public PropertyResponse createContentProperties(final String contentId,
@@ -2045,8 +2174,8 @@ public class Confluence
 	 * Дополнительные параметры:
 	 * <ul>
 	 * <li>expand (String, default:<strong>update.restrictions.user,read.restrictions.group,read.restrictions.user,update.restrictions.group</strong>) - список свойств, с запятыми-разделителями, для развёртывания (expand) свойств содержимого. Значение по умолчанию: group (?)</li>
-	 *
-	 * <h2><strong>Responses:</strong></h2>
+	 * </ul>
+	 * <strong>Responses:</strong>
 	 * <strong>STATUS 200</strong> -- application/json, возвращает JSON представление restriction (ограничений) сгруппированных по операциям
 	 * <br>
 	 * <blockquote><PRE>
@@ -2623,7 +2752,9 @@ public class Confluence
     "additionalProperties": false
 }
 	 * </PRE></blockquote>
-	 * @return
+	 * @param contentId идентификатор контента
+	 * @return объект содержащий информацию об ограничениях
+	 * @throws IOException ошибка сети
 	 */
 	public RestrictionResponseContainer getContentRestrictionByOperation(final String contentId) throws IOException
 	{
@@ -2643,6 +2774,7 @@ public class Confluence
 	 * <li>expand (String, default:<strong>restrictions.user,restrictions.group</strong>) - список свойств (с разделитем-запятой между значениями) для развёртывания (expand) свойств содержимого. Значение по умолчанию: group (?)</li>
 	 * <li>start (int) - старт разбиения на страницы (pagination start)</li>
 	 * <li>limit (int, default:<strong>100</strong>) - ограничение (limit) для разбиения на страницы (pagination limit)</li>
+	 * </ul>
 	 * <br>
 	 * <h2><strong>Responses:</strong></h2>
 	 * <strong>STATUS 200</strong> -- application/json, возвращает JSON представление restriction (ограничений) для данной операции
@@ -3233,7 +3365,10 @@ public class Confluence
     "additionalProperties": false
 }
 	 * </PRE></blockquote>
-	 * @return
+	 * @param contendId идентификатор контента
+	 * @param operationKey ключ операции
+	 * @return объект содержащий информацию об ограничении для данной операции
+	 * @throws IOException ошибки сети
 	 */
 	public Restriction getContentRestrictionForOperation(final String contendId,
 	                                                     final String operationKey)throws IOException
@@ -3254,6 +3389,10 @@ public class Confluence
 	/**
 	 * Publish legacy draft
 	 * <br>
+	 * @param draftId идентификатор черновика
+	 * @param draftBody объект с данными тела черновика
+	 * @return todo проверить и дописать
+	 * @throws IOException ошибка сети
 	 */
 	public Object publishLegacyDraftOfBlueprint(final String draftId, final Draft draftBody) throws IOException
 	{
@@ -3266,6 +3405,10 @@ public class Confluence
 	/**
 	 * Publish shared draft
 	 * <br>
+	 * @param draftId идентификатор черновика
+	 * @param draftBody объект с данными тела черновика
+	 * @return проверить и дописать
+	 * @throws IOException ошибка сети
 	 */
 	public Object publishSharedDraftOfBlueprint(final String draftId, final Draft draftBody) throws IOException
 	{
@@ -3300,18 +3443,14 @@ public class Confluence
 	 * Добавить пользователя, выполняющего запрос, в наблюдатели контента (контент определяется по contentId)
 	 * <br>
 	 * <strong>Более подробную документацию можно прочесть в методе : {@link ConfluenceApi#addWatcher(String, Map)}</strong>
-	 *
-	 * @param contentId
-	 * 		идентификатор элемента контента
-	 *
+	 * @param contentId	идентификатор элемента контента
 	 * @return если операция выполнена успешно то true, в противном случае - false
-	 *
-	 * @throws IOException
+	 * @throws IOException ошибки соединения по HTTP
 	 */
 	public boolean addCurrentUserToWatchers(final String contentId) throws IOException
 	{
 		//пустой набор параметров - заглушка
-		Map<String, String> params = new HashMap<String, String>();
+		Map<String, String> params = new HashMap<>();
 		return addUserToWatchers(contentId, params);
 	}
 	//@formatter:on
@@ -3321,14 +3460,10 @@ public class Confluence
 	 * <br>
 	 * <strong>Более подробную документацию можно прочесть в методе : {@link ConfluenceApi#addWatcher(String, Map)}</strong>
 	 *
-	 * @param contentId
-	 * 		идентификатор элемента контента
-	 * @param username
-	 * 		имя пользователя (login)
-	 *
+	 * @param contentId идентификатор элемента контента
+	 * @param username имя пользователя (login)
 	 * @return если операция выполнена успешно то true, в противном случае - false
-	 *
-	 * @throws IOException
+	 * @throws IOException ошибки соединения по HTTP
 	 */
 	public boolean addWatcherByUserName(final String contentId, final String username) throws IOException
 	{
@@ -3341,14 +3476,10 @@ public class Confluence
 	 * <br>
 	 * <strong>Более подробную документацию можно прочесть в методе : {@link ConfluenceApi#addWatcher(String, Map)}</strong>
 	 *
-	 * @param contentId
-	 * 		идентификатор элемента контента
-	 * @param userKey
-	 * 		ключ пользователя
-	 *
+	 * @param contentId    идентификатор элемента контента
+	 * @param userKey ключ пользователя
 	 * @return если операция выполнена успешно то true, в противном случае - false
-	 *
-	 * @throws IOException
+	 * @throws IOException ошибки соединения по HTTP
 	 */
 	public boolean addWatcherByUserKey(final String contentId, final String userKey) throws IOException
 	{
@@ -3361,14 +3492,10 @@ public class Confluence
 	 * <br>
 	 * <strong>Более подробную документацию можно прочесть в методе : {@link ConfluenceApi#addWatcher(String, Map)}</strong>
 	 *
-	 * @param contentId
-	 * 		идентификатор элемента контента
-	 * @param params
-	 * 		отображаение на основе которого генерируют параметры запроса
-	 *
+	 * @param contentId идентификатор элемента контента
+	 * @param params отображаение на основе которого генерируют параметры запроса
 	 * @return если операция выполнена успешно то true, в противном случае - false
-	 *
-	 * @throws IOException
+	 * @throws IOException ошибки соединения по HTTP
 	 */
 	private boolean addUserToWatchers(final String contentId, Map<String, String> params) throws IOException
 	{
@@ -3390,17 +3517,14 @@ public class Confluence
 	 * <br>
 	 * <strong>Более подробную документацию можно прочесть в методе : {@link ConfluenceApi#removeWatcher(String, Map)}</strong>
 	 *
-	 * @param contentId
-	 * 		идентификатор элемента контента
-	 *
+	 * @param contentId идентификатор элемента контента
 	 * @return если операция выполнена успешно то true, в противном случае - false
-	 *
-	 * @throws IOException
+	 * @throws IOException ошибки соединения по HTTP
 	 */
 	public boolean removeCurrentUserFromWatchers(final String contentId) throws IOException
 	{
 		//пустой набор параметров - заглушка
-		Map<String, String> params = new HashMap<String, String>();
+		Map<String, String> params = new HashMap<>();
 		
 		return removeUserFromWatchers(contentId, params);
 	}
@@ -3411,14 +3535,10 @@ public class Confluence
 	 * <br>
 	 * <strong>Более подробную документацию можно прочесть в методе : {@link ConfluenceApi#removeWatcher(String, Map)}</strong>
 	 *
-	 * @param contentId
-	 * 		идентификатор элемента контента
-	 * @param userName
-	 * 		имя пользователя (login)
-	 *
+	 * @param contentId идентификатор элемента контента
+	 * @param userName имя пользователя (login)
 	 * @return если операция выполнена успешно то true, в противном случае - false
-	 *
-	 * @throws IOException
+	 * @throws IOException ошибки соединения по HTTP
 	 */
 	public boolean removeWatcherByUserName(final String contentId, final String userName) throws IOException
 	{
@@ -3431,14 +3551,10 @@ public class Confluence
 	 * <br>
 	 * <strong>Более подробную документацию можно прочесть в методе : {@link ConfluenceApi#removeWatcher(String, Map)}</strong>
 	 *
-	 * @param contentId
-	 * 		идентификатор элемента контента
-	 * @param userKey
-	 * 		ключ пользователя
-	 *
+	 * @param contentId идентификатор элемента контента
+	 * @param userKey ключ пользователя
 	 * @return если операция выполнена успешно то true, в противном случае - false
-	 *
-	 * @throws IOException
+	 * @throws IOException ошибки соединения по HTTP
 	 */
 	public boolean removeWatcherByUserKey(final String contentId, final String userKey) throws IOException
 	{
@@ -3451,14 +3567,10 @@ public class Confluence
 	 * <br>
 	 * <strong>Более подробную документацию можно прочесть в методе : {@link ConfluenceApi#removeWatcher(String, Map)}</strong>
 	 *
-	 * @param contentId
-	 * 		идентификатор элемента контента
-	 * @param params
-	 * 		отображение на основе которого генерируют параметры запроса
-	 *
+	 * @param contentId идентификатор элемента контента
+	 * @param params отображение на основе которого генерируют параметры запроса
 	 * @return если операция выполнена успешно - то true, в противном случае - false
-	 *
-	 * @throws IOException
+	 * @throws IOException ошибки соединения по HTTP
 	 */
 	private boolean removeUserFromWatchers(final String contentId, Map<String, String> params) throws IOException
 	{
@@ -3479,12 +3591,10 @@ public class Confluence
 	 * Добавить пользователя к списку наблюдателей области
 	 * <br>
 	 *
-	 * @param spaceKey
-	 * @param params
-	 *
-	 * @return
-	 *
-	 * @throws IOException
+	 * @param spaceKey ключ области
+	 * @param params дополнительные параметры
+	 * @return булево значение указывающее на то добавлен ли наблюдатель (true - добавлен, false - не добавлен)
+	 * @throws IOException ошибка соединения по HTTP
 	 */
 	private boolean addWatcherToSpace(final String spaceKey,
 	                                  final Map<String, String> params) throws IOException
@@ -3503,12 +3613,10 @@ public class Confluence
 	 * <strong>При это указать пользователя по userKey</strong>
 	 * <br>
 	 *
-	 * @param spaceKey
-	 * @param watcherUserKey
-	 *
-	 * @return
-	 *
-	 * @throws IOException
+	 * @param spaceKey ключ области
+	 * @param watcherUserKey ключ идентифицирующий пользователя
+	 * @return булево значение (true - успешно удалось добавить, false - добавить не удалось)
+	 * @throws IOException ошибки HTTP соединения
 	 */
 	public boolean addWatcherToSpaceByUserKey(final String spaceKey,
 	                                          final String watcherUserKey) throws IOException
@@ -3523,12 +3631,10 @@ public class Confluence
 	 * <strong>При этом указать пользователя по userName.</strong>
 	 * <br>
 	 *
-	 * @param spaceKey
-	 * @param watcherUserName
-	 *
-	 * @return
-	 *
-	 * @throws IOException
+	 * @param spaceKey ключ области
+	 * @param watcherUserName имя пользователя, которого мы хотим добавить в список наблюдателей
+	 * @return булево значение (true - успешно добавили в список наблюдателей)
+	 * @throws IOException ошибки HTTP соединения
 	 */
 	public boolean addWatcherToSpaceByUserName(final String spaceKey,
 	                                           final String watcherUserName) throws IOException
@@ -3541,16 +3647,14 @@ public class Confluence
 	 * Добавить текущего (отправляющего запрос) пользователя в список наблюдателей области.
 	 * <br>
 	 *
-	 * @param spaceKey
-	 *
-	 * @return
-	 *
-	 * @throws IOException
+	 * @param spaceKey ключ области
+	 * @return булево значение (true - успешно добавили пользователя)
+	 * @throws IOException ошибки HTTP соединения
 	 */
 	public boolean addCurrentUserToWatchersOfSpace(final String spaceKey) throws IOException
 	{
 		//объект-заглушка без параметров
-		Map<String, String> params = new HashMap<String, String>();
+		Map<String, String> params = new HashMap<>();
 		
 		return addWatcherToSpace(spaceKey, params);
 	}
@@ -3568,12 +3672,10 @@ public class Confluence
 	 * <br>
 	 * или можно не указывать, тогда будет взят текущий (отправляющий запрос) пользователь
 	 *
-	 * @param spaceKey
-	 * @param params
-	 *
-	 * @return
-	 *
-	 * @throws IOException
+	 * @param spaceKey ключ области
+	 * @param params отображаение с дополнительными параметрами
+	 * @return булево значение (true - операция по удалению прошла успешно)
+	 * @throws IOException ошибки HTTP соединения
 	 */
 	private boolean removeWatcherFromSpace(final String spaceKey, final Map<String, String> params) throws IOException
 	{
@@ -3586,12 +3688,10 @@ public class Confluence
 	/**
 	 * Удалить пользователя (указанного по userKey) из списка наблюдателей области
 	 *
-	 * @param spaceKey
-	 * @param userKey
-	 *
-	 * @return
-	 *
-	 * @throws IOException
+	 * @param spaceKey ключ области
+	 * @param userKey ключ пользователя
+	 * @return булево значение (true - успешно удалили наблюдателя)
+	 * @throws IOException ошибки HTTP соединения
 	 */
 	public boolean removeWatcherFromSpaceByUserKey(final String spaceKey, final String userKey) throws IOException
 	{
@@ -3602,12 +3702,10 @@ public class Confluence
 	/**
 	 * Удалить пользователя (указанного по userName) из списка наблюдателей области
 	 *
-	 * @param spaceKey
-	 * @param userName
-	 *
-	 * @return
-	 *
-	 * @throws IOException
+	 * @param spaceKey ключ области
+	 * @param userName имя пользователя (login)
+	 * @return булево значение (true - успешно удалили наблюдателя)
+	 * @throws IOException ошибки HTTP соединения
 	 */
 	public boolean removeWatcherFromSpaceByUserName(final String spaceKey, final String userName) throws IOException
 	{
@@ -3619,15 +3717,13 @@ public class Confluence
 	 * Удалить текущего (отправляющего запрос) пользователя из списка наблюдателей области.
 	 * <br>
 	 *
-	 * @param spaceKey
-	 *
-	 * @return
-	 *
-	 * @throws IOException
+	 * @param spaceKey ключ области
+	 * @return булево значение (true - успешно удалили наблюдателя)
+	 * @throws IOException ошибки HTTP соединения
 	 */
 	public boolean removeCurrentUserFromWatchersOfSpace(final String spaceKey) throws IOException
 	{
-		Map<String, String> params = new HashMap<String, String>();
+		Map<String, String> params = new HashMap<>();
 		return removeWatcherFromSpace(spaceKey, params);
 	}
 	//конец, Remove space watcher
@@ -3640,14 +3736,10 @@ public class Confluence
 	 * Узнать находится ли текущий пользователь в списке наблюдателей области
 	 * <br>
 	 *
-	 * @param spaceKey
-	 * 		ключ области
-	 * @param params
-	 * 		параметры запроса
-	 *
-	 * @return
-	 *
-	 * @throws IOException
+	 * @param spaceKey ключ области
+	 * @param params параметры запроса
+	 * @return булево значение (true - пользователь является наблюдателем указанной области)
+	 * @throws IOException ошибки HTTP соединения
 	 */
 	private boolean isWatchSpace(final String spaceKey, Map<String, String> params) throws IOException
 	{
@@ -3661,16 +3753,13 @@ public class Confluence
 	/**
 	 * Определить является ли текущий (отправляющий запрос) пользователь, наблюдателем области
 	 *
-	 * @param spaceKey
-	 * 		ключ области
-	 *
+	 * @param spaceKey ключ области
 	 * @return булево значение статуса (является или не является наблюдателем)
-	 *
-	 * @throws IOException
+	 * @throws IOException ошибки HTTP соединения
 	 */
 	public boolean isCurrentUserWatchSpace(final String spaceKey) throws IOException
 	{
-		Map<String, String> params = new HashMap<String, String>();
+		Map<String, String> params = new HashMap<>();
 		boolean watchSpace = isWatchSpace(spaceKey, params);
 		return watchSpace;
 	}
@@ -3678,14 +3767,10 @@ public class Confluence
 	/**
 	 * Определить статус нахождения в списке наблюдателей области, пользователя заданного при помощи userName
 	 *
-	 * @param spaceKey
-	 * 		ключ области
-	 * @param userName
-	 * 		имя пользователя (login)
-	 *
+	 * @param spaceKey ключ области
+	 * @param userName имя пользователя (login)
 	 * @return булево значение статуса (является или не является наблюдателем)
-	 *
-	 * @throws IOException
+	 * @throws IOException ошибки HTTP соединения
 	 */
 	public boolean isWatchSpaceByUserName(final String spaceKey, final String userName) throws IOException
 	{
@@ -3698,14 +3783,10 @@ public class Confluence
 	 * Определить статус нахождения в списке наблюдателей области, пользователя заданного при помощи userKey
 	 * <br>
 	 *
-	 * @param spaceKey
-	 * 		ключ области
-	 * @param userKey
-	 * 		ключ пользователя
-	 *
+	 * @param spaceKey ключ области
+	 * @param userKey ключ пользователя
 	 * @return булево значение статуса (является или не является наблюдателем)
-	 *
-	 * @throws IOException
+	 * @throws IOException ошибки сети
 	 */
 	public boolean isWatchSpaceByUserKey(final String spaceKey, final String userKey) throws IOException
 	{
@@ -3723,11 +3804,9 @@ public class Confluence
 	 * Получаем информацию о пользователе
 	 * <br>
 	 *
-	 * @param params
-	 *
-	 * @return
-	 *
-	 * @throws IOException
+	 * @param params дополнительные параметры запроса
+	 * @return объект содержащий информацию о пользователе
+	 * @throws IOException ошибки HTTP соединения
 	 */
 	public User getUser(final Map<String, String> params) throws IOException
 	{
@@ -3741,9 +3820,8 @@ public class Confluence
 	 * получить информацию о юзере-анонимусе
 	 * <br>
 	 *
-	 * @return
-	 *
-	 * @throws IOException
+	 * @return объект, содержащий информацию о пользователе
+	 * @throws IOException ошибки HTTP соединения
 	 */
 	public User getAnonymous() throws IOException
 	{
@@ -3756,9 +3834,8 @@ public class Confluence
 	/**
 	 * Получаем информацию о пользователе, отправляющем запрос (текущем пользователе)
 	 *
-	 * @return
-	 *
-	 * @throws IOException
+	 * @return объект, содержащий информацию о пользователе
+	 * @throws IOException ошибки сети
 	 */
 	public User getCurrentUser() throws IOException
 	{
@@ -3771,12 +3848,9 @@ public class Confluence
 	/**
 	 * Получаем список групп, в которые входит пользователь
 	 * <br>
-	 *
-	 * @param params
-	 *
-	 * @return
-	 *
-	 * @throws IOException
+	 * @param params дополнительные параметры запроса
+	 * @return объект, содержащий список групп
+	 * @throws IOException ошибки сети
 	 */
 	public GroupResultList getUserGroups(final Map<String, String> params) throws IOException
 	{
@@ -3795,10 +3869,10 @@ public class Confluence
 	 * Получить свойство области
 	 * <br>
 	 *
-	 * @param spaceKey
-	 * @param param
-	 *
-	 * @return
+	 * @param spaceKey ключ области
+	 * @param param дополнительные параметры запроса
+	 * @return объект, содержащий список свойств области
+	 * @throws IOException ошибки сети
 	 */
 	public PropertyListResponseContainer getSpaceProperties(final String spaceKey,
 	                                                        final Map<String, String> param) throws IOException
@@ -3813,9 +3887,9 @@ public class Confluence
 	 * Создать свойство области
 	 * <br>
 	 *
-	 * @param spaceKey
-	 *
-	 * @return
+	 * @param spaceKey ключ области
+	 * @return объект содержащий данные свойства области
+	 * @throws IOException ошибки сети
 	 */
 	public PropertyResponse createSpaceProperty(final String spaceKey, final PropertyOfContent property) throws IOException
 	{
@@ -3829,10 +3903,10 @@ public class Confluence
 	 * Получить свойство области по указанному ключу
 	 * <br>
 	 *
-	 * @param spaceKey
-	 * @param key
-	 *
-	 * @return
+	 * @param spaceKey ключ области
+	 * @param key ключ свойства области
+	 * @return объект содержащий данные свойства области
+	 * @throws IOException ошибки сети
 	 */
 	public PropertyResponse getSpacePropertyByKey(final String spaceKey, final String key) throws IOException
 	{
@@ -3846,10 +3920,10 @@ public class Confluence
 	 * Обновить свойство области по указанному ключу
 	 * <br>
 	 *
-	 * @param spaceKey
-	 * @param key
-	 *
-	 * @return
+	 * @param spaceKey ключ области
+	 * @param key ключ свойства области
+	 * @return объект, содержащий данные о свойстве области
+	 * @throws IOException ошибки сети
 	 */
 	public PropertyResponse updateSpacePropertyByKey(final String spaceKey, final String key, final PropertyOfContentWithVersion property) throws IOException
 	{
@@ -3863,10 +3937,10 @@ public class Confluence
 	 * Удалить свойство области по указанному ключу
 	 * <br>
 	 *
-	 * @param spaceKey
-	 * @param key
-	 *
-	 * @return
+	 * @param spaceKey ключ области
+	 * @param key ключ свойства области
+	 * @return булево значение (true - свойство области успешно удалено)
+	 * @throws IOException ошибки сети
 	 */
 	public boolean deleteSpacePropertyByKey(final String spaceKey, final String key) throws IOException
 	{
@@ -3881,10 +3955,10 @@ public class Confluence
 	 * Создать свойство области по указанному ключу
 	 * <br>
 	 *
-	 * @param spaceKey
-	 * @param key
-	 *
-	 * @return
+	 * @param spaceKey ключ области
+	 * @param key ключ свойства облатси
+	 * @return объект, содержащий данные свойства области
+	 * @throws IOException ошибки сети
 	 */
 	PropertyResponse createSpacePropertyByKey(final String spaceKey, final String key, final PropertyOfContent property) throws IOException
 	{
@@ -3898,6 +3972,12 @@ public class Confluence
 	
 	//-----------  /rest/accessmode Начало ---------------------------------------------------
 	//----------------------------------------------------------------------------------------
+	
+	/**
+	 * todo дописать
+	 * @return todo проверить и дописать
+	 * @throws IOException ошибки сети
+	 */
 	public Object getAccessModeStatus() throws IOException
 	{
 		Call<Object> accessModeStatusCall = confluenceApi.getAccessModeStatus();
@@ -3912,7 +3992,8 @@ public class Confluence
 	//----------------------------------------------------------------------------------------
 	/**
 	 * Возвращает информацию обо всех отслеживаемых (tracked) длительных (long-running) задачах (task)
-	 * <br>
+	 * @return объект-контейнер, содержащий список задач (list of long-running task)
+	 * @throws IOException ошибки сети
 	 */
 	public LongTaskListResultContainer getTasksList() throws IOException
 	{
@@ -3925,6 +4006,8 @@ public class Confluence
 	/**
 	 * Возвращает информацию об одной отслеживаемой (tracked) длительной (long-running) задаче (task)
 	 * <br>
+	 * @return объект-представление задачи (long-running task)
+	 * @throws IOException ошибки сети
 	 */
 	public LongTask getTask(final String taskId) throws IOException
 	{

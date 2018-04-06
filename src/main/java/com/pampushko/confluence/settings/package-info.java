@@ -1,5 +1,5 @@
 /**
  * Пакет содержит код для работы с настройками клиента.
- * <p>
+ * <br>
  */
 package com.pampushko.confluence.settings;

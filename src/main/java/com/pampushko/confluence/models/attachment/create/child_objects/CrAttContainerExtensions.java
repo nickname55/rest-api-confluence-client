@@ -17,7 +17,7 @@ public class CrAttContainerExtensions extends BaseModel
 {
 	/**
 	 * Пример: "none"
-	 * <p>
+	 * <br>
 	 */
 	String position;
 }

@@ -17,73 +17,73 @@ public class CrAttContainerExpandable extends BaseModel
 {
 	/**
 	 * Пример: ""
-	 * <p>
+	 * <br>
 	 */
 	String childTypes;
 	
 	/**
 	 * Пример: "/rest/api/space/4654313"
-	 * <p>
+	 * <br>
 	 */
 	String container;
 	
 	/**
 	 * Пример: ""
-	 * <p>
+	 * <br>
 	 */
 	String metadata;
 	
 	/**
 	 * Пример: ""
-	 * <p>
+	 * <br>
 	 */
 	String operations;
 	
 	/**
 	 * Пример: "/rest/api/content/5210113/child"
-	 * <p>
+	 * <br>
 	 */
 	String children;
 	
 	/**
 	 * Пример: "/rest/api/content/5210113/restriction/byOperation"
-	 * <p>
+	 * <br>
 	 */
 	String restrictions;
 	
 	/**
 	 * Пример: "/rest/api/content/5210113/history"
-	 * <p>
+	 * <br>
 	 */
 	String history;
 	
 	/**
 	 * Пример: ""
-	 * <p>
+	 * <br>
 	 */
 	String ancestors;
 	
 	/**
 	 * Пример: ""
-	 * <p>
+	 * <br>
 	 */
 	String body;
 	
 	/**
 	 * Пример: ""
-	 * <p>
+	 * <br>
 	 */
 	String version;
 	
 	/**
 	 * Пример: "/rest/api/content/5210113/descendant"
-	 * <p>
+	 * <br>
 	 */
 	String descendants;
 	
 	/**
 	 * Пример: "/rest/api/space/4654313"
-	 * <p>
+	 * <br>
 	 */
 	String space;
 }

@@ -1,5 +1,5 @@
 /**
  * Классы для управления дочерними комментариями
- * <p>
+ * <br>
  */
 package com.pampushko.confluence.models.child_content.comment;

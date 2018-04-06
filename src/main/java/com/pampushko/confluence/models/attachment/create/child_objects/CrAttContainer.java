@@ -18,52 +18,52 @@ public class CrAttContainer extends BaseModel
 {
 	/**
 	 * Пример: "5210113"
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("id")
 	String id;
 	
 	/**
 	 * Пример: "page"
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("type")
 	String type;
 	
 	/**
 	 * Пример: "current"
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("status")
 	String status;
 	
 	/**
 	 * Пример: "Change Item"
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("title")
 	String title;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("macroRenderedOutput")
 	CrAttContainerMacroRenderedOutput macroRenderedOutput;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("extensions")
 	CrAttContainerExtensions extensions;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("_expandable")
 	CrAttContainerExpandable expandable;
 	
 	/**
-	 * <p>
+	 * <br>
 	 */
 	@SerializedName("_links")
 	CrAttContainerLinks links;

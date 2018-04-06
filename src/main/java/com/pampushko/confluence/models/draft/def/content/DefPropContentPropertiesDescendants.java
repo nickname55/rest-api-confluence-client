@@ -25,7 +25,7 @@ public class DefPropContentPropertiesDescendants extends BaseModel
 	
 	/**
 	 * Пример:
-	 * <p>
+	 * <br>
 	 * <br>
 	 */
 	@SerializedName("patternProperties")

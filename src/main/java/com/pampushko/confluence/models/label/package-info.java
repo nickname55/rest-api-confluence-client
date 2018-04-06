@@ -1,5 +1,5 @@
 /**
  * Пакет содержит модели для работы с метками в Confluence
- * <p>
+ * <br>
  */
 package com.pampushko.confluence.models.label;
