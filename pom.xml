@@ -230,28 +230,6 @@
 				<!--</configuration>-->
 			</plugin>
 
-			<!-- собираем jar-файл -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-shade-plugin</artifactId>
-				<version>3.1.0</version>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>shade</goal>
-						</goals>
-						<configuration>
-							<transformers>
-								<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-									<mainClass>com.pampushko.confluence.rest.Main</mainClass>
-								</transformer>
-							</transformers>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
 			<!-- выгружаем зависимости, в т.ч. транзитивные в один каталог -->
 			<!-- зависимости нам нужны для генерации из docbook документации в HTML при помощи dodo -->
 			<plugin>
