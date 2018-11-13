@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 public class UpdAttLinksReq
 {
 	/**
-	 * Пример: "https://java-java.atlassian.net/wiki/rest/api/content/5210113"
+	 * Пример: "https://java-java.atlassian.net/rest/api/content/5210113"
 	 * <br>
 	 */
 	String self;

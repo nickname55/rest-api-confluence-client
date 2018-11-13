@@ -19,7 +19,6 @@ public class _ContentExpandable extends BaseModel
 	@SerializedName("childTypes")
 	String childTypes;
 	
-	
 	/**
 	 * <br>
 	 */

@@ -50,7 +50,6 @@ public class Content extends BaseModel
 	@SerializedName("title")
 	private String title;
 	
-	
 	/**
 	 * Описание области
 	 * <br>
@@ -71,7 +70,6 @@ public class Content extends BaseModel
 	 */
 	@SerializedName("status")
 	private String status;
-	
 	
 	/**
 	 * <br>

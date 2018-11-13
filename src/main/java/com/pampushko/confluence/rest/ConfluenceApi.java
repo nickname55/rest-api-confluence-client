@@ -61,11 +61,11 @@ public interface ConfluenceApi
 	 * <br>
 	 *
 	 * @return возвращаёмое значение {@code SpaceResultList} - массив из областей {@code Space}
+	 *
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 * <br>
-	 *
 	 */
-	@GET("/wiki/rest/api/space")
+	@GET("/rest/api/space")
 	Call<SpaceResultList> getSpaces();
 	
 	/**
@@ -73,12 +73,17 @@ public interface ConfluenceApi
 	 * <br>
 	 * с кодом {@code key}
 	 * <br>
-	 * @param spaceKey ключ области
-	 * @param params дополнительные параметры запроса
+	 *
+	 * @param spaceKey
+	 * 		ключ области
+	 * @param params
+	 * 		дополнительные параметры запроса
+	 *
 	 * @return возвращаёмое значение {@code SpaceResultList} - массив из областей {@code Space}
+	 *
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
-	@GET("/wiki/rest/api/space/{key}")
+	@GET("/rest/api/space/{key}")
 	Call<Space> getSpaceByKey(@Path("key") String spaceKey,
 	                          @QueryMap Map<String, String> params);
 	
@@ -96,7 +101,7 @@ public interface ConfluenceApi
 	 *
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
-	@POST("/wiki/rest/api/space")
+	@POST("/rest/api/space")
 	Call<Space> createSpace(final @Body Space space);
 	
 	/**
@@ -112,7 +117,7 @@ public interface ConfluenceApi
 	 *
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
-	@DELETE("/wiki/rest/api/space/{key}")
+	@DELETE("/rest/api/space/{key}")
 	Call<NoContentResponse> deleteSpace(final @Path("key") String spaceKey);
 	
 	/**
@@ -126,7 +131,7 @@ public interface ConfluenceApi
 	 *
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
-	@POST("/wiki/rest/api/space/_private")
+	@POST("/rest/api/space/_private")
 	Call<Space> createPrivateSpace(final @Body Space space);
 	
 	/**
@@ -142,7 +147,7 @@ public interface ConfluenceApi
 	 *
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
-	@PUT("/wiki/rest/api/space/{key}")
+	@PUT("/rest/api/space/{key}")
 	Call<Space> updateSpace(final @Body Space space,
 	                        final @Path("key") String spaceKey);
 	
@@ -159,7 +164,7 @@ public interface ConfluenceApi
 	 *
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
-	@GET("/wiki/rest/api/space/{key}/content")
+	@GET("/rest/api/space/{key}/content")
 	Call<ContentContainter> getSpaceContent(final @Path("key") String spaceKey,
 	                                        final @QueryMap Map<String, String> params);
 	
@@ -175,7 +180,7 @@ public interface ConfluenceApi
 	 *
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
-	@GET("/wiki/rest/api/group")
+	@GET("/rest/api/group")
 	Call<GroupResultList> getGroups(final @Query("start") int start,
 	                                final @Query("limit") int limit);
 	
@@ -190,7 +195,7 @@ public interface ConfluenceApi
 	 *
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
-	@GET("/wiki/rest/api/group/{groupName}")
+	@GET("/rest/api/group/{groupName}")
 	Call<Group> getGroupsByName(final @Path("groupName") String groupName);
 	
 	/**
@@ -206,7 +211,7 @@ public interface ConfluenceApi
 	 *
 	 * @return todo дописать
 	 */
-	@GET("/wiki/rest/api/group/{groupName}/member")
+	@GET("/rest/api/group/{groupName}/member")
 	Call<UserResultList> getUsersFromGroupByGroupName(final @Path("groupName") String groupName,
 	                                                  final @Query("start") int start,
 	                                                  final @Query("limit") int limit);
@@ -231,7 +236,7 @@ public interface ConfluenceApi
 	 *
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
-	@GET("/wiki/rest/api/search")
+	@GET("/rest/api/search")
 	Call<SearchResultList> search(final @Query("cql") String cql,
 	                              final @QueryMap Map<String, String> params);
 	
@@ -282,7 +287,7 @@ public interface ConfluenceApi
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
 	//@formatter:on
-	@POST("/wiki/rest/api/user/watch/content/{contentId}")
+	@POST("/rest/api/user/watch/content/{contentId}")
 	Call<Void> addWatcher(final @Path("contentId") String contentId,
 	                      final @QueryMap Map<String, String> param);
 	
@@ -335,7 +340,7 @@ public interface ConfluenceApi
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
 	//@formatter:on
-	@DELETE("/wiki/rest/api/user/watch/content/{contentId}")
+	@DELETE("/rest/api/user/watch/content/{contentId}")
 	Call<Void> removeWatcher(final @Path("contentId") String contentId,
 	                         final @QueryMap Map<String, String> param);
 	
@@ -388,12 +393,16 @@ public interface ConfluenceApi
 	 * <strong>Здесь несоответствие с документацией Atlassian: в документации Atlassian указан код 404, а не 403</strong>
 	 * <br>
 	 *
-	 * @param spaceKey ключ области
-	 * @param params дополнительные параметры запроса
+	 * @param spaceKey
+	 * 		ключ области
+	 * @param params
+	 * 		дополнительные параметры запроса
+	 *
 	 * @return пустой ответ
+	 *
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
-	@POST("/wiki/rest/api/user/watch/space/{spaceKey}")
+	@POST("/rest/api/user/watch/space/{spaceKey}")
 	Call<Void> addWatcherToSpace(final @Path("spaceKey") String spaceKey,
 	                             final @QueryMap Map<String, String> params);
 	//конец, Add space watcher
@@ -406,37 +415,37 @@ public interface ConfluenceApi
 	 * Функция удаляет пользователя из списка наблюдателей Пространства (Space)
 	 * <br>
 	 * пространство указывается при помощи spaceKey
-     * <br>
-     * Пользователь не является обязательным параметром.
-     * <br>
-     * Если пользователь не указан, то будет использоваться текущий пользователь (отравитель запроса)
-     * <br>
-     * В противном случае, вы можете указать пользователя либо с помощью user key
-     * <br>
-     * или с помощью имени пользователя (username).
-     * <br>
-     * <br>
-     * <em>Обратите внимание, что только администраторы Confluence могут добавлять в наблюдатели не только себя, но и других пользователей системы.
-     * </em>
-     * <br>
-     * <br>
-     * <strong>Примеры URI запросов:</strong>
-     * <ul>
-     * <li>DELETE http://example.com/rest/api/user/watch/space/SPACEKEY</li>
+	 * <br>
+	 * Пользователь не является обязательным параметром.
+	 * <br>
+	 * Если пользователь не указан, то будет использоваться текущий пользователь (отравитель запроса)
+	 * <br>
+	 * В противном случае, вы можете указать пользователя либо с помощью user key
+	 * <br>
+	 * или с помощью имени пользователя (username).
+	 * <br>
+	 * <br>
+	 * <em>Обратите внимание, что только администраторы Confluence могут добавлять в наблюдатели не только себя, но и других пользователей системы.
+	 * </em>
+	 * <br>
+	 * <br>
+	 * <strong>Примеры URI запросов:</strong>
+	 * <ul>
+	 * <li>DELETE http://example.com/rest/api/user/watch/space/SPACEKEY</li>
      * <li>DELETE http://example.com/rest/api/user/watch/space/SPACEKEY?username=jblogs</li>
      * <li>DELETE http://example.com/rest/api/user/watch/space/SPACEKEY?key=ff8080815a58e24c015a58e263710000</li>
-     * </ul>
-     * <br>
-     * <strong>Дополнительные параметры</strong>
-     * <ul>
-     * <li>key (String) -- Optional -- userkey по которому система найдёт пользователя, которого мы хотим удалить из списка наблюдателей</li>
-     * <li>username (String) -- Optional -- username по которому система найдёт пользователя, которого мы хотим удалить из списка наблюдателей</li>
-     * <li>contentType (String) -- Optional -- тип контента для которого мы хотим удалить наблюдателя? todo протестировать как работает этот параметр, уточнить
-     * </li>
 	 * </ul>
 	 * <br>
-	 * <h2><strong>Responses:</strong></h2>
-	 * <strong>STATUS 204</strong> -- application/json, такой ответ будет получен, если пользователь успешно удален из списка наблюдателей указанной вами области (Space)
+	 * <strong>Дополнительные параметры</strong>
+	 * <ul>
+	 * <li>key (String) -- Optional -- userkey по которому система найдёт пользователя, которого мы хотим удалить из списка наблюдателей</li>
+     * <li>username (String) -- Optional -- username по которому система найдёт пользователя, которого мы хотим удалить из списка наблюдателей</li>
+	 * <li>contentType (String) -- Optional -- тип контента для которого мы хотим удалить наблюдателя? todo протестировать как работает этот параметр, уточнить
+	 * </li>
+	 * </ul>
+     * <br>
+     * <h2><strong>Responses:</strong></h2>
+     * <strong>STATUS 204</strong> -- application/json, такой ответ будет получен, если пользователь успешно удален из списка наблюдателей указанной вами области (Space)
      * <br>
      * <strong>STATUS 404</strong> -- такой код будет возвращён, если для указанного ключа области (space key) не найдена область или если выполняющий запрос пользователь не имеет достаточных прав доступа для выполнения данной операции
      * <br>
@@ -450,7 +459,7 @@ public interface ConfluenceApi
      *
      * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
      */
-	@DELETE("/wiki/rest/api/user/watch/space/{spaceKey}")
+	@DELETE("/rest/api/user/watch/space/{spaceKey}")
 	Call<Void> removeWatcherFromSpace(final @Path("spaceKey") String spaceKey,
 	                                  final @QueryMap Map<String, String> params);
 	//конец, Remove space watcher
@@ -508,7 +517,7 @@ public interface ConfluenceApi
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
 	//@formatter:on
-	@GET("/wiki/rest/api/user/watch/space/{spaceKey}")
+	@GET("/rest/api/user/watch/space/{spaceKey}")
 	Call<WatchObject> isWatchSpace(final @Path("spaceKey") String spaceKey,
 	                               final @QueryMap Map<String, String> params);
 	//конец, Is watching space
@@ -528,7 +537,7 @@ public interface ConfluenceApi
 	 *
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
-	@GET("/wiki/rest/api/user/watch/content/{contentId}")
+	@GET("/rest/api/user/watch/content/{contentId}")
 	Call<WatchObject> isWatch(final @Path("contentId") String contentId);
 	
 	/**
@@ -546,7 +555,7 @@ public interface ConfluenceApi
 	 *
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
-	@GET("/wiki/rest/api/user/watch/content/{contentId}")
+	@GET("/rest/api/user/watch/content/{contentId}")
 	Call<WatchObject> isWatchByKey(final @Path("contentId") String contentId,
 	                               final @Query("key") String userKey);
 	
@@ -565,7 +574,7 @@ public interface ConfluenceApi
 	 *
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
-	@GET("/wiki/rest/api/user/watch/content/{contentId}")
+	@GET("/rest/api/user/watch/content/{contentId}")
 	Call<WatchObject> isWatchByUsername(final @Path("contentId") String contentId,
 	                                    final @Query("username") String username);
 	//конец, Is watching content
@@ -595,7 +604,7 @@ public interface ConfluenceApi
 	 *
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
-	@POST("wiki/rest/api/content")
+	@POST("rest/api/content")
 	Call<Content> createContent(final @Body Content content, final @QueryMap Map<String, String> param);
 	
 	/**
@@ -610,9 +619,9 @@ public interface ConfluenceApi
 	 *
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
-	@GET("/wiki/rest/api/content/{contentId}")
-	Call<PageResultItem> getContentById(@Path("contentId")    final String contentId,
-	                                    @QueryMap    final Map<String, String> params);
+	@GET("/rest/api/content/{contentId}")
+	Call<PageResultItem> getContentById(@Path("contentId") final String contentId,
+	                                    @QueryMap final Map<String, String> params);
 	
 	/**
 	 * Получить версию контента по заданному индентификатору контента и номеру версии
@@ -629,7 +638,7 @@ public interface ConfluenceApi
 	 *
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
-	@GET("/wiki/rest/api/content/{contentId}/version/{versionId}")
+	@GET("/rest/api/content/{contentId}/version/{versionId}")
 	//готово
 	Call<Version> getVersionOfContent(final @Path("contentId") String contentId,
 	                                  final @Path("versionId") int versionId,
@@ -664,7 +673,7 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
 	//@formatter:on
-	@GET("/wiki/rest/api/content")
+	@GET("/rest/api/content")
 	Call<ContentResultList> getContent(@QueryMap Map<String, String> params);
 	
 	//@formatter:off
@@ -938,7 +947,7 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
 	//@formatter:on
-	@PUT("/wiki/rest/api/content/{contentId}")
+	@PUT("/rest/api/content/{contentId}")
 	Call<Content> updateContent(final @Body Content content,
 	                            final @Path("contentId") String contentId,
 	                            final @QueryMap Map<String, String> params);
@@ -947,23 +956,29 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	 * Удаляет контент имеющий указанный идентификатор
 	 * <br>
 	 *
-	 * @param contentId идентификатор контента
+	 * @param contentId
+	 * 		идентификатор контента
+	 *
 	 * @return todo дописать
+	 *
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
-	@DELETE("/wiki/rest/api/content/{contentId}")
+	@DELETE("/rest/api/content/{contentId}")
 	Call<Void> deleteContentById(final @Path(value = "contentId") String contentId);
 	
 	/**
 	 * Возвращает историю от выбранного элемента контента
 	 * <br>
 	 *
-	 * @param contendId идентификатор контента
+	 * @param contendId
+	 * 		идентификатор контента
+	 *
 	 * @return коллекция истории контента
+	 *
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
 	//todo дописать документацию к методу
-	@GET("/wiki/rest/api/content/{contentId}/history")
+	@GET("/rest/api/content/{contentId}/history")
 	Call<HistoryContainer> getContentHistory(final @Path("contentId") String contendId);
 	
 	/**
@@ -997,13 +1012,18 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	 * Это позволит работать плагинам во время периода миграции.
 	 * <br>
 	 *
-	 * @param contentId идентификатор контента
-	 * @param version версия контента
-	 * @param hash хеш макроса
+	 * @param contentId
+	 * 		идентификатор контента
+	 * @param version
+	 * 		версия контента
+	 * @param hash
+	 * 		хеш макроса
+	 *
 	 * @return todo дописать
+	 *
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
-	@GET("/wiki/rest/api/content/{contentId}/history/{version}/macro/hash/{hash}")
+	@GET("/rest/api/content/{contentId}/history/{version}/macro/hash/{hash}")
 	Call<Macros> getContentMacroBodyByHash(final @Path("contentId") String contentId,
 	                                       final @Path("version") String version,
 	                                       final @Path("hash") String hash);
@@ -1013,67 +1033,67 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	 * <br>
 	 * Этот функция в основном используется connect-приложениями
 	 * <br>
-     * которым необходимо тело макроса для того чтобы выполнить свою работу
-     * <br>
-     * Когда контент создан, если macroId не указан,
-     * <br>
-     * то Confluence будет генерировать случайный id.
-     * <br>
-     * Идентификатор (id) сохраняется, когда сохраняется контент
-     * <br>
-     * и может быть изменен Confluence, если имеются конфликтующие идентификаторы
-     * <br>
-     * Чтобы сохранить обратную совместимость, этот ресурс также будет матчить hash of the macro body,
-     * <br>
-     * даже если присутствует macroId.
+	 * которым необходимо тело макроса для того чтобы выполнить свою работу
+	 * <br>
+	 * Когда контент создан, если macroId не указан,
+	 * <br>
+	 * то Confluence будет генерировать случайный id.
+	 * <br>
+	 * Идентификатор (id) сохраняется, когда сохраняется контент
+	 * <br>
+	 * и может быть изменен Confluence, если имеются конфликтующие идентификаторы
+	 * <br>
+	 * Чтобы сохранить обратную совместимость, этот ресурс также будет матчить hash of the macro body,
+	 * <br>
+	 * даже если присутствует macroId.
 	 * <br>
 	 * Эта проверка станет излишней так как страницы получают macroId сгенерированный для них
-     * <br>
-     * и прозрачно распространяемый на все экземпляры (all instances).
-     * <br>
-     *
-     * @param contentId
-     * 		идентификатор контента
-     * @param version
-     * 		версия контента
-     * @param macroId
-     * 		идентификатор макроса
-     *
-     * @return контейнер, содержащий список элементов контента
-     *
-     * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
-     */
-	@GET("/wiki/rest/api/content/{contentId}/history/{version}/macro/id/{macroId}")
+	 * <br>
+	 * и прозрачно распространяемый на все экземпляры (all instances).
+	 * <br>
+	 *
+	 * @param contentId
+	 * 		идентификатор контента
+	 * @param version
+	 * 		версия контента
+	 * @param macroId
+	 * 		идентификатор макроса
+	 *
+	 * @return контейнер, содержащий список элементов контента
+	 *
+	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
+	 */
+	@GET("/rest/api/content/{contentId}/history/{version}/macro/id/{macroId}")
 	Call<Macros> getContentMacroBodyByMacroId(final @Path("contentId") String contentId,
 	                                          final @Path("version") String version,
 	                                          final @Path("macroId") String macroId);
 	
 	/**
-     * Получить список элементов контента,
-     * используя для запроса Confluence Query Language (CQL)
-     *
-     * @param cql
-     * 		текст запроса на Confluence Quiery Language
-     * @param params
-     * 		дополнительные параметры для поиска
-     *
-     * @return объект-контейнер, внутри которого находится коллекция найденных элементов контента
-     *
-     * @see <a href="https://developer.atlassian.com/display/CONFDEV/Advanced+Searching+using+CQL">
-     * Advanced searching using CQL
-     * </a>
-     * <br>
-     * Дополнительные параметры:
-     * <ul>
-     * <li>cql (String) - задаётся отдельным параметром метода</li>
-     * <li>cqlcontext (String) - the context to execute a cql search in, this is the json serialized form of SearchContext</li>
-     * <li>expand (String) - a comma separated list of properties to expand on the content.</li>
-     * <li>start (int) - the start point of the collection to return</li>
-     * <li>limit (int, default:<strong>25</strong>) - the limit of the number of items to return, this may be restricted by fixed system limits </li>
-     * </ul>
-     * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
-     */
-	@GET("/wiki/rest/api/content/search")
+	 * Получить список элементов контента,
+	 * используя для запроса Confluence Query Language (CQL)
+	 *
+	 * @param cql
+	 * 		текст запроса на Confluence Quiery Language
+	 * @param params
+	 * 		дополнительные параметры для поиска
+	 *
+	 * @return объект-контейнер, внутри которого находится коллекция найденных элементов контента
+	 *
+	 * @see <a href="https://developer.atlassian.com/display/CONFDEV/Advanced+Searching+using+CQL">
+	 * Advanced searching using CQL
+	 * </a>
+	 * <br>
+	 * Дополнительные параметры:
+	 * <ul>
+	 * <li>cql (String) - задаётся отдельным параметром метода</li>
+	 * <li>cqlcontext (String) - the context to execute a cql search in, this is the json serialized form of SearchContext</li>
+	 * <li>expand (String) - a comma separated list of properties to expand on the content.</li>
+	 * <li>start (int) - the start point of the collection to return</li>
+	 * <li>limit (int, default:<strong>25</strong>) - the limit of the number of items to return, this may be restricted by fixed system limits </li>
+	 * </ul>
+	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
+	 */
+	@GET("/rest/api/content/search")
 	Call<ContentContainter> getContentSearch(final @Query("cql") String cql,
 	                                         final @QueryMap Map<String, String> params);
 	//-----------Content Конец ---------------
@@ -1083,124 +1103,124 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	//----------------------------------------------------------------------------------------
 	
 	/**
-     * Fetch a paginated list of AuditRecord instances dating back to a certain time
-     * <br>
-     * <strong>Дополнительные параметры</strong>
-     * <ul>
-     * <li>startDate (String) -- </li>
-     * <li>endDate (String) -- </li>
-     * <li>start (int) -- where to start within results set</li>
-     * <li>limit (int) -- Default : <strong>1000</strong> -- the maximum results to fetch</li>
+	 * Fetch a paginated list of AuditRecord instances dating back to a certain time
+	 * <br>
+	 * <strong>Дополнительные параметры</strong>
+	 * <ul>
+	 * <li>startDate (String) -- </li>
+	 * <li>endDate (String) -- </li>
+	 * <li>start (int) -- where to start within results set</li>
+	 * <li>limit (int) -- Default : <strong>1000</strong> -- the maximum results to fetch</li>
 	 * <li>searchString (String) -- </li>
 	 * </ul>
 	 * <br>
 	 * <strong>Пример</strong>
-     *
-     * @param params
-     * 		дополнительные параметры запроса
-     *
-     * @return todo дописать
-     *
-     * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
-     */
-	@GET("/wiki/rest/api/audit")
+	 *
+	 * @param params
+	 * 		дополнительные параметры запроса
+	 *
+	 * @return todo дописать
+	 *
+	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
+	 */
+	@GET("/rest/api/audit")
 	Call<AuditResultList> getAudit(final @QueryMap Map<String, String> params);
 	
 	/**
-     * Store record
-     * <br>
+	 * Store record
+	 * <br>
 	 *
 	 * @param audit
-     * 		объект-представление записи аудита Confluence
-     *
-     * @return todo дописать
-     *
-     * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
-     */
-	@POST("/wiki/rest/api/audit")
+	 * 		объект-представление записи аудита Confluence
+	 *
+	 * @return todo дописать
+	 *
+	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
+	 */
+	@POST("/rest/api/audit")
 	Call<Audit> createAudit(final @Body Audit audit);
 	
 	/**
-     * <br>
-     * <strong>Дополнительные параметры</strong>
+	 * <br>
+	 * <strong>Дополнительные параметры</strong>
 	 * <ul>
-     * <li>startDate (String) -- </li>
-     * <li>endDate (String) -- </li>
+	 * <li>startDate (String) -- </li>
+	 * <li>endDate (String) -- </li>
 	 * <li>searchString (String) -- </li>
 	 * <li>format (String) -- Default: <strong>csv</strong> -- </li>
-     * </ul>
-     * <br>
-     * <strong>Responses</strong>
-     * <ul>
-     * <li>application/zip</li>
-     * <li>text/csv</li>
-     * </ul>
-     *
-     * @param acceptHeader
-     * 		в этом параметре мы передаем содеражимое заголовка Accept - отправляемого на сервер запроса
-     * @param params
-     * 		список дополнительных параметров
-     *
-     * @return todo дописать
-     *
-     * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
-     */
+	 * </ul>
+	 * <br>
+	 * <strong>Responses</strong>
+	 * <ul>
+	 * <li>application/zip</li>
+	 * <li>text/csv</li>
+	 * </ul>
+	 *
+	 * @param acceptHeader
+	 * 		в этом параметре мы передаем содеражимое заголовка Accept - отправляемого на сервер запроса
+	 * @param params
+	 * 		список дополнительных параметров
+	 *
+	 * @return todo дописать
+	 *
+	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
+	 */
 	@Streaming
-	@GET("/wiki/rest/api/audit/export")
+	@GET("/rest/api/audit/export")
 	Call<ResponseBody> exportAudit(@Header("Accept") String acceptHeader, final @QueryMap Map<String, String> params);
 	
 	/**
-     * Получаем текущий период хранения (Fetches the current retention period)
-     * <br>
-     * <strong>Responses</strong>
-     * application/json
-     *
-     * @return todo дописать
-     *
+	 * Получаем текущий период хранения (Fetches the current retention period)
+	 * <br>
+	 * <strong>Responses</strong>
+	 * application/json
+	 *
+	 * @return todo дописать
+	 *
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
-     */
-	@GET("/wiki/rest/api/audit/retention")
+	 */
+	@GET("/rest/api/audit/retention")
 	Call<RetentionPeriod> getRetentionPeriodOfAudit();
 	
 	/**
-     * Устанавливаем текущий период хранения (Set the retention period to a new value.)
-     * <br>
-     * Can throw ServiceException if the retention period is too long
-     *
-     * @param newRetentionPeriod
-     * 		объект-представление содержащий данные для установки текущего периода хранения
-     *
-     * @return todo дописать
-     *
-     * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
-     */
-	@PUT("/wiki/rest/api/audit/retention")
+	 * Устанавливаем текущий период хранения (Set the retention period to a new value.)
+	 * <br>
+	 * Can throw ServiceException if the retention period is too long
+	 *
+	 * @param newRetentionPeriod
+	 * 		объект-представление содержащий данные для установки текущего периода хранения
+	 *
+	 * @return todo дописать
+	 *
+	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
+	 */
+	@PUT("/rest/api/audit/retention")
 	Call<RetentionPeriod> setRetentionPeriodOfAudit(final @Body RetentionPeriod newRetentionPeriod);
 	
 	/**
-     * Fetch a paginated list of AuditRecord instances dating back to a certain time
+	 * Fetch a paginated list of AuditRecord instances dating back to a certain time
 	 * <br>
 	 * <strong>Дополнительные параметры</strong>
-     * <ul>
-     * <li>number (long) -- Default: <strong>3</strong> -- the amount of time periods</li>
-     * <li>units (String) -- the units to use for the time periods eg. 'days', 'months' etc</li>
-     * <li>start (int) -- where to start within results set</li>
-     * <li>limit (int) -- Default: <strong>1000</strong> -- the maximum results to fetch</li>
-     * <li>searchString (String) -- </li>
-     * </ul>
-     * <br>
-     * <br>
-     * <strong>Responses</strong>
-     * application/json
-     *
-     * @param params
-     * 		дополнительные параметры запроса
-     *
-     * @return todo дописать
-     *
-     * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
+	 * <ul>
+	 * <li>number (long) -- Default: <strong>3</strong> -- the amount of time periods</li>
+	 * <li>units (String) -- the units to use for the time periods eg. 'days', 'months' etc</li>
+	 * <li>start (int) -- where to start within results set</li>
+	 * <li>limit (int) -- Default: <strong>1000</strong> -- the maximum results to fetch</li>
+	 * <li>searchString (String) -- </li>
+	 * </ul>
+	 * <br>
+	 * <br>
+	 * <strong>Responses</strong>
+	 * application/json
+	 *
+	 * @param params
+	 * 		дополнительные параметры запроса
+	 *
+	 * @return todo дописать
+	 *
+	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
-	@GET("/wiki/rest/api/audit/since")
+	@GET("/rest/api/audit/since")
 	Call<AuditResultList> getAuditSince(final @QueryMap Map<String, String> params);
 	//-----------Audit Конец ---------------
 	//----------------------------------------------------------------------------------------
@@ -1361,7 +1381,7 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
 	//@formatter:on
-	@GET("/wiki/rest/api/content/{contentId}/child")
+	@GET("/rest/api/content/{contentId}/child")
 	Call<ChildContentContainer> getChild(final @Path("contentId") String contentId,
 	                                     final @QueryMap Map<String, String> params);
 	//@formatter:off
@@ -1508,7 +1528,7 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
 	//@formatter:on
-	@GET("/wiki/rest/api/content/{contentId}/child/{type}")
+	@GET("/rest/api/content/{contentId}/child/{type}")
 	Call<ChildContentContainer> getChildByType(final @Path("contentId") String contentId,
 	                                           final @Path("type") String type,
 	                                           final @QueryMap Map<String, String> params);
@@ -1655,7 +1675,7 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
 	//@formatter:on
-	@GET("/wiki/rest/api/content/{contentId}/child/page")
+	@GET("/rest/api/content/{contentId}/child/page")
 	Call<ChildPage> getChildPage(final @Path("contentId") String contentId,
 	                             final @QueryMap Map<String, String> params);
 	//@formatter:off
@@ -1801,7 +1821,7 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
 	//@formatter:on
-	@GET("/wiki/rest/api/content/{contentId}/child/attachment")
+	@GET("/rest/api/content/{contentId}/child/attachment")
 	Call<ChildAttachment> getChildAttachment(final @Path("contentId") String contentId,
 	                                         final @QueryMap Map<String, String> params);
 	//@formatter:off
@@ -1943,7 +1963,7 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
 	//@formatter:on
-	@GET("/wiki/rest/api/content/{contentId}/child/comment")
+	@GET("/rest/api/content/{contentId}/child/comment")
 	Call<ChildComment> getChildComment(final @Path("contentId") String contentId,
 	                                   final @QueryMap Map<String, String> params);
 	//----------- content/{id}/child Конец ---------------
@@ -2179,7 +2199,7 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	 */
 	//@formatter:on
 	@Multipart
-	@POST("/wiki/rest/api/content/{contentId}/child/attachment")
+	@POST("/rest/api/content/{contentId}/child/attachment")
 	Call<CreateAttResponseContainer> createAttachment(final @Path("contentId") String parentContentId,
 	                                                  @Part MultipartBody.Part fileBodyAndFileName,
 	                                                  @Part("comment") String comment,
@@ -2376,7 +2396,7 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
 	//@formatter:on
-	@PUT("/wiki/rest/api/content/{contentId}/child/attachment/{attachmentId}")
+	@PUT("/rest/api/content/{contentId}/child/attachment/{attachmentId}")
 	Call<UpdAttResponse> updateAttachment(final @Path("contentId") String parentContentId,
 	                                      final @Path("attachmentId") String attachmentId,
 	                                      final @Body UpdAttRequest body,
@@ -2607,7 +2627,7 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	 */
 	//@formatter:on
 	@Multipart
-	@POST("/wiki/rest/api/content/{contentId}/child/attachment/{attachmentId}/data")
+	@POST("/rest/api/content/{contentId}/child/attachment/{attachmentId}/data")
 	Call<UpdAttResponse> updateAttachmentFileBody(final @Path("contentId") String parentContentId,
 	                                              final @Path("attachmentId") String attachmentId,
 	                                              final @Part MultipartBody.Part fileBody,
@@ -2765,7 +2785,7 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
 	//@formatter:on
-	@GET("/wiki/rest/api/content/{contentId}/descendant")
+	@GET("/rest/api/content/{contentId}/descendant")
 	Call<DescendantsResult> getContentDescendants(final @Path("contentId") String parentContentId,
 	                                              final @Query("expand") String expand);
 	//@formatter:off
@@ -2903,7 +2923,7 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
 	//@formatter:on
-	@GET("/wiki/rest/api/content/{contentId}/descendant/{type}")
+	@GET("/rest/api/content/{contentId}/descendant/{type}")
 	Call<ContentResultList> getContentDescendantsByType(final @Path("contentId") String parentContentId,
 	                                                    final @Path("type") String type,
 	                                                    final @Query("expand") String expand,
@@ -2938,9 +2958,10 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	 * 		идентификатор элемента контента, метки этого элемента контента мы хотим получить
 	 *
 	 * @return объект содержащий список меток
+	 *
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
-	@GET("/wiki/rest/api/content/{contentId}/label")
+	@GET("/rest/api/content/{contentId}/label")
 	Call<LabelResultList> getLabels(final @Path("contentId") String contentId);
 	
 	//@formatter:off
@@ -2976,7 +2997,7 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
 	//@formatter:on
-	@POST("/wiki/rest/api/content/{contentId}/label")
+	@POST("/rest/api/content/{contentId}/label")
 	Call<LabelResultList> addLabels(final @Path("contentId") String contentId,
 	                                final @Body List<Label> labels);
 	
@@ -2999,7 +3020,7 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	 *
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
-	@DELETE("/wiki/rest/api/content/{contentId}/label")
+	@DELETE("/rest/api/content/{contentId}/label")
 	Call<Object> deleteLabels(final @Path("contentId") String contentId,
 	                          @Query(value = "name", encoded = false) String labelName);
 	
@@ -3034,7 +3055,7 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	 *
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
-	@DELETE("/wiki/rest/api/content/{contentId}/label/{labelName}")
+	@DELETE("/rest/api/content/{contentId}/label/{labelName}")
 	Call<Object> deleteLabelsWithoutQueryParam(final @Path("contentId") String contentId,
 	                                           final @Path("labelName") String labelName);
 	//----------- content/{id}/label Конец ---------------
@@ -3112,7 +3133,7 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
 	//@formatter:on
-	@GET("/wiki/rest/api/content/{contentId}/property")
+	@GET("/rest/api/content/{contentId}/property")
 	Call<PropertyListResponseContainer> getContentProperties(final @Path("contentId") String contentId);
 	
 	//@formatter:off
@@ -3177,7 +3198,7 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
 	//@formatter:on
-	@GET("/wiki/rest/api/content/{contentId}/property/{propKey}")
+	@GET("/rest/api/content/{contentId}/property/{propKey}")
 	Call<PropertyResponse> findByKeyContentProperties(final @Path("contentId") String contentId,
 	                                                  final @Path("propKey") String propKey);
 	//@formatter:off
@@ -3260,7 +3281,7 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
 	//@formatter:on
-	@PUT("/wiki/rest/api/content/{contentId}/property/{propKey}")
+	@PUT("/rest/api/content/{contentId}/property/{propKey}")
 	Call<PropertyResponse> updateContentProperties(final @Path("contentId") String contentId,
 	                                               final @Path("propKey") String propKey,
 	                                               final @Body PropertyOfContentWithVersion body);
@@ -3283,7 +3304,7 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
 	//@formatter:on
-	@DELETE("/wiki/rest/api/content/{contentId}/property/{propKey}")
+	@DELETE("/rest/api/content/{contentId}/property/{propKey}")
 	Call<Void> deleteContentProperties(final @Path("contentId") String contentId,
 	                                   final @Path("propKey") String propKey);
 	//@formatter:off
@@ -3351,7 +3372,7 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
 	//@formatter:on
-	@POST("/wiki/rest/api/content/{contentId}/property/{propKey}")
+	@POST("/rest/api/content/{contentId}/property/{propKey}")
 	Call<PropertyResponse> createContentPropertiesWithKey(final @Path("contentId") String contentId,
 	                                                      final @Path("propKey") String propKey,
 	                                                      final @Body PropertyOfContent body);
@@ -3417,7 +3438,7 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
 	//@formatter:on
-	@POST("/wiki/rest/api/content/{contentId}/property")
+	@POST("/rest/api/content/{contentId}/property")
 	Call<PropertyResponse> createContentProperties(final @Path("contentId") String contentId,
 	                                               final @Body PropertyOfContent body);
 	//----------- content/{id}/property Конец ---------------
@@ -4015,7 +4036,7 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
 	//@formatter:on
-	@GET("/wiki/rest/api/content/{contentId}/restriction/byOperation")
+	@GET("/rest/api/content/{contentId}/restriction/byOperation")
 	Call<RestrictionResponseContainer> getContentRestrictionByOperation(final @Path("contentId") String contentId);
 	
 	//@formatter:off
@@ -4623,7 +4644,7 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
 	//@formatter:on
-	@GET("/wiki/rest/api/content/{contentId}/restriction/byOperation/{operationKey}")
+	@GET("/rest/api/content/{contentId}/restriction/byOperation/{operationKey}")
 	Call<Restriction> getContentRestrictionForOperation(final @Path("contentId") String contendId,
 	                                                    final @Path("operationKey") String operationKey);
 	//----------- content/{id}/restriction Конец ---------------
@@ -5348,7 +5369,7 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
 	//@formatter:on
-	@POST("/wiki/rest/api/content/blueprint/instance/{draftId}")
+	@POST("/rest/api/content/blueprint/instance/{draftId}")
 	Call<Object> publishLegacyDraftOfBlueprint(final @Path("draftId") String draftId,
 	                                           final @Body Draft draftBody);
 	//@formatter:off
@@ -6068,7 +6089,7 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
 	//@formatter:on
-	@PUT("/wiki/rest/api/content/blueprint/instance/{draftId}")
+	@PUT("/rest/api/content/blueprint/instance/{draftId}")
 	Call<Object> publishSharedDraftOfBlueprint(final @Path("draftId") String draftId,
 	                                           final @Body Draft draftBody);
 	//----------- content/blueprint Конец ---------------
@@ -6151,7 +6172,7 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
 	//@formatter:on
-	@POST("/wiki/rest/api/contentbody/convert/{to}")
+	@POST("/rest/api/contentbody/convert/{to}")
 	Call<ConvertationResponsBody> convert(final @Body ContentBody contentBody,
 	                                      final @Path("to") String toFormat);
 	//----------- contentbody/convert/{to} Конец ---------------
@@ -6190,7 +6211,7 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
     "username": "jsmith",
     "userKey": "402880824ff933a4014ff9345d7c0002",
     "profilePicture": {
-        "path": "/wiki/relative/avatar.png",
+        "path": "/relative/avatar.png",
         "width": 48,
         "height": 48,
         "isDefault": true
@@ -6395,7 +6416,7 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
 	//@formatter:on
-	@GET("/wiki/rest/api/user")
+	@GET("/rest/api/user")
 	Call<User> getUser(final @QueryMap Map<String, String> params);
 	
 	//@formatter:off
@@ -6415,7 +6436,7 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 {
     "type": "anonymous",
     "profilePicture": {
-        "path": "/wiki/relative/avatar.png",
+        "path": "/relative/avatar.png",
         "width": 48,
         "height": 48,
         "isDefault": true
@@ -6432,7 +6453,7 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
 	//@formatter:on
-	@GET("/wiki/rest/api/user/anonymous")
+	@GET("/rest/api/user/anonymous")
 	Call<User> getAnonymous();
 	
 	//@formatter:off
@@ -6459,7 +6480,7 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
     "username": "jsmith",
     "userKey": "402880824ff933a4014ff9345d7c0002",
     "profilePicture": {
-        "path": "/wiki/relative/avatar.png",
+        "path": "/relative/avatar.png",
         "width": 48,
         "height": 48,
         "isDefault": true
@@ -6484,7 +6505,7 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
 	//@formatter:on
-	@GET("/wiki/rest/api/user/current")
+	@GET("/rest/api/user/current")
 	Call<User> getCurrentUser();
 	
 	//@formatter:off
@@ -6552,7 +6573,7 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
 	//@formatter:on
-	@GET("/wiki/rest/api/user/memberof")
+	@GET("/rest/api/user/memberof")
 	Call<GroupResultList> getUserGroups(@QueryMap Map<String, String> params);
 	//----------- user (Non-admin user operations), Конец ---------------
 	//----------------------------------------------------------------------------------------
@@ -6628,7 +6649,7 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	 * @see <a href="https://docs.atlassian.com/atlassian-confluence/REST/6.6.0/#space/%7BspaceKey%7D/property-get">Оригинальная документация к API</a>
 	 */
 	//@formatter:on
-	@GET("/wiki/rest/api/space/{spaceKey}/property")
+	@GET("/rest/api/space/{spaceKey}/property")
 	Call<PropertyListResponseContainer> getSpaceProperties(final @Path("spaceKey") String spaceKey,
 	                                                       final @QueryMap Map<String, String> param);
 	
@@ -6692,7 +6713,7 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	 * @see <a href="https://docs.atlassian.com/atlassian-confluence/REST/6.6.0/#space/%7BspaceKey%7D/property-create">Оригинальная документация к API</a>
 	 */
 	//@formatter:on
-	@POST("/wiki/rest/api/space/{spaceKey}/property")
+	@POST("/rest/api/space/{spaceKey}/property")
 	Call<PropertyResponse> createSpaceProperty(final @Path("spaceKey") String spaceKey,
 	                                           final @Body PropertyOfContent property);
 	
@@ -6764,7 +6785,7 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	 * @see <a href="https://docs.atlassian.com/atlassian-confluence/REST/6.6.0/#space/%7BspaceKey%7D/property-get">Оригинальная документация к API</a>
 	 */
 	//@formatter:on
-	@GET("/wiki/rest/api/space/{spaceKey}/property/{key}")
+	@GET("/rest/api/space/{spaceKey}/property/{key}")
 	Call<PropertyResponse> getSpacePropertyByKey(final @Path("spaceKey") String spaceKey, final @Path("key") String key);
 	
 	//@formatter:off
@@ -8045,7 +8066,7 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	 * @see <a href="https://docs.atlassian.com/atlassian-confluence/REST/6.6.0/#space/%7BspaceKey%7D/property-update">Оригинальная документация к API</a>
 	 */
 	//@formatter:on
-	@PUT("/wiki/rest/api/space/{spaceKey}/property/{key}")
+	@PUT("/rest/api/space/{spaceKey}/property/{key}")
 	Call<PropertyResponse> updateSpacePropertyByKey(final @Path("spaceKey") String spaceKey, final @Path("key") String key, final @Body PropertyOfContentWithVersion property);
 	
 	//@formatter:off
@@ -8067,7 +8088,7 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	 * @see <a href="https://docs.atlassian.com/atlassian-confluence/REST/6.6.0/#space/%7BspaceKey%7D/property-delete">Оригинальная документация к API</a>
 	 */
 	//@formatter:on
-	@DELETE("/wiki/rest/api/space/{spaceKey}/property/{key}")
+	@DELETE("/rest/api/space/{spaceKey}/property/{key}")
 	Call<Void> deleteSpacePropertyByKey(final @Path("spaceKey") String spaceKey, final @Path("key") String key);
 	
 	//@formatter:off
@@ -8137,13 +8158,14 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	 * @see <a href="https://docs.atlassian.com/atlassian-confluence/REST/6.6.0/#space/%7BspaceKey%7D/property-create">Оригинальная документация к API</a>
 	 */
 	//@formatter:on
-	@POST("/wiki/rest/api/space/{spaceKey}/property/{key}")
+	@POST("/rest/api/space/{spaceKey}/property/{key}")
 	Call<PropertyResponse> createSpacePropertyByKey(final @Path("spaceKey") String spaceKey, final @Path("key") String key, final @Body PropertyOfContent propertyOfContent);
 	//----------- space/{spaceKey}/property (Manipulating space properties). Конец -----------
 	//----------------------------------------------------------------------------------------
 	
 	//-----------  /rest/accessmode Начало ---------------------------------------------------
 	//----------------------------------------------------------------------------------------
+	
 	/**
 	 * todo ФУНКЦИЯ НЕ РАБОТАЕТ! ХОТЯ СОГЛАСНО ДОКУМЕНТАЦИИ - РАБОТАТЬ ДОЛЖНА
 	 * <br>
@@ -8165,7 +8187,7 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	 *
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/">Оригинальная документация к API</a>
 	 */
-	@GET("/wiki/rest/api/accessmode")
+	@GET("/rest/api/accessmode")
 	Call<Object> getAccessModeStatus();
 	//----------- /rest/accessmode Конец -----------------------------------------------------
 	//----------------------------------------------------------------------------------------
@@ -8256,7 +8278,7 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	 * @see <a href="https://docs.atlassian.com/ConfluenceServer/rest/6.8.1/#longtask-getTasks">Оригинальная документация к API</a>
 	 */
 	//@formatter:on
-	@GET("/wiki/rest/api/longtask")
+	@GET("/rest/api/longtask")
 	Call<LongTaskListResultContainer> getTasksList();
 	
 	//@formatter:off
@@ -8339,11 +8361,10 @@ http://example.com/rest/api/content?type=blogpost&amp;spaceKey=TST&amp;title=Bac
 	 * @return объект содержащий список long задач, объект создается на основе возвращаемого JSON
 	 */
 	//@formatter:on
-	@GET("/wiki/rest/api/longtask/{taskId}")
+	@GET("/rest/api/longtask/{taskId}")
 	Call<LongTask> getTask(final @Path("taskId") String taskId);
 	
 	//-----------   longtask: REST wrapper for the LongTaskService. Конец --------------------
 	//----------------------------------------------------------------------------------------
-
-
+	
 }

@@ -4,6 +4,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.pampushko.confluence.custom_deserialazers.ExpandablePropDeserializer;
 import com.pampushko.confluence.models.BaseModel;
+import com.pampushko.confluence.models.Body;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -42,7 +43,6 @@ public class ChildCommentContainer extends BaseModel
 	 */
 	private String title;
 	
-	
 	/**
 	 * todo проверить необходимость этого свойства
 	 */
@@ -55,7 +55,6 @@ public class ChildCommentContainer extends BaseModel
 	 */
 	private ChildCommentExtensions extensions;
 	
-	
 	//---------------------------------------------------------------------------
 	/**
 	 * <br>
@@ -63,11 +62,13 @@ public class ChildCommentContainer extends BaseModel
 	@SerializedName("_expandable")
 	private ChildCommentExpandable expandable;
 	
-	
 	/**
 	 * <br>
 	 */
 	@SerializedName("_links")
 	private ChildCommentLinks links;
+	
+	@SerializedName("body")
+	Body body;
 	
 }

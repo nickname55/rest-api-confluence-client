@@ -17,21 +17,21 @@ import lombok.extern.slf4j.Slf4j;
 public class PropertyResponseContainerLinks extends BaseModel
 {
 	/**
-	 * Пример: "https://java-java.atlassian.net/wiki"
+	 * Пример: "https://java-java.atlassian.net"
 	 * <br>
 	 */
 	@SerializedName("base")
 	String base;
 	
 	/**
-	 * Пример: "/wiki"
+	 * Пример: ""
 	 * <br>
 	 */
 	@SerializedName("context")
 	String context;
 	
 	/**
-	 * Пример: "https://java-java.atlassian.net/wiki/rest/api/content/5210113/property/hello"
+	 * Пример: "https://java-java.atlassian.net/rest/api/content/5210113/property/hello"
 	 * <br>
 	 */
 	@SerializedName("self")

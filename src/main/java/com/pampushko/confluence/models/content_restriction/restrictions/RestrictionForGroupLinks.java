@@ -17,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 public class RestrictionForGroupLinks extends BaseModel
 {
 	/**
-	 * Пример: self : "https://java-java.atlassian.net/wiki/rest/experimental/group/jira-core-users"
+	 * Пример: self : "https://java-java.atlassian.net/rest/experimental/group/jira-core-users"
 	 * <br>
 	 */
 	@SerializedName("self")

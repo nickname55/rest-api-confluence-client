@@ -16,19 +16,19 @@ import lombok.extern.slf4j.Slf4j;
 public class DescendantResultLinks extends BaseModel
 {
 	/**
-	 * Пример: "https://java-java.atlassian.net/wiki/rest/api/content/5210113/descendant"
+	 * Пример: "https://java-java.atlassian.net/rest/api/content/5210113/descendant"
 	 * <br>
 	 */
 	String self;
 	
 	/**
-	 * Пример: "https://java-java.atlassian.net/wiki"
+	 * Пример: "https://java-java.atlassian.net"
 	 * <br>
 	 */
 	String base;
 	
 	/**
-	 * Пример: "/wiki"
+	 * Пример: ""
 	 * <br>
 	 */
 	String context;

@@ -67,7 +67,6 @@ public class Space extends BaseModel
 	@SerializedName("_expandable")
 	_SpaceExpandable expandable;
 	
-	
 	/**
 	 * <br>
 	 */

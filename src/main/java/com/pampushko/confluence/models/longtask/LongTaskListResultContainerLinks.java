@@ -17,21 +17,21 @@ import lombok.extern.slf4j.Slf4j;
 public class LongTaskListResultContainerLinks extends BaseModel
 {
 	/**
-	 * Пример: "https://java-java.atlassian.net/wiki"
+	 * Пример: "https://java-java.atlassian.net"
 	 * <br>
 	 */
 	@SerializedName("base")
 	String base;
 	
 	/**
-	 * Пример: "/wiki"
+	 * Пример: ""
 	 * <br>
 	 */
 	@SerializedName("context")
 	String context;
 	
 	/**
-	 * Пример: "https://java-java.atlassian.net/wiki/rest/api/longtask"
+	 * Пример: "https://java-java.atlassian.net/rest/api/longtask"
 	 * <br>
 	 */
 	@SerializedName("self")

@@ -11,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 public class ChildAttachmentContainerLinks extends BaseModel
 {
 	/**
-	 *
 	 * <br>
 	 */
 	@SerializedName("base")
@@ -24,7 +23,6 @@ public class ChildAttachmentContainerLinks extends BaseModel
 	String context;
 	
 	/**
-	 *
 	 * <br>
 	 */
 	@SerializedName("self")

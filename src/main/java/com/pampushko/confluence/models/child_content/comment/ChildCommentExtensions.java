@@ -28,4 +28,9 @@ public class ChildCommentExtensions extends BaseModel
 	@SerializedName("_expandable")
 	ChildCommentExtensionsExpandable expandable;
 	
+	@SerializedName("inlineProperties")
+	InlineProperties inlineProperties;
+	
+	@SerializedName("resolution")
+	Resolution resolution;
 }

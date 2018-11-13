@@ -34,7 +34,8 @@ public class ExpandablePropDeserializer<T> implements JsonDeserializer<T>
 		if (json.isJsonObject())
 		{
 			return new Gson().fromJson(json, typeOfT);
-		} else
+		}
+		else
 		{
 			return null;
 		}

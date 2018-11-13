@@ -137,11 +137,16 @@ public class Confluence
 	 * с кодом {@code key}
 	 * <br>
 	 *
-	 * @param spaceKey ключ области
-	 * @param params дополнительные параметры
+	 * @param spaceKey
+	 * 		ключ области
+	 * @param params
+	 * 		дополнительные параметры
+	 *
 	 * @return возвращаёмое значение {@code SpaceResultList} - массив из областей {@code Space}
-	 * @throws IOException ошибки сети
-	 * <br>
+	 *
+	 * @throws IOException
+	 * 		ошибки сети
+	 * 		<br>
 	 */
 	public Space getSpaceByKey(final String spaceKey, final Map<String, String> params) throws IOException
 	{
@@ -1520,7 +1525,9 @@ public class Confluence
 	 * 		другие параметры, передаваемые в запросе
 	 *
 	 * @return todo дописать
-	 * @throws IOException ошибки сети
+	 *
+	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	public CreateAttResponseContainer createAttachment(final String parentContentId,
 	                                                   final MultipartBody.Part fileBodyAndFileName,
@@ -3389,10 +3396,16 @@ public class Confluence
 	/**
 	 * Publish legacy draft
 	 * <br>
-	 * @param draftId идентификатор черновика
-	 * @param draftBody объект с данными тела черновика
+	 *
+	 * @param draftId
+	 * 		идентификатор черновика
+	 * @param draftBody
+	 * 		объект с данными тела черновика
+	 *
 	 * @return todo проверить и дописать
-	 * @throws IOException ошибка сети
+	 *
+	 * @throws IOException
+	 * 		ошибка сети
 	 */
 	public Object publishLegacyDraftOfBlueprint(final String draftId, final Draft draftBody) throws IOException
 	{
@@ -3405,10 +3418,16 @@ public class Confluence
 	/**
 	 * Publish shared draft
 	 * <br>
-	 * @param draftId идентификатор черновика
-	 * @param draftBody объект с данными тела черновика
+	 *
+	 * @param draftId
+	 * 		идентификатор черновика
+	 * @param draftBody
+	 * 		объект с данными тела черновика
+	 *
 	 * @return проверить и дописать
-	 * @throws IOException ошибка сети
+	 *
+	 * @throws IOException
+	 * 		ошибка сети
 	 */
 	public Object publishSharedDraftOfBlueprint(final String draftId, final Draft draftBody) throws IOException
 	{
@@ -3443,9 +3462,14 @@ public class Confluence
 	 * Добавить пользователя, выполняющего запрос, в наблюдатели контента (контент определяется по contentId)
 	 * <br>
 	 * <strong>Более подробную документацию можно прочесть в методе : {@link ConfluenceApi#addWatcher(String, Map)}</strong>
-	 * @param contentId	идентификатор элемента контента
+	 *
+	 * @param contentId
+	 * 		идентификатор элемента контента
+	 *
 	 * @return если операция выполнена успешно то true, в противном случае - false
-	 * @throws IOException ошибки соединения по HTTP
+	 *
+	 * @throws IOException
+	 * 		ошибки соединения по HTTP
 	 */
 	public boolean addCurrentUserToWatchers(final String contentId) throws IOException
 	{
@@ -3460,10 +3484,15 @@ public class Confluence
 	 * <br>
 	 * <strong>Более подробную документацию можно прочесть в методе : {@link ConfluenceApi#addWatcher(String, Map)}</strong>
 	 *
-	 * @param contentId идентификатор элемента контента
-	 * @param username имя пользователя (login)
+	 * @param contentId
+	 * 		идентификатор элемента контента
+	 * @param username
+	 * 		имя пользователя (login)
+	 *
 	 * @return если операция выполнена успешно то true, в противном случае - false
-	 * @throws IOException ошибки соединения по HTTP
+	 *
+	 * @throws IOException
+	 * 		ошибки соединения по HTTP
 	 */
 	public boolean addWatcherByUserName(final String contentId, final String username) throws IOException
 	{
@@ -3476,10 +3505,15 @@ public class Confluence
 	 * <br>
 	 * <strong>Более подробную документацию можно прочесть в методе : {@link ConfluenceApi#addWatcher(String, Map)}</strong>
 	 *
-	 * @param contentId    идентификатор элемента контента
-	 * @param userKey ключ пользователя
+	 * @param contentId
+	 * 		идентификатор элемента контента
+	 * @param userKey
+	 * 		ключ пользователя
+	 *
 	 * @return если операция выполнена успешно то true, в противном случае - false
-	 * @throws IOException ошибки соединения по HTTP
+	 *
+	 * @throws IOException
+	 * 		ошибки соединения по HTTP
 	 */
 	public boolean addWatcherByUserKey(final String contentId, final String userKey) throws IOException
 	{
@@ -3492,10 +3526,15 @@ public class Confluence
 	 * <br>
 	 * <strong>Более подробную документацию можно прочесть в методе : {@link ConfluenceApi#addWatcher(String, Map)}</strong>
 	 *
-	 * @param contentId идентификатор элемента контента
-	 * @param params отображаение на основе которого генерируют параметры запроса
+	 * @param contentId
+	 * 		идентификатор элемента контента
+	 * @param params
+	 * 		отображаение на основе которого генерируют параметры запроса
+	 *
 	 * @return если операция выполнена успешно то true, в противном случае - false
-	 * @throws IOException ошибки соединения по HTTP
+	 *
+	 * @throws IOException
+	 * 		ошибки соединения по HTTP
 	 */
 	private boolean addUserToWatchers(final String contentId, Map<String, String> params) throws IOException
 	{
@@ -3517,9 +3556,13 @@ public class Confluence
 	 * <br>
 	 * <strong>Более подробную документацию можно прочесть в методе : {@link ConfluenceApi#removeWatcher(String, Map)}</strong>
 	 *
-	 * @param contentId идентификатор элемента контента
+	 * @param contentId
+	 * 		идентификатор элемента контента
+	 *
 	 * @return если операция выполнена успешно то true, в противном случае - false
-	 * @throws IOException ошибки соединения по HTTP
+	 *
+	 * @throws IOException
+	 * 		ошибки соединения по HTTP
 	 */
 	public boolean removeCurrentUserFromWatchers(final String contentId) throws IOException
 	{
@@ -3535,10 +3578,15 @@ public class Confluence
 	 * <br>
 	 * <strong>Более подробную документацию можно прочесть в методе : {@link ConfluenceApi#removeWatcher(String, Map)}</strong>
 	 *
-	 * @param contentId идентификатор элемента контента
-	 * @param userName имя пользователя (login)
+	 * @param contentId
+	 * 		идентификатор элемента контента
+	 * @param userName
+	 * 		имя пользователя (login)
+	 *
 	 * @return если операция выполнена успешно то true, в противном случае - false
-	 * @throws IOException ошибки соединения по HTTP
+	 *
+	 * @throws IOException
+	 * 		ошибки соединения по HTTP
 	 */
 	public boolean removeWatcherByUserName(final String contentId, final String userName) throws IOException
 	{
@@ -3551,10 +3599,15 @@ public class Confluence
 	 * <br>
 	 * <strong>Более подробную документацию можно прочесть в методе : {@link ConfluenceApi#removeWatcher(String, Map)}</strong>
 	 *
-	 * @param contentId идентификатор элемента контента
-	 * @param userKey ключ пользователя
+	 * @param contentId
+	 * 		идентификатор элемента контента
+	 * @param userKey
+	 * 		ключ пользователя
+	 *
 	 * @return если операция выполнена успешно то true, в противном случае - false
-	 * @throws IOException ошибки соединения по HTTP
+	 *
+	 * @throws IOException
+	 * 		ошибки соединения по HTTP
 	 */
 	public boolean removeWatcherByUserKey(final String contentId, final String userKey) throws IOException
 	{
@@ -3567,10 +3620,15 @@ public class Confluence
 	 * <br>
 	 * <strong>Более подробную документацию можно прочесть в методе : {@link ConfluenceApi#removeWatcher(String, Map)}</strong>
 	 *
-	 * @param contentId идентификатор элемента контента
-	 * @param params отображение на основе которого генерируют параметры запроса
+	 * @param contentId
+	 * 		идентификатор элемента контента
+	 * @param params
+	 * 		отображение на основе которого генерируют параметры запроса
+	 *
 	 * @return если операция выполнена успешно - то true, в противном случае - false
-	 * @throws IOException ошибки соединения по HTTP
+	 *
+	 * @throws IOException
+	 * 		ошибки соединения по HTTP
 	 */
 	private boolean removeUserFromWatchers(final String contentId, Map<String, String> params) throws IOException
 	{
@@ -3591,10 +3649,15 @@ public class Confluence
 	 * Добавить пользователя к списку наблюдателей области
 	 * <br>
 	 *
-	 * @param spaceKey ключ области
-	 * @param params дополнительные параметры
+	 * @param spaceKey
+	 * 		ключ области
+	 * @param params
+	 * 		дополнительные параметры
+	 *
 	 * @return булево значение указывающее на то добавлен ли наблюдатель (true - добавлен, false - не добавлен)
-	 * @throws IOException ошибка соединения по HTTP
+	 *
+	 * @throws IOException
+	 * 		ошибка соединения по HTTP
 	 */
 	private boolean addWatcherToSpace(final String spaceKey,
 	                                  final Map<String, String> params) throws IOException
@@ -3613,10 +3676,15 @@ public class Confluence
 	 * <strong>При это указать пользователя по userKey</strong>
 	 * <br>
 	 *
-	 * @param spaceKey ключ области
-	 * @param watcherUserKey ключ идентифицирующий пользователя
+	 * @param spaceKey
+	 * 		ключ области
+	 * @param watcherUserKey
+	 * 		ключ идентифицирующий пользователя
+	 *
 	 * @return булево значение (true - успешно удалось добавить, false - добавить не удалось)
-	 * @throws IOException ошибки HTTP соединения
+	 *
+	 * @throws IOException
+	 * 		ошибки HTTP соединения
 	 */
 	public boolean addWatcherToSpaceByUserKey(final String spaceKey,
 	                                          final String watcherUserKey) throws IOException
@@ -3631,10 +3699,15 @@ public class Confluence
 	 * <strong>При этом указать пользователя по userName.</strong>
 	 * <br>
 	 *
-	 * @param spaceKey ключ области
-	 * @param watcherUserName имя пользователя, которого мы хотим добавить в список наблюдателей
+	 * @param spaceKey
+	 * 		ключ области
+	 * @param watcherUserName
+	 * 		имя пользователя, которого мы хотим добавить в список наблюдателей
+	 *
 	 * @return булево значение (true - успешно добавили в список наблюдателей)
-	 * @throws IOException ошибки HTTP соединения
+	 *
+	 * @throws IOException
+	 * 		ошибки HTTP соединения
 	 */
 	public boolean addWatcherToSpaceByUserName(final String spaceKey,
 	                                           final String watcherUserName) throws IOException
@@ -3647,9 +3720,13 @@ public class Confluence
 	 * Добавить текущего (отправляющего запрос) пользователя в список наблюдателей области.
 	 * <br>
 	 *
-	 * @param spaceKey ключ области
+	 * @param spaceKey
+	 * 		ключ области
+	 *
 	 * @return булево значение (true - успешно добавили пользователя)
-	 * @throws IOException ошибки HTTP соединения
+	 *
+	 * @throws IOException
+	 * 		ошибки HTTP соединения
 	 */
 	public boolean addCurrentUserToWatchersOfSpace(final String spaceKey) throws IOException
 	{
@@ -3672,10 +3749,15 @@ public class Confluence
 	 * <br>
 	 * или можно не указывать, тогда будет взят текущий (отправляющий запрос) пользователь
 	 *
-	 * @param spaceKey ключ области
-	 * @param params отображаение с дополнительными параметрами
+	 * @param spaceKey
+	 * 		ключ области
+	 * @param params
+	 * 		отображаение с дополнительными параметрами
+	 *
 	 * @return булево значение (true - операция по удалению прошла успешно)
-	 * @throws IOException ошибки HTTP соединения
+	 *
+	 * @throws IOException
+	 * 		ошибки HTTP соединения
 	 */
 	private boolean removeWatcherFromSpace(final String spaceKey, final Map<String, String> params) throws IOException
 	{
@@ -3688,10 +3770,15 @@ public class Confluence
 	/**
 	 * Удалить пользователя (указанного по userKey) из списка наблюдателей области
 	 *
-	 * @param spaceKey ключ области
-	 * @param userKey ключ пользователя
+	 * @param spaceKey
+	 * 		ключ области
+	 * @param userKey
+	 * 		ключ пользователя
+	 *
 	 * @return булево значение (true - успешно удалили наблюдателя)
-	 * @throws IOException ошибки HTTP соединения
+	 *
+	 * @throws IOException
+	 * 		ошибки HTTP соединения
 	 */
 	public boolean removeWatcherFromSpaceByUserKey(final String spaceKey, final String userKey) throws IOException
 	{
@@ -3702,10 +3789,15 @@ public class Confluence
 	/**
 	 * Удалить пользователя (указанного по userName) из списка наблюдателей области
 	 *
-	 * @param spaceKey ключ области
-	 * @param userName имя пользователя (login)
+	 * @param spaceKey
+	 * 		ключ области
+	 * @param userName
+	 * 		имя пользователя (login)
+	 *
 	 * @return булево значение (true - успешно удалили наблюдателя)
-	 * @throws IOException ошибки HTTP соединения
+	 *
+	 * @throws IOException
+	 * 		ошибки HTTP соединения
 	 */
 	public boolean removeWatcherFromSpaceByUserName(final String spaceKey, final String userName) throws IOException
 	{
@@ -3717,9 +3809,13 @@ public class Confluence
 	 * Удалить текущего (отправляющего запрос) пользователя из списка наблюдателей области.
 	 * <br>
 	 *
-	 * @param spaceKey ключ области
+	 * @param spaceKey
+	 * 		ключ области
+	 *
 	 * @return булево значение (true - успешно удалили наблюдателя)
-	 * @throws IOException ошибки HTTP соединения
+	 *
+	 * @throws IOException
+	 * 		ошибки HTTP соединения
 	 */
 	public boolean removeCurrentUserFromWatchersOfSpace(final String spaceKey) throws IOException
 	{
@@ -3736,10 +3832,15 @@ public class Confluence
 	 * Узнать находится ли текущий пользователь в списке наблюдателей области
 	 * <br>
 	 *
-	 * @param spaceKey ключ области
-	 * @param params параметры запроса
+	 * @param spaceKey
+	 * 		ключ области
+	 * @param params
+	 * 		параметры запроса
+	 *
 	 * @return булево значение (true - пользователь является наблюдателем указанной области)
-	 * @throws IOException ошибки HTTP соединения
+	 *
+	 * @throws IOException
+	 * 		ошибки HTTP соединения
 	 */
 	private boolean isWatchSpace(final String spaceKey, Map<String, String> params) throws IOException
 	{
@@ -3753,9 +3854,13 @@ public class Confluence
 	/**
 	 * Определить является ли текущий (отправляющий запрос) пользователь, наблюдателем области
 	 *
-	 * @param spaceKey ключ области
+	 * @param spaceKey
+	 * 		ключ области
+	 *
 	 * @return булево значение статуса (является или не является наблюдателем)
-	 * @throws IOException ошибки HTTP соединения
+	 *
+	 * @throws IOException
+	 * 		ошибки HTTP соединения
 	 */
 	public boolean isCurrentUserWatchSpace(final String spaceKey) throws IOException
 	{
@@ -3767,10 +3872,15 @@ public class Confluence
 	/**
 	 * Определить статус нахождения в списке наблюдателей области, пользователя заданного при помощи userName
 	 *
-	 * @param spaceKey ключ области
-	 * @param userName имя пользователя (login)
+	 * @param spaceKey
+	 * 		ключ области
+	 * @param userName
+	 * 		имя пользователя (login)
+	 *
 	 * @return булево значение статуса (является или не является наблюдателем)
-	 * @throws IOException ошибки HTTP соединения
+	 *
+	 * @throws IOException
+	 * 		ошибки HTTP соединения
 	 */
 	public boolean isWatchSpaceByUserName(final String spaceKey, final String userName) throws IOException
 	{
@@ -3783,10 +3893,15 @@ public class Confluence
 	 * Определить статус нахождения в списке наблюдателей области, пользователя заданного при помощи userKey
 	 * <br>
 	 *
-	 * @param spaceKey ключ области
-	 * @param userKey ключ пользователя
+	 * @param spaceKey
+	 * 		ключ области
+	 * @param userKey
+	 * 		ключ пользователя
+	 *
 	 * @return булево значение статуса (является или не является наблюдателем)
-	 * @throws IOException ошибки сети
+	 *
+	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	public boolean isWatchSpaceByUserKey(final String spaceKey, final String userKey) throws IOException
 	{
@@ -3804,9 +3919,13 @@ public class Confluence
 	 * Получаем информацию о пользователе
 	 * <br>
 	 *
-	 * @param params дополнительные параметры запроса
+	 * @param params
+	 * 		дополнительные параметры запроса
+	 *
 	 * @return объект содержащий информацию о пользователе
-	 * @throws IOException ошибки HTTP соединения
+	 *
+	 * @throws IOException
+	 * 		ошибки HTTP соединения
 	 */
 	public User getUser(final Map<String, String> params) throws IOException
 	{
@@ -3821,7 +3940,9 @@ public class Confluence
 	 * <br>
 	 *
 	 * @return объект, содержащий информацию о пользователе
-	 * @throws IOException ошибки HTTP соединения
+	 *
+	 * @throws IOException
+	 * 		ошибки HTTP соединения
 	 */
 	public User getAnonymous() throws IOException
 	{
@@ -3835,7 +3956,9 @@ public class Confluence
 	 * Получаем информацию о пользователе, отправляющем запрос (текущем пользователе)
 	 *
 	 * @return объект, содержащий информацию о пользователе
-	 * @throws IOException ошибки сети
+	 *
+	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	public User getCurrentUser() throws IOException
 	{
@@ -3848,9 +3971,14 @@ public class Confluence
 	/**
 	 * Получаем список групп, в которые входит пользователь
 	 * <br>
-	 * @param params дополнительные параметры запроса
+	 *
+	 * @param params
+	 * 		дополнительные параметры запроса
+	 *
 	 * @return объект, содержащий список групп
-	 * @throws IOException ошибки сети
+	 *
+	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	public GroupResultList getUserGroups(final Map<String, String> params) throws IOException
 	{
@@ -3869,10 +3997,15 @@ public class Confluence
 	 * Получить свойство области
 	 * <br>
 	 *
-	 * @param spaceKey ключ области
-	 * @param param дополнительные параметры запроса
+	 * @param spaceKey
+	 * 		ключ области
+	 * @param param
+	 * 		дополнительные параметры запроса
+	 *
 	 * @return объект, содержащий список свойств области
-	 * @throws IOException ошибки сети
+	 *
+	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	public PropertyListResponseContainer getSpaceProperties(final String spaceKey,
 	                                                        final Map<String, String> param) throws IOException
@@ -3887,9 +4020,13 @@ public class Confluence
 	 * Создать свойство области
 	 * <br>
 	 *
-	 * @param spaceKey ключ области
+	 * @param spaceKey
+	 * 		ключ области
+	 *
 	 * @return объект содержащий данные свойства области
-	 * @throws IOException ошибки сети
+	 *
+	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	public PropertyResponse createSpaceProperty(final String spaceKey, final PropertyOfContent property) throws IOException
 	{
@@ -3903,10 +4040,15 @@ public class Confluence
 	 * Получить свойство области по указанному ключу
 	 * <br>
 	 *
-	 * @param spaceKey ключ области
-	 * @param key ключ свойства области
+	 * @param spaceKey
+	 * 		ключ области
+	 * @param key
+	 * 		ключ свойства области
+	 *
 	 * @return объект содержащий данные свойства области
-	 * @throws IOException ошибки сети
+	 *
+	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	public PropertyResponse getSpacePropertyByKey(final String spaceKey, final String key) throws IOException
 	{
@@ -3920,10 +4062,15 @@ public class Confluence
 	 * Обновить свойство области по указанному ключу
 	 * <br>
 	 *
-	 * @param spaceKey ключ области
-	 * @param key ключ свойства области
+	 * @param spaceKey
+	 * 		ключ области
+	 * @param key
+	 * 		ключ свойства области
+	 *
 	 * @return объект, содержащий данные о свойстве области
-	 * @throws IOException ошибки сети
+	 *
+	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	public PropertyResponse updateSpacePropertyByKey(final String spaceKey, final String key, final PropertyOfContentWithVersion property) throws IOException
 	{
@@ -3937,10 +4084,15 @@ public class Confluence
 	 * Удалить свойство области по указанному ключу
 	 * <br>
 	 *
-	 * @param spaceKey ключ области
-	 * @param key ключ свойства области
+	 * @param spaceKey
+	 * 		ключ области
+	 * @param key
+	 * 		ключ свойства области
+	 *
 	 * @return булево значение (true - свойство области успешно удалено)
-	 * @throws IOException ошибки сети
+	 *
+	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	public boolean deleteSpacePropertyByKey(final String spaceKey, final String key) throws IOException
 	{
@@ -3955,10 +4107,15 @@ public class Confluence
 	 * Создать свойство области по указанному ключу
 	 * <br>
 	 *
-	 * @param spaceKey ключ области
-	 * @param key ключ свойства облатси
+	 * @param spaceKey
+	 * 		ключ области
+	 * @param key
+	 * 		ключ свойства облатси
+	 *
 	 * @return объект, содержащий данные свойства области
-	 * @throws IOException ошибки сети
+	 *
+	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	PropertyResponse createSpacePropertyByKey(final String spaceKey, final String key, final PropertyOfContent property) throws IOException
 	{
@@ -3975,8 +4132,11 @@ public class Confluence
 	
 	/**
 	 * todo дописать
+	 *
 	 * @return todo проверить и дописать
-	 * @throws IOException ошибки сети
+	 *
+	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	public Object getAccessModeStatus() throws IOException
 	{
@@ -3990,10 +4150,14 @@ public class Confluence
 	
 	//-----------  longtask: REST wrapper for the LongTaskService. Начало --------------------
 	//----------------------------------------------------------------------------------------
+	
 	/**
 	 * Возвращает информацию обо всех отслеживаемых (tracked) длительных (long-running) задачах (task)
+	 *
 	 * @return объект-контейнер, содержащий список задач (list of long-running task)
-	 * @throws IOException ошибки сети
+	 *
+	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	public LongTaskListResultContainer getTasksList() throws IOException
 	{
@@ -4006,8 +4170,11 @@ public class Confluence
 	/**
 	 * Возвращает информацию об одной отслеживаемой (tracked) длительной (long-running) задаче (task)
 	 * <br>
+	 *
 	 * @return объект-представление задачи (long-running task)
-	 * @throws IOException ошибки сети
+	 *
+	 * @throws IOException
+	 * 		ошибки сети
 	 */
 	public LongTask getTask(final String taskId) throws IOException
 	{

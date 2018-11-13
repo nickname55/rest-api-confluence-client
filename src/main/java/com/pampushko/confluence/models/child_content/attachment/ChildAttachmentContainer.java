@@ -47,7 +47,6 @@ public class ChildAttachmentContainer extends BaseModel
 	 */
 	private ChildAttachmentMetadata metadata;
 	
-	
 	/**
 	 * todo проверить необходимость наличия этого свойства
 	 * <br>
@@ -61,14 +60,12 @@ public class ChildAttachmentContainer extends BaseModel
 	 */
 	private ChildAttachmentExtensions extensions;
 	
-	
 	//---------------------------------------------------------------------------
 	/**
 	 * <br>
 	 */
 	@SerializedName("_expandable")
 	private ChildAttachmentExpandable expandable;
-	
 	
 	/**
 	 * <br>

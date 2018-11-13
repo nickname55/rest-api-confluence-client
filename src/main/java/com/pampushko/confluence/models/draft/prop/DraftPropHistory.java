@@ -24,7 +24,6 @@ public class DraftPropHistory extends BaseModel
 	@SerializedName("type")
 	String type;
 	
-	
 	/**
 	 * Пример:
 	 * <br>

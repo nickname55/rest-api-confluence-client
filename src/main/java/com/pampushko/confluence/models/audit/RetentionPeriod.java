@@ -19,14 +19,12 @@ import lombok.extern.slf4j.Slf4j;
 public class RetentionPeriod extends BaseModel
 {
 	/**
-	 *
 	 * <br>
 	 */
 	@SerializedName("number")
 	long number;
 	
 	/**
-	 *
 	 * <br>
 	 */
 	@SerializedName("units")

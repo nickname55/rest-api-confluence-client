@@ -33,7 +33,7 @@ public class CreateContentTest
 		};
 		
 		Space space = confluence.getSpaceByKey("KARMA");
-		Content page = ContentUtils.createNewContent();
+		Content page = ContentUtils.createNewContent("Лиманське (Роздільнянський р-н)");
 		page.setSpace(space);
 		Content content = confluence.createContent(page, params);
 		System.out.println(content);

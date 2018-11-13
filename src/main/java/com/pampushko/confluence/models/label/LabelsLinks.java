@@ -23,21 +23,21 @@ public class LabelsLinks
 	String next;
 	
 	/**
-	 * Пример: "https://java-java.atlassian.net/wiki/rest/api/content/att184680449/label"
+	 * Пример: "https://java-java.atlassian.net/rest/api/content/att184680449/label"
 	 * <br>
 	 */
 	@SerializedName("self")
 	String self;
 	
 	/**
-	 * Пример: "https://java-java.atlassian.net/wiki"
+	 * Пример: "https://java-java.atlassian.net"
 	 * <br>
 	 */
 	@SerializedName("base")
 	String base;
 	
 	/**
-	 * Пример: "/wiki"
+	 * Пример: ""
 	 * <br>
 	 */
 	@SerializedName("context")

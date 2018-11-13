@@ -16,14 +16,14 @@ import lombok.extern.slf4j.Slf4j;
 public class UpdAttLinksResp
 {
 	/**
-	 * Пример: "/wiki"
+	 * Пример: ""
 	 * <br>
 	 */
 	@SerializedName("context")
 	String context;
 	
 	/**
-	 * Пример: "https://java-java.atlassian.net/wiki/rest/api/content/att184451088"
+	 * Пример: "https://java-java.atlassian.net/rest/api/content/att184451088"
 	 * <br>
 	 */
 	@SerializedName("self")
@@ -35,7 +35,6 @@ public class UpdAttLinksResp
 	 */
 	@SerializedName("download")
 	String download;
-	
 	
 	/**
 	 * Пример: "/rest/api/content"
@@ -52,7 +51,7 @@ public class UpdAttLinksResp
 	String webui;
 	
 	/**
-	 * Пример: "https://java-java.atlassian.net/wiki"
+	 * Пример: "https://java-java.atlassian.net"
 	 * <br>
 	 */
 	@SerializedName("base")

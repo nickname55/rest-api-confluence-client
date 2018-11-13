@@ -11,14 +11,14 @@ import lombok.extern.slf4j.Slf4j;
 public class ChildPageContainerLinks extends BaseModel
 {
 	/**
-	 * Пример: "https://java-java.atlassian.net/wiki"
+	 * Пример: "https://java-java.atlassian.net"
 	 * <br>
 	 */
 	@SerializedName("base")
 	String base;
 	
 	/**
-	 * Пример: "/wiki"
+	 * Пример: ""
 	 * <br>
 	 */
 	@SerializedName("context")

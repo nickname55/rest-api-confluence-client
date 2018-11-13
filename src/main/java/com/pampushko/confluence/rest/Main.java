@@ -1,6 +1,7 @@
 package com.pampushko.confluence.rest;
 
-import com.pampushko.confluence.models.longtask.LongTask;
+import com.pampushko.confluence.models.Space;
+import com.pampushko.confluence.models.SpaceResultList;
 import com.pampushko.confluence.settings.SettingsManager;
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,7 +30,12 @@ public class Main
 		final String taskId = "173998183";
 		
 		//выполняем запрос и печатаем результат
-		LongTask result = confluence.getTask(taskId);
-		System.out.println(result);
+		
+		SpaceResultList spacesRl = confluence.getSpaces();
+		Space[] spaces = spacesRl.getSpaces();
+		for (Space space : spaces)
+		{
+			System.out.println(space.getName());
+		}
 	}
 }

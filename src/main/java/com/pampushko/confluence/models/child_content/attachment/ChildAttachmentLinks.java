@@ -24,7 +24,7 @@ public class ChildAttachmentLinks extends BaseModel
 	String webui;
 	
 	/**
-	 * Пример: "https://java-java.atlassian.net/wiki/rest/api/content/att172261377"
+	 * Пример: "https://java-java.atlassian.net/rest/api/content/att172261377"
 	 * <br>
 	 */
 	@SerializedName("self")

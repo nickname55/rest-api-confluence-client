@@ -14,7 +14,7 @@
 			<id>pampushko</id>
 			<name>Alexander Pampushko</name>
 			<email>pampushko@gmail.com</email>
-			<organization />
+			<organization/>
 			<roles>
 				<role>Java Developer</role>
 			</roles>
@@ -220,13 +220,13 @@
 				</configuration>
 				<!-- генерируем docbook, потом попрбовать из него нормальную документацию сделать -->
 				<!--<configuration>-->
-					<!--<doclet>org.dbdoclet.doclet.docbook.DocBookDoclet</doclet>-->
-					 <!--<docletArtifact>-->
-						 <!--<groupId>org.dbdoclet</groupId>-->
-						 <!--<artifactId>dbdoclet</artifactId>-->
-						 <!--<version>8.0.2</version>-->
-					 <!--</docletArtifact>-->
-					<!--<useStandardDocletOptions>false</useStandardDocletOptions>-->
+				<!--<doclet>org.dbdoclet.doclet.docbook.DocBookDoclet</doclet>-->
+				<!--<docletArtifact>-->
+				<!--<groupId>org.dbdoclet</groupId>-->
+				<!--<artifactId>dbdoclet</artifactId>-->
+				<!--<version>8.0.2</version>-->
+				<!--</docletArtifact>-->
+				<!--<useStandardDocletOptions>false</useStandardDocletOptions>-->
 				<!--</configuration>-->
 			</plugin>
 

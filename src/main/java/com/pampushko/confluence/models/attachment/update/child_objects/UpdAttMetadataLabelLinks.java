@@ -23,7 +23,7 @@ public class UpdAttMetadataLabelLinks
 	String next;
 	
 	/**
-	 * Пример: "https://java-java.atlassian.net/wiki/rest/api/content/att184451088/label"
+	 * Пример: "https://java-java.atlassian.net/rest/api/content/att184451088/label"
 	 * <br>
 	 */
 	@SerializedName("self")

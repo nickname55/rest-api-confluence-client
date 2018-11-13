@@ -29,9 +29,9 @@ import lombok.extern.slf4j.Slf4j;
  
 	"_links":
 	{
-	  "base":"https://np-int.atlassian.net/wiki",
-	  "context":"/wiki",
-	  "self":"https://np-int.atlassian.net/wiki/rest/api/content/74131547/label"
+	  "base":"https://np-int.atlassian.net",
+	  "context":"",
+	  "self":"https://np-int.atlassian.net/rest/api/content/74131547/label"
 	}
 }
  * </PRE></blockquote>

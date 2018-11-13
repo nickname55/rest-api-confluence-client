@@ -19,13 +19,13 @@ public class AuditLinks
 	 * <br>
 	 */
 	@SerializedName("base")
-	String base; //"https://java-java.atlassian.net/wiki"
+	String base; //"https://java-java.atlassian.net"
 	
 	/**
 	 * <br>
 	 */
 	@SerializedName("context")
-	String context; //"/wiki"
+	String context; //""
 	
 	/**
 	 * <br>
@@ -37,5 +37,5 @@ public class AuditLinks
 	 * <br>
 	 */
 	@SerializedName("self")
-	String self; //"https://java-java.atlassian.net/wiki/rest/api/audit"
+	String self; //"https://java-java.atlassian.net/rest/api/audit"
 }

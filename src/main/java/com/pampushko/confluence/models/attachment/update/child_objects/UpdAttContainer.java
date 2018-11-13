@@ -70,13 +70,11 @@ public class UpdAttContainer extends BaseModel
 	@SerializedName("operations")
 	String[] operations;
 	
-	
 	/**
 	 * <br>
 	 */
 	@SerializedName("children")
 	String children;
-	
 	
 	/**
 	 * <br>
@@ -84,13 +82,11 @@ public class UpdAttContainer extends BaseModel
 	@SerializedName("descendants")
 	UpdAttDescendants descendants;
 	
-	
 	/**
 	 * <br>
 	 */
 	@SerializedName("container")
 	UpdAttContainer container;
-	
 	
 	/**
 	 * <br>
@@ -98,13 +94,11 @@ public class UpdAttContainer extends BaseModel
 	@SerializedName("body")
 	UpdAttBody body;
 	
-	
 	/**
 	 * <br>
 	 */
 	@SerializedName("metadata")
 	UpdAttMetadata metadata;
-	
 	
 	/**
 	 * <br>

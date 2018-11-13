@@ -17,21 +17,21 @@ import lombok.extern.slf4j.Slf4j;
 public class RestrictionResponseContainerLinks extends BaseModel
 {
 	/**
-	 * Пример: "https://java-java.atlassian.net/wiki/rest/api/content/5210113/restriction/byOperation"
+	 * Пример: "https://java-java.atlassian.net/rest/api/content/5210113/restriction/byOperation"
 	 * <br>
 	 */
 	@SerializedName("self")
 	String self;
 	
 	/**
-	 * Пример: "https://java-java.atlassian.net/wiki"
+	 * Пример: "https://java-java.atlassian.net"
 	 * <br>
 	 */
 	@SerializedName("base")
 	String base;
 	
 	/**
-	 * Пример: "/wiki"
+	 * Пример: ""
 	 * <br>
 	 */
 	@SerializedName("context")

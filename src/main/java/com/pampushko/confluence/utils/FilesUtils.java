@@ -21,9 +21,14 @@ public class FilesUtils
 	/**
 	 * Метод читает ResponseBody как последовательность байтов и записывает их в файл на диске
 	 * <br>
-	 * @param body - тело ответа
-	 * @param directoryName - имя каталога в который мы хотим записать файл результата (<strong>без разделителя в конце</strong>)
-	 * @param fileName - имя в который мы хотим поместить результат
+	 *
+	 * @param body
+	 * 		- тело ответа
+	 * @param directoryName
+	 * 		- имя каталога в который мы хотим записать файл результата (<strong>без разделителя в конце</strong>)
+	 * @param fileName
+	 * 		- имя в который мы хотим поместить результат
+	 *
 	 * @return булево значение, если метод завершился успешно, то равно true
 	 */
 	public static boolean writeResponseBodyToDisk(ResponseBody body, final String directoryName, final String fileName)
@@ -95,6 +100,7 @@ public class FilesUtils
 	 * <br>
 	 * и возвращает имя это директории (<strong>без разделителя в конце</strong>)
 	 * <br>
+	 *
 	 * @return имя созданной директории
 	 */
 	public static String getExternalFilesDir()
@@ -104,7 +110,6 @@ public class FilesUtils
 		return directoryName;
 	}
 	
-	
 	/**
 	 * Метод получает на вход содержимое заголовка Content-Disposition
 	 * <br>
@@ -112,7 +117,9 @@ public class FilesUtils
 	 * <br>
 	 * и возвращает это имя файла
 	 * <br>
+	 *
 	 * @param contentDispositionHeader
+	 *
 	 * @return строка- имя файла
 	 */
 	public static String getFileNameFromContentDispositionHeader(final String contentDispositionHeader)

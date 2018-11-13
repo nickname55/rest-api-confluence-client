@@ -31,7 +31,7 @@ public class Body extends BaseModel
 	 * <br>
 	 */
 	@SerializedName("view")
-	String view;
+	BodyView view;
 	
 	/**
 	 * <br>
@@ -62,7 +62,6 @@ public class Body extends BaseModel
 	 */
 	@SerializedName("anonymous_export_view")
 	String anonymous_export_view;
-	
 	
 	//-------------------------------------------------------------------
 	@SerializedName("_expandable")

@@ -1,6 +1,7 @@
 package com.pampushko.confluence.utils;
 
 import com.pampushko.confluence.models.Body;
+import com.pampushko.confluence.models.Parent;
 import com.pampushko.confluence.models.Storage;
 import com.pampushko.confluence.models.content.Content;
 import lombok.extern.slf4j.Slf4j;
@@ -13,13 +14,19 @@ public class ContentUtils
 {
 	public static void main(String[] args)
 	{
-		createNewContent();
+		createNewContent("test");
 	}
 	
-	public static Content createNewContent()
+	public static Content createNewContent(final String pageTitle)
 	{
 		Content content = new Content();
-		String title = "super page 222";
+		Parent parent = new Parent();
+		parent.setId("81323713");
+		parent.setType("page");
+		
+		Parent[] parents = {parent};
+		content.setAncestors(parents);
+		String title = pageTitle;
 		content.setTitle(title);
 		String type = "page";
 		content.setType(type);
