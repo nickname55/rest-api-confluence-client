@@ -50,7 +50,7 @@
 
 		<retrofit.version>2.4.0</retrofit.version>
 		<guava.version>25.0-jre</guava.version>
-		<lombok.version>1.16.20</lombok.version>
+		<lombok.version>1.18.8</lombok.version>
 		<slf4j-api.version>1.7.25</slf4j-api.version>
 		<logback-classic.version>1.0.13</logback-classic.version>
 		<okhttp3.logging-interceptor.version>3.10.0</okhttp3.logging-interceptor.version>
@@ -119,6 +119,13 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.6.1</version>
 				<configuration>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>${lombok.version}</version>
+						</path>
+					</annotationProcessorPaths>
 					<source>${maven.compiler.source}</source>
 					<target>${maven.compiler.target}</target>
 				</configuration>
